@@ -1,5 +1,6 @@
 <template>
   <h1>{{ city }} {{ routeName }}</h1>
+  <p>{{ updateTime }}秒前更新</p>
   <div class="row">
     <!-- 地圖 -->
     <div class="col-md-7 pb-4">
@@ -67,7 +68,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { computed, ref, onUnmounted } from 'vue'
 import bus from '@/composables/useBus'
 import map from '@/composables/useMap'
 
@@ -79,7 +80,9 @@ export default {
   },
   setup(props) {
     const activeItem = ref('forward')
+    const updateTime = ref(0)
     const { busState } = bus
+    let timer = null
 
     const forwardLabel = computed(() => {
       // console.log(busState.forwardStopsList)
@@ -98,9 +101,21 @@ export default {
     map.mapInit('stops-map')
     bus
       .fetchStopsAndBusArrivalTime(props.city, props.routeName)
-      .then(() => map.drawStopsPathAndMarkers(busState.forwardStopsList))
+      .then(() => {
+        map.drawStopsPathAndMarkers(busState.forwardStopsList)
+        timer = setInterval(() => {
+          if(updateTime.value >= 60){
+            bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+            updateTime.value = 0
+          } else {
+            updateTime.value = updateTime.value + 1
+          }
+        }, 1000)
+        onUnmounted(() => clearInterval(timer))
+      })
 
     return {
+      updateTime,
       busState,
       forwardLabel,
       setTab,

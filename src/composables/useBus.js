@@ -18,6 +18,7 @@ watchEffect(() => {
   // console.log(state.routeName)
 })
 
+// 工具函式
 const getTimeBadgeAndColor = (timeObj) => {
   let badge = {
     text: '',
@@ -41,6 +42,7 @@ const getTimeBadgeAndColor = (timeObj) => {
   return badge
 }
 
+// fetch 函式
 // 取得指定[縣市]的公車動態定時資料
 const fetchCityRoutes = async (city) => {
   try {
@@ -88,6 +90,7 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
       if (time) {
         const badge = getTimeBadgeAndColor(time)
         const newStop = Object.assign(stop, {
+          EstimateTime: time.EstimateTime,
           TimeLabel: badge.text,
           Color: badge.color,
           StopStatus: time.StopStatus
@@ -117,8 +120,12 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
   }
 }
 
+// 取得指定[縣市]的市區公車站位資料
+const fetchCityStations = async (city) => {}
+
 export default {
   busState: readonly(state),
   fetchCityRoutes,
-  fetchStopsAndBusArrivalTime
+  fetchStopsAndBusArrivalTime,
+  fetchCityStations
 }
