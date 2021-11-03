@@ -19,7 +19,7 @@
 
 <script setup>
 // import { computed, defineProps, ref } from 'vue'
-import bus from '@/composables/useBus'
+import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 
 const props = defineProps({

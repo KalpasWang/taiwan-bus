@@ -10,6 +10,8 @@ const state = reactive({
   cityRoutesList: [],
   forwardStopsList: [],
   backwardStopsList: [],
+  station: {},
+  stationsList: [],
   error: null
 })
 
@@ -116,6 +118,30 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     state.error = error.message
   }
 }
+
+// 取得指定[位置,範圍]的全臺公車站位資料
+const fetchNearByStations = (radius) => {
+  if (!navigator.geolocation) {
+    state.error = 'Geolocation is not supported by your browser'
+    return
+  }
+  state.error = null
+  navigator.geolocation.watchPosition(async (position) => {
+    try {
+      const lat = position.coords.latitude
+      const lng = position.coords.longitude
+      const url = 'Station/NearBy'
+      const res = await api.get(url, {
+        params: { $spatialFilter: `nearby(${lat}, ${lng}, ${radius})` }
+      })
+      state.stationsList = res.data
+    } catch (error) {
+      state.error = error.message
+    }
+  })
+}
+
+const getLocationAndFetchStations = () => {}
 
 export default {
   busState: readonly(state),

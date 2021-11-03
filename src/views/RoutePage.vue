@@ -68,7 +68,7 @@
 
 <script>
 import { computed, ref } from 'vue'
-import bus from '@/composables/useBus'
+import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 
 export default {
