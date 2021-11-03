@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import bus from '@/composables/useBus'
+// import { computed, defineProps, ref } from 'vue'
+import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 
 const props = defineProps({

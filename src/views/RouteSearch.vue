@@ -34,7 +34,7 @@
 
 <script>
 import { ref, computed, toRefs } from 'vue'
-import bus from '@/composables/useBus'
+import bus from '@/composables/useCityBus'
 
 export default {
   name: 'RouteSearch',
