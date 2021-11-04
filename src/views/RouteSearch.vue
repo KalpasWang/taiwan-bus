@@ -1,8 +1,8 @@
 <template>
   <select v-model="selectedCityModel" class="form-select">
     <option value="-1" selected>選擇縣市</option>
-    <option v-for="city in citysList" :key="city.value" :value="city.value">
-      {{ city.name }}
+    <option v-for="city in citysList" :key="city.City" :value="city.City">
+      {{ city.CityName }}
     </option>
   </select>
   <input
@@ -65,5 +65,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

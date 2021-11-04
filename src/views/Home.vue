@@ -3,7 +3,9 @@
     <router-link :to="{ name: 'BusSearch' }" class="btn btn-primary btn-lg m-3">
       路線搜尋
     </router-link>
-    <button class="btn btn-warning btn-lg m-3">附近站牌</button>
+    <router-link :to="{ name: 'NearBy' }" class="btn btn-warning btn-lg m-3"
+      >附近站牌</router-link
+    >
   </div>
 </template>
 
@@ -13,5 +15,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

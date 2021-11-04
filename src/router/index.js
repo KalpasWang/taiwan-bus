@@ -18,7 +18,7 @@ export const router = createRouter({
       props: true
     },
     {
-      path: '/stops/:city/:stationName',
+      path: '/stations/:city/:stationId',
       component: StationPage,
       name: 'StationPage',
       props: true

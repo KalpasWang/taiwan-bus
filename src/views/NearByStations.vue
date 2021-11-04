@@ -1,22 +1,34 @@
 <template>
   <div class="list-group">
     <router-link
-      :to="{}"
+      :to="{
+        name: 'StationPage',
+        params: {
+          city: getCity(item.LocationCityCode),
+          stationId: item.StaionID
+        }
+      }"
       v-for="item in state.stationsList"
       :key="item.StaionUID"
       class="list-group-item list-group-item-action"
     >
-      {{ item.StationName.Zh_tw }}{{ item.Bearing }}
+      <h4>{{ item.StationName.Zh_tw }}{{ item.Bearing }}</h4>
     </router-link>
   </div>
 </template>
 
 <script setup>
 import bus from '@/composables/useCityBus'
-import toRef from 'vue'
+import { toRef } from 'vue'
 
 const state = toRef(bus, 'busState')
-bud.fetchNearByStations(500)
+
+const getCity = (code) => {
+  const city = state.citysList.find((item) => item.CityCode === code)
+  return city.City
+}
+
+bus.fetchNearByStations(500)
 </script>
 
 <style lang=""></style>

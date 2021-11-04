@@ -141,6 +141,7 @@ const fetchNearByStations = (radius) => {
         }
       })
       state.stationsList = res.data
+      console.log(res.data)
     } catch (error) {
       state.error = error.message
     }
