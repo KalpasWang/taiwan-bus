@@ -135,7 +135,10 @@ const fetchNearByStations = (radius) => {
       const lng = position.coords.longitude
       const url = 'Station/NearBy'
       const res = await api.get(url, {
-        params: { $spatialFilter: `nearby(${lat}, ${lng}, ${radius})` }
+        params: {
+          $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`,
+          $format: 'JSON'
+        }
       })
       state.stationsList = res.data
     } catch (error) {
@@ -144,11 +147,9 @@ const fetchNearByStations = (radius) => {
   })
 }
 
-const getLocationAndFetchStations = () => {}
-
 export default {
   busState: readonly(state),
   fetchCityRoutes,
   fetchStopsAndBusArrivalTime,
-  fetchCityStations
+  fetchNearByStations
 }

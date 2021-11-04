@@ -38,7 +38,12 @@
             <li
               v-for="stop in busState.forwardStopsList"
               :key="stop.StopID"
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
             >
               {{ stop.StopName.Zh_tw }}
               <span class="badge" :class="stop.Color">{{
@@ -55,7 +60,12 @@
             <li
               v-for="stop in busState.backwardStopsList"
               :key="stop.StopID"
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
             >
               {{ stop.StopName.Zh_tw }}
               <span class="badge bg-primary">14分</span>
@@ -69,7 +79,7 @@
 
 <script>
 import { computed, ref, onUnmounted } from 'vue'
-import bus from '@/composables/useBus'
+import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 
 export default {
@@ -99,20 +109,18 @@ export default {
     }
 
     map.mapInit('stops-map')
-    bus
-      .fetchStopsAndBusArrivalTime(props.city, props.routeName)
-      .then(() => {
-        map.drawStopsPathAndMarkers(busState.forwardStopsList)
-        timer = setInterval(() => {
-          if(updateTime.value >= 60){
-            bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-            updateTime.value = 0
-          } else {
-            updateTime.value = updateTime.value + 1
-          }
-        }, 1000)
-        onUnmounted(() => clearInterval(timer))
-      })
+    bus.fetchStopsAndBusArrivalTime(props.city, props.routeName).then(() => {
+      map.drawStopsPathAndMarkers(busState.forwardStopsList)
+      timer = setInterval(() => {
+        if (updateTime.value >= 60) {
+          bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+          updateTime.value = 0
+        } else {
+          updateTime.value = updateTime.value + 1
+        }
+      }, 1000)
+      onUnmounted(() => clearInterval(timer))
+    })
 
     return {
       updateTime,
