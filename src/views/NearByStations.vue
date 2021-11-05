@@ -5,7 +5,7 @@
         name: 'StationPage',
         params: {
           city: getCity(item.LocationCityCode),
-          stationId: item.StaionID
+          stationId: item.StaionUID
         }
       }"
       v-for="item in state.stationsList"
@@ -24,7 +24,8 @@ import { toRef } from 'vue'
 const state = toRef(bus, 'busState')
 
 const getCity = (code) => {
-  const city = state.citysList.find((item) => item.CityCode === code)
+  // console.log(state.value.citysList)
+  const city = state.value.citysList.find((item) => item.CityCode === code)
   return city.City
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ city }} {{ stationName }}</h1>
+  <h1>{{ city }} {{ stationId }}</h1>
   <h4 v-if="busState.error" class="p-3">發生錯誤</h4>
   <div class="list-group">
     <button class="list-group-item list-group-item-action">234</button>
@@ -13,7 +13,7 @@ import map from '@/composables/useMap'
 
 const props = defineProps({
   city: String,
-  stationName: String
+  stationId: String
 })
 </script>
 
