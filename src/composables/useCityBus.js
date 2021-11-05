@@ -49,7 +49,7 @@ const getTimeBadgeAndColor = (timeObj) => {
 const fetchCityRoutes = async (city) => {
   try {
     state.error = null
-    const url = `Route/City/${city}?format=json`
+    const url = `Route/City/${city}?$format=json`
     const res = await api.get(url)
     // console.log(res.data)
     state.cityRoutesList = res.data
@@ -62,8 +62,8 @@ const fetchCityRoutes = async (city) => {
 const fetchStopsAndBusArrivalTime = async (city, routeName) => {
   try {
     state.error = null
-    const url = `StopOfRoute/City/${city}/${routeName}?format=json`
-    const url2 = `EstimatedTimeOfArrival/City/${city}/${routeName}?format=json`
+    const url = `StopOfRoute/City/${city}/${routeName}?$format=json`
+    const url2 = `EstimatedTimeOfArrival/City/${city}/${routeName}?$format=json`
     // 取得站序資料
     const res = await api.get(url)
     // 取得預估時間資料
@@ -149,9 +149,28 @@ const fetchNearByStations = (radius) => {
   })
 }
 
+// 取得指定[縣市]與站位ID的市區公車站位資料
+const fetchOneCityStation = async (city, stationId) => {
+  try {
+    state.error = null
+    const url = `Station/City/${city}`
+    const res = await api.get(url, {
+      params: {
+        $filter: `StationUID eq '${stationId}'`,
+        $format: 'JSON'
+      }
+    })
+    console.log(res.data)
+    state.station = res.data[0]
+  } catch (error) {
+    state.error = error.message
+  }
+}
+
 export default {
   busState: readonly(state),
   fetchCityRoutes,
   fetchStopsAndBusArrivalTime,
-  fetchNearByStations
+  fetchNearByStations,
+  fetchOneCityStation
 }

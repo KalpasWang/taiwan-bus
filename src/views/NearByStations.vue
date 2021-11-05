@@ -5,10 +5,10 @@
         name: 'StationPage',
         params: {
           city: getCity(item.LocationCityCode),
-          stationId: item.StaionUID
+          stationId: item.StationUID
         }
       }"
-      v-for="item in state.stationsList"
+      v-for="item in busState.stationsList"
       :key="item.StaionUID"
       class="list-group-item list-group-item-action"
     >
@@ -19,13 +19,12 @@
 
 <script setup>
 import bus from '@/composables/useCityBus'
-import { toRef } from 'vue'
 
-const state = toRef(bus, 'busState')
+const { busState, error } = bus
 
 const getCity = (code) => {
-  // console.log(state.value.citysList)
-  const city = state.value.citysList.find((item) => item.CityCode === code)
+  // console.log(busState)
+  const city = busState.citysList.find((item) => item.CityCode === code)
   return city.City
 }
 
