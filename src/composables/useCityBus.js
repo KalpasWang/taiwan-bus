@@ -168,15 +168,10 @@ const fetchOneCityStation = async (city, stationId) => {
   try {
     state.error = null
     state.pending = true
-    const url = `Station/City/${city}`
-    const res = await api.get(url, {
-      params: {
-        $filter: `StationUID eq '${stationId}'`,
-        $format: 'JSON'
-      }
-    })
+    const url = `Route/City/${city}/PassThrough/Station/${stationId}?$format=JSON`
+    const res = await api.get(url)
     console.log(res.data)
-    state.station = res.data[0]
+    state.station = res.data
     state.pending = false
   } catch (error) {
     state.error = error.message

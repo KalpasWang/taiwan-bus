@@ -3,25 +3,24 @@
   <h4 v-if="busState.pending">Loading...</h4>
   <h4 v-else-if="busState.error">發生錯誤</h4>
   <div v-else>
-    <div v-if="busState.station.Stops">
-      <div
-        v-for="item in busState.station.Stops"
-        :key="item.StationUID"
-        class="list-group"
+    <div
+      v-for="item in busState.station"
+      :key="item.StationUID"
+      class="list-group"
+    >
+      <router-link
+        :to="{
+          name: 'RoutePage',
+          params: {
+            city: city,
+            routeName: item.RouteName.Zh_tw
+          }
+        }"
+        class="list-group-item list-group-item-action"
       >
-        <router-link
-          :to="{
-            name: 'RoutePage',
-            params: {
-              city: city,
-              routeName: item.RouteName.Zh_tw
-            }
-          }"
-          class="list-group-item list-group-item-action"
-        >
-          <h4>{{ item.RouteName.Zh_tw }}</h4>
-        </router-link>
-      </div>
+        <h4>{{ item.RouteName.Zh_tw }}</h4>
+        <p>往 {{ item.DestinationStopNameZh }}</p>
+      </router-link>
     </div>
   </div>
 </template>

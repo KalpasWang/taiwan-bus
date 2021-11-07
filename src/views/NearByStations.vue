@@ -5,7 +5,7 @@
         name: 'StationPage',
         params: {
           city: getCity(item.LocationCityCode),
-          stationId: item.StationUID
+          stationId: item.StationID
         }
       }"
       v-for="item in busState.stationsList"
