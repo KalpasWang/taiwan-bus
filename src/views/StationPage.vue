@@ -1,24 +1,28 @@
 <template>
   <h1>{{ city }} {{ stationId }}</h1>
-  <h4 v-if="error" class="p-3">發生錯誤</h4>
-  <div
-    v-else
-    v-for="item in station.Stops"
-    :key="item.StationUID"
-    class="list-group"
-  >
-    <router-link
-      :to="{
-        name: 'RoutePage',
-        params: {
-          city: city,
-          routeName: item.RouteName.Zh_tw
-        }
-      }"
-      class="list-group-item list-group-item-action"
-    >
-      <h4>{{ item.RouteName.Zh_tw }}</h4>
-    </router-link>
+  <h4 v-if="busState.pending">Loading...</h4>
+  <h4 v-else-if="busState.error">發生錯誤</h4>
+  <div v-else>
+    <div v-if="busState.station.Stops">
+      <div
+        v-for="item in busState.station.Stops"
+        :key="item.StationUID"
+        class="list-group"
+      >
+        <router-link
+          :to="{
+            name: 'RoutePage',
+            params: {
+              city: city,
+              routeName: item.RouteName.Zh_tw
+            }
+          }"
+          class="list-group-item list-group-item-action"
+        >
+          <h4>{{ item.RouteName.Zh_tw }}</h4>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,8 +36,7 @@ const props = defineProps({
   stationId: String
 })
 
-const { busState, error } = bus
-const station = toRef(busState, 'station')
+const { busState } = bus
 bus.fetchOneCityStation(props.city, props.stationId)
 </script>
 

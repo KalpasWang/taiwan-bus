@@ -12,6 +12,7 @@ const state = reactive({
   backwardStopsList: [],
   station: {},
   stationsList: [],
+  pending: false,
   error: null
 })
 
@@ -44,17 +45,23 @@ const getTimeBadgeAndColor = (timeObj) => {
   return badge
 }
 
-// fetch 函式
+/**
+ * fetch 函式
+ */
+
 // 取得指定[縣市]的公車動態定時資料
 const fetchCityRoutes = async (city) => {
   try {
     state.error = null
+    state.pending = true
     const url = `Route/City/${city}?$format=json`
     const res = await api.get(url)
     // console.log(res.data)
     state.cityRoutesList = res.data
+    state.pending = false
   } catch (error) {
     state.error = error.message
+    state.pending = false
   }
 }
 
@@ -62,6 +69,7 @@ const fetchCityRoutes = async (city) => {
 const fetchStopsAndBusArrivalTime = async (city, routeName) => {
   try {
     state.error = null
+    state.pending = true
     const url = `StopOfRoute/City/${city}/${routeName}?$format=json`
     const url2 = `EstimatedTimeOfArrival/City/${city}/${routeName}?$format=json`
     // 取得站序資料
@@ -70,7 +78,7 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     const res2 = await api.get(url2)
     // console.log(res.data)
     // console.log(res2.data)
-    console.log('ajax')
+    // console.log('ajax')
 
     // 清理 state
     state.city = city
@@ -117,8 +125,11 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
       })
       state.backwardStopsList.push(newStop)
     })
+
+    state.pending = false
   } catch (error) {
     state.error = error.message
+    state.pending = false
   }
 }
 
@@ -128,9 +139,10 @@ const fetchNearByStations = (radius) => {
     state.error = 'Geolocation is not supported by your browser'
     return
   }
-  state.error = null
   navigator.geolocation.watchPosition(async (position) => {
     try {
+      state.error = null
+      state.pending = true
       const lat = position.coords.latitude
       const lng = position.coords.longitude
       const url = 'Station/NearBy'
@@ -142,9 +154,11 @@ const fetchNearByStations = (radius) => {
       })
       state.stationsList = res.data
       // console.log(res.data)
+      state.pending = false
     } catch (error) {
       state.error = error.message
       // console.log(state.error)
+      state.pending = false
     }
   })
 }
@@ -153,6 +167,7 @@ const fetchNearByStations = (radius) => {
 const fetchOneCityStation = async (city, stationId) => {
   try {
     state.error = null
+    state.pending = true
     const url = `Station/City/${city}`
     const res = await api.get(url, {
       params: {
@@ -162,8 +177,10 @@ const fetchOneCityStation = async (city, stationId) => {
     })
     console.log(res.data)
     state.station = res.data[0]
+    state.pending = false
   } catch (error) {
     state.error = error.message
+    state.pending = false
   }
 }
 
