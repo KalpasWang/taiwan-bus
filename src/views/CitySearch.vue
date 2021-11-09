@@ -37,7 +37,7 @@ import { ref, computed, toRefs } from 'vue'
 import bus from '@/composables/useCityBus'
 
 export default {
-  name: 'RouteSearch',
+  name: 'CitySearch',
   setup() {
     const { busState, fetchCityRoutes } = bus
     const selectedCity = ref(-1)

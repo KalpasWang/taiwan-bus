@@ -21,7 +21,10 @@ watchEffect(() => {
   // console.log(state.routeName)
 })
 
-// 工具函式
+/**
+ * 工具函式
+ */
+
 const getTimeBadgeAndColor = (timeObj) => {
   let badge = {
     text: '',
