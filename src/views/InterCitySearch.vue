@@ -1,7 +1,7 @@
 <template>
-  <select v-model="selectedCityModel" class="form-select">
+  <select v-model="selectedCity" class="form-select">
     <option value="-1" selected>選擇縣市</option>
-    <option v-for="city in citysList" :key="city.City" :value="city.City">
+    <option v-for="city in state.citysList" :key="city.City" :value="city.City">
       {{ city.CityName }}
     </option>
   </select>
@@ -11,12 +11,13 @@
     class="form-control"
     placeholder="搜尋公車路線"
   />
-  <h3 v-if="pending" class="mt-5 text-center">Loading...</h3>
-  <h3 v-else-if="error" class="mt-5 text-center">{{ error }}</h3>
+  <input @click="onSubmit()" type="submit" class="btn btn-primary" />
+  <h3 v-if="state.pending" class="mt-5 text-center">Loading...</h3>
+  <h3 v-else-if="state.error" class="mt-5 text-center">{{ state.error }}</h3>
   <div v-else>
     <ul class="list-group">
       <li
-        v-for="route in cityRoutesList"
+        v-for="route in state.routesList"
         :key="route.RouteUID"
         class="list-group-item list-group-item-action"
       >
@@ -33,36 +34,16 @@
   </div>
 </template>
 
-<script>
-import { ref, computed, toRefs } from 'vue'
+<script setup>
+import { ref, computed } from 'vue'
 import bus from '@/composables/useInterCityBus'
 
-export default {
-  name: 'InterCitySearch',
-  setup() {
-    const { busState, fetchCityRoutes } = bus
-    const selectedCity = ref(-1)
-    // console.log(busState)
+const { state } = bus
+const selectedCity = ref(-1)
 
-    const selectedCityModel = computed({
-      get() {
-        return selectedCity.value
-      },
-      set(value) {
-        // console.log(value)
-        if (value !== -1) {
-          fetchCityRoutes(value)
-        }
-        selectedCity.value = value
-      }
-    })
-
-    return {
-      selectedCity,
-      selectedCityModel,
-      ...toRefs(busState)
-    }
-  }
+const onSubmit = async () => {
+  await bus.fetchRoutesByCityAndRouteName(selectedCity.value)
+  console.log(state.routesList)
 }
 </script>
 

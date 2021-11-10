@@ -17,11 +17,13 @@ const state = reactive({
  */
 
 // 取得指定[縣市]的公車動態定時資料
-const fetchCityRoutes = async (city, routeName) => {
+const fetchRoutesByCityAndRouteName = async (city, routeName) => {
   try {
     state.error = null
     state.pending = true
     const cityItem = state.citysList.find((c) => c.City === city)
+    console.log(city)
+    console.log(cityItem)
     const url = 'StopOfRoute/InterCity'
     const res = await api.get(url, {
       params: {
@@ -30,10 +32,15 @@ const fetchCityRoutes = async (city, routeName) => {
       }
     })
     // console.log(res.data)
-    state.citysList = res.data
+    state.routesList = res.data
     state.pending = false
   } catch (error) {
     state.error = error.message
     state.pending = false
   }
+}
+
+export default {
+  state: readonly(state),
+  fetchRoutesByCityAndRouteName
 }

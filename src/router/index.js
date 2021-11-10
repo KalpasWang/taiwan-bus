@@ -13,7 +13,7 @@ export const router = createRouter({
     { path: '/city', component: CitySearch, name: 'CitySearch' },
     { path: '/nearby', component: NearByStations, name: 'NearBy' },
     {
-      path: 'intercity',
+      path: '/intercity',
       component: InterCitySearch,
       name: 'InterCitySearch'
     },
