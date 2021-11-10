@@ -27,12 +27,19 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
     const url = 'StopOfRoute/InterCity'
     const res = await api.get(url, {
       params: {
-        $filter: `Stops/all(d:d/LocationCityCode eq ${cityItem.CityCode})`,
+        $filter: `Stops/any(d:d/LocationCityCode eq '${cityItem.CityCode}')`,
         $format: 'JSON'
       }
     })
-    // console.log(res.data)
-    state.routesList = res.data
+    state.routesList = res.data.filter((item, idx, arr) => {
+      const i = arr.findIndex(
+        (el) => el.RouteUID === item.RouteUID && el.Direction === item.Direction
+      )
+      if (i >= 0) {
+        return false
+      }
+      return true
+    })
     state.pending = false
   } catch (error) {
     state.error = error.message

@@ -24,7 +24,7 @@
         <router-link
           :to="{
             name: 'RoutePage',
-            params: { city: route.City, routeName: route.RouteName.Zh_tw }
+            params: { city: selectedCity, routeName: route.RouteName.Zh_tw }
           }"
           class="d-block link-primary text-decoration-none"
           >{{ route.RouteName.Zh_tw }}</router-link

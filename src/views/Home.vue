@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column justify-content-center align-items-center">
     <router-link
       :to="{ name: 'CitySearch' }"
       class="btn btn-primary btn-lg m-3"
