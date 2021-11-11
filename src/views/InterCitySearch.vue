@@ -1,12 +1,12 @@
 <template>
   <select v-model="selectedCity" class="form-select">
-    <option value="-1" selected>選擇縣市</option>
+    <option value="" disabled selected>選擇縣市</option>
     <option v-for="city in state.citysList" :key="city.City" :value="city.City">
       {{ city.CityName }}
     </option>
   </select>
   <input
-    ref="busInput"
+    v-model="busInput"
     type="text"
     class="form-control"
     placeholder="搜尋公車路線"
@@ -29,9 +29,13 @@
           class="d-block link-primary text-decoration-none"
         >
           <h5>{{ route.RouteName.Zh_tw }}</h5>
-          <p class="text-secondary">
+          <p v-if="route.Stops" class="text-secondary">
             {{ route.Stops[0].StopName.Zh_tw }} -
             {{ route.Stops[route.Stops.length - 1].StopName.Zh_tw }}
+          </p>
+          <p v-if="route.DepartureStopNameZh" class="text-secondary">
+            {{ route.DepartureStopNameZh }} -
+            {{ route.DestinationStopNameZh }}
           </p>
         </router-link>
       </li>
@@ -40,14 +44,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import bus from '@/composables/useInterCityBus'
 
 const { state } = bus
-const selectedCity = ref(-1)
+const selectedCity = ref('')
+const busInput = ref(null)
 
 const onSubmit = () => {
-  bus.fetchRoutesByCityAndRouteName(selectedCity.value)
+  bus.fetchRoutesByCityAndRouteName(selectedCity.value, busInput.value)
 }
 </script>
 
