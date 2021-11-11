@@ -22,8 +22,6 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
     state.error = null
     state.pending = true
     const cityItem = state.citysList.find((c) => c.City === city)
-    console.log(city)
-    console.log(cityItem)
     const url = 'StopOfRoute/InterCity'
     const res = await api.get(url, {
       params: {
@@ -31,14 +29,12 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
         $format: 'JSON'
       }
     })
-    state.routesList = res.data.filter((item, idx, arr) => {
-      const i = arr.findIndex(
-        (el) => el.RouteUID === item.RouteUID && el.Direction === item.Direction
-      )
-      if (i >= 0) {
-        return false
+    state.routesList = []
+    res.data.forEach((item, idx, arr) => {
+      const i = arr.findIndex((el) => el.RouteUID === item.RouteUID)
+      if (i === idx) {
+        state.routesList.push(item)
       }
-      return true
     })
     state.pending = false
   } catch (error) {

@@ -27,8 +27,13 @@
             params: { city: selectedCity, routeName: route.RouteName.Zh_tw }
           }"
           class="d-block link-primary text-decoration-none"
-          >{{ route.RouteName.Zh_tw }}</router-link
         >
+          <h5>{{ route.RouteName.Zh_tw }}</h5>
+          <p class="text-secondary">
+            {{ route.Stops[0].StopName.Zh_tw }} -
+            {{ route.Stops[route.Stops.length - 1].StopName.Zh_tw }}
+          </p>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -41,9 +46,8 @@ import bus from '@/composables/useInterCityBus'
 const { state } = bus
 const selectedCity = ref(-1)
 
-const onSubmit = async () => {
-  await bus.fetchRoutesByCityAndRouteName(selectedCity.value)
-  console.log(state.routesList)
+const onSubmit = () => {
+  bus.fetchRoutesByCityAndRouteName(selectedCity.value)
 }
 </script>
 
