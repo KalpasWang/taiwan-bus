@@ -39,9 +39,9 @@ import bus from '@/composables/useCityBus'
 export default {
   name: 'CitySearch',
   setup() {
-    const { busState, fetchCityRoutes } = bus
+    const { state, fetchCityRoutes } = bus
     const selectedCity = ref(-1)
-    // console.log(busState)
+    // console.log(state)
 
     const selectedCityModel = computed({
       get() {
@@ -59,7 +59,7 @@ export default {
     return {
       selectedCity,
       selectedCityModel,
-      ...toRefs(busState)
+      ...toRefs(state)
     }
   }
 }

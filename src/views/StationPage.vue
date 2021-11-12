@@ -1,10 +1,10 @@
 <template>
   <h1>{{ city }} {{ stationId }}</h1>
-  <h4 v-if="busState.pending">Loading...</h4>
-  <h4 v-else-if="busState.error">發生錯誤</h4>
+  <h4 v-if="state.pending">Loading...</h4>
+  <h4 v-else-if="state.error">發生錯誤</h4>
   <div v-else>
     <div
-      v-for="item in busState.station"
+      v-for="item in state.station"
       :key="item.StationUID"
       class="list-group"
     >
@@ -35,7 +35,7 @@ const props = defineProps({
   stationId: String
 })
 
-const { busState } = bus
+const { state } = bus
 bus.fetchOneCityStation(props.city, props.stationId)
 </script>
 

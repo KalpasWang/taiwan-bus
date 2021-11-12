@@ -28,7 +28,7 @@
           </button>
         </li>
       </ul>
-      <h4 v-if="busState.error" class="p-3">發生錯誤</h4>
+      <h4 v-if="state.error" class="p-3">發生錯誤</h4>
       <div v-else class="tab-content">
         <div
           class="tab-pane fade"
@@ -36,7 +36,7 @@
         >
           <ul class="list-group">
             <li
-              v-for="stop in busState.forwardStopsList"
+              v-for="stop in state.forwardStopsList"
               :key="stop.StopID"
               class="
                 list-group-item
@@ -58,7 +58,7 @@
         >
           <ul class="list-group">
             <li
-              v-for="stop in busState.backwardStopsList"
+              v-for="stop in state.backwardStopsList"
               :key="stop.StopID"
               class="
                 list-group-item
@@ -91,16 +91,16 @@ export default {
   setup(props) {
     const activeItem = ref('forward')
     const updateTime = ref(0)
-    const { busState } = bus
+    const { state } = bus
     let timer = null
 
     const forwardLabel = computed(() => {
-      // console.log(busState.forwardStopsList)
-      const len = busState.forwardStopsList.length
+      // console.log(state.forwardStopsList)
+      const len = state.forwardStopsList.length
       if (len === 0) {
         return '去程'
       }
-      const finalStop = busState.forwardStopsList[len - 1].StopName.Zh_tw
+      const finalStop = state.forwardStopsList[len - 1].StopName.Zh_tw
       return `往 ${finalStop}`
     })
 
@@ -110,7 +110,7 @@ export default {
 
     map.mapInit('stops-map')
     bus.fetchStopsAndBusArrivalTime(props.city, props.routeName).then(() => {
-      map.drawStopsPathAndMarkers(busState.forwardStopsList)
+      map.drawStopsPathAndMarkers(state.forwardStopsList)
       timer = setInterval(() => {
         if (updateTime.value >= 60) {
           bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
@@ -124,7 +124,7 @@ export default {
 
     return {
       updateTime,
-      busState,
+      state,
       forwardLabel,
       setTab,
       activeItem

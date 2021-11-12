@@ -8,7 +8,7 @@
           stationId: item.StationID
         }
       }"
-      v-for="item in busState.stationsList"
+      v-for="item in state.stationsList"
       :key="item.StaionUID"
       class="list-group-item list-group-item-action"
     >
@@ -20,11 +20,11 @@
 <script setup>
 import bus from '@/composables/useCityBus'
 
-const { busState, error } = bus
+const { state, error } = bus
 
 const getCity = (code) => {
-  // console.log(busState)
-  const city = busState.citysList.find((item) => item.CityCode === code)
+  // console.log(state)
+  const city = state.citysList.find((item) => item.CityCode === code)
   return city.City
 }
 

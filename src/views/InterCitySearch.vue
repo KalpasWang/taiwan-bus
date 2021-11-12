@@ -23,8 +23,8 @@
       >
         <router-link
           :to="{
-            name: 'RoutePage',
-            params: { city: selectedCity, routeName: route.RouteName.Zh_tw }
+            name: 'InterCityRoutePage',
+            params: { routeName: route.RouteName.Zh_tw }
           }"
           class="d-block link-primary text-decoration-none"
         >

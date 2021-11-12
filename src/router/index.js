@@ -4,6 +4,7 @@ import CitySearch from '@/views/CitySearch.vue'
 import InterCitySearch from '@/views/InterCitySearch.vue'
 import NearByStations from '@/views/NearByStations.vue'
 import RoutePage from '@/views/RoutePage.vue'
+import InterCityRoutePage from '@/views/InterCityRoutePage.vue'
 import StationPage from '@/views/StationPage.vue'
 
 export const router = createRouter({
@@ -16,6 +17,12 @@ export const router = createRouter({
       path: '/intercity',
       component: InterCitySearch,
       name: 'InterCitySearch'
+    },
+    {
+      path: '/routes/intercity/:routeName',
+      component: InterCityRoutePage,
+      name: 'InterCityRoutePage',
+      props: true
     },
     {
       path: '/routes/:city/:routeName',

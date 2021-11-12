@@ -183,7 +183,7 @@ const fetchOneCityStation = async (city, stationId) => {
 }
 
 export default {
-  busState: readonly(state),
+  state: readonly(state),
   fetchCityRoutes,
   fetchStopsAndBusArrivalTime,
   fetchNearByStations,
