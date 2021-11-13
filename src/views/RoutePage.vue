@@ -24,11 +24,11 @@
             :class="{ 'show active': activeItem === 'backward' }"
             @click="setTab('backward')"
           >
-            backward
+            {{ backwardLabel }}
           </button>
         </li>
       </ul>
-      <h4 v-if="state.error" class="p-3">發生錯誤</h4>
+      <h4 v-if="state.error" class="p-3">{{ state.error }}</h4>
       <div v-else class="tab-content">
         <div
           class="tab-pane fade"
@@ -68,7 +68,9 @@
               "
             >
               {{ stop.StopName.Zh_tw }}
-              <span class="badge bg-primary">14分</span>
+              <span class="badge" :class="stop.Color">{{
+                stop.TimeLabel
+              }}</span>
             </li>
           </ul>
         </div>
@@ -77,60 +79,60 @@
   </div>
 </template>
 
-<script>
-import { computed, ref, onUnmounted } from 'vue'
+<script setup>
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 
-export default {
-  name: 'RoutePage',
-  props: {
-    city: String,
-    routeName: String
-  },
-  setup(props) {
-    const activeItem = ref('forward')
-    const updateTime = ref(0)
-    const { state } = bus
-    let timer = null
+const props = defineProps({
+  city: String,
+  routeName: String
+})
 
-    const forwardLabel = computed(() => {
-      // console.log(state.forwardStopsList)
-      const len = state.forwardStopsList.length
-      if (len === 0) {
-        return '去程'
-      }
-      const finalStop = state.forwardStopsList[len - 1].StopName.Zh_tw
-      return `往 ${finalStop}`
-    })
+const activeItem = ref('forward')
+const updateTime = ref(0)
+const { state } = bus
+let timer = null
 
-    const setTab = (tabName) => {
-      activeItem.value = tabName
-    }
-
-    map.mapInit('stops-map')
-    bus.fetchStopsAndBusArrivalTime(props.city, props.routeName).then(() => {
-      map.drawStopsPathAndMarkers(state.forwardStopsList)
-      timer = setInterval(() => {
-        if (updateTime.value >= 60) {
-          bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-          updateTime.value = 0
-        } else {
-          updateTime.value = updateTime.value + 1
-        }
-      }, 1000)
-      onUnmounted(() => clearInterval(timer))
-    })
-
-    return {
-      updateTime,
-      state,
-      forwardLabel,
-      setTab,
-      activeItem
-    }
+const forwardLabel = computed(() => {
+  const len = state.forwardStopsList.length
+  if (len === 0) {
+    return '去程'
   }
+  const finalStop = state.forwardStopsList[len - 1].StopName.Zh_tw
+  return `往 ${finalStop}`
+})
+
+const backwardLabel = computed(() => {
+  const len = state.backwardStopsList.length
+  if (len === 0) {
+    return '返程'
+  }
+  const finalStop = state.backwardStopsList[len - 1].StopName.Zh_tw
+  return `往 ${finalStop}`
+})
+
+const setTab = (tabName) => {
+  activeItem.value = tabName
 }
+
+onMounted(async () => {
+  map.mapInit('stops-map')
+  await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+  map.drawStopsPathAndMarkers(state.forwardStopsList)
+  timer = setInterval(() => {
+    if (updateTime.value >= 60) {
+      updateTime.value = '更新中'
+      bus
+        .fetchStopsAndBusArrivalTime(props.city, props.routeName)
+        .then(() => (updateTime.value = 0))
+    } else {
+      updateTime.value = updateTime.value + 1
+    }
+  }, 1000)
+})
+
+onUnmounted(() => clearInterval(timer))
 </script>
 
 <style lang="scss">

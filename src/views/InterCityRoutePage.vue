@@ -29,7 +29,9 @@
         </li>
       </ul>
       <h4 v-if="state.pending" class="mt-4 text-center">Loading...</h4>
-      <h4 v-else-if="state.error" class="mt-4 text-center">發生錯誤</h4>
+      <h4 v-else-if="state.error" class="mt-4 text-center">
+        {{ state.error }}
+      </h4>
       <div v-else class="tab-content">
         <div
           class="tab-pane fade"
@@ -81,7 +83,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import bus from '@/composables/useInterCityBus'
 import map from '@/composables/useMap'
 
@@ -116,19 +118,23 @@ const setTab = (tabName) => {
   activeItem.value = tabName
 }
 
-map.mapInit('route-map')
-bus.fetchStopsAndBusArrivalTime(props.routeName).then(() => {
+onMounted(async () => {
+  map.mapInit('route-map')
+  await bus.fetchStopsAndBusArrivalTime(props.routeName)
   map.drawStopsPathAndMarkers(state.forwardStopsList)
   timer = setInterval(() => {
     if (updateTime.value >= 60) {
-      bus.fetchStopsAndBusArrivalTime(props.routeName)
-      updateTime.value = 0
+      updateTime.value = '更新中'
+      bus
+        .fetchStopsAndBusArrivalTime(props.routeName)
+        .then(() => (updateTime.value = 0))
     } else {
       updateTime.value = updateTime.value + 1
     }
   }, 1000)
-  onUnmounted(() => clearInterval(timer))
 })
+
+onUnmounted(() => clearInterval(timer))
 </script>
 
 <style lang="scss">

@@ -82,7 +82,7 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
     // 取得預估時間資料
     const res2 = await api.get(url2)
     // console.log(res.data)
-    console.log(res2.data)
+    // console.log(res2.data)
 
     // 清理 state
     state.routeName = res.data[0].RouteName.Zh_tw
@@ -144,6 +144,7 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
 
     state.pending = false
   } catch (error) {
+    console.log(error)
     state.error = error.message
     state.pending = false
   }

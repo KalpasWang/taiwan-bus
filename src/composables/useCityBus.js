@@ -1,6 +1,7 @@
 import { reactive, readonly, watchEffect } from 'vue'
 import api from './api'
 import { citys } from './constant'
+import { getTimeBadgeAndColor } from './useUtilities'
 
 const state = reactive({
   citysList: citys,
@@ -20,33 +21,6 @@ watchEffect(() => {
   // console.log(state.forwardStopsList)
   // console.log(state.routeName)
 })
-
-/**
- * 工具函式
- */
-
-const getTimeBadgeAndColor = (timeObj) => {
-  let badge = {
-    text: '',
-    color: 'bg-primary'
-  }
-  // console.log(timeObj)
-  const time = timeObj.EstimateTime
-  if (time === 0) {
-    badge.text = '進站中'
-    badge.color = 'bg-danger'
-  } else if (time <= 60) {
-    badge.text = '即將到站'
-    badge.color = 'bg-warning'
-  } else if (!time) {
-    badge.text = '--'
-    badge.color = 'bg-secondary'
-  } else {
-    const min = Math.floor(time / 60)
-    badge.text = `約${min}分`
-  }
-  return badge
-}
 
 /**
  * fetch 函式
@@ -122,11 +96,23 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     // 返程
     stopsBackward.forEach((stop) => {
       const time = timeBackward.find((item) => item.StopUID === stop.StopUID)
-      const newStop = Object.assign(stop, {
-        EstimateTime: time.EstimateTime,
-        StopStatus: time.StopStatus
-      })
-      state.backwardStopsList.push(newStop)
+      if (time) {
+        const badge = getTimeBadgeAndColor(time)
+        const newStop = Object.assign(stop, {
+          EstimateTime: time.EstimateTime,
+          TimeLabel: badge.text,
+          Color: badge.color,
+          StopStatus: time.StopStatus
+        })
+        state.backwardStopsList.push(newStop)
+      } else {
+        const newStop = Object.assign(stop, {
+          TimeLabel: '--',
+          Color: 'bg-secondary',
+          StopStatus: 4
+        })
+        state.backwardStopsList.push(newStop)
+      }
     })
 
     state.pending = false

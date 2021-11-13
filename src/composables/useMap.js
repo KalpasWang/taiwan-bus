@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import L from 'leaflet'
 // import { markerIcon } from './constant'
 
@@ -39,23 +39,20 @@ const setMapPosition = (pos) => {
 }
 
 const mapInit = (element) => {
-  onMounted(() => {
-    console.log('mounted')
-    map.value = L.map(element, {
-      center: [25.03, 121.55],
-      zoom: 14
-    })
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
-      maxZoom: 18
-    }).addTo(map.value)
+  map.value = L.map(element, {
+    center: [25.03, 121.55],
+    zoom: 14
   })
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
+    maxZoom: 18
+  }).addTo(map.value)
 }
 
 const drawStopsPathAndMarkers = (stops) => {
-  console.log('stops', stops)
+  // console.log('stops', stops)
   if (stops && stops.length > 0) {
     // setMapPosition(stops[0].StopPosition)
     const latlngs = stops.map((stop) => {
