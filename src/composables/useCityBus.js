@@ -1,7 +1,8 @@
 import { reactive, readonly, watchEffect } from 'vue'
 import api from './api'
 import { citys } from './constant'
-import { getTimeBadgeAndColor, getDistance } from './useUtilities'
+import { getTimeBadgeAndColor } from './useUtilities'
+import haversine from 'haversine-distance'
 
 const state = reactive({
   citysList: citys,
@@ -148,7 +149,7 @@ const fetchNearByStations = (radius) => {
       })
       state.stationsList = []
       res.data.forEach((item) => {
-        const d = getDistance(
+        const d = haversine(
           { lat, lng },
           {
             lat: item.StationPosition.PositionLat,
@@ -172,10 +173,11 @@ const fetchNearByStations = (radius) => {
         }
         state.stationsList.push({
           BearingZh_tw: bearing,
-          Distance: d,
+          Distance: Math.round(d),
           ...item
         })
       })
+      state.stationsList.sort((a, b) => a.Distance - b.Distance)
       // console.log(res.data)
       state.pending = false
     } catch (error) {
