@@ -1,7 +1,7 @@
 import { reactive, readonly, watchEffect } from 'vue'
 import api from './api'
 import { citys } from './constant'
-import { getTimeBadgeAndColor } from './useUtilities'
+import { getTimeBadgeAndColor, getDistance } from './useUtilities'
 
 const state = reactive({
   citysList: citys,
@@ -146,7 +146,36 @@ const fetchNearByStations = (radius) => {
           $format: 'JSON'
         }
       })
-      state.stationsList = res.data
+      state.stationsList = []
+      res.data.forEach((item) => {
+        const d = getDistance(
+          { lat, lng },
+          {
+            lat: item.StationPosition.PositionLat,
+            lng: item.StationPosition.PositionLon
+          }
+        )
+        let bearing = ''
+        switch (item.Bearing) {
+          case 'N':
+            bearing = '北向'
+            break
+          case 'S':
+            bearing = '南向'
+            break
+          case 'E':
+            bearing = '東向'
+            break
+          case 'W':
+            bearing = '西向'
+            break
+        }
+        state.stationsList.push({
+          BearingZh_tw: bearing,
+          Distance: d,
+          ...item
+        })
+      })
       // console.log(res.data)
       state.pending = false
     } catch (error) {

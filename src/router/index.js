@@ -29,6 +29,12 @@ export const router = createRouter({
       component: RoutePage,
       name: 'RoutePage',
       props: true
+    },
+    {
+      path: '/stations/:city/:stationId',
+      component: StationPage,
+      name: 'StationPage',
+      props: true
     }
   ]
 })
