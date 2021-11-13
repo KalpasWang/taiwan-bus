@@ -8,7 +8,7 @@ const state = reactive({
   city: '',
   routeUID: '',
   routeName: '',
-  cityRoutesList: [],
+  routesList: [],
   forwardStopsList: [],
   backwardStopsList: [],
   station: {},
@@ -26,15 +26,20 @@ watchEffect(() => {
  * fetch 函式
  */
 
-// 取得指定[縣市]的公車動態定時資料
-const fetchCityRoutes = async (city) => {
+// 取得指定[縣市與路線名稱]的公車資料
+const fetchRoutesByCityAndRouteName = async (city, routeName) => {
   try {
     state.error = null
     state.pending = true
-    const url = `Route/City/${city}?$format=json`
+    let url
+    if (city && !routeName) {
+      url = `Route/City/${city}?$format=json`
+    } else {
+      url = `Route/City/${city}/${routeName}?$format=json`
+    }
     const res = await api.get(url)
-    // console.log(res.data)
-    state.cityRoutesList = res.data
+    console.log(res.data)
+    state.routesList = res.data
     state.pending = false
   } catch (error) {
     state.error = error.message
@@ -170,7 +175,7 @@ const fetchOneCityStation = async (city, stationId) => {
 
 export default {
   state: readonly(state),
-  fetchCityRoutes,
+  fetchRoutesByCityAndRouteName,
   fetchStopsAndBusArrivalTime,
   fetchNearByStations,
   fetchOneCityStation
