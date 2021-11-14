@@ -1,3 +1,5 @@
+import bus from '@/composables/useCityBus'
+
 export const getTimeBadgeAndColor = (timeObj) => {
   let badge = {
     text: '',
@@ -36,4 +38,10 @@ export const getTimeBadgeAndColor = (timeObj) => {
     badge.text = `約${min}分`
   }
   return badge
+}
+
+export const getCity = (code) => {
+  // console.log(state)
+  const city = bus.state.citysList.find((item) => item.CityCode === code)
+  return city.City
 }

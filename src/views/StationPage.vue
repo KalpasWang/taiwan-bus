@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ city }} {{ stationId }}</h1>
+  <h1>{{ city }} {{ groupId }}</h1>
   <h4 v-if="state.pending">Loading...</h4>
   <h4 v-else-if="state.error">發生錯誤</h4>
   <div v-else>
@@ -32,11 +32,11 @@ import map from '@/composables/useMap'
 
 const props = defineProps({
   city: String,
-  stationId: String
+  groupId: String
 })
 
 const { state } = bus
-bus.fetchOneCityStation(props.city, props.stationId)
+bus.fetchStationGroup(props.city, props.groupId)
 </script>
 
 <style lang="scss">

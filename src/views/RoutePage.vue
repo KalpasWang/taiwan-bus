@@ -34,12 +34,19 @@
           class="tab-pane fade"
           :class="{ 'show active': activeItem === 'forward' }"
         >
-          <ul class="list-group">
-            <li
+          <div class="list-group">
+            <router-link
               v-for="stop in state.forwardStopsList"
               :key="stop.StopID"
+              :to="{
+                name: 'StationPage',
+                params: {
+                  city: getCity(stop.LocationCityCode),
+                  groupId: stop.StationGroupID
+                }
+              }"
               class="
-                list-group-item
+                list-group-item list-group-item-action
                 d-flex
                 justify-content-between
                 align-items-center
@@ -49,8 +56,8 @@
               <span class="badge" :class="stop.Color">{{
                 stop.TimeLabel
               }}</span>
-            </li>
-          </ul>
+            </router-link>
+          </div>
         </div>
         <div
           class="tab-pane fade"
@@ -83,6 +90,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
+import { getCity } from '@/composables/useUtilities'
 
 const props = defineProps({
   city: String,

@@ -12,7 +12,7 @@ const state = reactive({
   routesList: [],
   forwardStopsList: [],
   backwardStopsList: [],
-  station: {},
+  stationGroup: {},
   stationsList: [],
   pending: false,
   error: null
@@ -189,14 +189,19 @@ const fetchNearByStations = (radius) => {
 }
 
 // 取得指定[縣市]與站位ID的市區公車站位資料
-const fetchOneCityStation = async (city, stationId) => {
+const fetchStationGroup = async (city, groupId) => {
   try {
     state.error = null
     state.pending = true
-    const url = `Route/City/${city}/PassThrough/Station/${stationId}?$format=JSON`
-    const res = await api.get(url)
+    const url = `Station/City/${city}`
+    const res = await api.get(url, {
+      params: {
+        $filter: `StationGroupID eq '${groupId}'`,
+        $format: 'JSON'
+      }
+    })
     console.log(res.data)
-    state.station = res.data
+    state.stationGroup = res.data
     state.pending = false
   } catch (error) {
     state.error = error.message
@@ -209,5 +214,5 @@ export default {
   fetchRoutesByCityAndRouteName,
   fetchStopsAndBusArrivalTime,
   fetchNearByStations,
-  fetchOneCityStation
+  fetchStationGroup
 }

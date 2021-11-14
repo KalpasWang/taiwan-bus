@@ -30,14 +30,9 @@
 <script setup>
 import { onMounted } from 'vue'
 import bus from '@/composables/useCityBus'
+import { getCity } from '@/composables/useUtilities'
 
 const { state } = bus
-
-const getCity = (code) => {
-  // console.log(state)
-  const city = state.citysList.find((item) => item.CityCode === code)
-  return city.City
-}
 
 onMounted(() => {
   bus.fetchNearByStations(500)
