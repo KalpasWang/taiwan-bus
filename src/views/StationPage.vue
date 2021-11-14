@@ -2,41 +2,78 @@
   <h1>{{ city }} {{ groupId }}</h1>
   <h4 v-if="state.pending">Loading...</h4>
   <h4 v-else-if="state.error">發生錯誤</h4>
-  <div v-else>
-    <div
-      v-for="item in state.station"
-      :key="item.StationUID"
-      class="list-group"
-    >
-      <router-link
-        :to="{
-          name: 'RoutePage',
-          params: {
-            city: city,
-            routeName: item.RouteName.Zh_tw
-          }
-        }"
-        class="list-group-item list-group-item-action"
-      >
-        <h4>{{ item.RouteName.Zh_tw }}</h4>
-        <p>往 {{ item.DestinationStopNameZh }}</p>
-      </router-link>
+  <div v-else class="row">
+    <!-- 地圖 -->
+    <div class="col-md-7 pb-4">
+      <div id="station-map" class="map"></div>
+    </div>
+    <!-- 站序與預估時間 -->
+    <div class="col-md-5">
+      <ul class="nav nav-tabs">
+        <li v-for="(item, i) in state.stationGroup" :key="i" class="nav-item">
+          <button
+            class="nav-link"
+            :class="{ active: activeItem === item.StationID }"
+            @click="setTab(item.StationID)"
+          >
+            {{ item.Bearing }}
+          </button>
+        </li>
+      </ul>
+      <h4 v-if="state.error" class="p-3">{{ state.error }}</h4>
+      <div v-else class="tab-content">
+        <div
+          v-for="(item, i) in state.stationGroup"
+          :key="i"
+          class="tab-pane"
+          :class="{ active: activeItem === item.StationID }"
+        >
+          <div v-for="(stop, idx) in item.Stops" :key="idx" class="list-group">
+            <router-link
+              :to="{
+                name: 'RoutePage',
+                params: {
+                  city: getCity(item.LocationCityCode),
+                  routeName: stop.RouteName.Zh_tw
+                }
+              }"
+              class="
+                list-group-item list-group-item-action
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              {{ stop.RouteName.Zh_tw }}
+            </router-link>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { toRef } from 'vue'
+import { ref } from 'vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
+import { getCity } from '@/composables/useUtilities'
 
 const props = defineProps({
   city: String,
   groupId: String
 })
 
+const activeItem = ref('')
 const { state } = bus
-bus.fetchStationGroup(props.city, props.groupId)
+
+const setTab = (tabName) => {
+  activeItem.value = tabName
+}
+
+bus.fetchStationGroup(props.city, props.groupId).then(() => {
+  activeItem.value = state.stationGroup[0].StationID
+})
 </script>
 
 <style lang="scss">

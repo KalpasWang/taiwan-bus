@@ -45,3 +45,22 @@ export const getCity = (code) => {
   const city = bus.state.citysList.find((item) => item.CityCode === code)
   return city.City
 }
+
+export const getBearingLabel = (bearing) => {
+  let label = ''
+  switch (bearing) {
+    case 'N':
+      label = '北向'
+      break
+    case 'S':
+      label = '南向'
+      break
+    case 'E':
+      label = '東向'
+      break
+    case 'W':
+      label = '西向'
+      break
+  }
+  return label
+}

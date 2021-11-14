@@ -156,23 +156,7 @@ const fetchNearByStations = (radius) => {
             lng: item.StationPosition.PositionLon
           }
         )
-        let bearing = ''
-        switch (item.Bearing) {
-          case 'N':
-            bearing = '北向'
-            break
-          case 'S':
-            bearing = '南向'
-            break
-          case 'E':
-            bearing = '東向'
-            break
-          case 'W':
-            bearing = '西向'
-            break
-        }
         state.stationsList.push({
-          BearingZh_tw: bearing,
           Distance: Math.round(d),
           ...item
         })

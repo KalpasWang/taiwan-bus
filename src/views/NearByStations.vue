@@ -18,7 +18,7 @@
     >
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <h4>{{ item.StationName.Zh_tw }}({{ item.BearingZh_tw }})</h4>
+          <h4>{{ item.StationName.Zh_tw }}</h4>
           <p>{{ item.Stops.length }} 個站牌</p>
         </div>
         <p>{{ item.Distance }} 公尺</p>
