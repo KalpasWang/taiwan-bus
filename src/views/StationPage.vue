@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ city }} {{ groupId }}</h1>
+  <h1>{{ stationName }}</h1>
   <h4 v-if="state.pending">Loading...</h4>
   <h4 v-else-if="state.error">發生錯誤</h4>
   <div v-else class="row">
@@ -16,7 +16,7 @@
             :class="{ active: activeItem === item.StationID }"
             @click="setTab(item.StationID)"
           >
-            {{ item.Bearing }}
+            {{ getBearingLabel(item.Bearing) }}
           </button>
         </li>
       </ul>
@@ -28,8 +28,10 @@
           class="tab-pane"
           :class="{ active: activeItem === item.StationID }"
         >
-          <div v-for="(stop, idx) in item.Stops" :key="idx" class="list-group">
+          <div class="list-group">
             <router-link
+              v-for="(stop, idx) in item.Stops"
+              :key="idx"
               :to="{
                 name: 'RoutePage',
                 params: {
@@ -57,7 +59,7 @@
 import { ref } from 'vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import { getCity } from '@/composables/useUtilities'
+import { getCity, getBearingLabel } from '@/composables/useUtilities'
 
 const props = defineProps({
   city: String,
@@ -65,6 +67,7 @@ const props = defineProps({
 })
 
 const activeItem = ref('')
+const stationName = ref('')
 const { state } = bus
 
 const setTab = (tabName) => {
@@ -73,6 +76,7 @@ const setTab = (tabName) => {
 
 bus.fetchStationGroup(props.city, props.groupId).then(() => {
   activeItem.value = state.stationGroup[0].StationID
+  stationName.value = state.stationGroup[0].StationName.Zh_tw
 })
 </script>
 

@@ -5,15 +5,15 @@
   <h3 v-else-if="state.error" class="mt-5 text-center">{{ state.error }}</h3>
   <div v-else class="list-group">
     <router-link
+      v-for="item in state.stationsList"
+      :key="item.StationID"
       :to="{
         name: 'StationPage',
         params: {
           city: getCity(item.LocationCityCode),
-          stationId: item.StationID
+          groupId: item.StationGroupID
         }
       }"
-      v-for="item in state.stationsList"
-      :key="item.StaionUID"
       class="list-group-item list-group-item-action"
     >
       <div class="d-flex justify-content-between align-items-center">
