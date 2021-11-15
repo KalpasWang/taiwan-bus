@@ -1,7 +1,7 @@
 <template>
   <h1>{{ stationName }}</h1>
   <h4 v-if="state.pending">Loading...</h4>
-  <h4 v-else-if="state.error">發生錯誤</h4>
+  <h4 v-else-if="state.error">{{ state.error }}</h4>
   <div v-else class="row">
     <!-- 地圖 -->
     <div class="col-md-7 pb-4">
@@ -47,6 +47,9 @@
               "
             >
               {{ stop.RouteName.Zh_tw }}
+              <span class="badge" :class="stop.BgColor">{{
+                stop.TimeLabel
+              }}</span>
             </router-link>
           </div>
         </div>

@@ -178,7 +178,7 @@ const fetchStationGroup = async (city, groupId) => {
     state.error = null
     state.pending = true
     const url = `Station/City/${city}`
-    const res = await api.get(url, {
+    let res = await api.get(url, {
       params: {
         $filter: `StationGroupID eq '${groupId}'`,
         $format: 'JSON'
@@ -186,6 +186,14 @@ const fetchStationGroup = async (city, groupId) => {
     })
     console.log(res.data)
     state.stationGroup = res.data
+    const stationId = res.data[0].StationID
+    res = await fetchEstimatedTimeOfArrivalByStaionId(city, stationId)
+    res.data.forEach((item) => {
+      const badge = getTimeBadgeAndColor(item)
+      item.TimeLabel = badge.text
+      item.BgColor = badge.color
+    })
+    state.stationGroup[0].Stops = res.data
     state.pending = false
   } catch (error) {
     state.error = error.message
@@ -193,10 +201,21 @@ const fetchStationGroup = async (city, groupId) => {
   }
 }
 
+const fetchEstimatedTimeOfArrivalByStaionId = async (city, stationId) => {
+  state.error = null
+  state.pending = true
+  const url = `EstimatedTimeOfArrival/City/${city}/PassThrough/Station/${stationId}?$format=JSON`
+  const res = await api.get(url)
+  console.log(res.data)
+  state.pending = false
+  return res
+}
+
 export default {
   state: readonly(state),
   fetchRoutesByCityAndRouteName,
   fetchStopsAndBusArrivalTime,
   fetchNearByStations,
-  fetchStationGroup
+  fetchStationGroup,
+  fetchEstimatedTimeOfArrivalByStaionId
 }
