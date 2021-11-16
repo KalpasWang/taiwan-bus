@@ -1,12 +1,12 @@
 <template>
-  <div id="app" class="container py-4">
-    <router-view></router-view>
+  <div id="app">
+    <div class="container">
+      <Header />
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App',
-  components: {}
-}
+<script setup>
+import Header from '@/components/Header'
 </script>
