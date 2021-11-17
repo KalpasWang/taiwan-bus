@@ -1,12 +1,11 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <Header />
-      <router-view></router-view>
-    </div>
+  <div id="app" class="bg-dark">
+    <router-view></router-view>
   </div>
 </template>
 
-<script setup>
-import Header from '@/components/Header'
-</script>
+<script setup></script>
+
+<style lang="scss">
+@import './assets/scss/all.scss';
+</style>

@@ -1,0 +1,49 @@
+$utilities: (
+  'z-index': (
+    property: z-index,
+    class: z,
+    values: (
+      100: 100,
+      200: 200,
+      300: 300,
+      900: 900,
+      1000: 1000
+    )
+  ),
+  'cursor': (
+    property: cursor,
+    class: cursor,
+    values: (
+      pointer: pointer
+    )
+  ),
+  'minh': (
+    property: min-height,
+    class: minh,
+    values: (
+      100: 100vh
+    )
+  )
+);
+
+.icon-lg {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+
+.bg-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.show {
+  display: block !important;
+}

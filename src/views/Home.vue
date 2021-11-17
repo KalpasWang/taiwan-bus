@@ -1,5 +1,6 @@
 <template>
-  <div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="home-height position-relative bg-home">
+    <img :src="logoUrl" width="245" />
     <router-link
       :to="{ name: 'CitySearch' }"
       class="btn btn-primary btn-lg m-3"
@@ -17,10 +18,21 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Home'
-}
+<script setup>
+import logoUrl from '@/assets/Logo.png'
 </script>
 
-<style></style>
+<style>
+.home-height {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+.bg-home {
+  /* black_gray_line */
+  background: linear-gradient(
+    171.99deg,
+    #323232 10.16%,
+    #0a0a0b 71.59%
+  ) !important;
+}
+</style>
