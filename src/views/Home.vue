@@ -1,6 +1,14 @@
 <template>
   <div class="home-height position-relative bg-home">
-    <img :src="logoUrl" width="245" />
+    <img :src="logoUrl" class="icon-home-size" />
+    <div class="blue-circle">
+      <router-link :to="{ name: 'NearBy' }">
+        <img src="" class="mb-2" />
+        附近公車站
+      </router-link>
+    </div>
+    <div class="white-circle"></div>
+    <div class="yellow-circle"></div>
     <router-link
       :to="{ name: 'CitySearch' }"
       class="btn btn-primary btn-lg m-3"
@@ -20,6 +28,14 @@
 
 <script setup>
 import logoUrl from '@/assets/Logo.png'
+
+const setFullHeight = () => {
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
+window.addEventListener('resize', setFullHeight)
+
+setFullHeight()
 </script>
 
 <style>
