@@ -1,11 +1,12 @@
 <template>
-  <div class="home-height position-relative bg-home">
+  <div class="home-height position-relative bg-home overflow-hidden">
     <img :src="logoUrl" class="icon-home-size mt-5 ml-4" />
     <div
       class="ball blue-ball d-flex justify-content-center align-items-center"
     >
       <router-link
         :to="{ name: 'NearBy' }"
+        role="button"
         class="d-flex flex-column text-decoration-none align-items-center"
       >
         <img :src="markerUrl" width="23.5" height="31.33" />
@@ -17,9 +18,10 @@
     >
       <router-link
         :to="{ name: 'CitySearch' }"
+        role="button"
         class="d-flex flex-column text-decoration-none align-items-center"
       >
-        <img :src="searchBlackUrl" width="23.5" height="31.33" />
+        <img :src="searchBlackUrl" width="22.6" />
         <span class="link-dark fs-5 lh-base">查詢公車</span>
       </router-link>
     </div>
@@ -28,9 +30,10 @@
     >
       <router-link
         :to="{ name: 'InterCitySearch' }"
+        role="button"
         class="d-flex flex-column text-decoration-none align-items-center"
       >
-        <img :src="markerUrl" width="23.5" height="31.33" />
+        <img :src="searchWhiteUrl" width="22.6" />
         <span class="link-light fs-5 lh-base">查詢客運</span>
       </router-link>
     </div>
@@ -41,6 +44,7 @@
 import logoUrl from '@/assets/Logo.png'
 import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
+import searchWhiteUrl from '@/assets/search-white.svg'
 
 const setFullHeight = () => {
   const vh = window.innerHeight * 0.01
@@ -51,7 +55,7 @@ window.addEventListener('resize', setFullHeight)
 setFullHeight()
 </script>
 
-<style>
+<style lang="scss">
 .home-height {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
@@ -69,61 +73,69 @@ setFullHeight()
   border-radius: 50%;
 }
 .blue-ball {
-  width: 248px;
-  height: 248px;
-  right: 95px;
-  top: 169px;
+  width: 19.3%;
+  height: 0;
+  padding-bottom: 19.3%;
+  right: 7.4%;
+  top: 23.4%;
   background: linear-gradient(149.2deg, #1cc8ee 29.55%, #07738b 78.54%);
   mix-blend-mode: normal;
   box-shadow: 0px 0px 32px #1cc8ee, 1px 13px 10px #000000;
-}
-.blue-ball::before {
-  content: '';
-  position: absolute;
-  width: 357px;
-  height: 357px;
-  border-radius: 50%;
-  mix-blend-mode: normal;
-  border: 1px solid #1cc8ee;
-  box-sizing: border-box;
-  filter: drop-shadow(0px 0px 10px #1cc8ee) drop-shadow(0px 0px 10px #1cc8ee);
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 27.9%;
+    height: 0;
+    padding-bottom: 27.9%;
+    border-radius: 50%;
+    mix-blend-mode: normal;
+    border: 1px solid #1cc8ee;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 0px 10px #1cc8ee) drop-shadow(0px 0px 10px #1cc8ee);
+  }
 }
 .white-ball {
-  width: 194px;
-  height: 194px;
-  right: 62px;
-  top: 386px;
+  width: 15.2%;
+  height: 0;
+  padding-bottom: 15.2%;
+  right: 4.8%;
+  top: 53.6%;
   background: #f5f5f5;
   box-shadow: 0px 0px 8px #ffffff, 0px 11px 18px #000000;
-}
-.white-ball::before {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  right: 34px;
-  top: 356px;
-  opacity: 0.37;
-  border: 2px solid #f5f5f5;
-  box-sizing: border-box;
-  filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 19.5%;
+    height: 0;
+    padding-bottom: 19.5%;
+    opacity: 0.37;
+    border-radius: 50%;
+    border: 2px solid #f5f5f5;
+    box-sizing: border-box;
+    filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+  }
 }
 .yellow-ball {
-  width: 182px;
-  height: 182px;
+  width: 14.2%;
+  height: 0;
+  padding-bottom: 14.2%;
   right: 35%;
   top: 79.7%;
   background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%);
   box-shadow: 0px 0px 39px #fcd42c, 0px 11px 24px #000000;
-}
-.yellow-ball::before {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  right: 32.4%;
-  top: 76.6%;
-  opacity: 0.37;
-  border: 2px solid #f5f5f5;
-  box-sizing: border-box;
-  filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 19.5%;
+    height: 0;
+    padding-bottom: 19.5%;
+    border-radius: 50%;
+    opacity: 0.37;
+    border: 2px solid #f5f5f5;
+    filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+  }
 }
 </style>
