@@ -26,17 +26,17 @@ $utilities: (
   )
 );
 
-.icon-home-size {
+.logo-home-size {
   width: 144px;
   @media screen and (min-width: 768px) {
     width: 210px;
   }
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1200px) {
     width: 245px;
   }
 }
 
-.icon-header-size {
+.logo-header-size {
   width: 90px;
   @media screen and (min-width: 768px) {
     width: 132px;

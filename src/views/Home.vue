@@ -1,6 +1,6 @@
 <template>
   <div class="home-height position-relative bg-home overflow-hidden">
-    <img :src="logoUrl" class="icon-home-size mt-5 ml-4" />
+    <img :src="logoUrl" class="logo-home-size mt-5 ms-4" />
     <div
       class="ball blue-ball d-flex justify-content-center align-items-center"
     >
@@ -33,18 +33,49 @@
         role="button"
         class="d-flex flex-column text-decoration-none align-items-center"
       >
-        <img :src="searchWhiteUrl" width="22.6" />
-        <span class="link-light fs-5 lh-base">查詢客運</span>
+        <img :src="searchBlackUrl" width="22.6" />
+        <span class="link-dark fs-5 lh-base">查詢客運</span>
       </router-link>
     </div>
   </div>
 </template>
 
 <script setup>
+import { reactive } from 'vue'
 import logoUrl from '@/assets/Logo.png'
 import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
-import searchWhiteUrl from '@/assets/search-white.svg'
+
+const circles = reactive([
+  { class: 'circle cricle1', left: 0, top: 0, size: 0 },
+  { class: 'circle cricle2', left: 0, top: 0, size: 0 },
+  { class: 'circle cricle3', left: 0, top: 0, size: 0 },
+  { class: 'circle cricle4', left: 0, top: 0, size: 0 },
+  { class: 'circle cricle5', left: 0, top: 0, size: 0 },
+  { class: 'circle cricle6', left: 0, top: 0, size: 0 }
+])
+
+const getRandomPosition = (max) => {
+  return Math.round(Math.random() * (max + 20)) - 10
+}
+
+const getRandomSize = (max, min) => {
+  return Math.round(Math.random() * (max - min)) + min
+}
+
+const setRandomCircles = () => {
+  let maxSize = 100
+  const minSize = 30
+  if (window.innerWidth >= 768) {
+    maxSize = 190
+  }
+
+  circles.forEach((circle) => {
+    circle.left = getRandomPosition(window.innerWidth)
+    circle.top = getRandomPosition(window.innerHeight)
+    circle.size = getRandomSize(maxSize, minSize)
+  })
+}
 
 const setFullHeight = () => {
   const vh = window.innerHeight * 0.01
@@ -56,6 +87,8 @@ setFullHeight()
 </script>
 
 <style lang="scss">
+@import '../assets/scss/custom-mixin';
+
 .home-height {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
@@ -73,9 +106,13 @@ setFullHeight()
   border-radius: 50%;
 }
 .blue-ball {
-  width: 19.3%;
-  height: 0;
-  padding-bottom: 19.3%;
+  @include size(202px);
+  @media screen and (min-width: 768px) {
+    @include size(321px);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(248px);
+  }
   right: 7.4%;
   top: 23.4%;
   background: linear-gradient(149.2deg, #1cc8ee 29.55%, #07738b 78.54%);
@@ -85,20 +122,27 @@ setFullHeight()
     content: '';
     position: absolute;
     z-index: -1;
-    width: 27.9%;
-    height: 0;
-    padding-bottom: 27.9%;
+    @include size(290px);
+    @media screen and (min-width: 768px) {
+      @include size(460px);
+    }
+    @media screen and (min-width: 991px) {
+      @include size(356px);
+    }
     border-radius: 50%;
     mix-blend-mode: normal;
     border: 1px solid #1cc8ee;
-    box-sizing: border-box;
     filter: drop-shadow(0px 0px 10px #1cc8ee) drop-shadow(0px 0px 10px #1cc8ee);
   }
 }
 .white-ball {
-  width: 15.2%;
-  height: 0;
-  padding-bottom: 15.2%;
+  @include size(157px);
+  @media screen and (min-width: 768px) {
+    @include size(250px);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(193px);
+  }
   right: 4.8%;
   top: 53.6%;
   background: #f5f5f5;
@@ -107,9 +151,13 @@ setFullHeight()
     content: '';
     position: absolute;
     z-index: -1;
-    width: 19.5%;
-    height: 0;
-    padding-bottom: 19.5%;
+    @include size(204px);
+    @media screen and (min-width: 768px) {
+      @include size(324px);
+    }
+    @media screen and (min-width: 991px) {
+      @include size(250px);
+    }
     opacity: 0.37;
     border-radius: 50%;
     border: 2px solid #f5f5f5;
@@ -118,9 +166,13 @@ setFullHeight()
   }
 }
 .yellow-ball {
-  width: 14.2%;
-  height: 0;
-  padding-bottom: 14.2%;
+  @include size(168px);
+  @media screen and (min-width: 768px) {
+    @include size(245px);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(182px);
+  }
   right: 35%;
   top: 79.7%;
   background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%);
@@ -129,9 +181,13 @@ setFullHeight()
     content: '';
     position: absolute;
     z-index: -1;
-    width: 19.5%;
-    height: 0;
-    padding-bottom: 19.5%;
+    @include size(230px);
+    @media screen and (min-width: 768px) {
+      @include size(337px);
+    }
+    @media screen and (min-width: 991px) {
+      @include size(250px);
+    }
     border-radius: 50%;
     opacity: 0.37;
     border: 2px solid #f5f5f5;
