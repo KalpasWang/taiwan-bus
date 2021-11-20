@@ -2,6 +2,17 @@
   <div class="home-height position-relative bg-home overflow-hidden">
     <img :src="logoUrl" class="logo-home-size mt-5 ms-4" />
     <div
+      v-for="(circle, i) in circles"
+      :key="i"
+      :class="circle.class"
+      :style="{
+        left: circle.left,
+        top: circle.top,
+        width: circle.size,
+        height: circle.size
+      }"
+    ></div>
+    <div
       class="ball blue-ball d-flex justify-content-center align-items-center"
     >
       <router-link
@@ -47,16 +58,16 @@ import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
 
 const circles = reactive([
-  { class: 'circle cricle1', left: 0, top: 0, size: 0 },
-  { class: 'circle cricle2', left: 0, top: 0, size: 0 },
-  { class: 'circle cricle3', left: 0, top: 0, size: 0 },
-  { class: 'circle cricle4', left: 0, top: 0, size: 0 },
-  { class: 'circle cricle5', left: 0, top: 0, size: 0 },
-  { class: 'circle cricle6', left: 0, top: 0, size: 0 }
+  { class: { circle: true, circle1: true }, left: 0, top: 0, size: 0 },
+  { class: { circle: true, circle2: true }, left: 0, top: 0, size: 0 },
+  { class: { circle: true, circle3: true }, left: 0, top: 0, size: 0 },
+  { class: { circle: true, circle4: true }, left: 0, top: 0, size: 0 },
+  { class: { circle: true, circle5: true }, left: 0, top: 0, size: 0 },
+  { class: { circle: true, circle6: true }, left: 0, top: 0, size: 0 }
 ])
 
 const getRandomPosition = (max) => {
-  return Math.round(Math.random() * (max + 20)) - 10
+  return Math.round(Math.random() * (max + 40)) - 20
 }
 
 const getRandomSize = (max, min) => {
@@ -71,9 +82,9 @@ const setRandomCircles = () => {
   }
 
   circles.forEach((circle) => {
-    circle.left = getRandomPosition(window.innerWidth)
-    circle.top = getRandomPosition(window.innerHeight)
-    circle.size = getRandomSize(maxSize, minSize)
+    circle.left = getRandomPosition(window.innerWidth) + 'px'
+    circle.top = getRandomPosition(window.innerHeight) + 'px'
+    circle.size = getRandomSize(maxSize, minSize) + 'px'
   })
 }
 
@@ -88,6 +99,7 @@ setFullHeight()
 
 <style lang="scss">
 @import '../assets/scss/custom-mixin';
+@import '../assets/scss/custom-variables';
 
 .home-height {
   height: 100vh;
@@ -101,9 +113,23 @@ setFullHeight()
     #0a0a0b 71.59%
   ) !important;
 }
+.circle {
+  position: absolute;
+  @include size(100px);
+  border-radius: 50%;
+  border: 1px solid $light;
+}
 .ball {
   position: absolute;
   border-radius: 50%;
+  z-index: 20;
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    border: 2px solid #f5f5f5;
+  }
 }
 .blue-ball {
   @include size(202px);
@@ -119,9 +145,6 @@ setFullHeight()
   mix-blend-mode: normal;
   box-shadow: 0px 0px 32px #1cc8ee, 1px 13px 10px #000000;
   &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
     @include size(290px);
     @media screen and (min-width: 768px) {
       @include size(460px);
@@ -129,7 +152,6 @@ setFullHeight()
     @media screen and (min-width: 991px) {
       @include size(356px);
     }
-    border-radius: 50%;
     mix-blend-mode: normal;
     border: 1px solid #1cc8ee;
     filter: drop-shadow(0px 0px 10px #1cc8ee) drop-shadow(0px 0px 10px #1cc8ee);
@@ -148,9 +170,6 @@ setFullHeight()
   background: #f5f5f5;
   box-shadow: 0px 0px 8px #ffffff, 0px 11px 18px #000000;
   &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
     @include size(204px);
     @media screen and (min-width: 768px) {
       @include size(324px);
@@ -159,9 +178,6 @@ setFullHeight()
       @include size(250px);
     }
     opacity: 0.37;
-    border-radius: 50%;
-    border: 2px solid #f5f5f5;
-    box-sizing: border-box;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
   }
 }
@@ -178,9 +194,6 @@ setFullHeight()
   background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%);
   box-shadow: 0px 0px 39px #fcd42c, 0px 11px 24px #000000;
   &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
     @include size(230px);
     @media screen and (min-width: 768px) {
       @include size(337px);
@@ -188,9 +201,7 @@ setFullHeight()
     @media screen and (min-width: 991px) {
       @include size(250px);
     }
-    border-radius: 50%;
     opacity: 0.37;
-    border: 2px solid #f5f5f5;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
   }
 }
