@@ -5,12 +5,7 @@
       v-for="(circle, i) in circles"
       :key="i"
       :class="circle.class"
-      :style="{
-        left: circle.left,
-        top: circle.top,
-        width: circle.size,
-        height: circle.size
-      }"
+      :style="circle.mobile"
     ></div>
     <div
       class="ball blue-ball d-flex justify-content-center align-items-center"
@@ -52,41 +47,37 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import logoUrl from '@/assets/Logo.png'
 import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
 
+const device = computed(() => {
+  const w = window.innerWidth
+  if (w < 768) return 'mobile'
+  if (w >= 768 && w < 992) return 'tablet'
+  return 'desktop'
+})
 const circles = reactive([
-  { class: { circle: true, circle1: true }, left: 0, top: 0, size: 0 },
-  { class: { circle: true, circle2: true }, left: 0, top: 0, size: 0 },
-  { class: { circle: true, circle3: true }, left: 0, top: 0, size: 0 },
-  { class: { circle: true, circle4: true }, left: 0, top: 0, size: 0 },
+  {
+    class: { circle: true, circle1: true },
+    mobile: 'left:-34px;top:26.5%;width:87px;height:87px;'
+  },
+  {
+    class: { circle: true, circle2: true },
+    mobile: 'left:-30px;top:52.5%;width:50px;height:50px;'
+  },
+  {
+    class: { circle: true, circle3: true },
+    mobile: 'right:20px;top:-47px;width:86px;height:86px;'
+  },
+  {
+    class: { circle: true, circle4: true },
+    mobile: 'right:27.5%;bottom:8.9%;width:33px;height:33px;'
+  },
   { class: { circle: true, circle5: true }, left: 0, top: 0, size: 0 },
   { class: { circle: true, circle6: true }, left: 0, top: 0, size: 0 }
 ])
-
-const getRandomPosition = (max) => {
-  return Math.round(Math.random() * (max + 40)) - 20
-}
-
-const getRandomSize = (max, min) => {
-  return Math.round(Math.random() * (max - min)) + min
-}
-
-const setRandomCircles = () => {
-  let maxSize = 100
-  const minSize = 30
-  if (window.innerWidth >= 768) {
-    maxSize = 190
-  }
-
-  circles.forEach((circle) => {
-    circle.left = getRandomPosition(window.innerWidth) + 'px'
-    circle.top = getRandomPosition(window.innerHeight) + 'px'
-    circle.size = getRandomSize(maxSize, minSize) + 'px'
-  })
-}
 
 const setFullHeight = () => {
   const vh = window.innerHeight * 0.01
@@ -115,7 +106,7 @@ setFullHeight()
 }
 .circle {
   position: absolute;
-  @include size(100px);
+  // @include size(100px);
   border-radius: 50%;
   border: 1px solid $light;
 }
@@ -141,6 +132,8 @@ setFullHeight()
   }
   right: 7.4%;
   top: 23.4%;
+  // border: 4px solid;
+  // border-image: linear-gradient(323.99deg, #1cc8ee 65.35%, #ffffff 89.01%) round;
   background: linear-gradient(149.2deg, #1cc8ee 29.55%, #07738b 78.54%);
   mix-blend-mode: normal;
   box-shadow: 0px 0px 32px #1cc8ee, 1px 13px 10px #000000;
@@ -190,7 +183,7 @@ setFullHeight()
     @include size(182px);
   }
   right: 35%;
-  top: 79.7%;
+  bottom: -36px;
   background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%);
   box-shadow: 0px 0px 39px #fcd42c, 0px 11px 24px #000000;
   &::before {
