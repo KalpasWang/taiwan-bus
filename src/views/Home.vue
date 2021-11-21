@@ -1,12 +1,15 @@
 <template>
-  <div class="home-height position-relative bg-home overflow-hidden">
+  <div
+    ref="container"
+    class="home-height position-relative bg-home overflow-hidden"
+  >
     <img :src="logoUrl" class="logo-home-size mt-5 ms-4" />
-    <div
-      v-for="(circle, i) in circles"
-      :key="i"
-      :class="circle.class"
-      :style="circle.mobile"
-    ></div>
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="circle circle4"></div>
+    <div class="circle circle5"></div>
+    <div class="circle circle6"></div>
     <div
       class="ball blue-ball d-flex justify-content-center align-items-center"
     >
@@ -47,46 +50,25 @@
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import logoUrl from '@/assets/Logo.png'
 import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
 
-const device = computed(() => {
-  const w = window.innerWidth
-  if (w < 768) return 'mobile'
-  if (w >= 768 && w < 992) return 'tablet'
-  return 'desktop'
-})
-
-const circles = reactive([
-  {
-    class: { circle: true, circle1: true },
-    mobile: 'left:-34px;top:26.5%;width:87px;height:87px;'
-  },
-  {
-    class: { circle: true, circle2: true },
-    mobile: 'left:-30px;top:52.5%;width:50px;height:50px;'
-  },
-  {
-    class: { circle: true, circle3: true },
-    mobile: 'right:20px;top:-47px;width:86px;height:86px;'
-  },
-  {
-    class: { circle: true, circle4: true },
-    mobile: 'right:27.5%;bottom:8.9%;width:33px;height:33px;'
-  },
-  { class: { circle: true, circle5: true }, left: 0, top: 0, size: 0 },
-  { class: { circle: true, circle6: true }, left: 0, top: 0, size: 0 }
-])
+const container = ref(null)
 
 const setFullHeight = () => {
   const vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`)
+  if (window.innerWidth >= 768) {
+    container.value.classList.add('min-height')
+  }
 }
 window.addEventListener('resize', setFullHeight)
 
-setFullHeight()
+onMounted(() => {
+  setFullHeight()
+})
 </script>
 
 <style lang="scss">
@@ -96,6 +78,9 @@ setFullHeight()
 .home-height {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
+}
+.min-height {
+  min-height: 570px;
 }
 .bg-home {
   /* black_gray_line */
@@ -124,14 +109,56 @@ setFullHeight()
   }
 }
 .circle2 {
+  @include size(50px);
+  @include position($left: -30px, $top: 59.1%);
+  @media screen and (min-width: 768px) {
+    @include size(92px);
+    @include position($left: -37px, $top: 61.5%);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(77px);
+    @include position($left: 27.8%, $top: -39px);
+  }
 }
 .circle3 {
+  @include size(86px);
+  @include position($right: 20px, $top: -47px);
+  @media screen and (min-width: 768px) {
+    @include size(170px);
+    @include position($right: 12.9%, $top: -103px);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(142px);
+    @include position($right: 22.7%, $top: -39px);
+  }
 }
 .circle4 {
+  @include size(33px);
+  @include position($right: 27.5%, $bottom: 7.3%);
+  @media screen and (min-width: 768px) {
+    @include size(68px);
+    @include position($right: 30.7%, $bottom: 8%);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(131px);
+    @include position($right: 11.4%, $bottom: -72px);
+  }
 }
 .circle5 {
+  @media screen and (min-width: 768px) {
+    @include size(75px);
+    @include position($left: 21.6%, $bottom: 44.8%);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(82px);
+    @include position($left: 24.5%, $bottom: 20.3%);
+  }
 }
 .circle6 {
+  @media screen and (min-width: 991px) {
+    @include size(56px);
+    @include position($right: 32.9%, $bottom: 38.8%);
+  }
 }
 
 .ball {
