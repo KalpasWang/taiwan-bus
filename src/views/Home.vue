@@ -58,6 +58,7 @@ const device = computed(() => {
   if (w >= 768 && w < 992) return 'tablet'
   return 'desktop'
 })
+
 const circles = reactive([
   {
     class: { circle: true, circle1: true },
@@ -110,6 +111,29 @@ setFullHeight()
   border-radius: 50%;
   border: 1px solid $light;
 }
+.circle1 {
+  @include size(87px);
+  @include position($left: -34px, $top: 26.5%);
+  @media screen and (min-width: 768px) {
+    @include size(183px);
+    @include position($left: -81px, $top: 28.4%);
+  }
+  @media screen and (min-width: 991px) {
+    @include size(156px);
+    @include position($left: -96px, $top: 32.6%);
+  }
+}
+.circle2 {
+}
+.circle3 {
+}
+.circle4 {
+}
+.circle5 {
+}
+.circle6 {
+}
+
 .ball {
   position: absolute;
   border-radius: 50%;
@@ -124,15 +148,19 @@ setFullHeight()
 }
 .blue-ball {
   @include size(202px);
+  right: -29px;
+  top: 25%;
   @media screen and (min-width: 768px) {
     @include size(321px);
+    right: 28px;
+    top: 28.4%;
   }
   @media screen and (min-width: 991px) {
     @include size(248px);
+    right: 7.4%;
+    top: 23.4%;
   }
-  right: 7.4%;
-  top: 23.4%;
-  // border: 4px solid;
+  border: 4px solid;
   // border-image: linear-gradient(323.99deg, #1cc8ee 65.35%, #ffffff 89.01%) round;
   background: linear-gradient(149.2deg, #1cc8ee 29.55%, #07738b 78.54%);
   mix-blend-mode: normal;
@@ -152,14 +180,18 @@ setFullHeight()
 }
 .white-ball {
   @include size(157px);
+  right: -36px;
+  top: 52.5%;
   @media screen and (min-width: 768px) {
     @include size(250px);
+    right: -15px;
+    top: 55.7%;
   }
   @media screen and (min-width: 991px) {
     @include size(193px);
+    right: 4.8%;
+    top: 53.6%;
   }
-  right: 4.8%;
-  top: 53.6%;
   background: #f5f5f5;
   box-shadow: 0px 0px 8px #ffffff, 0px 11px 18px #000000;
   &::before {
@@ -176,14 +208,19 @@ setFullHeight()
 }
 .yellow-ball {
   @include size(168px);
+  left: -41px;
+  bottom: -14px;
   @media screen and (min-width: 768px) {
     @include size(245px);
+    left: -35px;
+    bottom: -40px;
   }
   @media screen and (min-width: 991px) {
     @include size(182px);
+    left: auto;
+    right: 35%;
+    bottom: -36px;
   }
-  right: 35%;
-  bottom: -36px;
   background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%);
   box-shadow: 0px 0px 39px #fcd42c, 0px 11px 24px #000000;
   &::before {

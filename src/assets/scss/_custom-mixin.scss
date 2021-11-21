@@ -2,3 +2,10 @@
   width: $width;
   height: $height;
 }
+
+@mixin position($left: auto, $right: auto, $top: auto, $bottom: auto) {
+  left: $left;
+  right: $right;
+  top: $top;
+  bottom: $bottom;
+}
