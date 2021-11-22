@@ -3,7 +3,10 @@
     ref="container"
     class="home-height position-relative bg-home overflow-hidden"
   >
-    <img :src="logoUrl" class="logo-home-size mt-5 ms-4" />
+    <img
+      :src="logoUrl"
+      class="logo-home-size mt-5 mt-md-9 ms-4 ms-md-5 ms-lg-8"
+    />
     <div class="circle circle1"></div>
     <div class="circle circle2"></div>
     <div class="circle circle3"></div>
@@ -46,6 +49,7 @@
         <span class="link-dark fs-5 lh-base">查詢客運</span>
       </router-link>
     </div>
+    <p class="footer text-light">Taiwan Bus © Code: Kalpas / Design: KT</p>
   </div>
 </template>
 
@@ -60,8 +64,16 @@ const container = ref(null)
 const setFullHeight = () => {
   const vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`)
-  if (window.innerWidth >= 768) {
-    container.value.classList.add('min-height')
+
+  if (window.innerWidth >= 768 && window.innerWidth < 992) {
+    container.value.classList.remove('min-height-desktop')
+    container.value.classList.add('min-height-tablet')
+  } else if (window.innerWidth >= 992) {
+    container.value.classList.remove('min-height-tablet')
+    container.value.classList.add('min-height-desktop')
+  } else {
+    container.value.classList.remove('min-height-tablet')
+    container.value.classList.remove('min-height-desktop')
   }
 }
 window.addEventListener('resize', setFullHeight)
@@ -79,8 +91,11 @@ onMounted(() => {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 }
-.min-height {
-  min-height: 570px;
+.min-height-tablet {
+  min-height: 990px;
+}
+.min-height-desktop {
+  min-height: 700px;
 }
 .bg-home {
   /* black_gray_line */
@@ -260,6 +275,17 @@ onMounted(() => {
     }
     opacity: 0.37;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+  }
+}
+
+.footer {
+  position: absolute;
+  font-size: 0.75rem;
+  right: 16px;
+  bottom: 16px;
+  @media screen and (min-width: 991px) {
+    right: auto;
+    left: 30px;
   }
 }
 </style>
