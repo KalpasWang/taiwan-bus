@@ -202,11 +202,14 @@ onMounted(() => {
     right: 7.4%;
     top: 23.4%;
   }
-  border: 4px solid;
-  // border-image: linear-gradient(323.99deg, #1cc8ee 65.35%, #ffffff 89.01%) round;
-  background: linear-gradient(149.2deg, #1cc8ee 29.55%, #07738b 78.54%);
+  border: 4px solid transparent;
+  background-image: linear-gradient(149.2deg, #1cc8ee 29.55%, #07738b 78.54%),
+    linear-gradient(323.99deg, #1cc8ee 65.35%, #ffffff 89.01%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
   mix-blend-mode: normal;
   box-shadow: 0px 0px 32px #1cc8ee, 1px 13px 10px #000000;
+
   &::before {
     @include size(290px);
     @media screen and (min-width: 768px) {
@@ -218,6 +221,7 @@ onMounted(() => {
     mix-blend-mode: normal;
     border: 1px solid #1cc8ee;
     filter: drop-shadow(0px 0px 10px #1cc8ee) drop-shadow(0px 0px 10px #1cc8ee);
+    animation: loop 2s ease-in-out infinite alternate;
   }
 }
 .white-ball {
@@ -234,8 +238,13 @@ onMounted(() => {
     right: 4.8%;
     top: 53.6%;
   }
-  background: #f5f5f5;
+  border: 4px solid transparent;
+  background-image: linear-gradient(#f5f5f5, #f5f5f5),
+    linear-gradient(344.08deg, #f1f1f1 17.96%, #ffffff 84.68%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
   box-shadow: 0px 0px 8px #ffffff, 0px 11px 18px #000000;
+
   &::before {
     @include size(204px);
     @media screen and (min-width: 768px) {
@@ -246,6 +255,7 @@ onMounted(() => {
     }
     opacity: 0.37;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+    animation: loop 2s 0.5s ease-in-out infinite alternate;
   }
 }
 .yellow-ball {
@@ -263,8 +273,13 @@ onMounted(() => {
     right: 35%;
     bottom: -36px;
   }
-  background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%);
+  border: 4px solid transparent;
+  background: linear-gradient(206.57deg, #fcd42c 18.7%, #a98b0d 80.04%),
+    linear-gradient(16.05deg, #fcd42c 49.56%, #ffffff 86.1%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
   box-shadow: 0px 0px 39px #fcd42c, 0px 11px 24px #000000;
+
   &::before {
     @include size(230px);
     @media screen and (min-width: 768px) {
@@ -275,6 +290,7 @@ onMounted(() => {
     }
     opacity: 0.37;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
+    animation: loop 2s 1s ease-in-out infinite alternate;
   }
 }
 
@@ -286,6 +302,15 @@ onMounted(() => {
   @media screen and (min-width: 991px) {
     right: auto;
     left: 30px;
+  }
+}
+
+@keyframes loop {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1.05);
   }
 }
 </style>
