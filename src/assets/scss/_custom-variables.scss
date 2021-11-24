@@ -7,9 +7,9 @@ $danger: #e784ff;
 $light: #f5f5f5;
 $dark: #131414;
 
-$gray-700: #495057 !default;
+$gray-700: #414242;
 $gray-800: #343a40 !default;
-$gray-900: #212529 !default;
+$gray-900: #1c1d1d;
 
 $body-bg: $dark;
 $body-color: $light;
@@ -61,4 +61,7 @@ $paragraph-margin-bottom: 0;
 
 // Inputs
 
-$input-bg: $body-bg;
+$input-bg: $gray-900;
+$input-placeholder-color: $gray-700;
+$input-plaintext-color: $light;
+$input-color: $primary;

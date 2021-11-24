@@ -1,4 +1,5 @@
 <template>
+  <HeaderSearch />
   <select v-model="selectedCity" class="form-select">
     <option value="" disabled selected>選擇縣市</option>
     <option v-for="city in state.citysList" :key="city.City" :value="city.City">
@@ -41,6 +42,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import HeaderSearch from '@/components/HeaderSearch.vue'
 import bus from '@/composables/useCityBus'
 
 const { state } = bus
