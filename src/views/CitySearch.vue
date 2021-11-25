@@ -13,6 +13,7 @@
     placeholder="搜尋公車路線"
   />
   <input @click="onSubmit()" type="submit" class="btn btn-primary" />
+  <KeyBoard />
   <h3 v-if="state.pending" class="mt-5 text-center">Loading...</h3>
   <h3 v-else-if="state.error" class="mt-5 text-center">{{ state.error }}</h3>
   <div v-else>
@@ -43,6 +44,7 @@
 <script setup>
 import { ref } from 'vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
+import KeyBoard from '@/components/KeyBoard.vue'
 import bus from '@/composables/useCityBus'
 
 const { state } = bus
