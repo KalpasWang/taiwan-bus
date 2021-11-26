@@ -53,18 +53,48 @@ $spacers: (
   )
 );
 
+// font size
+$font-size-base: 1rem !default;
+
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
+$h7-font-size: $font-size-base * 0.88;
+$h8-font-size: $font-size-base * 0.75;
+// scss-docs-end font-variables
+
+// scss-docs-start font-sizes
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size,
+  7: $h7-font-size,
+  8: $h8-font-size
+);
+
 // Paragraphs
 //
 // Style p element.
-
 $paragraph-margin-bottom: 0;
 
 // Inputs
-
 $input-bg: $gray-900;
 $input-placeholder-color: $gray-700;
 $input-plaintext-color: $light;
 $input-color: $primary;
 
 // Grid
-$grid-columns: 10;
+$grid-columns: 60;
+
+// Buttons
+$input-btn-padding-y: 0.6rem;
+$btn-box-shadow: 0px 0px 2px 0px rgba(28, 200, 238, 1),
+  0px 0px 6px 0px rgba(28, 200, 238, 1);
+$btn-font-size: 0.88rem;
+$btn-border-radius: 0.56rem;
