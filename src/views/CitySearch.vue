@@ -7,7 +7,7 @@
     </option>
   </select>
   <input
-    v-model="busInput"
+    v-model="routeName"
     type="text"
     class="form-control"
     placeholder="搜尋公車路線"
@@ -46,8 +46,10 @@ import { ref } from 'vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import bus from '@/composables/useCityBus'
+import input from '@/composables/useInput'
 
 const { state } = bus
+const { routeName } = input
 const selectedCity = ref('')
 const busInput = ref('')
 // console.log(state)

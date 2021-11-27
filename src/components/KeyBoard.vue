@@ -14,11 +14,12 @@
       </div>
     </div>
     <div class="row row-cols-5 g-2">
+      <!-- 第一排 -->
       <div class="col">
-        <KeyItem @click="emitInput('紅')">紅</KeyItem>
+        <KeyItem @click="inputRouteName('紅')">紅</KeyItem>
       </div>
       <div class="col">
-        <KeyItem @click="emitInput('藍')">藍</KeyItem>
+        <KeyItem @click="inputRouteName('藍')">藍</KeyItem>
       </div>
       <div class="col">
         <KeyItem>1</KeyItem>
@@ -50,20 +51,27 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
+import input from '@/composables/useInput'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 
 const board = ref('routes')
 
-const emit = defineEmits(['input', 'delete'])
-
-const emitInput = (value) => {
-  if (value) {
-    emit('input', value)
-  } else {
-    emit('delete')
+const inputCityValue = (value) => {
+  if (input.checkCityInput(value)) {
+    input.city.value = value
   }
+}
+
+const inputRouteName = (value) => {
+  console.log(value)
+  input.routeName.value += value
+}
+
+const deleteRouteNameLastChar = () => {
+  const name = input.routeName.value
+  input.routeName.value = name.slice(0, -1)
 }
 </script>
 
