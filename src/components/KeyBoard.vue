@@ -56,6 +56,10 @@ import input from '@/composables/useInput'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 
+const props = defineProps({
+  type: String
+})
+
 const board = ref('routes')
 
 const inputCityValue = (value) => {
