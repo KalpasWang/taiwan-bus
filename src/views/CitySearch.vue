@@ -1,19 +1,14 @@
 <template>
-  <HeaderSearch />
-  <select v-model="selectedCity" class="form-select">
-    <option value="" disabled selected>選擇縣市</option>
-    <option v-for="city in state.citysList" :key="city.City" :value="city.City">
-      {{ city.CityName }}
-    </option>
-  </select>
-  <input
-    v-model="routeName"
-    type="text"
-    class="form-control"
-    placeholder="搜尋公車路線"
-  />
-  <input @click="onSubmit()" type="submit" class="btn btn-primary" />
-  <KeyBoard />
+  <div class="container vh-100">
+    <HeaderSearch tyype="city" />
+    <div class="position-relative h-100">
+      <h4 v-if="input.city.CityName" class="fs-6 text-light mt-5">
+        {{ input.city.CityName }}
+      </h4>
+      <h4 v-else class="fs-7 text-light mt-5">請先選擇縣市</h4>
+      <KeyBoard type="city" class="position-absolute w-100 bottom-0" />
+    </div>
+  </div>
   <h3 v-if="state.pending" class="mt-5 text-center">Loading...</h3>
   <h3 v-else-if="state.error" class="mt-5 text-center">{{ state.error }}</h3>
   <div v-else>

@@ -1,7 +1,11 @@
-import { ref, watchEffect } from 'vue'
+import { ref, reactive, watchEffect } from 'vue'
 import { citys } from '@/composables/constant'
 
-const city = ref('')
+const city = reactive({
+  CityName: '',
+  CityCode: '',
+  City: ''
+})
 const routeName = ref('')
 
 watchEffect(() => {

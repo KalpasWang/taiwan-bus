@@ -1,12 +1,13 @@
 <template>
   <!-- 路線選擇模式 -->
-  <div v-if="boardState === 1" class="bg-grey-900 p-4">
+  <div v-if="boardState === 1" class="bg-grey-900 px-1 py-4">
     <!-- 第一排 -->
     <div class="row g-3 mb-3">
       <div class="col-6">
         <KeyItem @click="boardState = 2" :white="true">
           <img :src="markerUrl" width="13" height="15.89" class="me-2" />
-          <span>選擇縣市</span>
+          <span v-if="input.city.CityName">{{ input.city.CityName }}</span>
+          <span v-else>選擇縣市</span>
         </KeyItem>
       </div>
       <div class="col-4">
@@ -52,17 +53,21 @@
   <div v-else-if="boardState === 2" class="bg-grey-900 px-4 py-5">
     <div class="row row-cols-5 g-2">
       <div v-for="city in citys" :key="city.CityCode" class="col">
-        <KeyItem @click="setCity(city.City)">{{ city.CityName }}</KeyItem>
+        <KeyItem
+          :class="{ active: city.CityName === activeBtn }"
+          @click="setTempCity(city)"
+          >{{ city.CityName }}</KeyItem
+        >
       </div>
       <div class="col flex-grow-1">
-        <KeyItem @click="boardState = 1">設定</KeyItem>
+        <KeyItem @click="setCityAndBoardState()">設定</KeyItem>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import input from '@/composables/useInput'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
@@ -73,11 +78,19 @@ const props = defineProps({
 })
 
 const boardState = ref(1)
+const temp = ref({
+  CityName: ''
+})
+const activeBtn = ref('')
 
-const setCity = (value) => {
-  if (input.checkCityInput(value)) {
-    input.city.value = value
-  }
+const setTempCity = (city) => {
+  temp.value = city
+  activeBtn.value = city.CityName
+}
+
+const setCityAndBoardState = () => {
+  input.city = temp.value
+  boardState.value = 1
 }
 
 const setRouteName = (value) => {
