@@ -1,23 +1,35 @@
-import { ref, reactive, watchEffect } from 'vue'
-import { citys } from '@/composables/constant'
+import { reactive } from 'vue'
 
-const city = reactive({
-  CityName: '',
-  CityCode: '',
-  City: ''
-})
-const routeName = ref('')
-
-watchEffect(() => {
-  console.log(routeName.value)
+const state = reactive({
+  city: {
+    CityName: '',
+    City: '',
+    CityCode: ''
+  },
+  routeName: ''
 })
 
-const checkCityInput = (value) => {
-  return citys.some((city) => city.CityName === value)
+const setCity = (city) => {
+  state.city = city
+}
+
+const inputRouteName = (value) => {
+  state.routeName += value
+}
+
+const deleteLastChar = () => {
+  const name = state.routeName
+  state.routeName = name.slice(0, -1)
+}
+
+const removeRouteName = () => {
+  state.routeName = ''
 }
 
 export default {
-  city,
-  routeName,
-  checkCityInput
+  inputs: state,
+  setCity,
+  inputRouteName,
+  deleteLastChar,
+  removeRouteName
 }
