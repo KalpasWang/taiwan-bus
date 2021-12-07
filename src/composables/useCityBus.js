@@ -1,4 +1,4 @@
-import { reactive, readonly, watchEffect } from 'vue'
+import { reactive, readonly } from 'vue'
 import api from './api'
 import { citys } from './constant'
 import { getTimeBadgeAndColor } from './useUtilities'
@@ -18,11 +18,6 @@ const state = reactive({
   error: null
 })
 
-watchEffect(() => {
-  // console.log(state.forwardStopsList)
-  // console.log(state.routeName)
-})
-
 /**
  * fetch 函式
  */
@@ -34,9 +29,9 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
     state.pending = true
     let url
     if (city && !routeName) {
-      url = `Route/City/${city}?$format=json`
+      url = `Route/City/${city}`
     } else {
-      url = `Route/City/${city}/${routeName}?$format=json`
+      url = `Route/City/${city}/${routeName}`
     }
     const res = await api.get(url)
     console.log(res.data)
@@ -53,8 +48,8 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
   try {
     state.error = null
     state.pending = true
-    const url = `StopOfRoute/City/${city}/${routeName}?$format=json`
-    const url2 = `EstimatedTimeOfArrival/City/${city}/${routeName}?$format=json`
+    const url = `StopOfRoute/City/${city}/${routeName}`
+    const url2 = `EstimatedTimeOfArrival/City/${city}/${routeName}`
     // 取得站序資料
     const res = await api.get(url)
     // 取得預估時間資料
@@ -143,8 +138,7 @@ const fetchNearByStations = (radius) => {
       const url = 'Station/NearBy'
       const res = await api.get(url, {
         params: {
-          $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`,
-          $format: 'JSON'
+          $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`
         }
       })
       state.stationsList = []
@@ -180,8 +174,7 @@ const fetchStationGroup = async (city, groupId) => {
     const url = `Station/City/${city}`
     let res = await api.get(url, {
       params: {
-        $filter: `StationGroupID eq '${groupId}'`,
-        $format: 'JSON'
+        $filter: `StationGroupID eq '${groupId}'`
       }
     })
     console.log(res.data)
@@ -204,7 +197,7 @@ const fetchStationGroup = async (city, groupId) => {
 const fetchEstimatedTimeOfArrivalByStaionId = async (city, stationId) => {
   state.error = null
   state.pending = true
-  const url = `EstimatedTimeOfArrival/City/${city}/PassThrough/Station/${stationId}?$format=JSON`
+  const url = `EstimatedTimeOfArrival/City/${city}/PassThrough/Station/${stationId}`
   const res = await api.get(url)
   console.log(res.data)
   state.pending = false

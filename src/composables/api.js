@@ -3,7 +3,11 @@ import jsSHA from 'jssha'
 
 const api = axios.create({
   baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',
-  headers: getAuthorizationHeader()
+  headers: getAuthorizationHeader(),
+  params: {
+    $top: 30,
+    $format: 'JSON'
+  }
 })
 
 function getAuthorizationHeader() {

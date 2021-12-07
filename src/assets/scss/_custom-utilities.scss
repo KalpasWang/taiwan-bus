@@ -10,18 +10,13 @@ $utilities: (
       1000: 1000
     )
   ),
-  'cursor': (
-    property: cursor,
-    class: cursor,
+  'letter-spacing': (
+    property: letter-spacing,
+    class: ls,
     values: (
-      pointer: pointer
-    )
-  ),
-  'minh': (
-    property: min-height,
-    class: minh,
-    values: (
-      100: 100vh
+      05: 0.5px,
+      1: 1px,
+      2: 2px
     )
   )
 );
