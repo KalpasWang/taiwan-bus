@@ -1,5 +1,26 @@
 <template>
-  <h1>{{ city }} {{ routeName }}</h1>
+  <div class="header-shadow bg-dark">
+    <div class="d-flex justify-content-between align-items-center px-3 py-4">
+      <img
+        @click="router.go(-1)"
+        :src="backIconUrl"
+        alt="回上一頁"
+        role="button"
+      />
+      <router-link :to="{ name: 'Home' }">
+        <img :src="logoUrl" alt="回首頁" />
+      </router-link>
+      <img @click="" :src="mapIconUrl" alt="地圖" role="button" />
+    </div>
+    <div class="row">
+      <div class="col pb-3 text-center">
+        <span class="text-primar">往</span> {{ forwardLabel }}
+      </div>
+      <div class="col pb-3 text-center">
+        <span class="text-primar">往</span> {{ backwardLabel }}
+      </div>
+    </div>
+  </div>
   <p>{{ updateTime }}秒前更新</p>
   <div class="row">
     <!-- 地圖 -->
@@ -88,15 +109,20 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 import { getCity } from '@/composables/useUtilities'
+import backIconUrl from '@/assets/back.svg'
+import logoUrl from '@/assets/Logo.png'
+import mapIconUrl from '@/assets/map.svg'
 
 const props = defineProps({
   city: String,
   routeName: String
 })
 
+const router = useRouter()
 const activeItem = ref('forward')
 const updateTime = ref(0)
 const { state } = bus
