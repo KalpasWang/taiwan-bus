@@ -1,4 +1,5 @@
 <template>
+  <!-- Header -->
   <div class="header-shadow bg-dark">
     <div class="d-flex justify-content-between align-items-center px-3 py-4">
       <img
@@ -6,21 +7,36 @@
         :src="backIconUrl"
         alt="回上一頁"
         role="button"
+        width="6"
       />
       <router-link :to="{ name: 'Home' }">
-        <img :src="logoUrl" alt="回首頁" />
+        <img :src="logoUrl" alt="回首頁" class="logo-header-size" />
       </router-link>
-      <img @click="" :src="mapIconUrl" alt="地圖" role="button" />
+      <img @click="" :src="mapIconUrl" alt="地圖" role="button" width="23" />
     </div>
     <div class="row">
-      <div class="col pb-3 text-center">
-        <span class="text-primar">往</span> {{ forwardLabel }}
+      <div class="col tab active pb-3 text-center position-relative">
+        <span class="text-primary">往</span> {{ forwardLabel }}
       </div>
-      <div class="col pb-3 text-center">
-        <span class="text-primar">往</span> {{ backwardLabel }}
+      <div class="col tab pb-3 text-center position-relative">
+        <span class="text-primary">往</span> {{ backwardLabel }}
       </div>
     </div>
   </div>
+  <!-- 預估到站時間 -->
+  <perfect-scrollbar>
+    <div class="bg-secondary container">
+      <p class="pt-4 mb-0 text-end text-primary">*於{{ updateTime }}秒前更新</p>
+      <ul class="list-unstyled">
+        <li class="py-2 flex-between">
+          <div class="flex-center time-label">
+            <span class="text-primary">6 分</span>
+          </div>
+          <div class="circle"></div>
+        </li>
+      </ul>
+    </div>
+  </perfect-scrollbar>
   <p>{{ updateTime }}秒前更新</p>
   <div class="row">
     <!-- 地圖 -->
@@ -134,7 +150,7 @@ const forwardLabel = computed(() => {
     return '去程'
   }
   const finalStop = state.forwardStopsList[len - 1].StopName.Zh_tw
-  return `往 ${finalStop}`
+  return finalStop
 })
 
 const backwardLabel = computed(() => {
@@ -143,7 +159,7 @@ const backwardLabel = computed(() => {
     return '返程'
   }
   const finalStop = state.backwardStopsList[len - 1].StopName.Zh_tw
-  return `往 ${finalStop}`
+  return finalStop
 })
 
 const setTab = (tabName) => {
@@ -170,7 +186,57 @@ onUnmounted(() => clearInterval(timer))
 </script>
 
 <style lang="scss">
+@import '../assets/scss/all.scss';
+
 .map {
   height: 840px;
+}
+
+.tab {
+  &::after {
+    content: '';
+    width: 100%;
+    height: 2.43px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: 50px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  &.active::after {
+    background: $primary;
+    box-shadow: 0px 0px 6px $primary, 0px 0px 2px $primary;
+  }
+}
+
+.time-label {
+  width: 79px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  background: $dark;
+  border: 1px solid $primary;
+  box-shadow: 0px 0px 5px $primary;
+}
+
+.circle {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.4px solid $primary;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -39px;
+    width: 2px;
+    height: 39px;
+    background: $primary;
+    box-shadow: 0px 0px 5px $primary;
+  }
 }
 </style>

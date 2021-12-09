@@ -21,6 +21,18 @@ $utilities: (
   )
 );
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .logo-home-size {
   width: 144px;
   @media screen and (min-width: 768px) {
