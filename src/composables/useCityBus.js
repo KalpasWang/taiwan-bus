@@ -75,12 +75,14 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     // 去程
     stopsForward.forEach((stop) => {
       const time = timeForward.find((item) => item.StopUID === stop.StopUID)
+      console.log(time)
       if (time) {
         const badge = getTimeBadgeAndColor(time)
         const newStop = Object.assign(stop, {
           EstimateTime: time.EstimateTime,
           TimeLabel: badge.text,
           Color: badge.color,
+          BgColor: badge.bgColor,
           StopStatus: time.StopStatus
         })
         state.forwardStopsList.push(newStop)
@@ -103,6 +105,7 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
           EstimateTime: time.EstimateTime,
           TimeLabel: badge.text,
           Color: badge.color,
+          BgColor: badge.bgColor,
           StopStatus: time.StopStatus
         })
         state.backwardStopsList.push(newStop)

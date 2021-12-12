@@ -3,16 +3,20 @@ import bus from '@/composables/useCityBus'
 export const getTimeBadgeAndColor = (timeObj) => {
   let badge = {
     text: '',
-    color: 'bg-primary'
+    bgColor: 'bg-dark',
+    color: 'text-primary',
+    border: true
   }
   // console.log(timeObj)
   const time = timeObj.EstimateTime
   if (time === 0) {
     badge.text = '進站中'
-    badge.color = 'bg-danger'
+    badge.bgColor = 'bg-primary'
+    badge.color = 'text-dark'
   } else if (time <= 90) {
     badge.text = '即將到站'
-    badge.color = 'bg-warning'
+    badge.bgColor = 'bg-primary'
+    badge.color = 'text-dark'
   } else if (!time) {
     const status = timeObj.StopStatus
     switch (status) {
@@ -20,7 +24,7 @@ export const getTimeBadgeAndColor = (timeObj) => {
         badge.text = '--'
         break
       case 1:
-        badge.text = '尚未發車'
+        badge.text = '未發車'
         break
       case 2:
         badge.text = '交管不停靠'
@@ -29,10 +33,11 @@ export const getTimeBadgeAndColor = (timeObj) => {
         badge.text = '末班車已過'
         break
       case 4:
-        badge.text = '今日未營運'
+        badge.text = '未營運'
         break
     }
-    badge.color = 'bg-secondary'
+    badge.bgColor = 'bg-dark'
+    ;(badge.color = 'text-warning'), (badge.border = false)
   } else {
     const min = Math.floor(time / 60)
     badge.text = `約${min}分`
