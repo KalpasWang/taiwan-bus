@@ -1,5 +1,5 @@
 import { reactive, readonly, watchEffect } from 'vue'
-import api from './api'
+import { api, apiTop30 } from './api'
 import { citys } from './constant'
 import { getTimeBadgeAndColor } from './useUtilities'
 
@@ -22,7 +22,7 @@ const state = reactive({
 const fetchRoutesByCity = async (city) => {
   const cityItem = state.citysList.find((c) => c.City === city)
   const url = 'StopOfRoute/InterCity'
-  const res = await api.get(url, {
+  const res = await apiTop30.get(url, {
     params: {
       $filter: `Stops/any(d:d/LocationCityCode eq '${cityItem.CityCode}')`,
       $format: 'JSON'

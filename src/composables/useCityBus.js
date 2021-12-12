@@ -1,5 +1,5 @@
 import { reactive, readonly } from 'vue'
-import api from './api'
+import { api, apiTop30 } from './api'
 import { citys } from './constant'
 import { getTimeBadgeAndColor } from './useUtilities'
 import haversine from 'haversine-distance'
@@ -33,7 +33,7 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
     } else {
       url = `Route/City/${city}/${routeName}`
     }
-    const res = await api.get(url)
+    const res = await apiTop30.get(url)
     console.log(res.data)
     state.routesList = res.data
     state.pending = false
@@ -56,7 +56,6 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     const res2 = await api.get(url2)
     // console.log(res.data)
     // console.log(res2.data)
-    // console.log('ajax')
 
     // 清理 state
     state.city = city
@@ -71,52 +70,44 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     const stopsBackward = isFirstForward ? res.data[1].Stops : res.data[0].Stops
     const timeForward = res2.data.filter((item) => !item.Direction)
     const timeBackward = res2.data.filter((item) => item.Direction)
+    console.log('timeForward', timeForward)
+    console.log('timeBackward', timeBackward)
 
-    // 去程
-    stopsForward.forEach((stop) => {
-      const time = timeForward.find((item) => item.StopUID === stop.StopUID)
-      console.log(time)
+    const processStop = (timeArr, stop) => {
+      const time = timeArr.find((item) => item.StopUID === stop.StopUID)
+      let newStop
       if (time) {
         const badge = getTimeBadgeAndColor(time)
-        const newStop = Object.assign(stop, {
+        newStop = Object.assign(stop, {
           EstimateTime: time.EstimateTime,
           TimeLabel: badge.text,
           Color: badge.color,
           BgColor: badge.bgColor,
-          StopStatus: time.StopStatus
+          StopStatus: time.StopStatus,
+          Border: badge.border
         })
-        state.forwardStopsList.push(newStop)
       } else {
-        const newStop = Object.assign(stop, {
+        newStop = Object.assign(stop, {
           TimeLabel: '--',
-          Color: 'bg-secondary',
-          StopStatus: 4
+          Color: 'text-warning',
+          BgColor: 'bg-dark',
+          StopStatus: 1,
+          Border: false
         })
-        state.forwardStopsList.push(newStop)
       }
+      return newStop
+    }
+
+    // 去程
+    stopsForward.forEach((stop) => {
+      const newStop = processStop(timeForward, stop)
+      state.forwardStopsList.push(newStop)
     })
 
     // 返程
     stopsBackward.forEach((stop) => {
-      const time = timeBackward.find((item) => item.StopUID === stop.StopUID)
-      if (time) {
-        const badge = getTimeBadgeAndColor(time)
-        const newStop = Object.assign(stop, {
-          EstimateTime: time.EstimateTime,
-          TimeLabel: badge.text,
-          Color: badge.color,
-          BgColor: badge.bgColor,
-          StopStatus: time.StopStatus
-        })
-        state.backwardStopsList.push(newStop)
-      } else {
-        const newStop = Object.assign(stop, {
-          TimeLabel: '--',
-          Color: 'bg-secondary',
-          StopStatus: 4
-        })
-        state.backwardStopsList.push(newStop)
-      }
+      const newStop = processStop(timeBackward, stop)
+      state.backwardStopsList.push(newStop)
     })
 
     state.pending = false
@@ -139,7 +130,7 @@ const fetchNearByStations = (radius) => {
       const lat = position.coords.latitude
       const lng = position.coords.longitude
       const url = 'Station/NearBy'
-      const res = await api.get(url, {
+      const res = await apiTop30.get(url, {
         params: {
           $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`
         }

@@ -1,11 +1,19 @@
 import axios from 'axios'
 import jsSHA from 'jssha'
 
-const api = axios.create({
+export const apiTop30 = axios.create({
   baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',
   headers: getAuthorizationHeader(),
   params: {
     $top: 30,
+    $format: 'JSON'
+  }
+})
+
+export const api = axios.create({
+  baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',
+  headers: getAuthorizationHeader(),
+  params: {
     $format: 'JSON'
   }
 })
@@ -29,5 +37,3 @@ function getAuthorizationHeader() {
     'X-Date': GMTString
   }
 }
-
-export default api

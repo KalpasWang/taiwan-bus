@@ -37,7 +37,8 @@ export const getTimeBadgeAndColor = (timeObj) => {
         break
     }
     badge.bgColor = 'bg-dark'
-    ;(badge.color = 'text-warning'), (badge.border = false)
+    badge.color = 'text-warning'
+    badge.border = false
   } else {
     const min = Math.floor(time / 60)
     badge.text = `約${min}分`

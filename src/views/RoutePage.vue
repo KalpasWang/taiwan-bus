@@ -38,7 +38,7 @@
           >
             <div
               class="flex-center time-label"
-              :class="[item.border ? 'label-border' : '', item.BgColor]"
+              :class="[item.Border ? 'label-border' : '', item.BgColor]"
             >
               <span :class="item.Color">{{ item.TimeLabel }}</span>
             </div>
@@ -242,6 +242,7 @@ onUnmounted(() => clearInterval(timer))
   border-radius: 50%;
   background: $secondary;
   border: 1.4px solid $primary;
+  z-index: 20;
 
   &::after {
     content: '';
@@ -252,6 +253,7 @@ onUnmounted(() => clearInterval(timer))
     height: 51px;
     background: $primary;
     box-shadow: 0px 0px 5px $primary;
+    z-index: -1;
   }
 
   &.noafter::after {
