@@ -27,8 +27,15 @@
   <perfect-scrollbar>
     <div class="bg-secondary">
       <div class="container">
-        <p class="pt-4 mb-0 text-end text-primary ls-05">
-          *於 {{ updateTime }} 秒前更新
+        <p
+          v-if="timeAfterUpdate < 60"
+          class="pt-4 mb-0 text-end text-primary ls-05"
+        >
+          *於 {{ timeAfterUpdate }} 前更新
+        </p>
+        <p v-else class="pt-4 mb-0 text-end text-primary ls-05">
+          *更新中...
+          <img :src="loadingIconUrl" width="25" alt="loading..." />
         </p>
         <ul class="list-unstyled">
           <li
@@ -49,7 +56,6 @@
       </div>
     </div>
   </perfect-scrollbar>
-  <p>{{ updateTime }}秒前更新</p>
   <div class="row">
     <!-- 地圖 -->
     <div class="col-md-7 pb-4">
@@ -84,16 +90,9 @@
           :class="{ 'show active': activeItem === 'forward' }"
         >
           <div class="list-group">
-            <router-link
+            <a
               v-for="stop in state.forwardStopsList"
               :key="stop.StopID"
-              :to="{
-                name: 'StationPage',
-                params: {
-                  city: getCity(stop.LocationCityCode),
-                  groupId: stop.StationGroupID
-                }
-              }"
               class="
                 list-group-item list-group-item-action
                 d-flex
@@ -105,7 +104,7 @@
               <span class="badge" :class="stop.Color">{{
                 stop.TimeLabel
               }}</span>
-            </router-link>
+            </a>
           </div>
         </div>
         <div
@@ -144,6 +143,7 @@ import { getCity } from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
 import logoUrl from '@/assets/Logo.png'
 import mapIconUrl from '@/assets/map.svg'
+import loadingIconUrl from '@/assets/loading.svg'
 
 const props = defineProps({
   city: String,
@@ -152,7 +152,7 @@ const props = defineProps({
 
 const router = useRouter()
 const activeItem = ref('forward')
-const updateTime = ref(0)
+const timeAfterUpdate = ref(0)
 const { state } = bus
 let timer = null
 
@@ -182,14 +182,13 @@ onMounted(async () => {
   map.mapInit('stops-map')
   await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
   map.drawStopsPathAndMarkers(state.forwardStopsList)
-  timer = setInterval(() => {
-    if (updateTime.value >= 60) {
-      updateTime.value = '更新中'
-      bus
-        .fetchStopsAndBusArrivalTime(props.city, props.routeName)
-        .then(() => (updateTime.value = 0))
+  timer = setInterval(async () => {
+    if (timeAfterUpdate.value >= 60) {
+      await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+      timeAfterUpdate.value = 0
     } else {
-      updateTime.value = updateTime.value + 1
+      const v = timeAfterUpdate.value
+      timeAfterUpdate.value = v + 1
     }
   }, 1000)
 })

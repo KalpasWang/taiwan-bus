@@ -61,8 +61,8 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     state.city = city
     state.routeName = res.data[0].RouteName.Zh_tw
     state.routeUID = res.data[0].RouteUID
-    state.forwardStopsList = []
-    state.backwardStopsList = []
+    state.forwardStopsList.splice(0)
+    state.backwardStopsList.splice(0)
 
     // cache 所需的資料
     const isFirstForward = !res.data[0].Direction
