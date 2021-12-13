@@ -47,8 +47,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import { notify } from '@kyvg/vue3-notification'
+import { watch } from 'vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import bus from '@/composables/useCityBus'
@@ -58,10 +57,7 @@ const { state } = bus
 const { inputs } = input
 
 const watchCB = () => {
-  if (!inputs.city.City) {
-    console.log(inputs.city)
-    notify('請輸入縣市')
-  } else {
+  if (inputs.city.City) {
     bus.fetchRoutesByCityAndRouteName(inputs.city.City, inputs.routeName)
   }
 }
@@ -71,8 +67,17 @@ watch(() => inputs.routeName, watchCB)
 watch(() => inputs.city, watchCB)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ps {
   height: 182px;
+}
+.ps .ps__rail-x:hover,
+.ps .ps__rail-y:hover,
+.ps .ps__rail-x:focus,
+.ps .ps__rail-y:focus,
+.ps .ps__rail-x.ps--clicking,
+.ps .ps__rail-y.ps--clicking {
+  background-color: transparent;
+  opacity: 0.9;
 }
 </style>

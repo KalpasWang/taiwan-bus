@@ -196,7 +196,7 @@ onMounted(async () => {
 onUnmounted(() => clearInterval(timer))
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/scss/all.scss';
 
 .map {
