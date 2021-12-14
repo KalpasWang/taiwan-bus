@@ -70,8 +70,8 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     const stopsBackward = isFirstForward ? res.data[1].Stops : res.data[0].Stops
     const timeForward = res2.data.filter((item) => !item.Direction)
     const timeBackward = res2.data.filter((item) => item.Direction)
-    console.log('timeForward', timeForward)
-    console.log('timeBackward', timeBackward)
+    // console.log('timeForward', timeForward)
+    // console.log('timeBackward', timeBackward)
 
     const processStop = (timeArr, stop) => {
       const time = timeArr.find((item) => item.StopUID === stop.StopUID)
@@ -84,7 +84,8 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
           Color: badge.color,
           BgColor: badge.bgColor,
           StopStatus: time.StopStatus,
-          Border: badge.border
+          Border: badge.border,
+          LinkColor: badge.linkColor
         })
       } else {
         newStop = Object.assign(stop, {
@@ -92,7 +93,8 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
           Color: 'text-warning',
           BgColor: 'bg-dark',
           StopStatus: 1,
-          Border: false
+          Border: false,
+          LinkColor: 'link-light'
         })
       }
       return newStop

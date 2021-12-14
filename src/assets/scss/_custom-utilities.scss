@@ -14,7 +14,6 @@ $utilities: (
     property: letter-spacing,
     class: ls,
     values: (
-      05: 0.5px,
       1: 1px,
       2: 2px
     )
@@ -58,6 +57,10 @@ $utilities: (
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.ps {
+  height: var(--h);
 }
 
 [v-cloak] {

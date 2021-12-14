@@ -1,18 +1,18 @@
 <template>
   <div class="container vh-100 d-flex flex-column">
     <HeaderSearch type="city" />
-    <div class="flex-grow-1 overflow-hidden">
+    <div ref="routesList" class="flex-grow-1 overflow-hidden">
       <h4 v-if="!inputs.city.CityName" class="fs-7 text-light mt-5">
         請先選擇縣市
       </h4>
-      <h3 v-if="state.pending" class="mt-5 text-center text-light">
-        Loading...
-      </h3>
-      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-        {{ state.error }}
-      </h3>
       <div v-else>
-        <perfect-scrollbar>
+        <h3 v-if="state.pending" class="mt-5 text-center text-light">
+          <img :src="loadingIconUrl" width="70" alt="loading..." />
+        </h3>
+        <h3 v-else-if="state.error" class="mt-5 text-center text-light">
+          {{ state.error }}
+        </h3>
+        <perfect-scrollbar v-else>
           <h4 class="fs-6 text-light mt-5">
             {{ inputs.city.CityName }}
           </h4>
@@ -47,14 +47,16 @@
 </template>
 
 <script setup>
-import { watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import bus from '@/composables/useCityBus'
 import input from '@/composables/useInput'
+import loadingIconUrl from '@/assets/loading.svg'
 
 const { state } = bus
 const { inputs } = input
+const routesList = ref(null)
 
 const watchCB = () => {
   if (inputs.city.City) {
@@ -63,21 +65,10 @@ const watchCB = () => {
 }
 
 watch(() => inputs.routeName, watchCB)
-
 watch(() => inputs.city, watchCB)
-</script>
 
-<style lang="scss" scoped>
-.ps {
-  height: 182px;
-}
-.ps .ps__rail-x:hover,
-.ps .ps__rail-y:hover,
-.ps .ps__rail-x:focus,
-.ps .ps__rail-y:focus,
-.ps .ps__rail-x.ps--clicking,
-.ps .ps__rail-y.ps--clicking {
-  background-color: transparent;
-  opacity: 0.9;
-}
-</style>
+onMounted(() => {
+  const height = routesList.value.getBoundingClientRect().height + 'px'
+  document.documentElement.style.setProperty('--h', height)
+})
+</script>

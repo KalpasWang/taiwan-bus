@@ -1,39 +1,61 @@
 <template>
-  <!-- Header -->
-  <div class="header-shadow bg-dark">
-    <div class="d-flex justify-content-between align-items-center px-3 py-4">
-      <img
-        @click="router.go(-1)"
-        :src="backIconUrl"
-        alt="回上一頁"
-        role="button"
-        width="6"
-      />
-      <router-link :to="{ name: 'Home' }">
-        <img :src="logoUrl" alt="回首頁" class="logo-header-size" />
-      </router-link>
-      <img @click="" :src="mapIconUrl" alt="地圖" role="button" width="23" />
-    </div>
-    <div class="row">
-      <div class="col tab active pb-3 text-center position-relative">
-        <span class="text-primary">往</span> {{ forwardLabel }}
+  <div class="bg-secondary vh-100 d-flex flex-column">
+    <!-- Header -->
+    <div class="header-shadow bg-dark">
+      <div class="d-flex justify-content-between align-items-center px-3 py-4">
+        <img
+          @click="router.go(-1)"
+          :src="backIconUrl"
+          alt="回上一頁"
+          role="button"
+          width="6"
+        />
+        <router-link :to="{ name: 'Home' }">
+          <img :src="logoUrl" alt="回首頁" class="logo-header-size" />
+        </router-link>
+        <img
+          @click="setTab('map')"
+          :src="mapIconUrl"
+          alt="地圖"
+          role="button"
+          width="23"
+        />
       </div>
-      <div class="col tab pb-3 text-center position-relative">
-        <span class="text-primary">往</span> {{ backwardLabel }}
-      </div>
-    </div>
-  </div>
-  <!-- 預估到站時間 -->
-  <perfect-scrollbar>
-    <div class="bg-secondary">
       <div class="container">
+        <div class="row">
+          <div
+            @click="setTab('forward')"
+            class="col tab active pb-3 text-center position-relative"
+            role="button"
+          >
+            <span class="text-primary">往</span> {{ forwardLabel }}
+          </div>
+          <div
+            @click="setTab('backward')"
+            class="col tab pb-3 text-center position-relative"
+            role="button"
+          >
+            <span class="text-primary">往</span> {{ backwardLabel }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 預估到站時間 -->
+    <div ref="stopsList" class="container flex-grow-1">
+      <h3 v-if="state.pending" class="mt-5 text-center text-light">
+        <img :src="loadingIconUrl" width="70" alt="loading..." />
+      </h3>
+      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
+        {{ state.error }}
+      </h3>
+      <perfect-scrollbar v-else>
         <p
           v-if="timeAfterUpdate < 60"
-          class="pt-4 mb-0 text-end text-primary ls-05"
+          class="pt-4 mb-0 text-end text-primary ls-1"
         >
           *於 {{ timeAfterUpdate }} 前更新
         </p>
-        <p v-else class="pt-4 mb-0 text-end text-primary ls-05">
+        <p v-else class="pt-4 mb-0 text-end text-primary ls-1">
           *更新中...
           <img :src="loadingIconUrl" width="25" alt="loading..." />
         </p>
@@ -43,19 +65,27 @@
             :key="i"
             class="py-2 flex-between"
           >
-            <div
-              class="flex-center time-label"
-              :class="[item.Border ? 'label-border' : '', item.BgColor]"
-            >
-              <span :class="item.Color">{{ item.TimeLabel }}</span>
+            <div class="d-flex justify-content-start align-items-center">
+              <span
+                class="flex-center time-label"
+                :class="[item.Border ? 'label-border' : '', item.BgColor]"
+              >
+                <span :class="item.Color">{{ item.TimeLabel }}</span>
+              </span>
+              <span
+                class="text-decoration-none fs-7 ls-1 ms-2"
+                :class="item.LinkColor"
+                >{{ item.StopName.Zh_tw }}</span
+              >
             </div>
-            <div v-if="i > 0" class="circle"></div>
-            <div v-else class="circle noafter"></div>
+            <div v-if="i > 0" class="circle me-4"></div>
+            <div v-else class="circle noafter me-4"></div>
           </li>
         </ul>
-      </div>
+      </perfect-scrollbar>
     </div>
-  </perfect-scrollbar>
+  </div>
+
   <div class="row">
     <!-- 地圖 -->
     <div class="col-md-7 pb-4">
@@ -152,6 +182,7 @@ const props = defineProps({
 
 const router = useRouter()
 const activeItem = ref('forward')
+const stopsList = ref(null)
 const timeAfterUpdate = ref(0)
 const { state } = bus
 let timer = null
@@ -179,9 +210,11 @@ const setTab = (tabName) => {
 }
 
 onMounted(async () => {
-  map.mapInit('stops-map')
-  await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-  map.drawStopsPathAndMarkers(state.forwardStopsList)
+  // set scroll region height
+  const height = stopsList.value.getBoundingClientRect().height + 'px'
+  document.documentElement.style.setProperty('--h', height)
+
+  // 每隔60秒 refresh 一次
   timer = setInterval(async () => {
     if (timeAfterUpdate.value >= 60) {
       await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
@@ -191,6 +224,11 @@ onMounted(async () => {
       timeAfterUpdate.value = v + 1
     }
   }, 1000)
+
+  // 地圖初始化
+  map.mapInit('stops-map')
+  await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+  map.drawStopsPathAndMarkers(state.forwardStopsList)
 })
 
 onUnmounted(() => clearInterval(timer))
@@ -226,7 +264,6 @@ onUnmounted(() => clearInterval(timer))
   min-width: 79px;
   padding: 8px;
   border-radius: 12px;
-  // background: $dark;
 }
 
 .label-border {
