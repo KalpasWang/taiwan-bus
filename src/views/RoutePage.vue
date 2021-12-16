@@ -14,7 +14,7 @@
           <img :src="logoUrl" alt="回首頁" class="logo-header-size" />
         </router-link>
         <img
-          @click="setTab('map')"
+          @click="toggleMap()"
           :src="mapIconUrl"
           alt="地圖"
           role="button"
@@ -25,7 +25,8 @@
         <div class="row">
           <div
             @click="setTab('forward')"
-            class="col tab active pb-3 text-center position-relative"
+            class="col tab pb-3 text-center position-relative"
+            :class="{ active: activeTab === 'forward' }"
             role="button"
           >
             <span class="text-primary">往</span> {{ forwardLabel }}
@@ -33,6 +34,7 @@
           <div
             @click="setTab('backward')"
             class="col tab pb-3 text-center position-relative"
+            :class="{ active: activeTab === 'backward' }"
             role="button"
           >
             <span class="text-primary">往</span> {{ backwardLabel }}
@@ -48,116 +50,52 @@
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
-      <perfect-scrollbar v-else>
-        <p
-          v-if="timeAfterUpdate < 60"
-          class="pt-4 mb-0 text-end text-primary ls-1"
-        >
-          *於 {{ timeAfterUpdate }} 前更新
-        </p>
-        <p v-else class="pt-4 mb-0 text-end text-primary ls-1">
-          *更新中...
-          <img :src="loadingIconUrl" width="25" alt="loading..." />
-        </p>
-        <ul class="list-unstyled">
-          <li
-            v-for="(item, i) in state.forwardStopsList"
-            :key="i"
-            class="py-2 flex-between"
-          >
-            <div class="d-flex justify-content-start align-items-center">
-              <span
-                class="flex-center time-label"
-                :class="[item.Border ? 'label-border' : '', item.BgColor]"
-              >
-                <span :class="item.Color">{{ item.TimeLabel }}</span>
-              </span>
-              <span
-                class="text-decoration-none fs-7 ls-1 ms-2"
-                :class="item.LinkColor"
-                >{{ item.StopName.Zh_tw }}</span
-              >
-            </div>
-            <div v-if="i > 0" class="circle me-4"></div>
-            <div v-else class="circle noafter me-4"></div>
-          </li>
-        </ul>
-      </perfect-scrollbar>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- 地圖 -->
-    <div class="col-md-7 pb-4">
-      <div id="stops-map" class="map"></div>
-    </div>
-    <!-- 站序與預估時間 -->
-    <div class="col-md-5">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <button
-            class="nav-link"
-            :class="{ active: activeItem === 'forward' }"
-            @click="setTab('forward')"
-          >
-            {{ forwardLabel }}
-          </button>
-        </li>
-        <li class="nav-item">
-          <button
-            class="nav-link"
-            :class="{ 'show active': activeItem === 'backward' }"
-            @click="setTab('backward')"
-          >
-            {{ backwardLabel }}
-          </button>
-        </li>
-      </ul>
-      <h4 v-if="state.error" class="p-3">{{ state.error }}</h4>
-      <div v-else class="tab-content">
-        <div
-          class="tab-pane fade"
-          :class="{ 'show active': activeItem === 'forward' }"
-        >
-          <div class="list-group">
-            <a
-              v-for="stop in state.forwardStopsList"
-              :key="stop.StopID"
-              class="
-                list-group-item list-group-item-action
-                d-flex
-                justify-content-between
-                align-items-center
-              "
-            >
-              {{ stop.StopName.Zh_tw }}
-              <span class="badge" :class="stop.Color">{{
-                stop.TimeLabel
-              }}</span>
-            </a>
-          </div>
+      <div v-else class="row">
+        <div class="col-lg-6">
+          <div id="stops-map" class="map"></div>
         </div>
-        <div
-          class="tab-pane fade"
-          :class="{ 'show active': activeItem === 'backward' }"
-        >
-          <ul class="list-group">
-            <li
-              v-for="stop in state.backwardStopsList"
-              :key="stop.StopID"
-              class="
-                list-group-item
-                d-flex
-                justify-content-between
-                align-items-center
-              "
+        <div class="col-lg-4">
+          <perfect-scrollbar>
+            <p
+              v-if="timeAfterUpdate < 60"
+              class="pt-4 mb-0 text-end text-primary ls-1"
             >
-              {{ stop.StopName.Zh_tw }}
-              <span class="badge" :class="stop.Color">{{
-                stop.TimeLabel
-              }}</span>
-            </li>
-          </ul>
+              *於 {{ timeAfterUpdate }} 前更新
+            </p>
+            <p v-else class="pt-4 mb-0 text-end text-primary ls-1">
+              *更新中...
+              <img :src="loadingIconUrl" width="25" alt="loading..." />
+            </p>
+            <ul class="list-unstyled">
+              <li
+                v-for="(item, i) in currentStops"
+                :key="i"
+                class="py-2 flex-between"
+              >
+                <div class="d-flex justify-content-start align-items-center">
+                  <span
+                    class="flex-center time-label"
+                    :class="[item.Border ? 'label-border' : '', item.BgColor]"
+                  >
+                    <span
+                      :class="[
+                        item.Color,
+                        item.TimeLabel.length > 3 ? 'fs-8' : ''
+                      ]"
+                      >{{ item.TimeLabel }}</span
+                    >
+                  </span>
+                  <span
+                    class="text-decoration-none fs-7 ls-1 ms-2"
+                    :class="item.LinkColor"
+                    >{{ item.StopName.Zh_tw }}</span
+                  >
+                </div>
+                <div v-if="i > 0" class="circle me-4"></div>
+                <div v-else class="circle noafter me-4"></div>
+              </li>
+            </ul>
+          </perfect-scrollbar>
         </div>
       </div>
     </div>
@@ -181,11 +119,20 @@ const props = defineProps({
 })
 
 const router = useRouter()
-const activeItem = ref('forward')
+const activeTab = ref('forward')
 const stopsList = ref(null)
 const timeAfterUpdate = ref(0)
 const { state } = bus
 let timer = null
+
+const currentStops = computed(() => {
+  if (activeTab.value === 'forward') {
+    return state.forwardStopsList
+  }
+  if (activeTab.value === 'backward') {
+    return state.backwardStopsList
+  }
+})
 
 const forwardLabel = computed(() => {
   const len = state.forwardStopsList.length
@@ -206,7 +153,13 @@ const backwardLabel = computed(() => {
 })
 
 const setTab = (tabName) => {
-  activeItem.value = tabName
+  activeTab.value = tabName
+  if (tabName === 'forward') {
+    map.drawStopsPathAndMarkers(state.forwardStopsList)
+  }
+  if (tabName === 'backward') {
+    map.drawStopsPathAndMarkers(state.backwardStopsList)
+  }
 }
 
 onMounted(async () => {
@@ -238,7 +191,7 @@ onUnmounted(() => clearInterval(timer))
 @import '../assets/scss/all.scss';
 
 .map {
-  height: 840px;
+  height: var(--h, 500px);
 }
 
 .tab {
@@ -262,6 +215,7 @@ onUnmounted(() => clearInterval(timer))
 
 .time-label {
   min-width: 79px;
+  height: 40px;
   padding: 8px;
   border-radius: 12px;
 }
@@ -277,7 +231,7 @@ onUnmounted(() => clearInterval(timer))
   height: 15px;
   border-radius: 50%;
   background: $secondary;
-  border: 1.4px solid $primary;
+  border: 2px solid $primary;
   z-index: 20;
 
   &::after {
