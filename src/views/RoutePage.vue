@@ -16,6 +16,7 @@
         <img
           @click="toggleMap()"
           :src="mapIconUrl"
+          :class="mapIconClass"
           alt="地圖"
           role="button"
           width="23"
@@ -51,18 +52,18 @@
         {{ state.error }}
       </h3>
       <div v-else class="row">
-        <div class="col-lg-6">
+        <div v-if="mapShow || isLarge" class="col-lg-6">
           <div id="stops-map" class="map"></div>
         </div>
-        <div class="col-lg-4">
+        <div v-if="!mapShow || isLarge" class="col">
           <perfect-scrollbar>
             <p
               v-if="timeAfterUpdate < 60"
-              class="pt-4 mb-0 text-end text-primary ls-1"
+              class="me-4 pt-4 mb-0 text-end text-primary ls-1"
             >
               *於 {{ timeAfterUpdate }} 前更新
             </p>
-            <p v-else class="pt-4 mb-0 text-end text-primary ls-1">
+            <p v-else class="me-4 pt-4 mb-0 text-end text-primary ls-1">
               *更新中...
               <img :src="loadingIconUrl" width="25" alt="loading..." />
             </p>
@@ -122,8 +123,31 @@ const router = useRouter()
 const activeTab = ref('forward')
 const stopsList = ref(null)
 const timeAfterUpdate = ref(0)
+const mapShow = ref(false)
 const { state } = bus
 let timer = null
+
+const isLarge = computed(() => {
+  return window.innerWidth >= 992
+})
+
+const mapIconClass = computed(() => {
+  return {
+    'visually-hidden noclick': isLarge.value
+  }
+})
+
+// 地圖初始化
+const initMap = computed(() => {
+  if (mapShow.value || isLarge.value) {
+    map.mapInit('stops-map')
+    if (activeTab.value === 'forward') {
+      map.drawStopsPathAndMarkers(state.forwardStopsList)
+    } else {
+      map.drawStopsPathAndMarkers(state.backwardStopsList)
+    }
+  }
+})
 
 const currentStops = computed(() => {
   if (activeTab.value === 'forward') {
@@ -162,7 +186,15 @@ const setTab = (tabName) => {
   }
 }
 
-onMounted(async () => {
+const toggleMap = () => {
+  const v = mapShow.value
+  mapShow.value = !v
+}
+
+// fetch 公車站牌與預估到達時間
+bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+
+onMounted(() => {
   // set scroll region height
   const height = stopsList.value.getBoundingClientRect().height + 'px'
   document.documentElement.style.setProperty('--h', height)
@@ -177,11 +209,6 @@ onMounted(async () => {
       timeAfterUpdate.value = v + 1
     }
   }, 1000)
-
-  // 地圖初始化
-  map.mapInit('stops-map')
-  await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-  map.drawStopsPathAndMarkers(state.forwardStopsList)
 })
 
 onUnmounted(() => clearInterval(timer))
@@ -192,6 +219,10 @@ onUnmounted(() => clearInterval(timer))
 
 .map {
   height: var(--h, 500px);
+}
+
+.noclick {
+  pointer-events: none;
 }
 
 .tab {
