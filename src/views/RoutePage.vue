@@ -16,7 +16,6 @@
         <img
           @click="toggleMap()"
           :src="mapIconUrl"
-          :class="mapIconClass"
           alt="地圖"
           role="button"
           width="23"
@@ -44,60 +43,56 @@
       </div>
     </div>
     <!-- 預估到站時間 -->
-    <div ref="stopsList" class="container flex-grow-1">
+    <div v-show="mapShow" id="stops-map" class="flex-grow-1 w-100"></div>
+    <div v-show="!mapShow" ref="stopsList" class="flex-grow-1 container">
       <h3 v-if="state.pending" class="mt-5 text-center text-light">
         <img :src="loadingIconUrl" width="70" alt="loading..." />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
-      <div v-else class="row">
-        <div v-if="mapShow || isLarge" class="col-lg-6">
-          <div id="stops-map" class="map"></div>
-        </div>
-        <div v-if="!mapShow || isLarge" class="col">
-          <perfect-scrollbar>
-            <p
-              v-if="timeAfterUpdate < 60"
-              class="me-4 pt-4 mb-0 text-end text-primary ls-1"
+      <div v-else>
+        <perfect-scrollbar>
+          <p
+            v-if="timeAfterUpdate < 60"
+            class="me-4 pt-4 mb-0 text-end text-primary ls-1"
+          >
+            *於 {{ timeAfterUpdate }} 前更新
+          </p>
+          <p v-else class="me-4 pt-4 mb-0 text-end text-primary ls-1">
+            *更新中...
+            <img :src="loadingIconUrl" width="25" alt="loading..." />
+          </p>
+          <ul class="list-unstyled">
+            <li
+              v-for="(item, i) in currentStops"
+              :key="i"
+              class="py-2 flex-between"
             >
-              *於 {{ timeAfterUpdate }} 前更新
-            </p>
-            <p v-else class="me-4 pt-4 mb-0 text-end text-primary ls-1">
-              *更新中...
-              <img :src="loadingIconUrl" width="25" alt="loading..." />
-            </p>
-            <ul class="list-unstyled">
-              <li
-                v-for="(item, i) in currentStops"
-                :key="i"
-                class="py-2 flex-between"
-              >
-                <div class="d-flex justify-content-start align-items-center">
+              <div class="d-flex justify-content-start align-items-center">
+                <span
+                  class="flex-center time-label"
+                  :class="[item.Border ? 'label-border' : '', item.BgColor]"
+                >
                   <span
-                    class="flex-center time-label"
-                    :class="[item.Border ? 'label-border' : '', item.BgColor]"
+                    :class="[
+                      item.Color,
+                      item.TimeLabel.length > 3 ? 'fs-8' : ''
+                    ]"
+                    >{{ item.TimeLabel }}</span
                   >
-                    <span
-                      :class="[
-                        item.Color,
-                        item.TimeLabel.length > 3 ? 'fs-8' : ''
-                      ]"
-                      >{{ item.TimeLabel }}</span
-                    >
-                  </span>
-                  <span
-                    class="text-decoration-none fs-7 ls-1 ms-2"
-                    :class="item.LinkColor"
-                    >{{ item.StopName.Zh_tw }}</span
-                  >
-                </div>
-                <div v-if="i > 0" class="circle me-4"></div>
-                <div v-else class="circle noafter me-4"></div>
-              </li>
-            </ul>
-          </perfect-scrollbar>
-        </div>
+                </span>
+                <span
+                  class="text-decoration-none fs-7 ls-1 ms-2"
+                  :class="item.LinkColor"
+                  >{{ item.StopName.Zh_tw }}</span
+                >
+              </div>
+              <div v-if="i > 0" class="circle me-4"></div>
+              <div v-else class="circle noafter me-4"></div>
+            </li>
+          </ul>
+        </perfect-scrollbar>
       </div>
     </div>
   </div>
@@ -127,25 +122,9 @@ const mapShow = ref(false)
 const { state } = bus
 let timer = null
 
-const isLarge = computed(() => {
-  return window.innerWidth >= 992
-})
-
-const mapIconClass = computed(() => {
-  return {
-    'visually-hidden noclick': isLarge.value
-  }
-})
-
-// 地圖初始化
-const initMap = computed(() => {
-  if (mapShow.value || isLarge.value) {
-    map.mapInit('stops-map')
-    if (activeTab.value === 'forward') {
-      map.drawStopsPathAndMarkers(state.forwardStopsList)
-    } else {
-      map.drawStopsPathAndMarkers(state.backwardStopsList)
-    }
+watch(mapShow, (value) => {
+  if (value) {
+    map.init()
   }
 })
 
@@ -199,6 +178,9 @@ onMounted(() => {
   const height = stopsList.value.getBoundingClientRect().height + 'px'
   document.documentElement.style.setProperty('--h', height)
 
+  // init map
+  map.mapInit('stops-map')
+
   // 每隔60秒 refresh 一次
   timer = setInterval(async () => {
     if (timeAfterUpdate.value >= 60) {
@@ -218,11 +200,9 @@ onUnmounted(() => clearInterval(timer))
 @import '../assets/scss/all.scss';
 
 .map {
-  height: var(--h, 500px);
-}
-
-.noclick {
-  pointer-events: none;
+  width: 100%;
+  // height: var(--h, 500px);
+  flex-grow: 1;
 }
 
 .tab {

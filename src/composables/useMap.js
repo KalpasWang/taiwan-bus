@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import L from 'leaflet'
 // import { markerIcon } from './constant'
 
+let routeLine = null
 const markers = []
 const map = ref({})
 
@@ -18,10 +19,11 @@ const addMarker = (item) => {
   markers.push(marker)
 }
 
-const clearMarkers = () => {
+const clearMarkersAndRoute = () => {
+  routeLine = null
   markers.length = 0
   map.value.eachLayer((layer) => {
-    if (layer instanceof L.Marker) {
+    if (layer instanceof L.Marker || layer instanceof L.Polyline) {
       map.value.removeLayer(layer)
     }
   })
@@ -34,14 +36,10 @@ const triggerPopup = (markerId) => {
   marker.openPopup()
 }
 
-const setMapPosition = (pos) => {
-  map.value.panTo([pos.PositionLat, pos.PositionLon])
-}
-
 const mapInit = (element) => {
   map.value = L.map(element, {
     center: [25.03, 121.55],
-    zoom: 14
+    zoom: 10
   })
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -49,20 +47,27 @@ const mapInit = (element) => {
       '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
     maxZoom: 18
   }).addTo(map.value)
+  // L.tileLayer(
+  // 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+  // {
+  // maxZoom: 20,
+  // attribution:
+  // '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+  // }
+  // ).addTo(map.value)
 }
 
 const drawStopsPathAndMarkers = (stops) => {
-  // console.log('stops', stops)
   if (stops && stops.length > 0) {
     // setMapPosition(stops[0].StopPosition)
+    // clearMarkersAndRoute()
     const latlngs = stops.map((stop) => {
       const lng = stop.StopPosition.PositionLon
       const lat = stop.StopPosition.PositionLat
       return [lat, lng]
     })
-    const polyline = L.polyline(latlngs, { color: 'blue' }).addTo(map.value)
-    map.value.fitBounds(polyline.getBounds())
-    clearMarkers()
+    routeLine = L.polyline(latlngs, { color: 'blue' }).addTo(map.value)
+    map.value.fitBounds(routeLine.getBounds())
     stops.forEach((el) => addMarker(el))
   }
 }
