@@ -11,7 +11,7 @@ const addMarker = (item) => {
   const lat = item.StopPosition.PositionLat
   const marker = L.marker([lat, lon])
     .addTo(map.value)
-    .bindPopup(`<h3 class="popup-name">${item.StopName.Zh_tw}</h3>`)
+    .bindPopup(`<h6 class="popup-name">${item.StopName.Zh_tw}</h6>`)
 
   marker.markerId = item.StopUID
   marker.lng = lon
@@ -60,12 +60,12 @@ const mapInit = (element) => {
 const drawStopsPathAndMarkers = (stops) => {
   if (stops && stops.length > 0) {
     // setMapPosition(stops[0].StopPosition)
-    // clearMarkersAndRoute()
     const latlngs = stops.map((stop) => {
       const lng = stop.StopPosition.PositionLon
       const lat = stop.StopPosition.PositionLat
       return [lat, lng]
     })
+    clearMarkersAndRoute()
     routeLine = L.polyline(latlngs, { color: 'blue' }).addTo(map.value)
     map.value.fitBounds(routeLine.getBounds())
     stops.forEach((el) => addMarker(el))

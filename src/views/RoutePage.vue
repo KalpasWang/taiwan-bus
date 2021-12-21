@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
@@ -119,14 +119,15 @@ const activeTab = ref('forward')
 const stopsList = ref(null)
 const timeAfterUpdate = ref(0)
 const mapShow = ref(false)
+const mapHasShown = ref(false)
 const { state } = bus
 let timer = null
 
-watch(mapShow, (value) => {
-  if (value) {
-    map.init()
-  }
-})
+// watch(mapShow, (value) => {
+// if (value) {
+// map.init()
+// }
+// })
 
 const currentStops = computed(() => {
   if (activeTab.value === 'forward') {
@@ -157,17 +158,26 @@ const backwardLabel = computed(() => {
 
 const setTab = (tabName) => {
   activeTab.value = tabName
-  if (tabName === 'forward') {
-    map.drawStopsPathAndMarkers(state.forwardStopsList)
-  }
-  if (tabName === 'backward') {
-    map.drawStopsPathAndMarkers(state.backwardStopsList)
-  }
 }
 
 const toggleMap = () => {
   const v = mapShow.value
   mapShow.value = !v
+  // init map
+  if (mapShow.value) {
+    nextTick(() => {
+      if (!mapHasShown.value) {
+        map.mapInit('stops-map')
+        mapHasShown.value = true
+      }
+      if (activeTab.value === 'forward') {
+        map.drawStopsPathAndMarkers(state.forwardStopsList)
+      }
+      if (activeTab.value === 'backward') {
+        map.drawStopsPathAndMarkers(state.backwardStopsList)
+      }
+    })
+  }
 }
 
 // fetch 公車站牌與預估到達時間
@@ -177,9 +187,6 @@ onMounted(() => {
   // set scroll region height
   const height = stopsList.value.getBoundingClientRect().height + 'px'
   document.documentElement.style.setProperty('--h', height)
-
-  // init map
-  map.mapInit('stops-map')
 
   // 每隔60秒 refresh 一次
   timer = setInterval(async () => {
@@ -198,12 +205,6 @@ onUnmounted(() => clearInterval(timer))
 
 <style lang="scss" scoped>
 @import '../assets/scss/all.scss';
-
-.map {
-  width: 100%;
-  // height: var(--h, 500px);
-  flex-grow: 1;
-}
 
 .tab {
   &::after {
