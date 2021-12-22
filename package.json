@@ -12,6 +12,7 @@
     "haversine-distance": "^1.2.1",
     "jssha": "^3.2.0",
     "leaflet": "^1.7.1",
+    "leaflet-color-number-markers": "^1.0.7",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12",
     "vue3-perfect-scrollbar": "^1.5.5"

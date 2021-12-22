@@ -123,12 +123,6 @@ const mapHasShown = ref(false)
 const { state } = bus
 let timer = null
 
-// watch(mapShow, (value) => {
-// if (value) {
-// map.init()
-// }
-// })
-
 const currentStops = computed(() => {
   if (activeTab.value === 'forward') {
     return state.forwardStopsList

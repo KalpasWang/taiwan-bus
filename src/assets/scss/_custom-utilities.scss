@@ -1,3 +1,5 @@
+@import 'custom-variables';
+
 $utilities: (
   'z-index': (
     property: z-index,
@@ -46,6 +48,24 @@ $utilities: (
   height: 40px;
   @media screen and (min-width: 768px) {
     height: 58px;
+  }
+}
+
+.map-marker {
+  width: 30px !important;
+  height: 30px !important;
+  background: $dark;
+  border-radius: 50%;
+  border: 3px solid $primary;
+  box-shadow: 0, 0, 4px, $primary !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+
+  .marker-label {
+    font-weight: normal;
+    font-size: 14px;
+    color: $light;
   }
 }
 

@@ -1,15 +1,19 @@
 import { ref } from 'vue'
 import L from 'leaflet'
-// import { markerIcon } from './constant'
 
 let routeLine = null
 const markers = []
 const map = ref({})
 
-const addMarker = (item) => {
+const addMarker = (item, idx) => {
   const lon = item.StopPosition.PositionLon
   const lat = item.StopPosition.PositionLat
-  const marker = L.marker([lat, lon])
+  const marker = L.marker([lat, lon], {
+    icon: L.divIcon({
+      className: 'map-marker',
+      html: `<span class="marker-label">${idx + 1}</span>`
+    })
+  })
     .addTo(map.value)
     .bindPopup(`<h6 class="popup-name">${item.StopName.Zh_tw}</h6>`)
 
@@ -45,7 +49,7 @@ const mapInit = (element) => {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
       '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
-    maxZoom: 18
+    maxZoom: 19
   }).addTo(map.value)
   // L.tileLayer(
   // 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
@@ -68,7 +72,7 @@ const drawStopsPathAndMarkers = (stops) => {
     clearMarkersAndRoute()
     routeLine = L.polyline(latlngs, { color: 'blue' }).addTo(map.value)
     map.value.fitBounds(routeLine.getBounds())
-    stops.forEach((el) => addMarker(el))
+    stops.forEach((el, i) => addMarker(el, i))
   }
 }
 
