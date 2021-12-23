@@ -46,11 +46,12 @@ const mapInit = (element) => {
     zoom: 10
   })
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
-    maxZoom: 19
-  }).addTo(map.value)
+  // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //   attribution:
+  //     '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
+  //   maxZoom: 19
+  // }).addTo(map.value)
+
   // L.tileLayer(
   // 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
   // {
@@ -59,6 +60,12 @@ const mapInit = (element) => {
   // '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
   // }
   // ).addTo(map.value)
+
+  L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+  }).addTo(map.value)
 }
 
 const drawStopsPathAndMarkers = (stops) => {
@@ -70,7 +77,7 @@ const drawStopsPathAndMarkers = (stops) => {
       return [lat, lng]
     })
     clearMarkersAndRoute()
-    routeLine = L.polyline(latlngs, { color: 'blue' }).addTo(map.value)
+    routeLine = L.polyline(latlngs, { color: '#fcd42c' }).addTo(map.value)
     map.value.fitBounds(routeLine.getBounds())
     stops.forEach((el, i) => addMarker(el, i))
   }

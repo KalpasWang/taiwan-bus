@@ -12,6 +12,8 @@ const state = reactive({
   routesList: [],
   forwardStopsList: [],
   backwardStopsList: [],
+  forwardBusList: [],
+  backwardBusList: [],
   stationGroup: {},
   stationsList: [],
   pending: false,
@@ -119,6 +121,25 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
   }
 }
 
+const fetchBusPosition = async (city, routeName) => {
+  try {
+    state.pending = true
+    state.error = null
+
+    const url = `RealTimeNearStop/City/${city}/${routeName}`
+    const res = await api.get(url)
+    const busForward = res.data.filter((item) => !item.Direction)
+    const busBackward = res.data.filter((item) => item.Direction)
+    state.forwardBusList = busForward
+    state.backwardBusList = busBackward
+
+    state.pending = false
+  } catch (error) {
+    state.error = error.message
+    state.pending = false
+  }
+}
+
 // 取得指定[位置,範圍]的全臺公車站位資料
 const fetchNearByStations = (radius) => {
   if (!navigator.geolocation) {
@@ -204,6 +225,7 @@ export default {
   state: readonly(state),
   fetchRoutesByCityAndRouteName,
   fetchStopsAndBusArrivalTime,
+  fetchBusPosition,
   fetchNearByStations,
   fetchStationGroup,
   fetchEstimatedTimeOfArrivalByStaionId

@@ -16,6 +16,7 @@
         <img
           @click="toggleMap()"
           :src="mapIconUrl"
+          :class="{ 'map-active': mapShow }"
           alt="地圖"
           role="button"
           width="23"
@@ -176,6 +177,7 @@ const toggleMap = () => {
 
 // fetch 公車站牌與預估到達時間
 bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+bus.fetchBusPosition(props.city, props.routeName)
 
 onMounted(() => {
   // set scroll region height
@@ -199,6 +201,10 @@ onUnmounted(() => clearInterval(timer))
 
 <style lang="scss" scoped>
 @import '../assets/scss/all.scss';
+
+.map-active {
+  filter: hue-rotate(48deg) saturate(97%) brightness(58%);
+}
 
 .tab {
   &::after {
