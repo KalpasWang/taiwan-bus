@@ -10,7 +10,7 @@ export const getTimeBadgeAndColor = (timeObj) => {
   }
   // console.log(timeObj)
   const time = timeObj.EstimateTime
-  if (time === 0) {
+  if (time <= 30) {
     badge.text = '進站中'
     badge.bgColor = 'bg-primary'
     badge.color = 'text-dark'

@@ -114,6 +114,8 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
       state.backwardStopsList.push(newStop)
     })
 
+    await fetchBusPosition(city, routeName)
+
     state.pending = false
   } catch (error) {
     state.error = error.message
@@ -122,22 +124,28 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
 }
 
 const fetchBusPosition = async (city, routeName) => {
-  try {
-    state.pending = true
-    state.error = null
+  const url = `RealTimeNearStop/City/${city}/${routeName}`
+  const res = await api.get(url)
+  const busForward = res.data.filter((item) => !item.Direction)
+  const busBackward = res.data.filter((item) => item.Direction)
+  state.forwardBusList = busForward
+  state.backwardBusList = busBackward
 
-    const url = `RealTimeNearStop/City/${city}/${routeName}`
-    const res = await api.get(url)
-    const busForward = res.data.filter((item) => !item.Direction)
-    const busBackward = res.data.filter((item) => item.Direction)
-    state.forwardBusList = busForward
-    state.backwardBusList = busBackward
+  state.forwardStopsList.forEach((stop) => {
+    const bus = busForward.find((item) => item.StopUID === stop.StopUID)
+    if (bus) {
+      stop.hasBus = true
+      stop.plate = bus.PlateNumb
+    }
+  })
 
-    state.pending = false
-  } catch (error) {
-    state.error = error.message
-    state.pending = false
-  }
+  state.backwardStopsList.forEach((stop) => {
+    const bus = busBackward.find((item) => item.StopUID === stop.StopUID)
+    if (bus) {
+      stop.hasBus = true
+      stop.plate = bus.PlateNumb
+    }
+  })
 }
 
 // 取得指定[位置,範圍]的全臺公車站位資料

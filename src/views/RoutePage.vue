@@ -89,8 +89,16 @@
                   >{{ item.StopName.Zh_tw }}</span
                 >
               </div>
-              <div v-if="i > 0" class="circle me-4"></div>
-              <div v-else class="circle noafter me-4"></div>
+              <div class="me-4 d-flex justify-content-end align-items-center">
+                <span v-if="item.hasBus" class="plate">{{ item.plate }}</span>
+                <div v-if="item.hasBus && i > 0" class="circle active"></div>
+                <div
+                  v-else-if="item.hasBus && i === 0"
+                  class="circle active noafter"
+                ></div>
+                <div v-else-if="i > 0" class="circle"></div>
+                <div v-else class="circle noafter"></div>
+              </div>
             </li>
           </ul>
         </perfect-scrollbar>
@@ -258,9 +266,25 @@ onUnmounted(() => clearInterval(timer))
     z-index: -1;
   }
 
+  &.active {
+    background: $primary;
+  }
+
   &.noafter::after {
     width: 0;
     height: 0;
+  }
+}
+
+.plate {
+  color: $primary;
+  font-style: 14px;
+  margin-right: 8px;
+  @media screen and (min-width: 768px) {
+    margin-right: 12px;
+  }
+  @media screen and (min-width: 1200px) {
+    margin-right: 12px;
   }
 }
 </style>
