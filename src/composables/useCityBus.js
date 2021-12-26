@@ -114,6 +114,7 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
       state.backwardStopsList.push(newStop)
     })
 
+    await fetchBusNearStop(city, routeName)
     await fetchBusPosition(city, routeName)
 
     state.pending = false
@@ -123,29 +124,34 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
   }
 }
 
-const fetchBusPosition = async (city, routeName) => {
+const fetchBusNearStop = async (city, routeName) => {
   const url = `RealTimeNearStop/City/${city}/${routeName}`
+  const res = await api.get(url)
+  const busForward = res.data.filter((item) => !item.Direction)
+  const busBackward = res.data.filter((item) => item.Direction)
+
+  const fn = (stop, busList) => {
+    const bus = busList.find((item) => item.StopUID === stop.StopUID)
+    if (bus) {
+      stop.hasBus = true
+      stop.plate = bus.PlateNumb
+    }
+  }
+  state.forwardStopsList.forEach((stop) => {
+    fn(stop, busForward)
+  })
+  state.backwardStopsList.forEach((stop) => {
+    fn(stop, busBackward)
+  })
+}
+
+const fetchBusPosition = async (city, routeName) => {
+  const url = `RealTimeByFrequency/City/${city}/${routeName}`
   const res = await api.get(url)
   const busForward = res.data.filter((item) => !item.Direction)
   const busBackward = res.data.filter((item) => item.Direction)
   state.forwardBusList = busForward
   state.backwardBusList = busBackward
-
-  state.forwardStopsList.forEach((stop) => {
-    const bus = busForward.find((item) => item.StopUID === stop.StopUID)
-    if (bus) {
-      stop.hasBus = true
-      stop.plate = bus.PlateNumb
-    }
-  })
-
-  state.backwardStopsList.forEach((stop) => {
-    const bus = busBackward.find((item) => item.StopUID === stop.StopUID)
-    if (bus) {
-      stop.hasBus = true
-      stop.plate = bus.PlateNumb
-    }
-  })
 }
 
 // 取得指定[位置,範圍]的全臺公車站位資料
@@ -233,7 +239,6 @@ export default {
   state: readonly(state),
   fetchRoutesByCityAndRouteName,
   fetchStopsAndBusArrivalTime,
-  fetchBusPosition,
   fetchNearByStations,
   fetchStationGroup,
   fetchEstimatedTimeOfArrivalByStaionId

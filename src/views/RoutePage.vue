@@ -86,7 +86,7 @@
                 <span
                   class="text-decoration-none fs-7 ls-1 ms-2"
                   :class="item.LinkColor"
-                  >{{ item.StopName.Zh_tw }}</span
+                  >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</span
                 >
               </div>
               <div class="me-4 d-flex justify-content-end align-items-center">
@@ -108,7 +108,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
@@ -159,6 +159,25 @@ const backwardLabel = computed(() => {
   return finalStop
 })
 
+watch([mapShow, activeTab], (newVal) => {
+  const isMap = newVal[0]
+  const tab = newVal[1]
+  const stops =
+    tab === 'forward' ? state.forwardStopsList : state.backwardStopsList
+  const busList =
+    tab === 'forward' ? state.forwardBusList : state.backwardBusList
+  if (isMap) {
+    nextTick(() => {
+      if (!mapHasShown.value) {
+        // init map
+        map.mapInit('stops-map')
+        mapHasShown.value = true
+      }
+      map.drawStopsPathAndMarkers(stops, busList)
+    })
+  }
+})
+
 const setTab = (tabName) => {
   activeTab.value = tabName
 }
@@ -166,26 +185,10 @@ const setTab = (tabName) => {
 const toggleMap = () => {
   const v = mapShow.value
   mapShow.value = !v
-  // init map
-  if (mapShow.value) {
-    nextTick(() => {
-      if (!mapHasShown.value) {
-        map.mapInit('stops-map')
-        mapHasShown.value = true
-      }
-      if (activeTab.value === 'forward') {
-        map.drawStopsPathAndMarkers(state.forwardStopsList)
-      }
-      if (activeTab.value === 'backward') {
-        map.drawStopsPathAndMarkers(state.backwardStopsList)
-      }
-    })
-  }
 }
 
 // fetch 公車站牌與預估到達時間
 bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-bus.fetchBusPosition(props.city, props.routeName)
 
 onMounted(() => {
   // set scroll region height

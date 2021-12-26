@@ -1,3 +1,6 @@
+import L from 'leaflet'
+import busIconUrl from '@/assets/bus.svg'
+
 export const citys = [
   {
     CityID: 'A',
@@ -176,3 +179,13 @@ export const citys = [
     Version: '21.08.1'
   }
 ]
+
+export const busIcon = L.icon({
+  iconUrl: busIconUrl,
+  iconSize: [36, 36],
+  iconAnchor: [18, 18],
+  popupAnchor: [18, -18],
+  shadowUrl: null,
+  shadowSize: [0, 0],
+  shadowAnchor: [18, 18]
+})

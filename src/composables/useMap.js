@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import L from 'leaflet'
+import { busIcon } from './constant'
 
 let routeLine = null
 const markers = []
@@ -23,6 +24,19 @@ const addMarker = (item, idx) => {
   markers.push(marker)
 }
 
+const addBusMarker = (item, idx) => {
+  const lon = item.BusPosition.PositionLon
+  const lat = item.BusPosition.PositionLat
+  const marker = L.marker([lat, lon], {
+    icon: busIcon
+  }).addTo(map.value)
+
+  marker.markerId = item.PlateNumb
+  marker.lng = lon
+  marker.lat = lat
+  markers.push(marker)
+}
+
 const clearMarkersAndRoute = () => {
   routeLine = null
   markers.length = 0
@@ -33,44 +47,24 @@ const clearMarkersAndRoute = () => {
   })
 }
 
-const triggerPopup = (markerId) => {
-  const marker = markers.find((d) => d.markerId === markerId)
-
-  map.value.flyTo([marker.lat, marker.lng], 15)
-  marker.openPopup()
-}
-
 const mapInit = (element) => {
   map.value = L.map(element, {
     center: [25.03, 121.55],
     zoom: 10
   })
 
-  // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //   attribution:
-  //     '<a target="_blank" href="https://www.openstreetmap.org/">© OpenStreetMap 貢獻者</a>',
-  //   maxZoom: 19
-  // }).addTo(map.value)
-
-  // L.tileLayer(
-  // 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-  // {
-  // maxZoom: 20,
-  // attribution:
-  // '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-  // }
-  // ).addTo(map.value)
-
-  L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
-  }).addTo(map.value)
+  L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }
+  ).addTo(map.value)
 }
 
-const drawStopsPathAndMarkers = (stops) => {
+const drawStopsPathAndMarkers = (stops, busList) => {
   if (stops && stops.length > 0) {
-    // setMapPosition(stops[0].StopPosition)
     const latlngs = stops.map((stop) => {
       const lng = stop.StopPosition.PositionLon
       const lat = stop.StopPosition.PositionLat
@@ -80,11 +74,11 @@ const drawStopsPathAndMarkers = (stops) => {
     routeLine = L.polyline(latlngs, { color: '#fcd42c' }).addTo(map.value)
     map.value.fitBounds(routeLine.getBounds())
     stops.forEach((el, i) => addMarker(el, i))
+    busList.forEach((el, i) => addBusMarker(el, i))
   }
 }
 
 export default {
-  triggerPopup,
   mapInit,
   drawStopsPathAndMarkers
 }
