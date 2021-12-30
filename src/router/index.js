@@ -31,7 +31,7 @@ export const router = createRouter({
       props: true
     },
     {
-      path: '/stations/:city/:groupId',
+      path: '/stations/:city/:stationId',
       component: StationPage,
       name: 'StationPage',
       props: true

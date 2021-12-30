@@ -73,7 +73,7 @@ const fetchBusType = async (city, plate) => {
 const fetchRouteShape = async (city, routeName) => {
   const url = `Shape/City/${city}/${routeName}`
   const res = await api.get(url)
-  // console.log(res.data)
+  console.log(res.data[0].Geometry)
   state.forwardRouteShape = null
   state.backwardRouteShape = null
   if (!res.data[0]) {

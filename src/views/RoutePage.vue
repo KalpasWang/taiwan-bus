@@ -10,9 +10,7 @@
           role="button"
           width="6"
         />
-        <router-link :to="{ name: 'Home' }">
-          <img :src="logoUrl" alt="回首頁" class="logo-header-size" />
-        </router-link>
+        <logo />
         <img
           @click="toggleMap()"
           :src="mapIconUrl"
@@ -83,10 +81,17 @@
                     >{{ item.TimeLabel }}</span
                   >
                 </span>
-                <span
-                  class="text-decoration-none fs-7 ls-1 ms-2"
+                <router-link
+                  :to="{
+                    name: 'StationPage',
+                    params: {
+                      city: getCity(item.LocationCityCode),
+                      stationId: item.StationID
+                    }
+                  }"
                   :class="item.LinkColor"
-                  >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</span
+                  class="text-decoration-none fs-7 ls-1 ms-2"
+                  >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
                 >
               </div>
               <div class="me-4 d-flex justify-content-end align-items-center">
@@ -115,11 +120,11 @@
 <script setup>
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import logo from '@/components/logo.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 import { getCity } from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
-import logoUrl from '@/assets/Logo.png'
 import mapIconUrl from '@/assets/map.svg'
 import loadingIconUrl from '@/assets/loading.svg'
 import wheelchairUrl from '@/assets/wheelchair.svg'

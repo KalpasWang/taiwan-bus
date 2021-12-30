@@ -1,7 +1,7 @@
 <template>
   <div class="header-shadow bg-dark row py-3">
     <div class="col-auto">
-      <img :src="logoUrl" class="logo-header-size" />
+      <logo />
     </div>
     <div class="col">
       <input
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import logoUrl from '@/assets/Logo.png'
+import logo from '@/components/logo.vue'
 import input from '@/composables/useInput'
 
 const props = defineProps({
