@@ -73,3 +73,12 @@ export const getBearingLabel = (bearing) => {
   }
   return label
 }
+
+export const parseShape = (shapeStr) => {
+  const latlngList = shapeStr.slice(10).trim().slice(1, -1).split(/,\s|,/)
+  // console.log(latlngList)
+  return latlngList.map((el, i) => {
+    const [lat, lng] = el.split(' ')
+    return [parseFloat(lat), parseFloat(lng)]
+  })
+}

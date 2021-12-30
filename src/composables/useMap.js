@@ -63,19 +63,24 @@ const mapInit = (element) => {
   ).addTo(map.value)
 }
 
-const drawStopsPathAndMarkers = (stops, busList) => {
-  if (stops && stops.length > 0) {
-    const latlngs = stops.map((stop) => {
+const drawStopsPathAndMarkers = (stops, busList, shape) => {
+  let latlngList
+  if (!shape) {
+    latlngList = stops.map((stop) => {
       const lng = stop.StopPosition.PositionLon
       const lat = stop.StopPosition.PositionLat
       return [lat, lng]
     })
-    clearMarkersAndRoute()
-    routeLine = L.polyline(latlngs, { color: '#fcd42c' }).addTo(map.value)
-    map.value.fitBounds(routeLine.getBounds())
-    stops.forEach((el, i) => addMarker(el, i))
-    busList.forEach((el, i) => addBusMarker(el, i))
+  } else {
+    latlngList = shape
   }
+  console.log(shape)
+  console.log(latlngList)
+  clearMarkersAndRoute()
+  routeLine = L.polyline(latlngList, { color: '#fcd42c' }).addTo(map.value)
+  map.value.fitBounds(routeLine.getBounds())
+  stops.forEach((el, i) => addMarker(el, i))
+  busList.forEach((el, i) => addBusMarker(el, i))
 }
 
 export default {

@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue'
 import { api, apiTop30 } from './api'
 import { citys } from './constant'
-import { getTimeBadgeAndColor } from './useUtilities'
+import { getTimeBadgeAndColor, parseShape } from './useUtilities'
 import haversine from 'haversine-distance'
 
 const state = reactive({
@@ -10,6 +10,8 @@ const state = reactive({
   routeUID: '',
   routeName: '',
   routesList: [],
+  forwardRouteShape: [],
+  backwardRouteShape: [],
   forwardStopsList: [],
   backwardStopsList: [],
   forwardBusList: [],
@@ -36,13 +38,84 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
       url = `Route/City/${city}/${routeName}`
     }
     const res = await apiTop30.get(url)
-    console.log(res.data)
+    // console.log(res.data)
     state.routesList = res.data
     state.pending = false
   } catch (error) {
     state.error = error.message
     state.pending = false
   }
+}
+
+const fetchBusPosition = async (city, routeName) => {
+  const url = `RealTimeByFrequency/City/${city}/${routeName}`
+  const res = await api.get(url)
+  const busForward = res.data.filter((item) => !item.Direction)
+  const busBackward = res.data.filter((item) => item.Direction)
+  state.forwardBusList = busForward
+  state.backwardBusList = busBackward
+}
+
+const fetchBusType = async (city, plate) => {
+  const url = `Vehicle/City/${city}`
+  const res = await api.get(url, {
+    params: {
+      $filter: `PlateNumb eq '${plate}'`
+    }
+  })
+  const bus = res.data[0]
+  if (bus && bus.VehicleType > 0 && bus.VehicleType < 3) {
+    return true
+  }
+  return false
+}
+
+const fetchRouteShape = async (city, routeName) => {
+  const url = `Shape/City/${city}/${routeName}`
+  const res = await api.get(url)
+  // console.log(res.data)
+  state.forwardRouteShape = null
+  state.backwardRouteShape = null
+  if (!res.data[0]) {
+    return
+  }
+  if (res.data[0].Direction >= 0) {
+    const forward = res.data.find((el) => el.Direction === 0)
+    const backward = res.data.find((el) => el.Direction === 1)
+    if (forward) {
+      state.forwardRouteShape = parseShape(forward.Geometry)
+    }
+    if (backward) {
+      state.backwardRouteShape = parseShape(backward.Geometry)
+    }
+  } else {
+    const shape = parseShape(res.data[0].Geometry)
+    state.forwardRouteShape = shape
+    state.backwardRouteShape = shape
+  }
+}
+
+const fetchBusNearStop = async (city, routeName) => {
+  const url = `RealTimeNearStop/City/${city}/${routeName}`
+  const res = await api.get(url)
+  const busForward = res.data.filter((item) => !item.Direction)
+  const busBackward = res.data.filter((item) => item.Direction)
+
+  const fn = async (stop, busList) => {
+    const bus = busList.find((item) => item.StopUID === stop.StopUID)
+    if (bus) {
+      const accessible = await fetchBusType(city, bus.PlateNumb)
+      stop.hasBus = true
+      stop.plate = bus.PlateNumb
+      stop.accessible = accessible
+    }
+  }
+  state.forwardStopsList.forEach((stop) => {
+    fn(stop, busForward)
+  })
+  state.backwardStopsList.forEach((stop) => {
+    fn(stop, busBackward)
+  })
 }
 
 // 取得指定[縣市],[路線名稱]的市區公車路線站序資料與公車預估到站資料
@@ -116,42 +189,13 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
 
     await fetchBusNearStop(city, routeName)
     await fetchBusPosition(city, routeName)
+    await fetchRouteShape(city, routeName)
 
     state.pending = false
   } catch (error) {
     state.error = error.message
     state.pending = false
   }
-}
-
-const fetchBusNearStop = async (city, routeName) => {
-  const url = `RealTimeNearStop/City/${city}/${routeName}`
-  const res = await api.get(url)
-  const busForward = res.data.filter((item) => !item.Direction)
-  const busBackward = res.data.filter((item) => item.Direction)
-
-  const fn = (stop, busList) => {
-    const bus = busList.find((item) => item.StopUID === stop.StopUID)
-    if (bus) {
-      stop.hasBus = true
-      stop.plate = bus.PlateNumb
-    }
-  }
-  state.forwardStopsList.forEach((stop) => {
-    fn(stop, busForward)
-  })
-  state.backwardStopsList.forEach((stop) => {
-    fn(stop, busBackward)
-  })
-}
-
-const fetchBusPosition = async (city, routeName) => {
-  const url = `RealTimeByFrequency/City/${city}/${routeName}`
-  const res = await api.get(url)
-  const busForward = res.data.filter((item) => !item.Direction)
-  const busBackward = res.data.filter((item) => item.Direction)
-  state.forwardBusList = busForward
-  state.backwardBusList = busBackward
 }
 
 // 取得指定[位置,範圍]的全臺公車站位資料

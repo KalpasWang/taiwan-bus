@@ -90,6 +90,11 @@
                 >
               </div>
               <div class="me-4 d-flex justify-content-end align-items-center">
+                <img
+                  v-if="item.accessible"
+                  :src="wheelchairUrl"
+                  alt="無障礙公車"
+                />
                 <span v-if="item.hasBus" class="plate">{{ item.plate }}</span>
                 <div v-if="item.hasBus && i > 0" class="circle active"></div>
                 <div
@@ -117,6 +122,7 @@ import backIconUrl from '@/assets/back.svg'
 import logoUrl from '@/assets/Logo.png'
 import mapIconUrl from '@/assets/map.svg'
 import loadingIconUrl from '@/assets/loading.svg'
+import wheelchairUrl from '@/assets/wheelchair.svg'
 
 const props = defineProps({
   city: String,
@@ -166,6 +172,8 @@ watch([mapShow, activeTab], (newVal) => {
     tab === 'forward' ? state.forwardStopsList : state.backwardStopsList
   const busList =
     tab === 'forward' ? state.forwardBusList : state.backwardBusList
+  const shape =
+    tab === 'forward' ? state.forwardRouteShape : state.backwardRouteShape
   if (isMap) {
     nextTick(() => {
       if (!mapHasShown.value) {
@@ -173,7 +181,7 @@ watch([mapShow, activeTab], (newVal) => {
         map.mapInit('stops-map')
         mapHasShown.value = true
       }
-      map.drawStopsPathAndMarkers(stops, busList)
+      map.drawStopsPathAndMarkers(stops, busList, shape)
     })
   }
 })
