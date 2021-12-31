@@ -1,7 +1,11 @@
 import { reactive, readonly } from 'vue'
 import { api, apiTop30 } from './api'
 import { citys } from './constant'
-import { getTimeBadgeAndColor, parseShape } from './useUtilities'
+import {
+  getTimeBadgeAndColor,
+  parseShape,
+  filterRouteName
+} from './useUtilities'
 import haversine from 'haversine-distance'
 
 const state = reactive({
@@ -50,8 +54,12 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
 const fetchBusPosition = async (city, routeName) => {
   const url = `RealTimeByFrequency/City/${city}/${routeName}`
   const res = await api.get(url)
-  const busForward = res.data.filter((item) => !item.Direction)
-  const busBackward = res.data.filter((item) => item.Direction)
+  const realData = filterRouteName(routeName, res.data)
+  if (!realData && !realData[0]) {
+    return
+  }
+  const busForward = realData.filter((item) => item.Direction === 0)
+  const busBackward = realData.filter((item) => item.Direction === 1)
   state.forwardBusList = busForward
   state.backwardBusList = busBackward
 }
@@ -73,15 +81,15 @@ const fetchBusType = async (city, plate) => {
 const fetchRouteShape = async (city, routeName) => {
   const url = `Shape/City/${city}/${routeName}`
   const res = await api.get(url)
-  console.log(res.data[0].Geometry)
+  const realData = filterRouteName(routeName, res.data)
   state.forwardRouteShape = null
   state.backwardRouteShape = null
-  if (!res.data[0]) {
+  if (!realData && !realData[0]) {
     return
   }
-  if (res.data[0].Direction >= 0) {
-    const forward = res.data.find((el) => el.Direction === 0)
-    const backward = res.data.find((el) => el.Direction === 1)
+  if (realData[0].Direction >= 0) {
+    const forward = realData.find((el) => el.Direction === 0)
+    const backward = realData.find((el) => el.Direction === 1)
     if (forward) {
       state.forwardRouteShape = parseShape(forward.Geometry)
     }
@@ -89,7 +97,7 @@ const fetchRouteShape = async (city, routeName) => {
       state.backwardRouteShape = parseShape(backward.Geometry)
     }
   } else {
-    const shape = parseShape(res.data[0].Geometry)
+    const shape = parseShape(realData[0].Geometry)
     state.forwardRouteShape = shape
     state.backwardRouteShape = shape
   }
@@ -98,8 +106,12 @@ const fetchRouteShape = async (city, routeName) => {
 const fetchBusNearStop = async (city, routeName) => {
   const url = `RealTimeNearStop/City/${city}/${routeName}`
   const res = await api.get(url)
-  const busForward = res.data.filter((item) => !item.Direction)
-  const busBackward = res.data.filter((item) => item.Direction)
+  const realData = filterRouteName(routeName, res.data)
+  if (!realData && !realData[0]) {
+    return
+  }
+  const busForward = realData.filter((item) => item.Direction === 0)
+  const busBackward = realData.filter((item) => item.Direction === 1)
 
   const fn = async (stop, busList) => {
     const bus = busList.find((item) => item.StopUID === stop.StopUID)
@@ -129,24 +141,27 @@ const fetchStopsAndBusArrivalTime = async (city, routeName) => {
     const res = await api.get(url)
     // 取得預估時間資料
     const res2 = await api.get(url2)
-    // console.log(res.data)
-    // console.log(res2.data)
 
+    const realData = filterRouteName(routeName, res.data)
+    if (!realData && !realData[0]) {
+      return
+    }
+    const realData2 = filterRouteName(routeName, res2.data)
+    if (!realData2 && !realData2[0]) {
+      return
+    }
     // 清理 state
     state.city = city
-    state.routeName = res.data[0].RouteName.Zh_tw
-    state.routeUID = res.data[0].RouteUID
-    state.forwardStopsList.splice(0)
-    state.backwardStopsList.splice(0)
+    state.routeName = realData[0].RouteName.Zh_tw
+    state.routeUID = realData[0].RouteUID
+    state.forwardStopsList.length = 0
+    state.backwardStopsList.length = 0
 
     // cache 所需的資料
-    const isFirstForward = !res.data[0].Direction
-    const stopsForward = isFirstForward ? res.data[0].Stops : res.data[1].Stops
-    const stopsBackward = isFirstForward ? res.data[1].Stops : res.data[0].Stops
-    const timeForward = res2.data.filter((item) => !item.Direction)
-    const timeBackward = res2.data.filter((item) => item.Direction)
-    // console.log('timeForward', timeForward)
-    // console.log('timeBackward', timeBackward)
+    const stopsForward = realData.find((item) => item.Direction === 0).Stops
+    const stopsBackward = realData.find((item) => item.Direction === 1).Stops
+    const timeForward = realData2.filter((item) => item.Direction === 0)
+    const timeBackward = realData2.filter((item) => item.Direction === 1)
 
     const processStop = (timeArr, stop) => {
       const time = timeArr.find((item) => item.StopUID === stop.StopUID)

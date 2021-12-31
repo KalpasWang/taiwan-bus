@@ -82,3 +82,14 @@ export const parseShape = (shapeStr) => {
     return [parseFloat(lat), parseFloat(lng)]
   })
 }
+
+export const filterRouteName = (routeName, list) => {
+  if (!Array.isArray(list)) {
+    console.error('list is not an array')
+    console.log(list)
+    return
+  }
+  return list.filter((item) => {
+    return item.RouteName.Zh_tw === routeName
+  })
+}

@@ -74,8 +74,6 @@ const drawStopsPathAndMarkers = (stops, busList, shape) => {
   } else {
     latlngList = shape
   }
-  console.log(shape)
-  console.log(latlngList)
   clearMarkersAndRoute()
   routeLine = L.polyline(latlngList, { color: '#fcd42c' }).addTo(map.value)
   map.value.fitBounds(routeLine.getBounds())

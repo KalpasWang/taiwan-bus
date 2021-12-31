@@ -76,26 +76,35 @@ const setFullHeight = () => {
     container.value.classList.remove('min-height-desktop')
   }
 }
-window.addEventListener('resize', setFullHeight)
 
 onMounted(() => {
   setFullHeight()
+  window.addEventListener('resize', setFullHeight)
+  const height = window.innerHeight
+  const minHeight = 750
+  let subtracted
+  if (height < minHeight) {
+    subtracted = minHeight - height > 100 ? 100 : minHeight - height
+  } else {
+    subtracted = 0
+  }
+  document.documentElement.style.setProperty('--subtracted', subtracted + 'px')
 })
 </script>
 
 <style lang="scss">
 @import '../assets/scss/custom-mixin';
-@import '../assets/scss/custom-variables';
+@import '../assets/scss/all.scss';
 
 .home-height {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 }
 .min-height-tablet {
-  min-height: 990px;
+  min-height: 500px;
 }
 .min-height-desktop {
-  min-height: 700px;
+  min-height: 500px;
 }
 .bg-home {
   /* black_gray_line */
@@ -110,13 +119,15 @@ onMounted(() => {
   // @include size(100px);
   border-radius: 50%;
   border: 1px solid $light;
+  animation: loop 2s ease-in-out infinite alternate;
 }
 .circle1 {
   @include size(87px);
   @include position($left: -34px, $top: 26.5%);
+  animation-delay: 0;
   @media screen and (min-width: 768px) {
-    @include size(183px);
-    @include position($left: -81px, $top: 28.4%);
+    @include size(calc(183px - var(--subtracted, 0)));
+    @include position($left: -61px, $top: 28.4%);
   }
   @media screen and (min-width: 991px) {
     @include size(156px);
@@ -126,6 +137,7 @@ onMounted(() => {
 .circle2 {
   @include size(50px);
   @include position($left: -30px, $top: 59.1%);
+  animation-delay: 0.5s;
   @media screen and (min-width: 768px) {
     @include size(92px);
     @include position($left: -37px, $top: 61.5%);
@@ -138,6 +150,7 @@ onMounted(() => {
 .circle3 {
   @include size(86px);
   @include position($right: 20px, $top: -47px);
+  animation-delay: 1s;
   @media screen and (min-width: 768px) {
     @include size(170px);
     @include position($right: 12.9%, $top: -103px);
@@ -150,6 +163,7 @@ onMounted(() => {
 .circle4 {
   @include size(33px);
   @include position($right: 27.5%, $bottom: 7.3%);
+  animation-delay: 0.25s;
   @media screen and (min-width: 768px) {
     @include size(68px);
     @include position($right: 30.7%, $bottom: 8%);
@@ -160,6 +174,7 @@ onMounted(() => {
   }
 }
 .circle5 {
+  animation-delay: 0.75s;
   @media screen and (min-width: 768px) {
     @include size(75px);
     @include position($left: 21.6%, $bottom: 44.8%);
@@ -170,6 +185,7 @@ onMounted(() => {
   }
 }
 .circle6 {
+  animation-delay: 1.25s;
   @media screen and (min-width: 991px) {
     @include size(56px);
     @include position($right: 32.9%, $bottom: 38.8%);
@@ -193,9 +209,9 @@ onMounted(() => {
   right: -29px;
   top: 25%;
   @media screen and (min-width: 768px) {
-    @include size(321px);
+    @include size(calc(321px - var(--subtracted, 0)));
     right: 28px;
-    top: 28.4%;
+    top: 25%;
   }
   @media screen and (min-width: 991px) {
     @include size(248px);
@@ -213,7 +229,7 @@ onMounted(() => {
   &::before {
     @include size(290px);
     @media screen and (min-width: 768px) {
-      @include size(460px);
+      @include size(calc(460px - var(--subtracted, 0)));
     }
     @media screen and (min-width: 991px) {
       @include size(356px);
@@ -227,16 +243,16 @@ onMounted(() => {
 .white-ball {
   @include size(157px);
   right: -36px;
-  top: 52.5%;
+  top: 55.5%;
   @media screen and (min-width: 768px) {
-    @include size(250px);
-    right: -15px;
-    top: 55.7%;
+    @include size(calc(250px - var(--subtracted, 0)));
+    right: -5px;
+    top: 60.7%;
   }
   @media screen and (min-width: 991px) {
     @include size(193px);
     right: 4.8%;
-    top: 53.6%;
+    top: 56.6%;
   }
   border: 4px solid transparent;
   background-image: linear-gradient(#f5f5f5, #f5f5f5),
@@ -248,7 +264,7 @@ onMounted(() => {
   &::before {
     @include size(204px);
     @media screen and (min-width: 768px) {
-      @include size(324px);
+      @include size(calc(324px - var(--subtracted, 0)));
     }
     @media screen and (min-width: 991px) {
       @include size(250px);
@@ -260,12 +276,12 @@ onMounted(() => {
 }
 .yellow-ball {
   @include size(168px);
-  left: -41px;
-  bottom: -14px;
+  left: -21px;
+  bottom: -7px;
   @media screen and (min-width: 768px) {
-    @include size(245px);
-    left: -35px;
-    bottom: -40px;
+    @include size(calc(245px - var(--subtracted, 0)));
+    left: -15px;
+    bottom: -20px;
   }
   @media screen and (min-width: 991px) {
     @include size(182px);
@@ -283,7 +299,7 @@ onMounted(() => {
   &::before {
     @include size(230px);
     @media screen and (min-width: 768px) {
-      @include size(337px);
+      @include size(calc(337px - var(--subtracted, 0)));
     }
     @media screen and (min-width: 991px) {
       @include size(250px);

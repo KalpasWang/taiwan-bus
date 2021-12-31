@@ -42,7 +42,7 @@
         </perfect-scrollbar>
       </div>
     </div>
-    <KeyBoard type="city" class="position-relative" />
+    <KeyBoard type="city" />
   </div>
 </template>
 
