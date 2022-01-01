@@ -50,8 +50,8 @@
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
-      <div v-else>
-        <perfect-scrollbar>
+      <div v-else class="position-relative overflow-hidden">
+        <perfect-scrollbar ref="ps">
           <p
             v-if="timeAfterUpdate < 60"
             class="me-4 pt-4 mb-0 text-end text-primary ls-1"
@@ -137,6 +137,7 @@ const props = defineProps({
 const router = useRouter()
 const activeTab = ref('forward')
 const stopsList = ref(null)
+const ps = ref(null)
 const timeAfterUpdate = ref(0)
 const mapShow = ref(false)
 const mapHasShown = ref(false)
@@ -193,6 +194,9 @@ watch([mapShow, activeTab], (newVal) => {
 
 const setTab = (tabName) => {
   activeTab.value = tabName
+  nextTick(() => {
+    ps.value.$el.scrollTop = 0
+  })
 }
 
 const toggleMap = () => {
