@@ -234,25 +234,6 @@ onUnmounted(() => clearInterval(timer))
   filter: hue-rotate(48deg) saturate(97%) brightness(58%);
 }
 
-.tab {
-  &::after {
-    content: '';
-    width: 100%;
-    height: 2.43px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    border-radius: 50px;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  &.active::after {
-    background: $primary;
-    box-shadow: 0px 0px 6px $primary, 0px 0px 2px $primary;
-  }
-}
-
 .time-label {
   min-width: 79px;
   height: 40px;
