@@ -20,8 +20,8 @@ const state = reactive({
   backwardStopsList: [],
   forwardBusList: [],
   backwardBusList: [],
-  stationGroup: {},
-  stationsList: [],
+  station: {},
+  nearByStations: [],
   pending: false,
   error: null
 })
@@ -257,26 +257,23 @@ const fetchNearByStations = (radius) => {
 }
 
 // 取得指定[縣市]與站位ID的市區公車站位資料
-const fetchStationGroup = async (city, groupId) => {
+const fetchStation = async (city, stationId) => {
   try {
     state.error = null
     state.pending = true
     const url = `Station/City/${city}`
     let res = await api.get(url, {
       params: {
-        $filter: `StationGroupID eq '${groupId}'`
+        $filter: `StationID eq '${stationId}'`
       }
     })
-    console.log(res.data)
-    state.stationGroup = res.data
-    const stationId = res.data[0].StationID
-    res = await fetchEstimatedTimeOfArrivalByStaionId(city, stationId)
-    res.data.forEach((item) => {
-      const badge = getTimeBadgeAndColor(item)
-      item.TimeLabel = badge.text
-      item.BgColor = badge.color
-    })
-    state.stationGroup[0].Stops = res.data
+    state.station = res.data[0]
+    // res = await fetchEstimatedTimeOfArrivalByStaionId(city, stationId)
+    // res.data.forEach((item) => {
+    // const badge = getTimeBadgeAndColor(item)
+    // item.TimeLabel = badge.text
+    // item.BgColor = badge.color
+    // })
     state.pending = false
   } catch (error) {
     state.error = error.message
@@ -285,12 +282,8 @@ const fetchStationGroup = async (city, groupId) => {
 }
 
 const fetchEstimatedTimeOfArrivalByStaionId = async (city, stationId) => {
-  state.error = null
-  state.pending = true
   const url = `EstimatedTimeOfArrival/City/${city}/PassThrough/Station/${stationId}`
   const res = await api.get(url)
-  console.log(res.data)
-  state.pending = false
   return res
 }
 
@@ -299,6 +292,5 @@ export default {
   fetchRoutesByCityAndRouteName,
   fetchStopsAndBusArrivalTime,
   fetchNearByStations,
-  fetchStationGroup,
-  fetchEstimatedTimeOfArrivalByStaionId
+  fetchStation
 }

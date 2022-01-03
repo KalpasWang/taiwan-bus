@@ -20,32 +20,48 @@
           width="23"
         />
       </div>
-      <div class="container">
-        <div class="row">
-          <div
-            @click="setTab('forward')"
-            class="col tab pb-3 text-center position-relative"
-            :class="{ active: activeTab === 'forward' }"
-            role="button"
-          >
-            <span class="text-primary">往</span> {{ forwardLabel }}
-          </div>
-          <div
-            @click="setTab('backward')"
-            class="col tab pb-3 text-center position-relative"
-            :class="{ active: activeTab === 'backward' }"
-            role="button"
-          >
-            <span class="text-primary">往</span> {{ backwardLabel }}
-          </div>
-        </div>
+    </div>
+    <div class="container">
+      <div v-show="mapShow" id="station-map" class="flex-grow-1 w-100"></div>
+      <div v-show="!mapShow">
+        <h3 v-if="state.pending" class="mt-5">
+          <Loading />
+        </h3>
+        <h3 v-else-if="state.error" class="mt-5 text-center text-light">
+          {{ state.error }}
+        </h3>
+        <perfect-scrollbar v-else>
+          <h4 class="fs-6 text-light mt-5">
+            {{ station.StationName.Zh_tw }}
+          </h4>
+          <ul class="list-group">
+            <li
+              v-for="(stop, i) in station.Stops"
+              :key="stop.StopID"
+              class="list-group-item list-group-item-action"
+              :class="{ 'bg-secondary': idx % 2 === 0 }"
+            >
+              <router-link
+                :to="{
+                  name: 'RoutePage',
+                  params: { city: props.city, routeName: stop.RouteName.Zh_tw }
+                }"
+                class="d-block link-primary text-decoration-none"
+              >
+                {{ stop.RouteName.Zh_tw }}
+                <p v-if="route.DepartureStopNameZh" class="text-light fs-7">
+                  {{ route.DepartureStopNameZh }}
+                  <span class="text-primary mx-1">往</span>
+                  {{ route.DestinationStopNameZh }}
+                </p>
+              </router-link>
+            </li>
+          </ul>
+        </perfect-scrollbar>
       </div>
     </div>
   </div>
-  <h1>{{ stationName }}</h1>
-  <h4 v-if="state.pending">Loading...</h4>
-  <h4 v-else-if="state.error">{{ state.error }}</h4>
-  <div v-else class="row">
+  <div class="row">
     <!-- 地圖 -->
     <div class="col-md-7 pb-4">
       <div id="station-map" class="map"></div>
@@ -102,7 +118,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, toRef } from 'vue'
+import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
@@ -113,22 +130,13 @@ const props = defineProps({
   stationId: String
 })
 
-const activeTab = ref('')
-const stationName = ref('')
+const mapShow = ref(false)
+const mapHasShown = ref(false)
 const { state } = bus
-
-const setTab = (tabName) => {
-  activeTab.value = tabName
-}
+const station = toRef(state, 'station')
 
 bus.fetchStationGroup(props.city, props.groupId).then(() => {
   activeItem.value = state.stationGroup[0].StationID
   stationName.value = state.stationGroup[0].StationName.Zh_tw
 })
 </script>
-
-<style lang="scss">
-.map {
-  height: 840px;
-}
-</style>

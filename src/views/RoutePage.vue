@@ -44,8 +44,8 @@
     <!-- 預估到站時間 -->
     <div v-show="mapShow" id="stops-map" class="flex-grow-1 w-100"></div>
     <div v-show="!mapShow" ref="stopsList" class="flex-grow-1 container">
-      <h3 v-if="state.pending" class="mt-5 text-center text-light">
-        <img :src="loadingIconUrl" width="70" alt="loading..." />
+      <h3 v-if="state.pending" class="mt-5">
+        <Loading />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
@@ -121,13 +121,14 @@
 import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import logo from '@/components/logo.vue'
+import Loading from '@/components/loading.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 import { getCity } from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
-import loadingIconUrl from '@/assets/loading.svg'
 import wheelchairUrl from '@/assets/wheelchair.svg'
+import Loading1 from '../components/loading.vue'
 
 const props = defineProps({
   city: String,
@@ -232,6 +233,25 @@ onUnmounted(() => clearInterval(timer))
 
 .map-active {
   filter: hue-rotate(48deg) saturate(97%) brightness(58%);
+}
+
+.tab {
+  &::after {
+    content: '';
+    width: 100%;
+    height: 2.43px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: 50px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  &.active::after {
+    background: $primary;
+    box-shadow: 0px 0px 6px $primary, 0px 0px 2px $primary;
+  }
 }
 
 .time-label {
