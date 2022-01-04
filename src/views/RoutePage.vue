@@ -128,7 +128,6 @@ import { getCity } from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 import wheelchairUrl from '@/assets/wheelchair.svg'
-import Loading1 from '../components/loading.vue'
 
 const props = defineProps({
   city: String,

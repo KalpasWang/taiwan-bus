@@ -22,8 +22,8 @@
       </div>
     </div>
     <div class="container">
-      <div v-show="mapShow" id="station-map" class="flex-grow-1 w-100"></div>
-      <div v-show="!mapShow">
+      <div v-show="mapShow" id="station-map" class="flex-grow-1"></div>
+      <div ref="routesList" v-show="!mapShow" class="flex-grow-1">
         <h3 v-if="state.pending" class="mt-5">
           <Loading />
         </h3>
@@ -32,7 +32,9 @@
         </h3>
         <perfect-scrollbar v-else>
           <h4 class="fs-6 text-light mt-5">
-            {{ station.StationName.Zh_tw }}
+            {{ station.StationName.Zh_tw }}({{
+              getBearingLabel(station.Bearing)
+            }})
           </h4>
           <ul class="list-group">
             <li
@@ -49,10 +51,9 @@
                 class="d-block link-primary text-decoration-none"
               >
                 {{ stop.RouteName.Zh_tw }}
-                <p v-if="route.DepartureStopNameZh" class="text-light fs-7">
-                  {{ route.DepartureStopNameZh }}
-                  <span class="text-primary mx-1">往</span>
-                  {{ route.DestinationStopNameZh }}
+                <p class="text-light fs-7">
+                  <span class="text-primary mx-3">往</span>
+                  <span v-if="stop.destination">{{ stop.destination }}</span>
                 </p>
               </router-link>
             </li>
@@ -61,69 +62,17 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <!-- 地圖 -->
-    <div class="col-md-7 pb-4">
-      <div id="station-map" class="map"></div>
-    </div>
-    <!-- 站序與預估時間 -->
-    <div class="col-md-5">
-      <ul class="nav nav-tabs">
-        <li v-for="(item, i) in state.stationGroup" :key="i" class="nav-item">
-          <button
-            class="nav-link"
-            :class="{ active: activeItem === item.StationID }"
-            @click="setTab(item.StationID)"
-          >
-            {{ getBearingLabel(item.Bearing) }}
-          </button>
-        </li>
-      </ul>
-      <h4 v-if="state.error" class="p-3">{{ state.error }}</h4>
-      <div v-else class="tab-content">
-        <div
-          v-for="(item, i) in state.stationGroup"
-          :key="i"
-          class="tab-pane"
-          :class="{ active: activeItem === item.StationID }"
-        >
-          <div class="list-group">
-            <router-link
-              v-for="(stop, idx) in item.Stops"
-              :key="idx"
-              :to="{
-                name: 'RoutePage',
-                params: {
-                  city: getCity(item.LocationCityCode),
-                  routeName: stop.RouteName.Zh_tw
-                }
-              }"
-              class="
-                list-group-item list-group-item-action
-                d-flex
-                justify-content-between
-                align-items-center
-              "
-            >
-              {{ stop.RouteName.Zh_tw }}
-              <span class="badge" :class="stop.BgColor">{{
-                stop.TimeLabel
-              }}</span>
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script setup>
-import { ref, toRef } from 'vue'
+import { ref, toRef, onMounted } from 'vue'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import { getCity, getBearingLabel } from '@/composables/useUtilities'
+import { getBearingLabel } from '@/composables/useUtilities'
+import backIconUrl from '@/assets/back.svg'
+import mapIconUrl from '@/assets/map.svg'
 
 const props = defineProps({
   city: String,
@@ -132,11 +81,30 @@ const props = defineProps({
 
 const mapShow = ref(false)
 const mapHasShown = ref(false)
+const routesList = ref(null)
 const { state } = bus
 const station = toRef(state, 'station')
 
-bus.fetchStationGroup(props.city, props.groupId).then(() => {
-  activeItem.value = state.stationGroup[0].StationID
-  stationName.value = state.stationGroup[0].StationName.Zh_tw
+const toggleMap = () => {
+  const v = mapShow.value
+  mapShow.value = !v
+  if (mapShow.value) {
+    nextTick(() => {
+      if (!mapHasShown.value) {
+        // init map
+        map.mapInit('station-map')
+        mapHasShown.value = true
+      }
+      // map.drawStopsPathAndMarkers(stops, busList, shape)
+    })
+  }
+}
+
+bus.fetchStation(props.city, props.stationId)
+
+onMounted(() => {
+  // set scroll region height
+  const height = routesList.value.getBoundingClientRect().height + 'px'
+  document.documentElement.style.setProperty('--h', height)
 })
 </script>

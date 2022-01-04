@@ -268,12 +268,24 @@ const fetchStation = async (city, stationId) => {
       }
     })
     state.station = res.data[0]
-    // res = await fetchEstimatedTimeOfArrivalByStaionId(city, stationId)
-    // res.data.forEach((item) => {
-    // const badge = getTimeBadgeAndColor(item)
-    // item.TimeLabel = badge.text
-    // item.BgColor = badge.color
-    // })
+    state.station.Stops.forEach(async (stop) => {
+      const routeName = stop.RouteName.Zh_tw
+      const url = `StopOfRoute/City/${city}/${routeName}`
+      res = await api.get(url)
+      const realData = filterRouteName(routeName, res.data)
+      const stopsForward = realData.find((item) => item.Direction === 0).Stops
+      const stopsBackward = realData.find((item) => item.Direction === 1).Stops
+      const stopF = stopsForward.find((item) => item.StopUID === stop.StopUID)
+      const stopB = stopsBackward.find((item) => item.StopUID === stop.StopUID)
+      if (!stopF && stopB) {
+        stop.destination =
+          stopsBackward[stopsBackward.length - 1].StopName.Zh_tw
+      } else if (stopF && !stopB) {
+        stop.destination = stopsForward[stopsForward.length - 1].StopName.Zh_tw
+      } else {
+        stop.destination = null
+      }
+    })
     state.pending = false
   } catch (error) {
     state.error = error.message
