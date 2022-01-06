@@ -273,17 +273,21 @@ const fetchStation = async (city, stationId) => {
       const url = `StopOfRoute/City/${city}/${routeName}`
       res = await api.get(url)
       const realData = filterRouteName(routeName, res.data)
-      const stopsForward = realData.find((item) => item.Direction === 0).Stops
-      const stopsBackward = realData.find((item) => item.Direction === 1).Stops
-      const stopF = stopsForward.find((item) => item.StopUID === stop.StopUID)
-      const stopB = stopsBackward.find((item) => item.StopUID === stop.StopUID)
-      if (!stopF && stopB) {
-        stop.destination =
-          stopsBackward[stopsBackward.length - 1].StopName.Zh_tw
-      } else if (stopF && !stopB) {
-        stop.destination = stopsForward[stopsForward.length - 1].StopName.Zh_tw
+      console.log(realData)
+      let foundStops = null
+      realData.some((route) => {
+        const foundStop = route.Stops.find(
+          (item) => item.StopUID === stop.StopUID
+        )
+        if (foundStop) {
+          foundStops = route.Stops
+        }
+        return +foundStop
+      })
+      if (foundStops) {
+        stop.destination = foundStops[foundStops.length - 1].StopName.Zh_tw
       } else {
-        stop.destination = null
+        stop.destination = '？'
       }
     })
     state.pending = false

@@ -42,7 +42,7 @@
       </div>
     </div>
     <!-- 預估到站時間 -->
-    <div v-show="mapShow" id="stops-map" class="flex-grow-1 w-100"></div>
+    <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div>
     <div v-show="!mapShow" ref="stopsList" class="flex-grow-1 container">
       <h3 v-if="state.pending" class="mt-5">
         <Loading />

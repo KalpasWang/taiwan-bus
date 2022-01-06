@@ -21,51 +21,50 @@
         />
       </div>
     </div>
-    <div class="container">
-      <div v-show="mapShow" id="station-map" class="flex-grow-1"></div>
-      <div ref="routesList" v-show="!mapShow" class="flex-grow-1">
-        <h3 v-if="state.pending" class="mt-5">
-          <Loading />
-        </h3>
-        <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-          {{ state.error }}
-        </h3>
-        <perfect-scrollbar v-else>
-          <h4 class="fs-6 text-light mt-5">
-            {{ station.StationName.Zh_tw }}({{
-              getBearingLabel(station.Bearing)
-            }})
-          </h4>
-          <ul class="list-group">
-            <li
-              v-for="(stop, i) in station.Stops"
-              :key="stop.StopID"
-              class="list-group-item list-group-item-action"
-              :class="{ 'bg-secondary': idx % 2 === 0 }"
+    <div v-show="mapShow" id="station-map" class="flex-grow-1"></div>
+    <div v-show="!mapShow" ref="routesList" class="flex-grow-1 container">
+      <h3 v-if="state.pending" class="mt-5">
+        <Loading />
+      </h3>
+      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
+        {{ state.error }}
+      </h3>
+      <perfect-scrollbar v-else>
+        <h4 class="fs-6 text-light mt-5">
+          {{ station.StationName.Zh_tw }}({{
+            getBearingLabel(station.Bearing)
+          }})
+        </h4>
+        <ul class="list-group">
+          <li
+            v-for="(stop, i) in station.Stops"
+            :key="stop.StopID"
+            class="list-group-item list-group-item-action"
+            :class="{ 'bg-secondary': i % 2 === 0 }"
+          >
+            <router-link
+              :to="{
+                name: 'RoutePage',
+                params: { city: props.city, routeName: stop.RouteName.Zh_tw }
+              }"
+              class="d-block link-primary text-decoration-none"
             >
-              <router-link
-                :to="{
-                  name: 'RoutePage',
-                  params: { city: props.city, routeName: stop.RouteName.Zh_tw }
-                }"
-                class="d-block link-primary text-decoration-none"
-              >
-                {{ stop.RouteName.Zh_tw }}
-                <p class="text-light fs-7">
-                  <span class="text-primary mx-3">往</span>
-                  <span v-if="stop.destination">{{ stop.destination }}</span>
-                </p>
-              </router-link>
-            </li>
-          </ul>
-        </perfect-scrollbar>
-      </div>
+              {{ stop.RouteName.Zh_tw }}
+              <p class="text-light fs-7">
+                <span class="text-primary mx-1">往</span>
+                {{ stop.destination }}
+              </p>
+            </router-link>
+          </li>
+        </ul>
+      </perfect-scrollbar>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, toRef, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
 import bus from '@/composables/useCityBus'
@@ -79,6 +78,7 @@ const props = defineProps({
   stationId: String
 })
 
+const router = useRouter()
 const mapShow = ref(false)
 const mapHasShown = ref(false)
 const routesList = ref(null)
