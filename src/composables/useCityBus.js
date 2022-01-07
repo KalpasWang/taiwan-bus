@@ -257,23 +257,21 @@ const fetchNearByStations = (radius) => {
 }
 
 // 取得指定[縣市]與站位ID的市區公車站位資料
-const fetchStation = async (city, stationId) => {
+const fetchStation = async (citys, stationId) => {
   try {
     state.error = null
     state.pending = true
-    const url = `Station/City/${city}`
+    const url = `Station/City/${citys[0]}`
     let res = await api.get(url, {
       params: {
         $filter: `StationID eq '${stationId}'`
       }
     })
     state.station = res.data[0]
-    state.station.Stops.forEach(async (stop) => {
-      const routeName = stop.RouteName.Zh_tw
-      const url = `StopOfRoute/City/${city}/${routeName}`
+    citys.forEach(async (city) => {
+      const url = `StopOfRoute/City/${city}/PassThrough/Station/${stationId}`
       res = await api.get(url)
-      const realData = filterRouteName(routeName, res.data)
-      console.log(realData)
+      res.data.forEach((route) => {})
       let foundStops = null
       realData.some((route) => {
         const foundStop = route.Stops.find(

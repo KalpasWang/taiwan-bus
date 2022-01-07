@@ -74,7 +74,7 @@ import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 
 const props = defineProps({
-  city: String,
+  citys: Array,
   stationId: String
 })
 
@@ -100,7 +100,7 @@ const toggleMap = () => {
   }
 }
 
-bus.fetchStation(props.city, props.stationId)
+bus.fetchStation(props.citys, props.stationId)
 
 onMounted(() => {
   // set scroll region height
