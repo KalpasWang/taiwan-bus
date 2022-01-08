@@ -268,25 +268,16 @@ const fetchStation = async (citys, stationId) => {
       }
     })
     state.station = res.data[0]
+    state.station.destination = []
     citys.forEach(async (city) => {
       const url = `StopOfRoute/City/${city}/PassThrough/Station/${stationId}`
       res = await api.get(url)
-      res.data.forEach((route) => {})
-      let foundStops = null
-      realData.some((route) => {
-        const foundStop = route.Stops.find(
-          (item) => item.StopUID === stop.StopUID
-        )
-        if (foundStop) {
-          foundStops = route.Stops
-        }
-        return +foundStop
+      res.data.forEach((route) => {
+        const stops = route.Stops
+        const finalStop = stops[stops.length - 1]
+        finalStop.RouteName = route.RouteName
+        state.station.destination.push(finalStop)
       })
-      if (foundStops) {
-        stop.destination = foundStops[foundStops.length - 1].StopName.Zh_tw
-      } else {
-        stop.destination = '？'
-      }
     })
     state.pending = false
   } catch (error) {

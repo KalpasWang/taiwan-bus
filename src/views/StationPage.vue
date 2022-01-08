@@ -37,7 +37,7 @@
         </h4>
         <ul class="list-group">
           <li
-            v-for="(stop, i) in station.Stops"
+            v-for="(stop, i) in station.destination"
             :key="stop.StopID"
             class="list-group-item list-group-item-action"
             :class="{ 'bg-secondary': i % 2 === 0 }"
@@ -45,14 +45,17 @@
             <router-link
               :to="{
                 name: 'RoutePage',
-                params: { city: props.city, routeName: stop.RouteName.Zh_tw }
+                params: {
+                  city: props.citys[0],
+                  routeName: stop.RouteName.Zh_tw
+                }
               }"
               class="d-block link-primary text-decoration-none"
             >
               {{ stop.RouteName.Zh_tw }}
               <p class="text-light fs-7">
                 <span class="text-primary mx-1">往</span>
-                {{ stop.destination }}
+                {{ stop.StopName.Zh_tw }}
               </p>
             </router-link>
           </li>

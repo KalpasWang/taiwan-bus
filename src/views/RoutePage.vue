@@ -87,7 +87,7 @@
                     params: {
                       citys: getCitys(
                         item.LocationCityCode,
-                        item.RouteUID.subString(0, 2)
+                        item.StopUID.substring(0, 3)
                       ),
                       stationId: item.StationID
                     }
@@ -208,10 +208,10 @@ const toggleMap = () => {
 }
 
 const getCitys = (code1, code2) => {
-  if (code1 == code2) {
-    return [getCity(code1)]
+  if (code1 === code2) {
+    return getCity(code1)
   } else {
-    return [getCity(code1), getCity(code2)]
+    return [getCity(code2), getCity(code1)].join(',')
   }
 }
 

@@ -34,7 +34,12 @@ export const router = createRouter({
       path: '/stations/:citys/:stationId',
       component: StationPage,
       name: 'StationPage',
-      props: true
+      props(route) {
+        return {
+          citys: route.params.citys.split(','),
+          stationId: route.params.stationId
+        }
+      }
     }
   ]
 })
