@@ -24,7 +24,25 @@ const addMarker = (item, idx) => {
   markers.push(marker)
 }
 
-const addBusMarker = (item, idx) => {
+const addStationMarker = (item) => {
+  const lon = item.StationPosition.PositionLon
+  const lat = item.StationPosition.PositionLat
+  const marker = L.marker([lat, lon], {
+    icon: L.divIcon({
+      className: 'map-marker',
+      html: '<span class="marker-label">S</span>'
+    })
+  })
+    .addTo(map.value)
+    .bindPopup(`<h6 class="popup-name">${item.StationName.Zh_tw}</h6>`)
+
+  marker.markerId = item.StationID
+  marker.lng = lon
+  marker.lat = lat
+  markers.push(marker)
+}
+
+const addBusMarker = (item) => {
   const lon = item.BusPosition.PositionLon
   const lat = item.BusPosition.PositionLat
   const marker = L.marker([lat, lon], {
@@ -35,6 +53,13 @@ const addBusMarker = (item, idx) => {
   marker.lng = lon
   marker.lat = lat
   markers.push(marker)
+}
+
+const triggerPopup = (markerId) => {
+  const marker = markers.find((d) => d.markerId === markerId)
+
+  map.value.flyTo([marker.lat, marker.lng], 16)
+  marker.openPopup()
 }
 
 const clearMarkersAndRoute = () => {
@@ -63,6 +88,12 @@ const mapInit = (element) => {
   ).addTo(map.value)
 }
 
+const drawStationMarker = (station) => {
+  clearMarkersAndRoute()
+  addStationMarker(station.value)
+  triggerPopup(station.value.StationID)
+}
+
 const drawStopsPathAndMarkers = (stops, busList, shape) => {
   let latlngList
   if (!shape) {
@@ -76,12 +107,13 @@ const drawStopsPathAndMarkers = (stops, busList, shape) => {
   }
   clearMarkersAndRoute()
   routeLine = L.polyline(latlngList, { color: '#fcd42c' }).addTo(map.value)
-  map.value.fitBounds(routeLine.getBounds())
+  map.value.flyToBounds(routeLine.getBounds())
   stops.forEach((el, i) => addMarker(el, i))
-  busList.forEach((el, i) => addBusMarker(el, i))
+  busList.forEach((el) => addBusMarker(el))
 }
 
 export default {
   mapInit,
-  drawStopsPathAndMarkers
+  drawStopsPathAndMarkers,
+  drawStationMarker
 }

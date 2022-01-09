@@ -66,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref, toRef, onMounted } from 'vue'
+import { ref, toRef, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
@@ -98,7 +98,7 @@ const toggleMap = () => {
         map.mapInit('station-map')
         mapHasShown.value = true
       }
-      // map.drawStopsPathAndMarkers(stops, busList, shape)
+      map.drawStationMarker(station)
     })
   }
 }
