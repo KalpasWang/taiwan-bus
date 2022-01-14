@@ -51,6 +51,7 @@ const fetchRoutesByCityAndRouteName = async (city, routeName) => {
   }
 }
 
+// 取得指定[縣市],[路線名稱]的公車動態定點資料
 const fetchBusPosition = async (city, routeName) => {
   const url = `RealTimeByFrequency/City/${city}/${routeName}`
   const res = await api.get(url)
@@ -64,6 +65,7 @@ const fetchBusPosition = async (city, routeName) => {
   state.backwardBusList = busBackward
 }
 
+// 取得指定[縣市]的市區公車車輛資料
 const fetchBusType = async (city, plate) => {
   const url = `Vehicle/City/${city}`
   const res = await api.get(url, {
@@ -78,6 +80,7 @@ const fetchBusType = async (city, plate) => {
   return false
 }
 
+// 取得指定[縣市],[路線名稱]的市區公車路線線型資料
 const fetchRouteShape = async (city, routeName) => {
   const url = `Shape/City/${city}/${routeName}`
   const res = await api.get(url)
@@ -103,6 +106,7 @@ const fetchRouteShape = async (city, routeName) => {
   }
 }
 
+// 取得指定[縣市],[路線名稱]的公車動態最接近站牌資料
 const fetchBusNearStop = async (city, routeName) => {
   const url = `RealTimeNearStop/City/${city}/${routeName}`
   const res = await api.get(url)
@@ -286,6 +290,7 @@ const fetchStation = async (citys, stationId) => {
   }
 }
 
+// 取得指定[縣市],[站位]的市區公車預估到站資料
 const fetchEstimatedTimeOfArrivalByStaionId = async (city, stationId) => {
   const url = `EstimatedTimeOfArrival/City/${city}/PassThrough/Station/${stationId}`
   const res = await api.get(url)

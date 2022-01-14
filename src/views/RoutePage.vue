@@ -51,7 +51,9 @@
         {{ state.error }}
       </h3>
       <div v-else class="position-relative overflow-hidden">
+        <!-- 使用套件取代 scrollbar -->
         <perfect-scrollbar ref="ps">
+          <!-- 每60秒更新一次 -->
           <p
             v-if="timeAfterUpdate < 60"
             class="me-4 pt-4 mb-0 text-end text-primary ls-1"
@@ -62,12 +64,14 @@
             *更新中...
             <img :src="loadingIconUrl" width="25" alt="loading..." />
           </p>
+          <!-- 所有站牌與公車預計抵達時間 -->
           <ul class="list-unstyled">
             <li
               v-for="(item, i) in currentStops"
               :key="i"
               class="py-2 flex-between"
             >
+              <!-- 顯示預估到站時間badge與站牌名稱 -->
               <div class="d-flex justify-content-start align-items-center">
                 <span
                   class="flex-center time-label"
@@ -81,6 +85,7 @@
                     >{{ item.TimeLabel }}</span
                   >
                 </span>
+                <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
                 <router-link
                   :to="{
                     name: 'StationPage',
@@ -138,6 +143,7 @@ const props = defineProps({
 })
 
 const router = useRouter()
+
 const activeTab = ref('forward')
 const stopsList = ref(null)
 const ps = ref(null)
@@ -147,6 +153,7 @@ const mapHasShown = ref(false)
 const { state } = bus
 let timer = null
 
+// 取得目前要顯示的 stops of route
 const currentStops = computed(() => {
   if (activeTab.value === 'forward') {
     return state.forwardStopsList
@@ -174,6 +181,7 @@ const backwardLabel = computed(() => {
   return finalStop
 })
 
+// map切換與tab切換時決定要繪製的地圖
 watch([mapShow, activeTab], (newVal) => {
   const isMap = newVal[0]
   const tab = newVal[1]
@@ -239,7 +247,7 @@ onUnmounted(() => clearInterval(timer))
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/all.scss';
+@import '../assets/scss/custom-variables';
 
 .map-active {
   filter: hue-rotate(48deg) saturate(97%) brightness(58%);

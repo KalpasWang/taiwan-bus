@@ -93,6 +93,10 @@ $utilities: (
   opacity: 0.9;
 }
 
+body {
+  overflow: hidden;
+}
+
 [v-cloak] {
   display: none;
 }

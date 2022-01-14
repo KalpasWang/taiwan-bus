@@ -1,49 +1,77 @@
 <template>
-  <div
-    ref="container"
-    class="home-height position-relative bg-home overflow-hidden"
-  >
+  <div class="home-height position-relative bg-home overflow-hidden">
     <img
       :src="logoUrl"
       class="logo-home-size mt-5 mt-md-9 ms-4 ms-md-5 ms-lg-8"
     />
+    <!-- 點綴畫面的白色圓圈 -->
     <div class="circle circle1"></div>
     <div class="circle circle2"></div>
     <div class="circle circle3"></div>
     <div class="circle circle4"></div>
     <div class="circle circle5"></div>
     <div class="circle circle6"></div>
+    <!-- 附近公車站頁面連結 -->
     <div
       class="ball blue-ball d-flex justify-content-center align-items-center"
     >
       <router-link
         :to="{ name: 'NearBy' }"
         role="button"
-        class="d-flex flex-column text-decoration-none align-items-center"
+        class="
+          d-flex
+          flex-column
+          w-100
+          h-100
+          rounded-circle
+          text-decoration-none
+          justify-content-center
+          align-items-center
+        "
       >
         <img :src="markerUrl" width="23.5" height="31.33" />
         <span class="link-light fs-5 lh-base">附近公車站</span>
       </router-link>
     </div>
+    <!-- 公車查詢頁面連結 -->
     <div
       class="ball white-ball d-flex justify-content-center align-items-center"
     >
       <router-link
         :to="{ name: 'CitySearch' }"
         role="button"
-        class="d-flex flex-column text-decoration-none align-items-center"
+        class="
+          d-flex
+          flex-column
+          w-100
+          h-100
+          rounded-circle
+          text-decoration-none
+          justify-content-center
+          align-items-center
+        "
       >
         <img :src="searchBlackUrl" width="22.6" />
         <span class="link-dark fs-5 lh-base">查詢公車</span>
       </router-link>
     </div>
+    <!-- 客運查詢頁面連結 -->
     <div
       class="ball yellow-ball d-flex justify-content-center align-items-center"
     >
       <router-link
         :to="{ name: 'InterCitySearch' }"
         role="button"
-        class="d-flex flex-column text-decoration-none align-items-center"
+        class="
+          d-flex
+          flex-column
+          w-100
+          h-100
+          rounded-circle
+          text-decoration-none
+          justify-content-center
+          align-items-center
+        "
       >
         <img :src="searchBlackUrl" width="22.6" />
         <span class="link-dark fs-5 lh-base">查詢客運</span>
@@ -54,57 +82,46 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import logoUrl from '@/assets/Logo.png'
 import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
 
-const container = ref(null)
-
 const setFullHeight = () => {
+  // 行動瀏覽器支援
   const vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`)
-
-  if (window.innerWidth >= 768 && window.innerWidth < 992) {
-    container.value.classList.remove('min-height-desktop')
-    container.value.classList.add('min-height-tablet')
-  } else if (window.innerWidth >= 992) {
-    container.value.classList.remove('min-height-tablet')
-    container.value.classList.add('min-height-desktop')
+  // 設定球在 window 高度不同的情況下的大小
+  const height = window.innerHeight
+  const maxSizeHeight = 750
+  const minSizeHeight = 550
+  let subtracted
+  if (height < maxSizeHeight && height > minSizeHeight) {
+    subtracted = (maxSizeHeight - height) / 2
+  } else if (height <= minSizeHeight) {
+    subtracted = 100
   } else {
-    container.value.classList.remove('min-height-tablet')
-    container.value.classList.remove('min-height-desktop')
+    subtracted = 0
   }
+  document.documentElement.style.setProperty('--subtracted', subtracted + 'px')
 }
 
 onMounted(() => {
   setFullHeight()
   window.addEventListener('resize', setFullHeight)
-  const height = window.innerHeight
-  const minHeight = 750
-  let subtracted
-  if (height < minHeight) {
-    subtracted = minHeight - height > 100 ? 100 : minHeight - height
-  } else {
-    subtracted = 0
-  }
-  document.documentElement.style.setProperty('--subtracted', subtracted + 'px')
 })
 </script>
 
 <style lang="scss">
 @import '../assets/scss/custom-mixin';
-@import '../assets/scss/all.scss';
+@import '../assets/scss/custom-variables';
 
 .home-height {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-}
-.min-height-tablet {
-  min-height: 500px;
-}
-.min-height-desktop {
-  min-height: 500px;
+  @media screen and (min-width: 768px) {
+    min-height: 500px;
+  }
 }
 .bg-home {
   /* black_gray_line */
@@ -202,6 +219,9 @@ onMounted(() => {
     z-index: -1;
     border-radius: 50%;
     border: 2px solid #f5f5f5;
+  }
+  &:hover {
+    filter: brightness(95%);
   }
 }
 .blue-ball {

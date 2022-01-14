@@ -21,7 +21,9 @@
         />
       </div>
     </div>
+    <!-- 地圖 -->
     <div v-show="mapShow" id="station-map" class="flex-grow-1"></div>
+    <!-- 站牌列表 -->
     <div v-show="!mapShow" ref="routesList" class="flex-grow-1 container">
       <h3 v-if="state.pending" class="mt-5">
         <Loading />
@@ -29,7 +31,9 @@
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
+      <!-- 使用套件取代 scrollbar -->
       <perfect-scrollbar v-else>
+        <!-- 顯示站牌名稱與方向 -->
         <h4 class="fs-6 text-light mt-5">
           {{ station.StationName.Zh_tw }}({{
             getBearingLabel(station.Bearing)
@@ -42,6 +46,7 @@
             class="list-group-item list-group-item-action"
             :class="{ 'bg-secondary': i % 2 === 0 }"
           >
+            <!-- 每個站牌可以連結到公車路線 -->
             <router-link
               :to="{
                 name: 'RoutePage',
@@ -88,6 +93,7 @@ const routesList = ref(null)
 const { state } = bus
 const station = toRef(state, 'station')
 
+// 切換 map 的顯示與隱藏
 const toggleMap = () => {
   const v = mapShow.value
   mapShow.value = !v
