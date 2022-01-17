@@ -44,7 +44,7 @@
     <!-- 預估到站時間 -->
     <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div>
     <div v-show="!mapShow" ref="stopsList" class="flex-grow-1 container">
-      <h3 v-if="state.pending" class="mt-5">
+      <h3 v-if="state.pending" class="mt-5 text-center">
         <Loading />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
@@ -54,15 +54,15 @@
         <!-- 使用套件取代 scrollbar -->
         <perfect-scrollbar ref="ps">
           <!-- 每60秒更新一次 -->
-          <p
+          <!-- <p
             v-if="timeAfterUpdate < 60"
             class="me-4 pt-4 mb-0 text-end text-primary ls-1"
           >
-            *於 {{ timeAfterUpdate }} 前更新
-          </p>
-          <p v-else class="me-4 pt-4 mb-0 text-end text-primary ls-1">
+            *於 {{ timeAfterUpdate }} 秒前更新
+          </p> -->
+          <p class="me-4 pt-4 mb-0 text-end text-primary ls-1">
             *更新中...
-            <img :src="loadingIconUrl" width="25" alt="loading..." />
+            <Loading :width="loadingWidth" class="d-inline-block" />
           </p>
           <!-- 所有站牌與公車預計抵達時間 -->
           <ul class="list-unstyled">
@@ -151,6 +151,7 @@ const timeAfterUpdate = ref(0)
 const mapShow = ref(false)
 const mapHasShown = ref(false)
 const { state } = bus
+const loadingWidth = '20'
 let timer = null
 
 // 取得目前要顯示的 stops of route
