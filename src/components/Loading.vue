@@ -1,5 +1,7 @@
 <template>
-  <img :src="loadingIconUrl" :width="width" alt="loading..." />
+  <div class="text-center">
+    <img :src="loadingIconUrl" :width="width" alt="loading..." />
+  </div>
 </template>
 
 <script setup>
@@ -7,8 +9,8 @@ import loadingIconUrl from '@/assets/loading.svg'
 
 const props = defineProps({
   width: {
-    type: 'String',
-    default: '70'
+    type: Number,
+    default: 70
   }
 })
 const { width } = props
