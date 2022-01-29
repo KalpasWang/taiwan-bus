@@ -21,6 +21,7 @@ const state = reactive({
   forwardBusList: [],
   backwardBusList: [],
   station: {},
+  userPosition: {},
   nearByStations: [],
   pending: false,
   error: null
@@ -210,13 +211,15 @@ const handleNearByStations = (radius) => {
   navigator.geolocation.watchPosition(async (position) => {
     const lat = position.coords.latitude
     const lng = position.coords.longitude
+    state.userPosition.lat = lat
+    state.userPosition.lng = lng
     const url = 'Station/NearBy'
     const res = await apiTop30.get(url, {
       params: {
         $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`
       }
     })
-    state.stationsList = []
+    state.nearByStations.length = 0
     res.data.forEach((item) => {
       const d = haversine(
         { lat, lng },
@@ -225,13 +228,13 @@ const handleNearByStations = (radius) => {
           lng: item.StationPosition.PositionLon
         }
       )
-      state.stationsList.push({
+      state.nearByStations.push({
         Distance: Math.round(d),
         ...item
       })
     })
-    state.stationsList.sort((a, b) => a.Distance - b.Distance)
-    // console.log(res.data)
+    state.nearByStations.sort((a, b) => a.Distance - b.Distance)
+    console.log(state.nearByStations)
   })
 }
 

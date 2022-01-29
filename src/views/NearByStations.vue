@@ -22,7 +22,7 @@
       </div>
     </div>
     <!-- 地圖 -->
-    <div v-show="mapShow" id="station-map" class="flex-grow-1"></div>
+    <div v-show="mapShow" id="stations-map" class="flex-grow-1"></div>
     <!-- 站位列表 -->
     <div v-show="!mapShow" ref="stationsList" class="flex-grow-1 container">
       <h3 v-if="state.pending" class="mt-5">
@@ -33,15 +33,9 @@
       </h3>
       <!-- 使用套件取代 scrollbar -->
       <perfect-scrollbar v-else>
-        <!-- 顯示站牌名稱與方向 -->
-        <h4 class="fs-6 text-light mt-5">
-          {{ station.StationName.Zh_tw }}({{
-            getBearingLabel(station.Bearing)
-          }})
-        </h4>
         <ul class="list-group">
           <li
-            v-for="(station, i) in state.stationsList"
+            v-for="(station, i) in state.nearByStations"
             :key="station.StationID"
             class="list-group-item list-group-item-action"
             :class="{ 'bg-secondary': i % 2 === 0 }"
@@ -49,61 +43,61 @@
             <!-- 每個站牌可以連結到公車路線 -->
             <router-link
               :to="{
-                name: 'StayionPage',
+                name: 'StationPage',
                 params: {
-                  city: getCity(station.LocationCityCode),
+                  citys: getCity(station.LocationCityCode),
                   stationId: station.StationID
                 }
               }"
               class="d-block link-primary text-decoration-none"
             >
-              {{ stop.RouteName.Zh_tw }}
-              <p class="text-light fs-7">
-                <span class="text-primary mx-1">往</span>
-                {{ stop.StopName.Zh_tw }}
-              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <!-- 顯示站牌名稱與方向 -->
+                  <h4 class="fs-6">
+                    {{ station.StationName.Zh_tw }}({{
+                      getBearingLabel(station.Bearing)
+                    }})
+                  </h4>
+                  <p class="text-light fs-7">
+                    {{ station.Stops.length }} 個站牌
+                  </p>
+                </div>
+                <p>{{ station.Distance }} 公尺</p>
+              </div>
             </router-link>
           </li>
         </ul>
       </perfect-scrollbar>
-      <div v-else class="list-group">
-        <router-link
-          v-for="item in state.stationsList"
-          :key="item.StationID"
-          :to="{
-            name: 'StationPage',
-            params: {
-              city: getCity(item.LocationCityCode),
-              groupId: item.StationGroupID
-            }
-          }"
-          class="list-group-item list-group-item-action"
-        >
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h4>{{ item.StationName.Zh_tw }}</h4>
-              <p>{{ item.Stops.length }} 個站牌</p>
-            </div>
-            <p>{{ item.Distance }} 公尺</p>
-          </div>
-        </router-link>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
+import backIconUrl from '@/assets/back.svg'
+import mapIconUrl from '@/assets/map.svg'
 import bus from '@/composables/useCityBus'
-import { getCity } from '@/composables/useUtilities'
+import { getCity, getBearingLabel } from '@/composables/useUtilities'
 
 const router = useRouter()
 const mapShow = ref(false)
-const mapHasShown = ref(false)
 const { state } = bus
+
+// 切換 map 的顯示與隱藏
+const toggleMap = () => {
+  const v = mapShow.value
+  mapShow.value = !v
+  if (mapShow.value) {
+    nextTick(() => {
+      map.mapInit('stations-map')
+      map.drawNearByMarkers(state.userPosition, state.nearByStations)
+    })
+  }
+}
 
 onMounted(() => {
   bus.fetchNearByStations(500)

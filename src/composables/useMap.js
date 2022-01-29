@@ -94,6 +94,10 @@ const drawStationMarker = (station) => {
   triggerPopup(station.value.StationID)
 }
 
+const drawNearByMarkers = (stations) => {
+  clearMarkersAndRoute()
+}
+
 const drawStopsPathAndMarkers = (stops, busList, shape) => {
   let latlngList
   if (!shape) {
