@@ -24,22 +24,34 @@ const addMarker = (item, idx) => {
   markers.push(marker)
 }
 
-const addStationMarker = (item) => {
-  const lon = item.StationPosition.PositionLon
-  const lat = item.StationPosition.PositionLat
+const addStationsMarker = (list) => {
+  for (const item in list.value) {
+    const lng = item.StationPosition.PositionLon
+    const lat = item.StationPosition.PositionLat
+    const marker = L.marker([lat, lng], {
+      icon: L.divIcon({
+        className: 'map-marker',
+        html: '<span class="marker-label">S</span>'
+      })
+    })
+      .addTo(map.value)
+      .bindPopup(`<h6 class="popup-name">${item.StationName.Zh_tw}</h6>`)
+
+    marker.markerId = item.StationID
+    marker.lng = lng
+    marker.lat = lat
+    markers.push(marker)
+  }
+}
+
+const addUserMarker = (user) => {
+  const lon = user.lng
+  const lat = user.lat
   const marker = L.marker([lat, lon], {
     icon: L.divIcon({
-      className: 'map-marker',
-      html: '<span class="marker-label">S</span>'
+      className: 'map-marker'
     })
-  })
-    .addTo(map.value)
-    .bindPopup(`<h6 class="popup-name">${item.StationName.Zh_tw}</h6>`)
-
-  marker.markerId = item.StationID
-  marker.lng = lon
-  marker.lat = lat
-  markers.push(marker)
+  }).addTo(map.value)
 }
 
 const addBusMarker = (item) => {
@@ -47,7 +59,9 @@ const addBusMarker = (item) => {
   const lat = item.BusPosition.PositionLat
   const marker = L.marker([lat, lon], {
     icon: busIcon
-  }).addTo(map.value)
+  })
+    .addTo(map.value)
+    .bindPopup(`<h6 class="popup-name">${item.PlateNumb}</h6>`)
 
   marker.markerId = item.PlateNumb
   marker.lng = lon
@@ -73,29 +87,37 @@ const clearMarkersAndRoute = () => {
 }
 
 const mapInit = (element) => {
-  map.value = L.map(element, {
-    center: [25.03, 121.55],
-    zoom: 10
+  return new Promise((resolve) => {
+    map.value = L.map(element, {
+      center: [24.03, 121.35],
+      zoom: 7
+    })
+    // 把地圖圖資加到 map
+    const layers = L.tileLayer(
+      'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+      {
+        maxZoom: 20,
+        attribution:
+          '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+      }
+    ).addTo(map.value)
+    // 圖資讀取完成則 resolve
+    layers.on('load', () => {
+      resolve()
+    })
   })
-
-  L.tileLayer(
-    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    {
-      maxZoom: 20,
-      attribution:
-        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    }
-  ).addTo(map.value)
 }
 
 const drawStationMarker = (station) => {
   clearMarkersAndRoute()
-  addStationMarker(station.value)
+  addStationsMarker([station.value])
   triggerPopup(station.value.StationID)
 }
 
-const drawNearByMarkers = (stations) => {
+const drawNearByMarkers = (user, stations) => {
   clearMarkersAndRoute()
+  addStationsMarker(stations)
+  addUserMarker(user)
 }
 
 const drawStopsPathAndMarkers = (stops, busList, shape) => {
@@ -119,5 +141,6 @@ const drawStopsPathAndMarkers = (stops, busList, shape) => {
 export default {
   mapInit,
   drawStopsPathAndMarkers,
-  drawStationMarker
+  drawStationMarker,
+  drawNearByMarkers
 }

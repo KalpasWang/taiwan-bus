@@ -74,13 +74,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
 import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 import bus from '@/composables/useCityBus'
+import map from '@/composables/useMap'
 import { getCity, getBearingLabel } from '@/composables/useUtilities'
 
 const router = useRouter()
@@ -93,8 +94,9 @@ const toggleMap = () => {
   mapShow.value = !v
   if (mapShow.value) {
     nextTick(() => {
-      map.mapInit('stations-map')
-      map.drawNearByMarkers(state.userPosition, state.nearByStations)
+      map.mapInit('stations-map').then(() => {
+        map.drawNearByMarkers(state.userPosition, state.nearByStations)
+      })
     })
   }
 }

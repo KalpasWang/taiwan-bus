@@ -206,6 +206,7 @@ const handleStopsAndBusArrivalTime = async (city, routeName) => {
 const handleNearByStations = (radius) => {
   if (!navigator.geolocation) {
     state.error = 'Geolocation is not supported by your browser'
+    state.pending = false
     return
   }
   navigator.geolocation.watchPosition(async (position) => {
@@ -234,7 +235,6 @@ const handleNearByStations = (radius) => {
       })
     })
     state.nearByStations.sort((a, b) => a.Distance - b.Distance)
-    console.log(state.nearByStations)
   })
 }
 
