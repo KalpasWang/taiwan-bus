@@ -93,3 +93,9 @@ export const filterRouteName = (routeName, list) => {
     return item.RouteName.Zh_tw === routeName
   })
 }
+
+export const delayOneSecond = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 1000)
+  })
+}

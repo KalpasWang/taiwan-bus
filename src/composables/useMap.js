@@ -25,7 +25,9 @@ const addMarker = (item, idx) => {
 }
 
 const addStationsMarker = (list) => {
-  for (const item in list.value) {
+  for (let i = 0; i < list.value.length; i++) {
+    const item = list.value[i]
+    console.log(item)
     const lng = item.StationPosition.PositionLon
     const lat = item.StationPosition.PositionLat
     const marker = L.marker([lat, lng], {
@@ -45,9 +47,9 @@ const addStationsMarker = (list) => {
 }
 
 const addUserMarker = (user) => {
-  const lon = user.lng
-  const lat = user.lat
-  const marker = L.marker([lat, lon], {
+  const lng = user.value.lng
+  const lat = user.value.lat
+  const marker = L.marker([lat, lng], {
     icon: L.divIcon({
       className: 'map-marker'
     })
@@ -116,6 +118,7 @@ const drawStationMarker = (station) => {
 
 const drawNearByMarkers = (user, stations) => {
   clearMarkersAndRoute()
+  map.value.flyTo([user.value.lat, user.value.lng], 16)
   addStationsMarker(stations)
   addUserMarker(user)
 }
