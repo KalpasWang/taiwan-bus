@@ -203,12 +203,13 @@ const handleStopsAndBusArrivalTime = async (city, routeName) => {
 }
 
 // 取得指定[位置,範圍]的全臺公車站位資料
-const handleNearByStations = (radius) => {
+const fetchNearByStations = (radius) => {
   if (!navigator.geolocation) {
     state.error = 'Geolocation is not supported by your browser'
-    state.pending = false
     return
   }
+  state.pending = true
+  state.error = null
   navigator.geolocation.watchPosition(async (position) => {
     const lat = position.coords.latitude
     const lng = position.coords.longitude
@@ -235,6 +236,7 @@ const handleNearByStations = (radius) => {
       })
     })
     state.nearByStations.sort((a, b) => a.Distance - b.Distance)
+    state.pending = false
   })
 }
 
@@ -287,8 +289,6 @@ const fetchRoutesByCityAndRouteName = tryCatchFactory(
 const fetchStopsAndBusArrivalTime = tryCatchFactory(
   handleStopsAndBusArrivalTime
 )
-const fetchNearByStations = tryCatchFactory(handleNearByStations)
-
 const fetchStation = tryCatchFactory(handleStation)
 
 export default {

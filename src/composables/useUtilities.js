@@ -94,8 +94,10 @@ export const filterRouteName = (routeName, list) => {
   })
 }
 
-export const delayOneSecond = () => {
+export const delayPointFiveSecond = () => {
   return new Promise((resolve) => {
-    setTimeout(resolve, 1000)
+    setTimeout(() => {
+      resolve()
+    }, 500)
   })
 }

@@ -69,6 +69,29 @@ $utilities: (
   }
 }
 
+.user-marker {
+  width: 20px !important;
+  height: 20px !important;
+  background: $success;
+  border-radius: 50%;
+  border: 3px solid $light;
+  z-index: 10;
+  &::before {
+    content: '';
+    // display: inline-block;
+    position: absolute;
+    left: -17px;
+    top: -17px;
+    width: 50px;
+    height: 50px;
+    background: lighten($success, 45%);
+    opacity: 0.5;
+    border-radius: 50%;
+    border: 1px solid $success;
+    z-index: -1;
+  }
+}
+
 .header-shadow {
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
 }

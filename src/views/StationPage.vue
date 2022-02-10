@@ -77,7 +77,10 @@ import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import { getBearingLabel } from '@/composables/useUtilities'
+import {
+  getBearingLabel,
+  delayPointFiveSecond
+} from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 
@@ -88,7 +91,6 @@ const props = defineProps({
 
 const router = useRouter()
 const mapShow = ref(false)
-const mapHasShown = ref(false)
 const routesList = ref(null)
 const { state } = bus
 const station = toRef(state, 'station')
@@ -99,12 +101,12 @@ const toggleMap = () => {
   mapShow.value = !v
   if (mapShow.value) {
     nextTick(() => {
-      if (!mapHasShown.value) {
-        // init map
-        map.mapInit('station-map')
-        mapHasShown.value = true
-      }
-      map.drawStationMarker(station)
+      map
+        .mapInit('station-map')
+        .then(() => delayPointFiveSecond())
+        .then(() => {
+          map.drawStationMarker(station)
+        })
     })
   }
 }

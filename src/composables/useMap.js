@@ -1,10 +1,11 @@
 import { ref } from 'vue'
 import L from 'leaflet'
 import { busIcon } from './constant'
+import { getBearingLabel } from '@/composables/useUtilities'
 
 let routeLine = null
 const markers = []
-const map = ref({})
+const map = ref(null)
 
 const addMarker = (item, idx) => {
   const lon = item.StopPosition.PositionLon
@@ -24,10 +25,31 @@ const addMarker = (item, idx) => {
   markers.push(marker)
 }
 
+const addStationMarker = (station) => {
+  const lng = station.value.StationPosition.PositionLon
+  const lat = station.value.StationPosition.PositionLat
+  const marker = L.marker([lat, lng], {
+    icon: L.divIcon({
+      className: 'map-marker',
+      html: '<span class="marker-label">S</span>'
+    })
+  })
+    .addTo(map.value)
+    .bindPopup(
+      `<h6 class="popup-name">${
+        station.value.StationName.Zh_tw
+      }(${getBearingLabel(station.value.Bearing)})</h6>`
+    )
+
+  marker.markerId = station.value.StationID
+  marker.lng = lng
+  marker.lat = lat
+  markers.push(marker)
+}
+
 const addStationsMarker = (list) => {
   for (let i = 0; i < list.value.length; i++) {
     const item = list.value[i]
-    console.log(item)
     const lng = item.StationPosition.PositionLon
     const lat = item.StationPosition.PositionLat
     const marker = L.marker([lat, lng], {
@@ -37,7 +59,11 @@ const addStationsMarker = (list) => {
       })
     })
       .addTo(map.value)
-      .bindPopup(`<h6 class="popup-name">${item.StationName.Zh_tw}</h6>`)
+      .bindPopup(
+        `<h6 class="popup-name">${item.StationName.Zh_tw}(${getBearingLabel(
+          item.Bearing
+        )})</h6>`
+      )
 
     marker.markerId = item.StationID
     marker.lng = lng
@@ -51,7 +77,7 @@ const addUserMarker = (user) => {
   const lat = user.value.lat
   const marker = L.marker([lat, lng], {
     icon: L.divIcon({
-      className: 'map-marker'
+      className: 'user-marker'
     })
   }).addTo(map.value)
 }
@@ -91,7 +117,7 @@ const clearMarkersAndRoute = () => {
 const mapInit = (element) => {
   return new Promise((resolve) => {
     map.value = L.map(element, {
-      center: [24.03, 121.35],
+      center: [23.7, 121],
       zoom: 7
     })
     // 把地圖圖資加到 map
@@ -112,8 +138,14 @@ const mapInit = (element) => {
 
 const drawStationMarker = (station) => {
   clearMarkersAndRoute()
-  addStationsMarker([station.value])
-  triggerPopup(station.value.StationID)
+  map.value.flyTo(
+    [
+      station.value.StationPosition.PositionLat,
+      station.value.StationPosition.PositionLon
+    ],
+    16
+  )
+  addStationMarker(station)
 }
 
 const drawNearByMarkers = (user, stations) => {

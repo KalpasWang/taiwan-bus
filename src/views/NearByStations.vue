@@ -85,11 +85,12 @@ import map from '@/composables/useMap'
 import {
   getCity,
   getBearingLabel,
-  delayOneSecond
+  delayPointFiveSecond
 } from '@/composables/useUtilities'
 
 const router = useRouter()
 const mapShow = ref(false)
+const stationsList = ref(null)
 const { state } = bus
 
 // 切換 map 的顯示與隱藏
@@ -100,7 +101,7 @@ const toggleMap = () => {
     nextTick(() => {
       map
         .mapInit('stations-map')
-        .then(delayOneSecond())
+        .then(() => delayPointFiveSecond())
         .then(() => {
           const { userPosition, nearByStations } = toRefs(state)
           map.drawNearByMarkers(userPosition, nearByStations)
@@ -110,6 +111,10 @@ const toggleMap = () => {
 }
 
 onMounted(() => {
+  // set scroll region height
+  const height = stationsList.value.getBoundingClientRect().height + 'px'
+  document.documentElement.style.setProperty('--h', height)
+
   bus.fetchNearByStations(500)
 })
 </script>
