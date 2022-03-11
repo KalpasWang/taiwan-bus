@@ -107,7 +107,7 @@ $list-group-item-padding-y: $spacer * 0.75;
 
 $list-group-hover-bg: inherit;
 $list-group-action-color: $dark;
-$list-group-action-hover-color: $list-group-action-color;
+// $list-group-action-hover-color: lighten($secondary, 10%);
 
 $list-group-action-active-color: $body-color;
 $list-group-action-active-bg: $secondary;

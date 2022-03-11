@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import L from 'leaflet'
 import { busIcon } from './constant'
-import { getBearingLabel } from '@/composables/useUtilities'
+import { getBearingLabel, delay } from '@/composables/useUtilities'
 
 let routeLine = null
 const markers = []
@@ -48,8 +48,8 @@ const addStationMarker = (station) => {
 }
 
 const addStationsMarker = (list) => {
-  for (let i = 0; i < list.value.length; i++) {
-    const item = list.value[i]
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i]
     const lng = item.StationPosition.PositionLon
     const lat = item.StationPosition.PositionLat
     const marker = L.marker([lat, lng], {
@@ -73,8 +73,8 @@ const addStationsMarker = (list) => {
 }
 
 const addUserMarker = (user) => {
-  const lng = user.value.lng
-  const lat = user.value.lat
+  const lng = user.lng
+  const lat = user.lat
   const marker = L.marker([lat, lng], {
     icon: L.divIcon({
       className: 'user-marker'
@@ -97,18 +97,19 @@ const addBusMarker = (item) => {
   markers.push(marker)
 }
 
-const triggerPopup = (markerId) => {
-  const marker = markers.find((d) => d.markerId === markerId)
+// const triggerPopup = (markerId) => {
+// const marker = markers.find((d) => d.markerId === markerId)
 
-  map.value.flyTo([marker.lat, marker.lng], 16)
-  marker.openPopup()
-}
+// map.value.flyTo([marker.lat, marker.lng], 16)
+// marker.openPopup()
+// }
 
 const clearMarkersAndRoute = () => {
   routeLine = null
   markers.length = 0
   map.value.eachLayer((layer) => {
     if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+      console.log(layer)
       map.value.removeLayer(layer)
     }
   })
@@ -136,23 +137,49 @@ const mapInit = (element) => {
   })
 }
 
+const flyEnd = () => {
+  return new Promise((resolve) => {
+    map.value.on('zoomend', () => {
+      resolve()
+    })
+  })
+}
+
 const drawStationMarker = (station) => {
   clearMarkersAndRoute()
-  map.value.flyTo(
-    [
-      station.value.StationPosition.PositionLat,
-      station.value.StationPosition.PositionLon
-    ],
-    16
-  )
-  addStationMarker(station)
+  delay()
+    .then(() => {
+      map.value.flyTo(
+        [
+          station.value.StationPosition.PositionLat,
+          station.value.StationPosition.PositionLon
+        ],
+        16
+      )
+      return flyEnd()
+    })
+    .then(() => {
+      addStationMarker(station)
+    })
 }
 
 const drawNearByMarkers = (user, stations) => {
   clearMarkersAndRoute()
-  map.value.flyTo([user.value.lat, user.value.lng], 16)
-  addStationsMarker(stations)
+  delay()
+    .then(() => {
+      map.value.flyTo([user.lat, user.lng], 16)
+      return flyEnd()
+    })
+    .then(() => {
+      addUserMarker(user)
+      addStationsMarker(stations)
+    })
+}
+
+const redrawNearByMarkers = (user, stations) => {
+  clearMarkersAndRoute()
   addUserMarker(user)
+  addStationsMarker(stations)
 }
 
 const drawStopsPathAndMarkers = (stops, busList, shape) => {
@@ -169,6 +196,7 @@ const drawStopsPathAndMarkers = (stops, busList, shape) => {
   clearMarkersAndRoute()
   routeLine = L.polyline(latlngList, { color: '#fcd42c' }).addTo(map.value)
   map.value.flyToBounds(routeLine.getBounds())
+
   stops.forEach((el, i) => addMarker(el, i))
   busList.forEach((el) => addBusMarker(el))
 }
@@ -176,6 +204,8 @@ const drawStopsPathAndMarkers = (stops, busList, shape) => {
 export default {
   mapInit,
   drawStopsPathAndMarkers,
+  addUserMarker,
   drawStationMarker,
-  drawNearByMarkers
+  drawNearByMarkers,
+  redrawNearByMarkers
 }

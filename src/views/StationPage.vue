@@ -77,10 +77,7 @@ import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import {
-  getBearingLabel,
-  delayPointFiveSecond
-} from '@/composables/useUtilities'
+import { getBearingLabel } from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 
@@ -101,12 +98,9 @@ const toggleMap = () => {
   mapShow.value = !v
   if (mapShow.value) {
     nextTick(() => {
-      map
-        .mapInit('station-map')
-        .then(() => delayPointFiveSecond())
-        .then(() => {
-          map.drawStationMarker(station)
-        })
+      map.mapInit('station-map').then(() => {
+        map.drawStationMarker(station)
+      })
     })
   }
 }

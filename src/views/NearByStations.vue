@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref, toRefs, onMounted, nextTick } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
@@ -82,11 +82,7 @@ import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import {
-  getCity,
-  getBearingLabel,
-  delayPointFiveSecond
-} from '@/composables/useUtilities'
+import { getCity, getBearingLabel } from '@/composables/useUtilities'
 
 const router = useRouter()
 const mapShow = ref(false)
@@ -99,16 +95,24 @@ const toggleMap = () => {
   mapShow.value = !v
   if (mapShow.value) {
     nextTick(() => {
-      map
-        .mapInit('stations-map')
-        .then(() => delayPointFiveSecond())
-        .then(() => {
-          const { userPosition, nearByStations } = toRefs(state)
-          map.drawNearByMarkers(userPosition, nearByStations)
-        })
+      map.mapInit('stations-map').then(() => {
+        // unwrappiing
+        const userPosition = state.userPosition
+        const nearByStations = state.nearByStations
+        map.drawNearByMarkers(userPosition, nearByStations)
+      })
     })
   }
 }
+
+watch(
+  () => state.nearByStations,
+  (newPositions) => {
+    // unwrapping
+    const userPosition = state.userPosition
+    map.redrawNearByMarkers(userPosition, newPositions)
+  }
+)
 
 onMounted(() => {
   // set scroll region height
