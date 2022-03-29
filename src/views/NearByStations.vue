@@ -86,6 +86,7 @@ import { getCity, getBearingLabel } from '@/composables/useUtilities'
 
 const router = useRouter()
 const mapShow = ref(false)
+const mapIsDrawed = ref(false)
 const stationsList = ref(null)
 const { state } = bus
 
@@ -100,17 +101,23 @@ const toggleMap = () => {
         const userPosition = state.userPosition
         const nearByStations = state.nearByStations
         map.drawNearByMarkers(userPosition, nearByStations)
+        mapIsDrawed.value = true
       })
     })
+  } else {
+    mapIsDrawed.value = false
   }
 }
 
 watch(
-  () => state.nearByStations,
-  (newPositions) => {
-    // unwrapping
-    const userPosition = state.userPosition
-    map.redrawNearByMarkers(userPosition, newPositions)
+  () => state.pending,
+  (val) => {
+    if (val && mapIsDrawed.value) {
+      // unwrapping
+      const userPosition = state.userPosition
+      const newPositions = state.nearByStations
+      map.redrawNearByMarkers(userPosition, newPositions)
+    }
   }
 )
 

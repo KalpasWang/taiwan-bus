@@ -208,9 +208,9 @@ const fetchNearByStations = (radius) => {
     state.error = 'Geolocation is not supported by your browser'
     return
   }
-  state.pending = true
-  state.error = null
   navigator.geolocation.watchPosition(async (position) => {
+    state.pending = true
+    state.error = null
     const lat = position.coords.latitude
     const lng = position.coords.longitude
     state.userPosition.lat = lat
