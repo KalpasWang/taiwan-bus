@@ -90,10 +90,7 @@
                   :to="{
                     name: 'StationPage',
                     params: {
-                      citys: getCitys(
-                        item.LocationCityCode,
-                        item.StopUID.substring(0, 3)
-                      ),
+                      city: getCity(item.LocationCityCode),
                       stationId: item.StationID
                     }
                   }"
@@ -213,14 +210,6 @@ const setTab = (tabName) => {
 const toggleMap = () => {
   const v = mapShow.value
   mapShow.value = !v
-}
-
-const getCitys = (code1, code2) => {
-  if (code1 === code2) {
-    return getCity(code1)
-  } else {
-    return [getCity(code2), getCity(code1)].join(',')
-  }
 }
 
 // fetch 公車站牌與預估到達時間

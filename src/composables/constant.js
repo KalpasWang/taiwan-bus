@@ -8,7 +8,8 @@ export const citys = [
     CityCode: 'TPE',
     City: 'Taipei',
     CountyID: 'A',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Keelung', 'NewTaipei']
   },
   {
     CityID: 'B',
@@ -16,7 +17,13 @@ export const citys = [
     CityCode: 'TXG',
     City: 'Taichung',
     CountyID: 'B',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: [
+      'MiaoliCounty',
+      'NantouCounty',
+      'ChanghuaCounty',
+      'HualienCounty'
+    ]
   },
   {
     CityID: 'C',
@@ -24,7 +31,8 @@ export const citys = [
     CityCode: 'KEE',
     City: 'Keelung',
     CountyID: 'C',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taipei', 'NewTaipei']
   },
   {
     CityID: 'D',
@@ -32,7 +40,8 @@ export const citys = [
     CityCode: 'TNN',
     City: 'Tainan',
     CountyID: 'D',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Kaohsiung', 'Chiayi', 'ChiayiCounty']
   },
   {
     CityID: 'E',
@@ -40,7 +49,8 @@ export const citys = [
     CityCode: 'KHH',
     City: 'Kaohsiung',
     CountyID: 'E',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Tainan', 'ChiayiCounty', 'PingtungCounty']
   },
   {
     CityID: 'F',
@@ -48,7 +58,8 @@ export const citys = [
     CityCode: 'NWT',
     City: 'NewTaipei',
     CountyID: 'F',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taipei', 'Keelung', 'YilanCounty', 'Taoyuan']
   },
   {
     CityID: 'G',
@@ -56,7 +67,8 @@ export const citys = [
     CityCode: 'ILA',
     City: 'YilanCounty',
     CountyID: 'G',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taipei', 'NewTaipei', 'HualienCounty']
   },
   {
     CityID: 'H',
@@ -64,7 +76,8 @@ export const citys = [
     CityCode: 'TAO',
     City: 'Taoyuan',
     CountyID: 'H',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taipei', 'NewTaipei', 'HsinchuCounty', 'Hsinchu']
   },
   {
     CityID: 'I',
@@ -72,7 +85,8 @@ export const citys = [
     CityCode: 'CYI',
     City: 'Chiayi',
     CountyID: 'I',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Tainan', 'YunlinCounty', 'ChiayiCounty']
   },
   {
     CityID: 'J',
@@ -80,7 +94,8 @@ export const citys = [
     CityCode: 'HSQ',
     City: 'HsinchuCounty',
     CountyID: 'J',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taoyuan', 'MiaoliCounty', 'Hsinchu']
   },
   {
     CityID: 'K',
@@ -88,7 +103,8 @@ export const citys = [
     CityCode: 'MIA',
     City: 'MiaoliCounty',
     CountyID: 'K',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taichung', 'HsinchuCounty', 'Hsinchu']
   },
   {
     CityID: 'M',
@@ -96,7 +112,14 @@ export const citys = [
     CityCode: 'NAN',
     City: 'NantouCounty',
     CountyID: 'M',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: [
+      'Taichung',
+      'ChanghuaCounty',
+      'YunlinCounty',
+      'ChiayiCounty',
+      'HualienCounty'
+    ]
   },
   {
     CityID: 'N',
@@ -104,7 +127,8 @@ export const citys = [
     CityCode: 'CHA',
     City: 'ChanghuaCounty',
     CountyID: 'N',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Taichung', 'NantouCounty', 'YunlinCounty']
   },
   {
     CityID: 'O',
@@ -112,7 +136,8 @@ export const citys = [
     CityCode: 'HSZ',
     City: 'Hsinchu',
     CountyID: 'O',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['HsinchuCounty']
   },
   {
     CityID: 'P',
@@ -120,7 +145,8 @@ export const citys = [
     CityCode: 'YUN',
     City: 'YunlinCounty',
     CountyID: 'P',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['NantouCounty', 'ChanghuaCounty', 'ChiayiCounty']
   },
   {
     CityID: 'Q',
@@ -128,7 +154,14 @@ export const citys = [
     CityCode: 'CYQ',
     City: 'ChiayiCounty',
     CountyID: 'Q',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: [
+      'Tainan',
+      'Kaohsiung',
+      'Chiayi',
+      'NantouCounty',
+      'YunlinCounty'
+    ]
   },
   {
     CityID: 'T',
@@ -136,7 +169,8 @@ export const citys = [
     CityCode: 'PIF',
     City: 'PingtungCounty',
     CountyID: 'T',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['Kaohsiung', 'TaitungCounty']
   },
   {
     CityID: 'U',
@@ -144,7 +178,8 @@ export const citys = [
     CityCode: 'HUA',
     City: 'HualienCounty',
     CountyID: 'U',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['YilanCounty', 'NantouCounty', 'TaitungCounty']
   },
   {
     CityID: 'V',
@@ -152,7 +187,8 @@ export const citys = [
     CityCode: 'TTT',
     City: 'TaitungCounty',
     CountyID: 'V',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: ['PingtungCounty', 'HualienCounty']
   },
   {
     CityID: 'W',
@@ -160,7 +196,8 @@ export const citys = [
     CityCode: 'KIN',
     City: 'KinmenCounty',
     CountyID: 'W',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: []
   },
   {
     CityID: 'X',
@@ -168,7 +205,8 @@ export const citys = [
     CityCode: 'PEN',
     City: 'PenghuCounty',
     CountyID: 'X',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: []
   },
   {
     CityID: 'Z',
@@ -176,7 +214,8 @@ export const citys = [
     CityCode: 'LIE',
     City: 'LienchiangCounty',
     CountyID: 'Z',
-    Version: '21.08.1'
+    Version: '21.08.1',
+    NearByCitys: []
   }
 ]
 

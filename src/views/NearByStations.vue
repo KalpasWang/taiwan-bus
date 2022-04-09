@@ -45,7 +45,7 @@
               :to="{
                 name: 'StationPage',
                 params: {
-                  citys: getCity(station.LocationCityCode),
+                  city: getCity(station.LocationCityCode),
                   stationId: station.StationID
                 }
               }"

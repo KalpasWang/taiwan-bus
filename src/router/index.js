@@ -31,15 +31,10 @@ export const router = createRouter({
       props: true
     },
     {
-      path: '/stations/:citys/:stationId',
+      path: '/stations/:city/:stationId',
       component: StationPage,
       name: 'StationPage',
-      props(route) {
-        return {
-          citys: route.params.citys.split(','),
-          stationId: route.params.stationId
-        }
-      }
+      props: true
     }
   ]
 })

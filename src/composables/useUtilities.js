@@ -1,4 +1,4 @@
-import bus from '@/composables/useCityBus'
+import { citys } from '@/composables/constant'
 
 export const getTimeBadgeAndColor = (timeObj) => {
   let badge = {
@@ -50,9 +50,14 @@ export const getTimeBadgeAndColor = (timeObj) => {
 }
 
 export const getCity = (code) => {
-  // console.log(state)
-  const city = bus.state.citysList.find((item) => item.CityCode === code)
+  // console.log(code)
+  const city = citys.find((item) => item.CityCode === code)
   return city.City
+}
+
+export const getNearByCitys = (city) => {
+  const foundCity = citys.find((item) => item.City === city)
+  return foundCity.NearByCitys
 }
 
 export const getBearingLabel = (bearing) => {

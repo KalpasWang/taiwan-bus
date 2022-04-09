@@ -41,8 +41,8 @@
         </h4>
         <ul class="list-group">
           <li
-            v-for="(stop, i) in station.destination"
-            :key="stop.StopID"
+            v-for="(route, i) in station.PassThrough"
+            :key="route.RouteUID"
             class="list-group-item list-group-item-action"
             :class="{ 'bg-secondary': i % 2 === 0 }"
           >
@@ -51,16 +51,16 @@
               :to="{
                 name: 'RoutePage',
                 params: {
-                  city: props.citys[0],
-                  routeName: stop.RouteName.Zh_tw
+                  city: route.City,
+                  routeName: route.RouteName.Zh_tw
                 }
               }"
               class="d-block link-primary text-decoration-none"
             >
-              {{ stop.RouteName.Zh_tw }}
+              {{ route.RouteName.Zh_tw }}
               <p class="text-light fs-7">
                 <span class="text-primary mx-1">往</span>
-                {{ stop.StopName.Zh_tw }}
+                {{ route.finalStop.StopName.Zh_tw }}
               </p>
             </router-link>
           </li>
@@ -82,7 +82,7 @@ import backIconUrl from '@/assets/back.svg'
 import mapIconUrl from '@/assets/map.svg'
 
 const props = defineProps({
-  citys: Array,
+  city: String,
   stationId: String
 })
 
@@ -105,7 +105,7 @@ const toggleMap = () => {
   }
 }
 
-bus.fetchStation(props.citys, props.stationId)
+bus.fetchStation(props.city, props.stationId)
 
 onMounted(() => {
   // set scroll region height

@@ -4,7 +4,8 @@ import { citys } from './constant'
 import {
   getTimeBadgeAndColor,
   parseShape,
-  filterRouteName
+  filterRouteName,
+  getNearByCitys
 } from './useUtilities'
 import haversine from 'haversine-distance'
 
@@ -241,23 +242,30 @@ const fetchNearByStations = (radius) => {
 }
 
 // 取得指定[縣市]與站位ID的市區公車站位資料
-const handleStation = async (citys, stationId) => {
-  const url = `Station/City/${citys[0]}`
+const handleStation = async (city, stationId) => {
+  const url = `Station/City/${city}`
   let res = await api.get(url, {
     params: {
       $filter: `StationID eq '${stationId}'`
     }
   })
   state.station = res.data[0]
-  state.station.destination = []
-  citys.forEach(async (city) => {
-    const url = `StopOfRoute/City/${city}/PassThrough/Station/${stationId}`
+  state.station.PassThrough = []
+  const citys = getNearByCitys(city)
+  citys.unshift(city)
+  citys.forEach(async (thisCity) => {
+    const url = `StopOfRoute/City/${thisCity}/PassThrough/Station/${stationId}`
     res = await api.get(url)
+    // console.log(res.data)
     res.data.forEach((route) => {
       const stops = route.Stops
-      const finalStop = stops[stops.length - 1]
-      finalStop.RouteName = route.RouteName
-      state.station.destination.push(finalStop)
+      route.finalStop = stops[stops.length - 1]
+      if (
+        !state.station.PassThrough.some(
+          (el) => el.RouteName.Zh_tw === route.RouteName.Zh_tw
+        )
+      )
+        state.station.PassThrough.push(route)
     })
   })
 }
