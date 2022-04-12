@@ -36,7 +36,7 @@
         <ul class="list-group">
           <li
             v-for="(station, i) in state.nearByStations"
-            :key="station.StationID"
+            :key="station.StationUID"
             class="list-group-item list-group-item-action"
             :class="{ 'bg-secondary': i % 2 === 0 }"
           >
@@ -45,7 +45,7 @@
               :to="{
                 name: 'StationPage',
                 params: {
-                  city: getCity(station.LocationCityCode),
+                  city: getCity(station.StationUID.slice(0, 3)),
                   stationId: station.StationID
                 }
               }"

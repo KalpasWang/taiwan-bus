@@ -49,9 +49,8 @@
             <!-- 每個站牌可以連結到公車路線 -->
             <router-link
               :to="{
-                name: 'RoutePage',
+                name: 'InterCityRoutePage',
                 params: {
-                  city: route.City,
                   routeName: route.RouteName.Zh_tw
                 }
               }"
@@ -75,7 +74,8 @@ import { ref, toRef, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import logo from '@/components/logo.vue'
-import bus from '@/composables/useCityBus'
+import cityBus from '@/composables/useCityBus'
+import intercityBus from '@/composables/useInterCityBus'
 import map from '@/composables/useMap'
 import { getBearingLabel } from '@/composables/useUtilities'
 import backIconUrl from '@/assets/back.svg'
@@ -86,11 +86,12 @@ const props = defineProps({
   stationId: String
 })
 
+const { city, stationId } = props
 const router = useRouter()
 const mapShow = ref(false)
 const routesList = ref(null)
-const { state } = bus
-const station = toRef(state, 'station')
+let state = { pending: true }
+let station = null
 
 // 切換 map 的顯示與隱藏
 const toggleMap = () => {
@@ -105,7 +106,15 @@ const toggleMap = () => {
   }
 }
 
-bus.fetchStation(props.city, props.stationId)
+if (city === 'intercity') {
+  intercityBus.fetchStation(stationId)
+  state = intercityBus.state
+  station = toRef(state, 'station')
+} else {
+  cityBus.fetchStation(city, stationId)
+  state = cityBus.state
+  station = toRef(state, 'station')
+}
 
 onMounted(() => {
   // set scroll region height

@@ -1,4 +1,4 @@
-import { reactive, readonly, watchEffect } from 'vue'
+import { reactive, readonly } from 'vue'
 import { api, apiTop30 } from './api'
 import { citys } from './constant'
 import { getTimeBadgeAndColor } from './useUtilities'
@@ -6,10 +6,14 @@ import { getTimeBadgeAndColor } from './useUtilities'
 const state = reactive({
   citysList: citys,
   routesList: [],
-  routeID: '',
+  routeUID: '',
   routeName: '',
+  routesList: [],
+  forwardRouteShape: [],
+  backwardRouteShape: [],
   forwardStopsList: [],
   backwardStopsList: [],
+  station: {},
   pending: false,
   error: null
 })
@@ -19,7 +23,7 @@ const state = reactive({
  */
 
 // 取得有經過指定[縣市]的公車資料
-const fetchRoutesByCity = async (city) => {
+const handleRoutesByCity = async (city) => {
   const cityItem = state.citysList.find((c) => c.City === city)
   const url = 'StopOfRoute/InterCity'
   const res = await apiTop30.get(url, {
@@ -150,8 +154,45 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
   }
 }
 
+// 取得指定[縣市]與站位ID的市區公車站位資料
+const handleStation = async (stationId) => {
+  const url = 'Station/InterCity'
+  let res = await api.get(url, {
+    params: {
+      $filter: `StationID eq '${stationId}'`
+    }
+  })
+  state.station = res.data[0]
+  state.station.PassThrough = []
+  const url2 = `StopOfRoute/InterCity/PassThrough/Station/${stationId}`
+  res = await api.get(url2)
+  // console.log(res.data)
+  res.data.forEach((route) => {
+    const stops = route.Stops
+    route.finalStop = stops[stops.length - 1]
+    state.station.PassThrough.push(route)
+  })
+}
+
+const tryCatchFactory = (handler) => {
+  return async (a, b) => {
+    try {
+      state.error = null
+      state.pending = true
+      await handler(a, b)
+      state.pending = false
+    } catch (error) {
+      state.error = error.message
+      state.pending = false
+    }
+  }
+}
+
+const fetchRoutesByCity = tryCatchFactory(handleRoutesByCity)
+const fetchStation = tryCatchFactory(handleStation)
+
 export default {
   state: readonly(state),
   fetchRoutesByCityAndRouteName,
-  fetchStopsAndBusArrivalTime
+  fetchStation
 }

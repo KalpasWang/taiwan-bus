@@ -50,9 +50,8 @@ export const getTimeBadgeAndColor = (timeObj) => {
 }
 
 export const getCity = (code) => {
-  // console.log(code)
   const city = citys.find((item) => item.CityCode === code)
-  return city.City
+  return city ? city.City : 'intercity'
 }
 
 export const getNearByCitys = (city) => {
