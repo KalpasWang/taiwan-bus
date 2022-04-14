@@ -106,13 +106,16 @@
                   alt="無障礙公車"
                 />
                 <span v-if="item.hasBus" class="plate">{{ item.plate }}</span>
-                <div v-if="item.hasBus && i > 0" class="circle active"></div>
+                <div
+                  v-if="item.hasBus && i > 0"
+                  class="station-badge active"
+                ></div>
                 <div
                   v-else-if="item.hasBus && i === 0"
-                  class="circle active noafter"
+                  class="station-badge active noafter"
                 ></div>
-                <div v-else-if="i > 0" class="circle"></div>
-                <div v-else class="circle noafter"></div>
+                <div v-else-if="i > 0" class="station-badge"></div>
+                <div v-else class="station-badge noafter"></div>
               </div>
             </li>
           </ul>
@@ -273,7 +276,7 @@ onUnmounted(() => clearInterval(timer))
   box-shadow: 0px 0px 5px $primary;
 }
 
-.circle {
+.station-badge {
   position: relative;
   width: 15px;
   height: 15px;
@@ -290,7 +293,7 @@ onUnmounted(() => clearInterval(timer))
     width: 1.4px;
     height: 51px;
     background: $primary;
-    box-shadow: 0px 0px 5px $primary;
+    // box-shadow: 0px 0px 5px $primary;
     z-index: -1;
   }
 
