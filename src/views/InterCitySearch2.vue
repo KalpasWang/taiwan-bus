@@ -1,6 +1,6 @@
 <template>
   <div class="container vh-100 d-flex flex-column">
-    <SearchHeader type="city" />
+    <HeaderSearch type="city" />
     <div ref="routesList" class="flex-grow-1 overflow-hidden">
       <h4 v-if="!inputs.city.CityName" class="fs-7 text-light mt-5">
         請先選擇縣市
@@ -91,7 +91,7 @@
 <script setup>
 import { ref } from 'vue'
 import bus from '@/composables/useInterCityBus'
-import SearchHeader from '@/components/SearchHeader.vue'
+import HeaderSearch from '@/components/HeaderSearch.vue'
 import KeyBoard2 from '@/components/KeyBoard2.vue'
 
 const { state } = bus
