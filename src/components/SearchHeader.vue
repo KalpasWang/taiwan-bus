@@ -1,5 +1,5 @@
 <template>
-  <div class="header-shadow bg-dark row p-3">
+  <div class="header-shadow bg-dark row p-3 px-lg-0">
     <div class="col-auto">
       <logo />
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid px-0 vh-100 d-flex flex-column">
-    <SearchHeader />
-    <div ref="routesList" id="routesList" class="flex-grow-1 overflow-hidden">
+  <div class="wrapper vh-100 container-lg position-relative">
+    <SearchHeader class="header" />
+    <div ref="routesList" id="routesList" class="main-content overflow-hidden">
       <h4 v-if="!query.city.City" class="fs-7 text-light px-3 mt-5">
         請先選擇縣市
       </h4>
@@ -43,7 +43,7 @@
       </div>
     </div>
     <Transition name="keyboard-slide" @after-leave="setScrollAreaHeight">
-      <div v-if="!isManual">
+      <div v-if="!isManual" class="keyboard">
         <KeyBoard />
       </div>
     </Transition>
@@ -134,7 +134,34 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style lang="scss">
+.wrapper {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'keyboard';
+  column-gap: 42px;
+  @media screen and (min-width: 991px) {
+    grid-template-columns: 5fr 7fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'header main'
+      'keyboard main';
+  }
+}
+.header {
+  grid-area: header;
+}
+.main-content {
+  grid-area: main;
+}
+.keyboard {
+  grid-area: keyboard;
+}
+
 .keyboard-slide-enter-active {
   transition: all 0.25s ease-in;
 }
@@ -150,7 +177,7 @@ onMounted(() => {
 }
 
 .keyboard-badge {
-  position: fixed;
+  position: absolute;
   right: 16px;
   bottom: 32px;
   display: flex;
@@ -160,6 +187,11 @@ onMounted(() => {
   height: 48px;
   border-radius: 50%;
   cursor: pointer;
+  @media screen and (min-width: 991px) {
+    top: 108px;
+    bottom: auto;
+    right: 58.34%;
+  }
 }
 
 .badge-fade-enter-active {
