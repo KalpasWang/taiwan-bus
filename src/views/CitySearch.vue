@@ -12,7 +12,8 @@
         <h3 v-else-if="state.error" class="mt-5 text-center text-light">
           {{ state.error }}
         </h3>
-        <perfect-scrollbar v-else>
+        <RoutesList v-else :cityName="query.city.CityName" />
+        <!-- <perfect-scrollbar v-else>
           <h4 class="fs-6 text-light mt-5">
             {{ query.city.CityName }}
           </h4>
@@ -39,7 +40,7 @@
               </router-link>
             </li>
           </ul>
-        </perfect-scrollbar>
+        </perfect-scrollbar> -->
       </div>
     </div>
     <Transition name="keyboard-slide" @after-leave="setScrollAreaHeight">
@@ -60,7 +61,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, provide } from 'vue'
+import { ref, onMounted, reactive, provide, toRef } from 'vue'
+import RoutesList from '@/components/RoutesList.vue'
 import SearchHeader from '@/components/SearchHeader.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import bus from '@/composables/useCityBus'
@@ -123,6 +125,8 @@ provide('query', {
   updateCityQuery,
   updateRouteNameQuery
 })
+
+provide('routesList', toRef(state, 'routesList'))
 
 provide('manualInput', {
   isManual,
