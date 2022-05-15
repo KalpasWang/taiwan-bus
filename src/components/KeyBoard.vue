@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- 路線選擇模式 -->
-    <div v-if="boardState === 1" class="bg-secondary p-4 px-sm-7 py-sm-5">
+    <div
+      v-if="boardState === 1"
+      class="bg-secondary p-4 px-md-7 py-md-5 p-lg-4"
+    >
       <!-- 第一排 -->
       <div class="row g-3 mb-3">
         <div class="col-6">
@@ -85,7 +88,10 @@
       </div>
     </div>
     <!-- 選擇縣市 -->
-    <div v-else-if="boardState === 2" class="bg-secondary px-4 py-5">
+    <div
+      v-else-if="boardState === 2"
+      class="bg-secondary p-4 px-md-7 py-md-5 p-lg-4"
+    >
       <div class="row row-cols-5 g-2">
         <div v-for="city in citys" :key="city.City" class="col">
           <KeyItem
@@ -100,7 +106,10 @@
       </div>
     </div>
     <!-- 選擇更多 -->
-    <div v-else-if="boardState === 3" class="bg-secondary px-4 py-5">
+    <div
+      v-else-if="boardState === 3"
+      class="bg-secondary p-4 px-md-7 py-md-5 p-lg-4"
+    >
       <div class="row row-cols-5 g-2">
         <!-- 第一排 -->
         <div class="col">
@@ -146,7 +155,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, inject } from 'vue'
+import { ref, computed, inject } from 'vue'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 import deleteIconUrl from '@/assets/delete-icon.svg'

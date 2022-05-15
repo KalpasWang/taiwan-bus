@@ -13,34 +13,6 @@
           {{ state.error }}
         </h3>
         <RoutesList v-else :cityName="query.city.CityName" />
-        <!-- <perfect-scrollbar v-else>
-          <h4 class="fs-6 text-light mt-5">
-            {{ query.city.CityName }}
-          </h4>
-          <ul class="list-group">
-            <li
-              v-for="(route, idx) in state.routesList"
-              :key="route.RouteUID"
-              class="list-group-item list-group-item-action"
-              :class="{ 'bg-secondary': idx % 2 === 0 }"
-            >
-              <router-link
-                :to="{
-                  name: 'RoutePage',
-                  params: { city: route.City, routeName: route.RouteName.Zh_tw }
-                }"
-                class="d-block link-primary text-decoration-none"
-              >
-                {{ route.RouteName.Zh_tw }}
-                <p v-if="route.DepartureStopNameZh" class="text-light fs-7">
-                  {{ route.DepartureStopNameZh }}
-                  <span class="text-primary mx-1">往</span>
-                  {{ route.DestinationStopNameZh }}
-                </p>
-              </router-link>
-            </li>
-          </ul>
-        </perfect-scrollbar> -->
       </div>
     </div>
     <Transition name="keyboard-slide" @after-leave="setScrollAreaHeight">
@@ -61,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, provide, toRef } from 'vue'
+import { ref, onMounted, reactive, provide, toRef, onUnmounted } from 'vue'
 import RoutesList from '@/components/RoutesList.vue'
 import SearchHeader from '@/components/SearchHeader.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
@@ -102,7 +74,7 @@ const updateRouteNameQuery = (key, allKeys = false) => {
 }
 
 const updateCityQuery = (newCity) => {
-  if (newCity.City) {
+  if (newCity?.City) {
     query.city = newCity
     bus.fetchRoutesByCityAndRouteName(query.city.City, query.routeName)
   }
@@ -112,7 +84,7 @@ const updateIsManual = (val) => {
   isManual.value = +val
 }
 
-// 在 mount 與 鍵盤切換時調整 perfect scrollbar 區域高度
+// 在 mount, resize 與 鍵盤切換時調整 perfect scrollbar 區域高度
 const setScrollAreaHeight = () => {
   const height = routesList.value.offsetHeight + 'px'
   // console.log(height)
@@ -133,8 +105,18 @@ provide('manualInput', {
   updateIsManual
 })
 
+// 監聽 resize event
+function listener() {
+  setScrollAreaHeight()
+}
+
 onMounted(() => {
   setScrollAreaHeight()
+  window.addEventListener('resize', listener)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', listener)
 })
 </script>
 
