@@ -12,7 +12,7 @@
         <h3 v-else-if="state.error" class="mt-5 text-center text-light">
           {{ state.error }}
         </h3>
-        <RoutesList v-else :cityName="query.city.CityName" />
+        <RoutesList v-else type="city" :cityName="query.city.CityName" />
       </div>
     </div>
     <Transition name="keyboard-slide" @after-leave="setScrollAreaHeight">
@@ -120,7 +120,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrapper {
   display: grid;
   grid-template-columns: auto;
@@ -138,28 +138,17 @@ onUnmounted(() => {
       'keyboard main';
   }
 }
+
 .header {
   grid-area: header;
 }
+
 .main-content {
   grid-area: main;
 }
+
 .keyboard {
   grid-area: keyboard;
-}
-
-.keyboard-slide-enter-active {
-  transition: all 0.25s ease-in;
-}
-
-.keyboard-slide-leave-active {
-  transition: all 0.25s ease-out;
-}
-
-.keyboard-slide-enter-from,
-.keyboard-slide-leave-to {
-  transform: translateY(120%);
-  opacity: 0;
 }
 
 .keyboard-badge {
@@ -178,18 +167,5 @@ onUnmounted(() => {
     bottom: auto;
     right: 58.34%;
   }
-}
-
-.badge-fade-enter-active {
-  transition: all 0.1s 0.25s ease-in;
-}
-
-.badge-fade-leave-active {
-  transition: all 0.1s ease-out;
-}
-
-.badge-fade-enter-from,
-.badge-fade-leave-to {
-  opacity: 0;
 }
 </style>

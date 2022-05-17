@@ -42,16 +42,10 @@ const handleRoutesByCity = async (city) => {
 }
 
 // 取得有指定[路線名稱]的公車資料
-const fetchRoutesByRouteName = async (routeName, useRoutesList) => {
-  if (useRoutesList) {
-    state.routesList = state.routesList.filter((r) =>
-      r.RouteName.Zh_tw.includes(routeName)
-    )
-  } else {
-    const url = `Route/InterCity/${routeName}?$format=JSON`
-    const res = await api.get(url)
-    state.routesList = res.data
-  }
+const handleRoutesByRouteName = async (routeName) => {
+  const url = `Route/InterCity/${routeName}?$format=JSON`
+  const res = await apiTop30.get(url)
+  state.routesList = res.data
 }
 
 // 取得指定[縣市與路線名稱]的公車資料
@@ -189,10 +183,12 @@ const tryCatchFactory = (handler) => {
 }
 
 const fetchRoutesByCity = tryCatchFactory(handleRoutesByCity)
+const fetchRoutesByRouteName = tryCatchFactory(handleRoutesByRouteName)
 const fetchStation = tryCatchFactory(handleStation)
 
 export default {
   state: readonly(state),
   fetchRoutesByCityAndRouteName,
+  fetchRoutesByRouteName,
   fetchStation
 }

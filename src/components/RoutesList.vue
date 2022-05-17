@@ -1,7 +1,7 @@
 <template>
   <perfect-scrollbar>
-    <h4 class="fs-6 text-light mt-5">
-      {{ props.cityName }}
+    <h4 v-if="cityName" class="fs-6 text-light mt-5">
+      {{ cityName }}
     </h4>
     <ul class="list-group">
       <li
@@ -12,8 +12,8 @@
       >
         <router-link
           :to="{
-            name: 'RoutePage',
-            params: { city: route.City, routeName: route.RouteName.Zh_tw }
+            name: type === 'city' ? 'RoutePage' : 'InterCityRoutePage',
+            params: getParams(route)
           }"
           class="d-block link-primary text-decoration-none"
         >
@@ -33,8 +33,20 @@
 import { inject } from 'vue'
 
 const props = defineProps({
+  type: String,
   cityName: String
 })
+const { type, cityName } = props
+
+const getParams = (route) => {
+  if (type === 'city') {
+    return { city: route.City, routeName: route.RouteName.Zh_tw }
+  } else if (type === 'intercity') {
+    return { routeName: route.RouteName.Zh_tw }
+  } else {
+    return {}
+  }
+}
 
 const routesList = inject('routesList')
 </script>
