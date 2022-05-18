@@ -23,13 +23,14 @@ const state = reactive({
  */
 
 // 取得有經過指定[縣市]的公車資料
-const handleRoutesByCity = async (city) => {
-  const cityItem = state.citysList.find((c) => c.City === city)
-  const url = 'StopOfRoute/InterCity'
+const handleRoutesByCitys = async (city1, city2) => {
+  const cityObj1 = state.citysList.find((c) => c.City === city1)
+  const cityObj2 = state.citysList.find((c) => c.City === city2)
+  const url = 'Station/InterCity'
   const res = await apiTop30.get(url, {
     params: {
-      $filter: `Stops/any(d:d/LocationCityCode eq '${cityItem.CityCode}')`,
-      $format: 'JSON'
+      $filter: `contains(StationUID, '${cityObj1.CityCode}') and 
+                contains(StationUID, '${cityObj2.CityCode}')`
     }
   })
   state.routesList = []
@@ -46,26 +47,6 @@ const handleRoutesByRouteName = async (routeName) => {
   const url = `Route/InterCity/${routeName}?$format=JSON`
   const res = await apiTop30.get(url)
   state.routesList = res.data
-}
-
-// 取得指定[縣市與路線名稱]的公車資料
-const fetchRoutesByCityAndRouteName = async (city, routeName) => {
-  try {
-    state.error = null
-    state.pending = true
-    if (city && !routeName) {
-      await fetchRoutesByCity(city)
-    } else if (!city && routeName) {
-      await fetchRoutesByRouteName(routeName)
-    } else if (city && routeName) {
-      await fetchRoutesByCity(city)
-      await fetchRoutesByRouteName(routeName)
-    }
-    state.pending = false
-  } catch (error) {
-    state.error = error.message
-    state.pending = false
-  }
 }
 
 // 取得指定[路線名稱]的客運路線站序資料與客運預估到站資料

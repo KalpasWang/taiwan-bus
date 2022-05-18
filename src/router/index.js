@@ -20,7 +20,7 @@ export const router = createRouter({
       name: 'InterCitySearch'
     },
     // {
-    //   path: '/intercity-from-back',
+    //   path: '/intercity/from-to',
     //   component: InterCitySearch2,
     //   name: 'InterCitySearch2'
     // },
