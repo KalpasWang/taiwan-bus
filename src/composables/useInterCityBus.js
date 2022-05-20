@@ -32,14 +32,19 @@ const handleRoutesByCitys = async (city1, city2) => {
       $filter: `Stops/any(d:d/LocationCityCode eq '${cityObj1.CityCode}')`
     }
   })
-  console.log(res.data)
-  state.routesList = []
-  // res.data.forEach((item, idx, arr) => {
-  // const i = arr.findIndex((el) => el.RouteUID === item.RouteUID)
-  // if (i === idx) {
-  // state.routesList.push(item)
-  // }
-  // })
+  // console.log(res.data)
+  if (cityObj2) {
+    state.routesList = []
+    res.data.forEach((route) => {
+      const hasCity2 = route.Stops.some(
+        (stop) => stop.LocationCityCode === cityObj2.CityCode
+      )
+      if (hasCity2) {
+        state.routesList.push(route)
+      }
+    })
+  }
+  console.log(state.routesList)
 }
 
 // 取得有指定[路線名稱]的公車資料
