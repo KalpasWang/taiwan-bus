@@ -26,20 +26,20 @@ const state = reactive({
 const handleRoutesByCitys = async (city1, city2) => {
   const cityObj1 = state.citysList.find((c) => c.City === city1)
   const cityObj2 = state.citysList.find((c) => c.City === city2)
-  const url = 'Station/InterCity'
-  const res = await apiTop30.get(url, {
+  const url = 'StopOfRoute/InterCity'
+  const res = await api.get(url, {
     params: {
-      $filter: `contains(StationUID, '${cityObj1.CityCode}') and 
-                contains(StationUID, '${cityObj2.CityCode}')`
+      $filter: `Stops/any(d:d/LocationCityCode eq '${cityObj1.CityCode}')`
     }
   })
+  console.log(res.data)
   state.routesList = []
-  res.data.forEach((item, idx, arr) => {
-    const i = arr.findIndex((el) => el.RouteUID === item.RouteUID)
-    if (i === idx) {
-      state.routesList.push(item)
-    }
-  })
+  // res.data.forEach((item, idx, arr) => {
+  // const i = arr.findIndex((el) => el.RouteUID === item.RouteUID)
+  // if (i === idx) {
+  // state.routesList.push(item)
+  // }
+  // })
 }
 
 // 取得有指定[路線名稱]的公車資料
@@ -163,13 +163,13 @@ const tryCatchFactory = (handler) => {
   }
 }
 
-const fetchRoutesByCity = tryCatchFactory(handleRoutesByCity)
+const fetchRoutesByCitys = tryCatchFactory(handleRoutesByCitys)
 const fetchRoutesByRouteName = tryCatchFactory(handleRoutesByRouteName)
 const fetchStation = tryCatchFactory(handleStation)
 
 export default {
   state: readonly(state),
-  fetchRoutesByCityAndRouteName,
+  fetchRoutesByCitys,
   fetchRoutesByRouteName,
   fetchStation
 }

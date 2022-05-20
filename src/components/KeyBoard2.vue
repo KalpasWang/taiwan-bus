@@ -4,7 +4,7 @@
     <!-- 第一排 -->
     <div class="row g-3 mb-3">
       <div class="col-6">
-        <KeyItem @click="router.push({ name: 'IntercitySearch2' })" white>
+        <KeyItem @click="router.push({ name: 'InterCitySearch2' })" white>
           <img :src="markerUrl" width="13" height="15.89" class="me-2" />
           以起訖地區搜尋
         </KeyItem>
