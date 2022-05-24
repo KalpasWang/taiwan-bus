@@ -96,7 +96,7 @@ import bus from '@/composables/useInterCityBus'
 const { state } = bus
 
 onMounted(() => {
-  bus.fetchRoutesByCitys('Taipei', 'HualienCounty')
+  bus.fetchRoutesByCitys('Taipei', 'YilanCounty')
 })
 </script>
 

@@ -32,14 +32,37 @@ const handleRoutesByCitys = async (city1, city2) => {
       $filter: `Stops/any(d:d/LocationCityCode eq '${cityObj1.CityCode}')`
     }
   })
-  // console.log(res.data)
+
   if (cityObj2) {
     state.routesList = []
+    const tempRoutesList = []
+    // 找出經過city1與city2的路線
     res.data.forEach((route) => {
       const hasCity2 = route.Stops.some(
         (stop) => stop.LocationCityCode === cityObj2.CityCode
       )
       if (hasCity2) {
+        tempRoutesList.push(route)
+      }
+    })
+    // 根據子路線整理routes list
+    console.log(tempRoutesList)
+    tempRoutesList.forEach((route) => {
+      const routeName = route.RouteName.Zh_tw
+      const subRouteName = route.SubRouteName.Zh_tw
+      const subSlice = subRouteName.slice(routeName.length)
+      console.log(subSlice)
+      // 如果subslice是0之外的都當成另一個route
+      route.UseSubName = false
+      if (subSlice !== '0') {
+        route.UseSubName = true
+      }
+      // 如果沒有被push過才push到state.routesList
+      const isPushed = state.routesList.some(
+        (savedRoute) =>
+          savedRoute.SubRouteName.Zh_tw === route.SubRouteName.Zh_tw
+      )
+      if (!isPushed) {
         state.routesList.push(route)
       }
     })
