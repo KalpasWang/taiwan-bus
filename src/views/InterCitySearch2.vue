@@ -1,5 +1,47 @@
 <template>
-  <div class="wrapper vh-100 container-lg position-relative"></div>
+  <div class="wrapper vh-100 container-lg">
+    <!-- header -->
+    <div class="header header-shadow bg-dark p-3 px-lg-0">
+      <div class="row">
+        <div class="col-auto">
+          <img
+            @click="router.go(-1)"
+            :src="backIconUrl"
+            alt="回上一頁"
+            role="button"
+            width="6"
+            class=""
+          />
+        </div>
+        <div class="col">
+          <logo />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control bg-secondary py-md-3 ls-1"
+            placeholder="選擇出發縣市"
+            readonly
+          />
+        </div>
+        <div class="col-auto">
+          <img :src="swapIcon" alt="交換" role="button" />
+        </div>
+      </div>
+    </div>
+    <div ref="routesList" class="main-content overflow-hidden px-3">
+      <h3 v-if="state.pending" class="mt-5 text-center text-light">
+        <img :src="loadingIconUrl" width="70" alt="loading..." />
+      </h3>
+      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
+        {{ state.error }}
+      </h3>
+      <RoutesList type="intercity-from-to" v-else />
+    </div>
+    <KeyBoard3 />
+  </div>
   <!-- <div class="container vh-100 d-flex flex-column">
     <HeaderSearch type="city" />
     <div ref="routesList" class="flex-grow-1 overflow-hidden">
@@ -91,8 +133,14 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import bus from '@/composables/useInterCityBus'
+import KeyBoard3 from '@/components/KeyBoard3.vue'
+import logo from '@/components/logo.vue'
+import loadingIconUrl from '@/assets/loading.svg'
+import swapIcon from '@/assets/swap.svg'
 
+const router = useRouter()
 const { state } = bus
 
 onMounted(() => {

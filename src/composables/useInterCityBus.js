@@ -46,12 +46,11 @@ const handleRoutesByCitys = async (city1, city2) => {
       }
     })
     // 根據子路線整理routes list
-    console.log(tempRoutesList)
+    // console.log(tempRoutesList)
     tempRoutesList.forEach((route) => {
       const routeName = route.RouteName.Zh_tw
       const subRouteName = route.SubRouteName.Zh_tw
       const subSlice = subRouteName.slice(routeName.length)
-      console.log(subSlice)
       // 如果subslice是0之外的都當成另一個route
       route.UseSubName = false
       if (subSlice !== '0') {
