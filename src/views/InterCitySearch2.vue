@@ -1,16 +1,15 @@
 <template>
   <div class="wrapper vh-100 container-lg">
     <!-- header -->
-    <div class="header header-shadow bg-dark p-3 px-lg-0">
+    <header class="header header-shadow bg-dark p-3 px-lg-0">
       <div class="row">
-        <div class="col-auto">
+        <div class="col-auto d-flex justify-content-center align-items-center">
           <img
             @click="router.go(-1)"
-            :src="backIconUrl"
+            :src="backIcon"
             alt="回上一頁"
             role="button"
             width="6"
-            class=""
           />
         </div>
         <div class="col">
@@ -20,132 +19,164 @@
       <div class="row">
         <div class="col">
           <input
+            ref="input1"
+            :value="cityFrom.city.CityName"
+            @click="focusInput1"
             type="text"
-            class="form-control bg-secondary py-md-3 ls-1"
+            class="form-control bg-secondary text-center ls-1"
+            role="button"
             placeholder="選擇出發縣市"
             readonly
           />
         </div>
-        <div class="col-auto">
-          <img :src="swapIcon" alt="交換" role="button" />
+        <div class="col-auto d-flex justify-content-center align-items-center">
+          <img :src="swapIcon" alt="交換縣市" role="button" />
+        </div>
+        <div class="col">
+          <input
+            ref="input2"
+            :value="cityTo.city.CityName"
+            @click="focusInput2"
+            type="text"
+            class="form-control bg-secondary text-center ls-1"
+            role="button"
+            placeholder="選擇到達縣市"
+            readonly
+          />
         </div>
       </div>
-    </div>
-    <div ref="routesList" class="main-content overflow-hidden px-3">
+    </header>
+    <main ref="routesList" class="main-content overflow-hidden px-3">
       <h3 v-if="state.pending" class="mt-5 text-center text-light">
-        <img :src="loadingIconUrl" width="70" alt="loading..." />
+        <img :src="loadingIcon" width="70" alt="loading..." />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
       <RoutesList type="intercity-from-to" v-else />
-    </div>
+    </main>
     <KeyBoard3 />
   </div>
-  <!-- <div class="container vh-100 d-flex flex-column">
-    <HeaderSearch type="city" />
-    <div ref="routesList" class="flex-grow-1 overflow-hidden">
-      <h4 v-if="!inputs.city.CityName" class="fs-7 text-light mt-5">
-        請先選擇縣市
-      </h4>
-      <div v-else>
-        <h3 v-if="state.pending" class="mt-5 text-center text-light">
-          <img :src="loadingIconUrl" width="70" alt="loading..." />
-        </h3>
-        <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-          {{ state.error }}
-        </h3>
-        <perfect-scrollbar v-else>
-          <h4 class="fs-6 text-light mt-5">
-            {{ inputs.city.CityName }}
-          </h4>
-          <ul class="list-group">
-            <li
-              v-for="(route, idx) in state.routesList"
-              :key="route.RouteUID"
-              class="list-group-item list-group-item-action"
-              :class="{ 'bg-secondary': idx % 2 === 0 }"
-            >
-              <router-link
-                :to="{
-                  name: 'RoutePage',
-                  params: { city: route.City, routeName: route.RouteName.Zh_tw }
-                }"
-                class="d-block link-primary text-decoration-none"
-              >
-                {{ route.RouteName.Zh_tw }}
-                <p v-if="route.DepartureStopNameZh" class="text-light fs-7">
-                  {{ route.DepartureStopNameZh }}
-                  <span class="text-primary mx-1">往</span>
-                  {{ route.DestinationStopNameZh }}
-                </p>
-              </router-link>
-            </li>
-          </ul>
-        </perfect-scrollbar>
-      </div>
-    </div>
-    <KeyBoard2 />
-  </div>
-  <select v-model="selectedCity" class="form-select">
-    <option value="" disabled selected>選擇縣市</option>
-    <option v-for="city in state.citysList" :key="city.City" :value="city.City">
-      {{ city.CityName }}
-    </option>
-  </select>
-  <input
-    v-model="busInput"
-    type="text"
-    class="form-control"
-    placeholder="搜尋公車路線"
-  />
-  <input @click="onSubmit()" type="submit" class="btn btn-primary" />
-  <h3 v-if="state.pending" class="mt-5 text-center">Loading...</h3>
-  <h3 v-else-if="state.error" class="mt-5 text-center">{{ state.error }}</h3>
-  <div v-else>
-    <ul class="list-group">
-      <li
-        v-for="route in state.routesList"
-        :key="route.RouteUID"
-        class="list-group-item list-group-item-action"
-      >
-        <router-link
-          :to="{
-            name: 'InterCityRoutePage',
-            params: { routeName: route.RouteName.Zh_tw }
-          }"
-          class="d-block link-primary text-decoration-none"
-        >
-          <h5>{{ route.RouteName.Zh_tw }}</h5>
-          <p v-if="route.Stops" class="text-secondary">
-            {{ route.Stops[0].StopName.Zh_tw }} -
-            {{ route.Stops[route.Stops.length - 1].StopName.Zh_tw }}
-          </p>
-          <p v-if="route.DepartureStopNameZh" class="text-secondary">
-            {{ route.DepartureStopNameZh }} -
-            {{ route.DestinationStopNameZh }}
-          </p>
-        </router-link>
-      </li>
-    </ul>
-  </div> -->
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {
+  onMounted,
+  onUnmounted,
+  ref,
+  reactive,
+  computed,
+  provide,
+  toRef
+} from 'vue'
 import { useRouter } from 'vue-router'
 import bus from '@/composables/useInterCityBus'
+import RoutesList from '@/components/RoutesList.vue'
 import KeyBoard3 from '@/components/KeyBoard3.vue'
 import logo from '@/components/logo.vue'
-import loadingIconUrl from '@/assets/loading.svg'
+import backIcon from '@/assets/back.svg'
+import loadingIcon from '@/assets/loading.svg'
 import swapIcon from '@/assets/swap.svg'
 
 const router = useRouter()
 const { state } = bus
+const routesList = ref(null)
+const input1 = ref(null)
+const input2 = ref(null)
+const cityTo = reactive({
+  city: {
+    CityName: '',
+    CityCode: '',
+    City: ''
+  }
+})
+const cityFrom = reactive({
+  city: {
+    CityName: '',
+    CityCode: '',
+    City: ''
+  }
+})
+let isCityFrom = ref(true)
+const currentCity = computed(() =>
+  isCityFrom.value ? cityFrom.city : cityTo.city
+)
+
+const focusInput1 = () => {
+  isCityFrom.value = true
+  input1.value.focus()
+}
+
+const focusInput2 = () => {
+  isCityFrom.value = false
+  input2.value.focus()
+}
+
+const updateCurrentCity = (temp) => {
+  const city = isCityFrom.value ? cityFrom : cityTo
+  city.city = temp
+  if (cityTo.city.City && cityFrom.city.City) {
+    bus.fetchRoutesByCitys(cityFrom.city.City, cityTo.city.City)
+  }
+}
+
+// provide 響應式 states 給子元件
+provide('routesList', toRef(state, 'routesList'))
+provide('currentCity', {
+  currentCity,
+  updateCurrentCity
+})
+
+// 在 mount, resize 時調整 perfect scrollbar 區域高度
+const setScrollAreaHeight = () => {
+  const height = routesList.value.offsetHeight + 'px'
+  document.documentElement.style.setProperty('--h', height)
+}
+
+// 監聽 resize event
+function callback() {
+  setScrollAreaHeight()
+}
 
 onMounted(() => {
-  bus.fetchRoutesByCitys('Taipei', 'YilanCounty')
+  setScrollAreaHeight()
+  focusInput1()
+  window.addEventListener('resize', callback)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', callback)
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.wrapper {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'keyboard';
+  column-gap: 42px;
+  @media screen and (min-width: 991px) {
+    grid-template-columns: 5fr 7fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'header main'
+      'keyboard main';
+  }
+}
+
+.header {
+  grid-area: header;
+}
+
+.main-content {
+  grid-area: main;
+}
+
+.keyboard {
+  grid-area: keyboard;
+}
+</style>

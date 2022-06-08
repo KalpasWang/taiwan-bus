@@ -220,7 +220,7 @@ export const citys = [
 ]
 
 export const busIcon = L.icon({
-  iconUrl: busIconUrl,
+  Icon: busIconUrl,
   iconSize: [36, 36],
   iconAnchor: [18, 18],
   popupAnchor: [18, -18],

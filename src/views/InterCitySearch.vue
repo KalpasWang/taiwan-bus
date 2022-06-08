@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper vh-100 container-lg position-relative">
     <SearchHeader class="header" />
-    <div ref="routesList" class="main-content overflow-hidden px-3">
+    <main ref="routesList" class="main-content overflow-hidden px-3">
       <h3 v-if="state.pending" class="mt-5 text-center text-light">
-        <img :src="loadingIconUrl" width="70" alt="loading..." />
+        <img :src="loadingIcon" width="70" alt="loading..." />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
       <RoutesList type="intercity" v-else />
-    </div>
+    </main>
     <Transition name="keyboard-slide" @after-leave="setScrollAreaHeight">
       <div v-if="!isManual" class="keyboard">
         <KeyBoard2 />
@@ -21,7 +21,7 @@
         class="keyboard-badge bg-primary shadow-sm"
         @click="isManual = false"
       >
-        <img :src="keyboardIconUrl" alt="開啟鍵盤" />
+        <img :src="keyboardIcon" alt="開啟鍵盤" />
       </div>
     </transition>
   </div>
@@ -33,8 +33,8 @@ import bus from '@/composables/useInterCityBus'
 import SearchHeader from '@/components/SearchHeader.vue'
 import KeyBoard2 from '@/components/KeyBoard2.vue'
 import RoutesList from '@/components/RoutesList.vue'
-import loadingIconUrl from '@/assets/loading.svg'
-import keyboardIconUrl from '@/assets/keyboard.svg'
+import loadingIcon from '@/assets/loading.svg'
+import keyboardIcon from '@/assets/keyboard.svg'
 
 const { state } = bus
 const routesList = ref(null)
@@ -42,10 +42,6 @@ const query = reactive({
   routeName: ''
 })
 const isManual = ref(false)
-
-// const onSubmit = () => {
-//   bus.fetchRoutesByCityAndRouteName(selectedCity.value, busInput.value)
-// }
 
 // methods
 const updateRouteNameQuery = (key, allKeys = false) => {

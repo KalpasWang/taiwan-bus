@@ -1,11 +1,11 @@
 <template>
   <div class="text-center">
-    <img :src="loadingIconUrl" :width="width" alt="loading..." />
+    <img :src="loadingIcon" :width="width" alt="loading..." />
   </div>
 </template>
 
 <script setup>
-import loadingIconUrl from '@/assets/loading.svg'
+import loadingIcon from '@/assets/loading.svg'
 
 const props = defineProps({
   width: {

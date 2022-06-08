@@ -1,5 +1,5 @@
 <template>
-  <div class="header-shadow bg-dark row p-3 px-lg-0">
+  <header class="header-shadow bg-dark row p-3 px-lg-0">
     <div class="col-auto">
       <logo />
     </div>
@@ -13,7 +13,7 @@
         placeholder="選擇路線或手動輸入關鍵字"
       />
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup>

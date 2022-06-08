@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-between align-items-center px-3 py-4">
         <img
           @click="router.go(-1)"
-          :src="backIconUrl"
+          :src="backIcon"
           alt="回上一頁"
           role="button"
           width="6"
@@ -13,7 +13,7 @@
         <logo />
         <img
           @click="toggleMap()"
-          :src="mapIconUrl"
+          :src="mapIcon"
           :class="{ 'map-active': mapShow }"
           alt="地圖"
           role="button"
@@ -133,8 +133,8 @@ import Loading from '@/components/loading.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
 import { getCity } from '@/composables/useUtilities'
-import backIconUrl from '@/assets/back.svg'
-import mapIconUrl from '@/assets/map.svg'
+import backIcon from '@/assets/back.svg'
+import mapIcon from '@/assets/map.svg'
 import wheelchairUrl from '@/assets/wheelchair.svg'
 
 const props = defineProps({

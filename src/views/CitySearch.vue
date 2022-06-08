@@ -7,7 +7,7 @@
       </h4>
       <div v-else class="px-3">
         <h3 v-if="state.pending" class="mt-5 text-center text-light">
-          <img :src="loadingIconUrl" width="70" alt="loading..." />
+          <img :src="loadingIcon" width="70" alt="loading..." />
         </h3>
         <h3 v-else-if="state.error" class="mt-5 text-center text-light">
           {{ state.error }}
@@ -26,7 +26,7 @@
         class="keyboard-badge bg-primary shadow-sm"
         @click="isManual = false"
       >
-        <img :src="keyboardIconUrl" alt="開啟鍵盤" />
+        <img :src="keyboardIcon" alt="開啟鍵盤" />
       </div>
     </transition>
   </div>
@@ -38,8 +38,8 @@ import RoutesList from '@/components/RoutesList.vue'
 import SearchHeader from '@/components/SearchHeader.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import bus from '@/composables/useCityBus'
-import loadingIconUrl from '@/assets/loading.svg'
-import keyboardIconUrl from '@/assets/keyboard.svg'
+import loadingIcon from '@/assets/loading.svg'
+import keyboardIcon from '@/assets/keyboard.svg'
 
 const { state } = bus
 const routesList = ref(null)

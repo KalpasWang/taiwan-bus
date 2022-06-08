@@ -82,7 +82,7 @@
         </div>
         <div class="col">
           <KeyItem @click="handleKeyPress(-1)"
-            ><img :src="deleteIconUrl" alt="delete"
+            ><img :src="deleteIcon" alt="delete"
           /></KeyItem>
         </div>
       </div>
@@ -158,7 +158,7 @@
 import { ref, computed, inject } from 'vue'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
-import deleteIconUrl from '@/assets/delete-icon.svg'
+import deleteIcon from '@/assets/delete-icon.svg'
 import { citys } from '@/composables/constant'
 
 // inject states and mutations from parent
