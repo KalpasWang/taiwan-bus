@@ -25,11 +25,12 @@ import { citys } from '@/composables/constant'
 const { currentCity, updateCurrentCity } = inject('currentCity')
 
 // states
-const tempCity = ref({
+const initialState = {
   City: '',
   CityCode: '',
   CityName: ''
-})
+}
+const tempCity = ref(initialState)
 const selectedCity = computed(
   () => tempCity.value.City || currentCity.value.City
 )
@@ -40,7 +41,6 @@ const setTempCity = (cityObj) => {
 }
 const update = () => {
   updateCurrentCity(tempCity.value)
-  tempCity.value = {}
-  tempCity.value.City = ''
+  tempCity.value = initialState
 }
 </script>

@@ -20,7 +20,7 @@
         <div class="col">
           <input
             ref="input1"
-            :value="cityFrom.city.CityName"
+            :value="city1.city.CityName"
             @click="focusInput1"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -30,12 +30,17 @@
           />
         </div>
         <div class="col-auto d-flex justify-content-center align-items-center">
-          <img :src="swapIcon" alt="交換縣市" role="button" />
+          <img
+            :src="swapIcon"
+            @click="swapCitys"
+            alt="交換縣市"
+            role="button"
+          />
         </div>
         <div class="col">
           <input
             ref="input2"
-            :value="cityTo.city.CityName"
+            :value="city2.city.CityName"
             @click="focusInput2"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -83,40 +88,49 @@ const { state } = bus
 const routesList = ref(null)
 const input1 = ref(null)
 const input2 = ref(null)
-const cityTo = reactive({
+const city1 = reactive({
   city: {
     CityName: '',
     CityCode: '',
     City: ''
   }
 })
-const cityFrom = reactive({
+const city2 = reactive({
   city: {
     CityName: '',
     CityCode: '',
     City: ''
   }
 })
-let isCityFrom = ref(true)
-const currentCity = computed(() =>
-  isCityFrom.value ? cityFrom.city : cityTo.city
-)
+let iscity1 = ref(true)
+const currentCity = computed(() => (iscity1.value ? city1.city : city2.city))
 
 const focusInput1 = () => {
-  isCityFrom.value = true
+  iscity1.value = true
   input1.value.focus()
 }
 
 const focusInput2 = () => {
-  isCityFrom.value = false
+  iscity1.value = false
   input2.value.focus()
 }
 
+const fetchData = () => {
+  bus.fetchRoutesByCitys(city1.city.City, city2.city.City)
+}
+
+const swapCitys = () => {
+  const temp = city1.city
+  city1.city = city2.city
+  city2.city = temp
+  fetchData()
+}
+
 const updateCurrentCity = (temp) => {
-  const city = isCityFrom.value ? cityFrom : cityTo
+  const city = iscity1.value ? city1 : city2
   city.city = temp
-  if (cityTo.city.City && cityFrom.city.City) {
-    bus.fetchRoutesByCitys(cityFrom.city.City, cityTo.city.City)
+  if (city2.city.City && city1.city.City) {
+    fetchData()
   }
 }
 
