@@ -2,7 +2,7 @@
   <!-- 選擇路線名稱 -->
   <div class="bg-secondary p-4 px-md-7 py-md-5 p-lg-4">
     <!-- 第一排 -->
-    <div class="row g-3 mb-3">
+    <div class="row g-1 mb-3">
       <div class="col-6">
         <KeyItem @click="router.push({ name: 'InterCitySearch2' })" white>
           <img :src="markerUrl" width="13" height="15.89" class="me-2" />
@@ -13,7 +13,7 @@
         <KeyItem @click="hideKeyboard()">手動輸入</KeyItem>
       </div>
     </div>
-    <div class="row row-cols-5 g-2">
+    <div class="row row-cols-5 g-1">
       <!-- 第二排 -->
       <div class="col">
         <KeyItem @click="handleKeyPress('A')">A</KeyItem>

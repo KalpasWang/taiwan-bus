@@ -1,7 +1,7 @@
 <template>
   <div class="bg-secondary p-4 px-md-7 py-md-5 p-lg-4">
     <!-- 選擇縣市 -->
-    <div class="row row-cols-5 g-2">
+    <div class="row row-cols-5 g-1">
       <div v-for="city in citys" :key="city.City" class="col">
         <KeyItem
           :class="{ active: city.City === selectedCity }"

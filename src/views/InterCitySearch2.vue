@@ -174,7 +174,7 @@ onUnmounted(() => {
     'keyboard';
   column-gap: 42px;
   @media screen and (min-width: 991px) {
-    grid-template-columns: 5fr 7fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       'header main'
