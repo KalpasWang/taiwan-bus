@@ -109,7 +109,7 @@ const clearMarkersAndRoute = () => {
   markers.length = 0
   map.value.eachLayer((layer) => {
     if (layer instanceof L.Marker || layer instanceof L.Polyline) {
-      console.log(layer)
+      // console.log(layer)
       map.value.removeLayer(layer)
     }
   })

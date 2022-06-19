@@ -43,99 +43,30 @@
     </div>
     <!-- 預估到站時間 -->
     <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div>
-    <div v-show="!mapShow" ref="stopsList" class="flex-grow-1 container">
+    <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
       <h3 v-if="state.pending" class="mt-5 text-center">
         <Loading />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
       </h3>
-      <div v-else class="position-relative overflow-hidden">
-        <!-- 使用套件取代 scrollbar -->
-        <perfect-scrollbar ref="ps">
-          <!-- 每60秒更新一次 -->
-          <p
-            v-if="timeAfterUpdate < 60"
-            class="me-4 pt-4 mb-0 text-end text-primary ls-1"
-          >
-            *於 {{ timeAfterUpdate }} 秒前更新
-          </p>
-          <p v-else class="me-4 pt-4 mb-0 text-end text-primary ls-1">
-            *更新中...
-            <Loading :width="25" class="d-inline-block" />
-          </p>
-          <!-- 所有站牌與公車預計抵達時間 -->
-          <ul class="list-unstyled">
-            <li
-              v-for="(item, i) in currentStops"
-              :key="i"
-              class="py-2 flex-between"
-            >
-              <!-- 顯示預估到站時間badge與站牌名稱 -->
-              <div class="d-flex justify-content-start align-items-center">
-                <span
-                  class="flex-center time-label"
-                  :class="[item.Border ? 'label-border' : '', item.BgColor]"
-                >
-                  <span
-                    :class="[
-                      item.Color,
-                      item.TimeLabel.length > 3 ? 'fs-8' : ''
-                    ]"
-                    >{{ item.TimeLabel }}</span
-                  >
-                </span>
-                <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
-                <router-link
-                  :to="{
-                    name: 'StationPage',
-                    params: {
-                      city: getCity(item.LocationCityCode),
-                      stationId: item.StationID
-                    }
-                  }"
-                  :class="item.LinkColor"
-                  class="text-decoration-none fs-7 ls-1 ms-2"
-                  >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
-                >
-              </div>
-              <div class="me-4 d-flex justify-content-end align-items-center">
-                <img
-                  v-if="item.accessible"
-                  :src="wheelchairUrl"
-                  alt="無障礙公車"
-                />
-                <span v-if="item.hasBus" class="plate">{{ item.plate }}</span>
-                <div
-                  v-if="item.hasBus && i > 0"
-                  class="station-badge active"
-                ></div>
-                <div
-                  v-else-if="item.hasBus && i === 0"
-                  class="station-badge active noafter"
-                ></div>
-                <div v-else-if="i > 0" class="station-badge"></div>
-                <div v-else class="station-badge noafter"></div>
-              </div>
-            </li>
-          </ul>
-        </perfect-scrollbar>
+      <div v-else>
+        <RealTimeArrivalInfo />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { computed, ref, watch, provide, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import logo from '@/components/logo.vue'
-import Loading from '@/components/loading.vue'
+import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
+import logo from '@/components/Logo.vue'
+import Loading from '@/components/Loading.vue'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import { getCity } from '@/composables/useUtilities'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
-import wheelchairUrl from '@/assets/wheelchair.svg'
 
 const props = defineProps({
   city: String,
@@ -145,13 +76,10 @@ const props = defineProps({
 const router = useRouter()
 
 const activeTab = ref('forward')
-const stopsList = ref(null)
-const ps = ref(null)
-const timeAfterUpdate = ref(0)
+// const stopsList = ref(null)
 const mapShow = ref(false)
 const mapHasShown = ref(false)
 const { state } = bus
-let timer = null
 
 // 取得目前要顯示的 stops of route
 const currentStops = computed(() => {
@@ -162,6 +90,13 @@ const currentStops = computed(() => {
     return state.backwardStopsList
   }
 })
+
+// 取得新 stops 狀態
+const fetchNewStops = async () => {
+  await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
+}
+
+provide('stops', { currentStops, fetchNewStops })
 
 const forwardLabel = computed(() => {
   const len = state.forwardStopsList.length
@@ -205,9 +140,6 @@ watch([mapShow, activeTab], (newVal) => {
 
 const setTab = (tabName) => {
   activeTab.value = tabName
-  nextTick(() => {
-    ps.value.$el.scrollTop = 0
-  })
 }
 
 const toggleMap = () => {
@@ -217,25 +149,6 @@ const toggleMap = () => {
 
 // fetch 公車站牌與預估到達時間
 bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-
-onMounted(() => {
-  // set scroll region height
-  const height = stopsList.value.getBoundingClientRect().height + 'px'
-  document.documentElement.style.setProperty('--h', height)
-
-  // 每隔60秒 refresh 一次
-  timer = setInterval(async () => {
-    if (timeAfterUpdate.value >= 60) {
-      await bus.fetchStopsAndBusArrivalTime(props.city, props.routeName)
-      timeAfterUpdate.value = 0
-    } else {
-      const v = timeAfterUpdate.value
-      timeAfterUpdate.value = v + 1
-    }
-  }, 1000)
-})
-
-onUnmounted(() => clearInterval(timer))
 </script>
 
 <style lang="scss" scoped>
