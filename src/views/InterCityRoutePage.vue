@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div><h1>建構中</h1></div>
+</template>
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'

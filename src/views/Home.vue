@@ -18,16 +18,7 @@
       <router-link
         :to="{ name: 'NearBy' }"
         role="button"
-        class="
-          d-flex
-          flex-column
-          w-100
-          h-100
-          rounded-circle
-          text-decoration-none
-          justify-content-center
-          align-items-center
-        "
+        class="d-flex flex-column w-100 h-100 rounded-circle text-decoration-none justify-content-center align-items-center"
       >
         <img :src="markerUrl" width="23.5" height="31.33" />
         <span class="link-light fs-5 lh-base">附近公車站</span>
@@ -40,16 +31,7 @@
       <router-link
         :to="{ name: 'CitySearch' }"
         role="button"
-        class="
-          d-flex
-          flex-column
-          w-100
-          h-100
-          rounded-circle
-          text-decoration-none
-          justify-content-center
-          align-items-center
-        "
+        class="d-flex flex-column w-100 h-100 rounded-circle text-decoration-none justify-content-center align-items-center"
       >
         <img :src="searchBlackUrl" width="22.6" />
         <span class="link-dark fs-5 lh-base">查詢公車</span>
@@ -62,16 +44,7 @@
       <router-link
         :to="{ name: 'InterCitySearch' }"
         role="button"
-        class="
-          d-flex
-          flex-column
-          w-100
-          h-100
-          rounded-circle
-          text-decoration-none
-          justify-content-center
-          align-items-center
-        "
+        class="d-flex flex-column w-100 h-100 rounded-circle text-decoration-none justify-content-center align-items-center"
       >
         <img :src="searchBlackUrl" width="22.6" />
         <span class="link-dark fs-5 lh-base">查詢客運</span>
@@ -83,7 +56,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import logoUrl from '@/assets/Logo.png'
+import logoUrl from '@/assets/logo.svg'
 import markerUrl from '@/assets/marker.svg'
 import searchBlackUrl from '@/assets/search-black.svg'
 
