@@ -10,27 +10,11 @@
         width="6"
       />
       <logo />
-      <img
-        @click="toggleMap()"
-        :src="mapIcon"
-        :class="{ 'map-active': mapShow }"
-        alt="地圖"
-        role="button"
-        width="23"
-      />
+      <slot></slot>
     </div>
     <div class="container">
+      <h2 class="h5 text-center mb-1">{{ routeName }}</h2>
       <div class="row">
-        <div
-          v-for="tab in tabs"
-          :key="tab.name"
-          @click="setTab(tab.name)"
-          class="col tab pb-3 text-center position-relative"
-          :class="{ active: activeTab === tab.name }"
-          role="button"
-        >
-          <span class="text-primary">往</span> {{ tab.label }}
-        </div>
         <div
           @click="setTab('forward')"
           class="col tab pb-3 text-center position-relative"
@@ -54,18 +38,38 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import logo from '@/components/logo.vue'
+import backIcon from '@/assets/back.svg'
 
 const props = defineProps({
-  tabs: Array,
-  currentIdx: Number
+  routeName: {
+    type: String,
+    default: ''
+  },
+  forwardLabel: {
+    type: String,
+    default: '去程'
+  },
+  backwardLabel: {
+    type: String,
+    default: '回程'
+  }
 })
-const emit = defineEmits(['active'])
+const emit = defineEmits(['setTab'])
 
-const activeTab = ref(tabs[currentIdx])
+const router = useRouter()
+const activeTab = ref('forward')
+
+const setTab = (tabName) => {
+  activeTab.value = tabName
+  emit('setTab', tabName)
+}
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/custom-variables';
+
 .tab {
   &::after {
     content: '';
