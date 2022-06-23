@@ -13,7 +13,7 @@
       <slot></slot>
     </div>
     <div class="container">
-      <h2 class="h5 text-center mb-1">{{ routeName }}</h2>
+      <h2 class="h4 text-center mb-1">{{ routeName }}</h2>
       <div class="row">
         <div
           @click="setTab('forward')"
@@ -56,14 +56,14 @@ const props = defineProps({
     default: '回程'
   }
 })
-const emit = defineEmits(['setTab'])
+const emit = defineEmits(['setDirection'])
 
 const router = useRouter()
 const activeTab = ref('forward')
 
-const setTab = (tabName) => {
-  activeTab.value = tabName
-  emit('setTab', tabName)
+const setTab = (direction) => {
+  activeTab.value = direction
+  emit('setDirection', direction)
 }
 </script>
 
@@ -81,6 +81,7 @@ const setTab = (tabName) => {
     border-radius: 50px;
     background: transparent;
     box-shadow: none;
+    transition: all 0.3s ease-in-out;
   }
 
   &.active::after {

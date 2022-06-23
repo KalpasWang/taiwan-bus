@@ -2,14 +2,14 @@
   <div class="bg-secondary vh-100 d-flex flex-column">
     <!-- Header -->
     <TabsHeader
-      @setTab="setCurrentStops()"
+      @setDirection="setCurrentStops"
       :routeName="props.routeName"
       :forwardLabel="forwardStopName"
       :backwardLabel="backwardStopName"
     >
       <img
         @click="toggleMap()"
-        :src="setMapIcon"
+        :src="getMapIcon"
         alt="地圖"
         role="button"
         width="23"
@@ -50,7 +50,11 @@ const activeTab = ref('forward')
 const mapShow = ref(false)
 const mapHasShown = ref(false)
 const { state } = bus
-let currentStops = state.forwardStopsList
+const currentStops = computed(() =>
+  activeTab.value === 'forward'
+    ? state.forwardStopsList
+    : state.backwardStopsList
+)
 
 // 取得新 stops 狀態
 const fetchNewStops = async () => {
@@ -59,6 +63,7 @@ const fetchNewStops = async () => {
 
 provide('stops', { currentStops, fetchNewStops })
 
+// 取得去程最後一站的名稱
 const forwardStopName = computed(() => {
   const len = state.forwardStopsList.length
   if (len === 0) {
@@ -67,6 +72,7 @@ const forwardStopName = computed(() => {
   return state.forwardStopsList[len - 1].StopName.Zh_tw
 })
 
+// 取得回程最後一站的名稱
 const backwardStopName = computed(() => {
   const len = state.backwardStopsList.length
   if (len === 0) {
@@ -97,13 +103,8 @@ watch([mapShow, activeTab], (newVal) => {
   }
 })
 
-const setMapIcon = computed(() => {
-  if (mapShow.value) {
-    return mapActiveIcon
-  } else {
-    return mapIcon
-  }
-})
+// 根據地圖開啟與否決定用哪一個圖示
+const getMapIcon = computed(() => (mapShow.value ? mapActiveIcon : mapIcon))
 
 const toggleMap = () => {
   const v = mapShow.value
@@ -111,11 +112,6 @@ const toggleMap = () => {
 }
 
 const setCurrentStops = (direction) => {
-  if (direction === 'forward') {
-    currentStops = state.forwardStopsList
-  } else {
-    currentStops = state.backStopsList
-  }
   activeTab.value = direction
 }
 
