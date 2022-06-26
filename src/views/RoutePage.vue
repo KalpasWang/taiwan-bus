@@ -2,7 +2,7 @@
   <div class="bg-secondary vh-100 d-flex flex-column">
     <!-- Header -->
     <TabsHeader
-      @setDirection="setCurrentStops"
+      @setDirection="setDirection"
       :routeName="props.routeName"
       :forwardLabel="forwardStopName"
       :backwardLabel="backwardStopName"
@@ -46,12 +46,12 @@ const props = defineProps({
   routeName: String
 })
 
-const activeTab = ref('forward')
+const direction = ref('forward')
 const mapShow = ref(false)
 const mapHasShown = ref(false)
 const { state } = bus
 const currentStops = computed(() =>
-  activeTab.value === 'forward'
+  direction.value === 'forward'
     ? state.forwardStopsList
     : state.backwardStopsList
 )
@@ -82,7 +82,7 @@ const backwardStopName = computed(() => {
 })
 
 // map切換與tab切換時決定要繪製的地圖
-watch([mapShow, activeTab], (newVal) => {
+watch([mapShow, direction], (newVal) => {
   const isMap = newVal[0]
   const tab = newVal[1]
   const stops =
@@ -111,8 +111,8 @@ const toggleMap = () => {
   mapShow.value = !v
 }
 
-const setCurrentStops = (direction) => {
-  activeTab.value = direction
+const setDirection = (newDirection) => {
+  direction.value = newDirection
 }
 
 // fetch 公車站牌與預估到達時間

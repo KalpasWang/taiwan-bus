@@ -73,7 +73,10 @@ const handleRoutesByRouteName = async (routeName) => {
   state.routesList = res.data
 }
 
-// 取得指定[路線名稱]的客運路線站序資料與客運預估到站資料
+/**
+ * 取得指定[路線名稱]的客運路線站序資料與客運預估到站資料
+ * @param {String} routeName
+ */
 const fetchStopsAndBusArrivalTime = async (routeName) => {
   try {
     state.error = null
@@ -110,14 +113,20 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
           EstimateTime: time.EstimateTime,
           TimeLabel: badge.text,
           Color: badge.color,
-          StopStatus: time.StopStatus
+          StopStatus: time.StopStatus,
+          BgColor: badge.bgColor,
+          Border: badge.border,
+          LinkColor: badge.linkColor
         })
         state.forwardStopsList.push(newStop)
       } else {
         const newStop = Object.assign(stop, {
           TimeLabel: '--',
           Color: 'bg-secondary',
-          StopStatus: 4
+          StopStatus: 4,
+          BgColor: 'bg-dark',
+          Border: false,
+          LinkColor: 'link-light'
         })
         state.forwardStopsList.push(newStop)
       }
@@ -132,14 +141,20 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
           EstimateTime: time.EstimateTime,
           TimeLabel: badge.text,
           Color: badge.color,
-          StopStatus: time.StopStatus
+          StopStatus: time.StopStatus,
+          BgColor: badge.bgColor,
+          Border: badge.border,
+          LinkColor: badge.linkColor
         })
         state.backwardStopsList.push(newStop)
       } else {
         const newStop = Object.assign(stop, {
           TimeLabel: '--',
           Color: 'bg-secondary',
-          StopStatus: 4
+          StopStatus: 4,
+          BgColor: 'bg-dark',
+          Border: false,
+          LinkColor: 'link-light'
         })
         state.backwardStopsList.push(newStop)
       }
@@ -205,6 +220,7 @@ export default {
   state: readonly(state),
   fetchRoutesByCitys,
   fetchRoutesByRouteName,
+  fetchStopsAndBusArrivalTime,
   fetchStation,
   fetchSchedule
 }

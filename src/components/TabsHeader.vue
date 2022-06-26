@@ -1,16 +1,23 @@
 <template>
   <!-- Header -->
   <div class="header-shadow bg-dark">
-    <div class="d-flex justify-content-between align-items-center px-3 py-4">
-      <img
-        @click="router.go(-1)"
-        :src="backIcon"
-        alt="回上一頁"
-        role="button"
-        width="6"
-      />
+    <div class="d-flex px-3 py-4">
+      <div class="flex-grow-1 w-100 d-flex align-items-center">
+        <img
+          @click="router.go(-1)"
+          :src="backIcon"
+          alt="回上一頁"
+          title="回上一頁"
+          role="button"
+          width="6"
+        />
+      </div>
       <logo />
-      <slot></slot>
+      <div
+        class="flex-grow-1 w-100 d-flex justify-content-end align-items-center"
+      >
+        <slot></slot>
+      </div>
     </div>
     <div class="container">
       <h2 class="h4 text-center mb-1">{{ routeName }}</h2>
