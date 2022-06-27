@@ -10,7 +10,7 @@
       <img
         @click="toggleFareInquiry()"
         :src="fareIcon"
-        class="pe-2"
+        class="pe-3"
         alt="票價查詢"
         title="票價查詢"
         role="button"
@@ -19,7 +19,7 @@
       <img
         @click="toggleTimeTable()"
         :src="timetableIcon"
-        class="pe-2"
+        class="pe-3"
         alt="時刻表"
         title="時刻表"
         role="button"

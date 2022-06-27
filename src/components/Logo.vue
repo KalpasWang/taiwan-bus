@@ -1,7 +1,12 @@
 <template>
-  <h1>
-    <router-link :to="{ name: 'Home' }" title="回首頁" class="hide-text">
-      <img :src="logoUrl" alt="回首頁" class="logo-header-size" />
+  <h1 class="m-0 lh-1 hide-text">
+    <router-link :to="{ name: 'Home' }" title="回首頁">
+      <img
+        :src="logoUrl"
+        title="回首頁"
+        alt="回首頁"
+        class="logo-header-size"
+      />
       Taiwan Bus
     </router-link>
   </h1>

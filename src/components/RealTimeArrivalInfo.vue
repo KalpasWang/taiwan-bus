@@ -21,7 +21,7 @@
             :class="[item.Border ? 'label-border' : '', item.BgColor]"
           >
             <span
-              :class="[item.Color, item.TimeLabel.length > 3 ? 'fs-8' : '']"
+              :class="[item.Color, item.TimeLabel.length > 4 ? 'fs-8' : '']"
               >{{ item.TimeLabel }}</span
             >
           </span>
@@ -36,7 +36,7 @@
             }"
             :class="item.LinkColor"
             class="text-decoration-none fs-7 ls-1 ms-2"
-            >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
+            >{{ item.StopName.Zh_tw }}</router-link
           >
         </div>
         <div class="me-4 d-flex justify-content-end align-items-center">

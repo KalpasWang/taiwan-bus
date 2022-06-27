@@ -30,10 +30,10 @@ export const getTimeBadgeAndColor = (timeObj) => {
         badge.text = '未發車'
         break
       case 2:
-        badge.text = '交管不停靠'
+        badge.text = '交管中'
         break
       case 3:
-        badge.text = '末班車已過'
+        badge.text = '末班過'
         break
       case 4:
         badge.text = '未營運'
@@ -44,7 +44,7 @@ export const getTimeBadgeAndColor = (timeObj) => {
     badge.border = false
   } else {
     const min = Math.floor(time / 60)
-    badge.text = `約${min}分`
+    badge.text = `${min} 分`
   }
   return badge
 }

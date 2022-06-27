@@ -46,7 +46,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import logo from '@/components/logo.vue'
+import logo from '@/components/Logo.vue'
 import backIcon from '@/assets/back.svg'
 
 const props = defineProps({

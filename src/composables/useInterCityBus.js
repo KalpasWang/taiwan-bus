@@ -92,7 +92,7 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
 
     // 清理 state
     state.routeName = res.data[0].RouteName.Zh_tw
-    state.routeID = res.data[0].RouteID
+    state.routeUID = res.data[0].RouteUID
     state.forwardStopsList = []
     state.backwardStopsList = []
 
@@ -123,7 +123,7 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
         const newStop = Object.assign(stop, {
           TimeLabel: '--',
           Color: 'bg-secondary',
-          StopStatus: 4,
+          StopStatus: 1,
           BgColor: 'bg-dark',
           Border: false,
           LinkColor: 'link-light'
@@ -151,7 +151,7 @@ const fetchStopsAndBusArrivalTime = async (routeName) => {
         const newStop = Object.assign(stop, {
           TimeLabel: '--',
           Color: 'bg-secondary',
-          StopStatus: 4,
+          StopStatus: 1,
           BgColor: 'bg-dark',
           Border: false,
           LinkColor: 'link-light'
