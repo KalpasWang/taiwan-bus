@@ -8,7 +8,7 @@
       :backwardLabel="backwardStopName"
     >
       <img
-        @click="toggleFareInquiry()"
+        @click="switchComponent('fare')"
         :src="fareIcon"
         class="pe-3"
         alt="票價查詢"
@@ -17,7 +17,7 @@
         height="23"
       />
       <img
-        @click="toggleTimeTable()"
+        @click="switchComponent('timetable')"
         :src="timetableIcon"
         class="pe-3"
         alt="時刻表"
@@ -27,7 +27,7 @@
       />
       <img
         @click="toggleMap()"
-        :src="getMapIcon"
+        :src="mapIcon"
         alt="地圖"
         title="地圖"
         role="button"
@@ -44,7 +44,13 @@
         {{ state.error }}
       </h3>
       <div v-else>
-        <RealTimeArrivalInfo />
+        <!-- <RealTimeArrivalInfo /> -->
+        <keep-alive>
+          <component
+            :is="components[cIndex]"
+            :routeName="props.routeName"
+          ></component>
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -54,11 +60,11 @@
 import { computed, ref, watch, nextTick, provide } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
 import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
+import TimeTable from '@/components/TimeTable.vue'
 import Loading from '@/components/Loading.vue'
 import bus from '@/composables/useInterCityBus'
 import map from '@/composables/useMap'
 import mapIcon from '@/assets/map.svg'
-import mapActiveIcon from '@/assets/map-active.svg'
 import timetableIcon from '@/assets/timetable.svg'
 import fareIcon from '@/assets/fare.svg'
 
@@ -67,6 +73,11 @@ const props = defineProps({
 })
 const { state } = bus
 const direction = ref('forward')
+const components = {
+  arrival: RealTimeArrivalInfo,
+  timetable: TimeTable
+}
+const cIndex = ref('arrival')
 const mapShow = ref(false)
 const mapHasShown = ref(false)
 const currentStops = computed(() =>
@@ -122,8 +133,11 @@ watch([mapShow, direction], (newVal) => {
   }
 })
 
-// 根據地圖開啟與否決定用哪一個圖示
-const getMapIcon = computed(() => (mapShow.value ? mapActiveIcon : mapIcon))
+// 動態切換元件，在即時公車路線、時刻表、票價查詢與地圖
+// 等元件中切換
+const switchComponent = (index) => {
+  cIndex.value = index
+}
 
 const toggleMap = () => {
   const v = mapShow.value
