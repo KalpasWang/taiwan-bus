@@ -16,7 +16,7 @@ export const getTimeBadgeAndColor = (timeObj) => {
     badge.color = 'text-dark'
     badge.linkColor = 'link-primary'
   } else if (time <= 90) {
-    badge.text = '即將到站'
+    badge.text = '進站中'
     badge.bgColor = 'bg-primary'
     badge.color = 'text-dark'
     badge.linkColor = 'link-primary'

@@ -35,21 +35,29 @@
       />
     </TabsHeader>
     <!-- 預估到站時間 -->
-    <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div>
-    <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
-      <h3 v-if="state.pending" class="mt-5 text-center">
+    <!-- <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div> -->
+    <div class="flex-grow-1 container overflow-auto">
+      <!-- <h3 v-if="state.pending" class="mt-5 text-center">
         <Loading />
       </h3>
       <h3 v-else-if="state.error" class="mt-5 text-center text-light">
         {{ state.error }}
+      </h3> -->
+      <h3 v-if="error" class="mt-5 text-center text-light">
+        {{ error }}
       </h3>
       <div v-else>
-        <!-- <RealTimeArrivalInfo /> -->
         <keep-alive>
-          <component
-            :is="components[cIndex]"
-            :routeName="props.routeName"
-          ></component>
+          <Suspense>
+            <component
+              :is="children[cIndex]"
+              v-bind="childrenProps"
+            ></component>
+
+            <template #fallback>
+              <Loading class="mt-4" />
+            </template>
+          </Suspense>
         </keep-alive>
       </div>
     </div>
@@ -57,7 +65,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, nextTick, provide } from 'vue'
+import { computed, ref, watch, nextTick, provide, onErrorCaptured } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
 import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
 import TimeTable from '@/components/TimeTable.vue'
@@ -73,43 +81,24 @@ const props = defineProps({
 })
 const { state } = bus
 const direction = ref('forward')
-const components = {
+const error = ref(null)
+const children = {
   arrival: RealTimeArrivalInfo,
   timetable: TimeTable
 }
+const childrenProps = computed(() => {
+  return {
+    ...(cIndex.value === 'arrival' && { direction: direction.value }),
+    routeName: props.routeName
+  }
+})
 const cIndex = ref('arrival')
 const mapShow = ref(false)
 const mapHasShown = ref(false)
-const currentStops = computed(() =>
-  direction.value === 'forward'
-    ? state.forwardStopsList
-    : state.backwardStopsList
-)
+const forwardStopName = ref('去程')
+const backwardStopName = ref('回程')
 
-// 取得新 stops 狀態
-const fetchNewStops = async () => {
-  await bus.fetchStopsAndBusArrivalTime(props.routeName)
-}
-
-provide('stops', { currentStops, fetchNewStops })
-
-// 取得去程最後一站的名稱
-const forwardStopName = computed(() => {
-  const len = state.forwardStopsList.length
-  if (len === 0) {
-    return '去程'
-  }
-  return state.forwardStopsList[len - 1].StopName.Zh_tw
-})
-
-// 取得回程最後一站的名稱
-const backwardStopName = computed(() => {
-  const len = state.backwardStopsList.length
-  if (len === 0) {
-    return '返程'
-  }
-  return state.backwardStopsList[len - 1].StopName.Zh_tw
-})
+provide('stopsLabel', { forwardStopName, backwardStopName })
 
 // map切換與tab切換時決定要繪製的地圖
 watch([mapShow, direction], (newVal) => {
@@ -148,6 +137,10 @@ const setDirection = (newDirection) => {
   direction.value = newDirection
 }
 
-// bus.fetchSchedule(props.routeName)
-bus.fetchStopsAndBusArrivalTime(props.routeName)
+// bus.fetchStopsAndBusArrivalTime(props.routeName)
+
+onErrorCaptured((e) => {
+  console.log(e)
+  error.value = e.message
+})
 </script>

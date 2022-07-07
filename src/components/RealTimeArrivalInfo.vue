@@ -56,20 +56,53 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted, onUnmounted } from 'vue'
+import { ref, inject, computed, onMounted, onUnmounted } from 'vue'
+import bus from '@/composables/useInterCityBus'
 import Loading from '@/components/loading.vue'
 import { getCity } from '@/composables/useUtilities'
 import wheelchairIcon from '@/assets/wheelchair.svg'
 
-const { currentStops, fetchNewStops } = inject('stops')
+const props = defineProps({
+  direction: {
+    type: String,
+    required: true,
+    default: 'forward'
+  },
+  routeName: {
+    type: String,
+    required: true,
+    default: ''
+  }
+})
+
+const { forwardStopName, backwardStopName } = inject('stopsLabel')
+const { state } = bus
 let timer = null
 const timeAfterUpdate = ref(0)
+
+const setStopName = (stopsList, stopName) => {
+  const len = stopsList.length
+  if (len !== 0) {
+    stopName.value = stopsList[len - 1].StopName.Zh_tw
+  }
+}
+
+await bus.fetchStopsAndBusArrivalTime(props.routeName)
+
+const currentStops = computed(() => {
+  return props.direction === 'forward'
+    ? state.forwardStopsList
+    : state.backwardStopsList
+})
+
+setStopName(state.forwardStopsList, forwardStopName)
+setStopName(state.backwardStopsList, backwardStopName)
 
 onMounted(() => {
   // 每隔60秒 refresh 一次
   timer = setInterval(async () => {
     if (timeAfterUpdate.value >= 60) {
-      await fetchNewStops()
+      await bus.fetchStopsAndBusArrivalTime(props.routeName)
       timeAfterUpdate.value = 0
     } else {
       const v = timeAfterUpdate.value

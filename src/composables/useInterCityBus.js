@@ -19,6 +19,20 @@ const state = reactive({
   error: null
 })
 
+const prepareFetching = () => {
+  state.pending = true
+  state.error = null
+}
+
+const finishFetching = () => {
+  state.pending = false
+}
+
+const handleFetchError = (error) => {
+  state.error = error.message
+  state.pending = false
+}
+
 /**
  * fetch 函式
  */
@@ -189,12 +203,18 @@ const handleStation = async (stationId) => {
 }
 
 // 取得指定[路線名稱]的公路客運路線班表資料
-const handleSchedule = async (routeName) => {
-  const url = `Schedule/InterCity/${routeName}`
-  const res = await api.get(url)
-  state.routeName = routeName
-  state.schedule = res.data
-  console.log(state.schedule)
+const fetchTimeTable = async (routeName) => {
+  try {
+    prepareFetching()
+    const url = `Schedule/InterCity/${routeName}`
+    const res = await api.get(url)
+    state.routeName = routeName
+    state.schedule = res.data
+    console.log('fetch ok')
+    finishFetching()
+  } catch (error) {
+    handleFetchError(error)
+  }
 }
 
 const tryCatchFactory = (handler) => {
@@ -214,7 +234,6 @@ const tryCatchFactory = (handler) => {
 const fetchRoutesByCitys = tryCatchFactory(handleRoutesByCitys)
 const fetchRoutesByRouteName = tryCatchFactory(handleRoutesByRouteName)
 const fetchStation = tryCatchFactory(handleStation)
-const fetchSchedule = tryCatchFactory(handleSchedule)
 
 export default {
   state: readonly(state),
@@ -222,5 +241,5 @@ export default {
   fetchRoutesByRouteName,
   fetchStopsAndBusArrivalTime,
   fetchStation,
-  fetchSchedule
+  fetchTimeTable
 }

@@ -1,28 +1,31 @@
 <template>
   <div>
-    <h3 v-if="state.pending" class="mt-5 text-center">
-      <Loading />
-    </h3>
-    <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-      {{ state.error }}
-    </h3>
-    <ul v-else class="list-unstyled">
-      <!-- <li v-for="item in items" :key="index"></li> -->
+    <ul class="list-unstyled">
+      <li>Hello</li>
     </ul>
   </div>
 </template>
+
 <script setup>
 import { onMounted, ref } from 'vue'
-import Loading from '@/components/loading.vue'
 import bus from '@/composables/useInterCityBus'
+import { api } from '@/composables/api'
 
 const props = defineProps({
   routeName: String
 })
-const { state } = bus
+// const { state } = bus
+const schedule = ref(null)
 
-onMounted(() => {
-  bus.fetchSchedule(props.routeName)
-})
+// 取得指定[路線名稱]的公路客運路線班表資料
+const fetchBusSchedule = async (routeName) => {
+  const url = `Schedule/InterCity/${routeName}`
+  const res = await api.get(url)
+  schedule.value = res.data
+  console.log(res.data)
+}
+
+await fetchBusSchedule(props.routeName)
 </script>
+
 <style lang=""></style>
