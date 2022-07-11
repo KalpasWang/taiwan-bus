@@ -87,17 +87,6 @@ export const parseShape = (shapeStr) => {
   })
 }
 
-export const filterRouteName = (routeName, list) => {
-  if (!Array.isArray(list)) {
-    console.error('list is not an array')
-    console.log(list)
-    return
-  }
-  return list.filter((item) => {
-    return item.RouteName.Zh_tw === routeName
-  })
-}
-
 export const delay = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
