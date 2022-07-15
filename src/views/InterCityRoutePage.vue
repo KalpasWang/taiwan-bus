@@ -131,8 +131,6 @@ const setDirection = (newDirection) => {
   direction.value = newDirection
 }
 
-// bus.fetchStopsAndBusArrivalTime(props.routeName)
-
 onErrorCaptured((e) => {
   console.log(e)
   error.value = e.message
