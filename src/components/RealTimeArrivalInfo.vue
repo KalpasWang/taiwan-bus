@@ -1,5 +1,5 @@
 <template>
-  <div class="position-relative">
+  <div class="h-100">
     <!-- 每60秒更新一次 -->
     <p
       v-if="timeAfterUpdate < 60"
@@ -21,7 +21,10 @@
             :class="[item.Border ? 'label-border' : '', item.BgColor]"
           >
             <span
-              :class="[item.Color, item.TimeLabel.length > 4 ? 'fs-8' : '']"
+              :class="[
+                item.Color,
+                item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
+              ]"
               >{{ item.TimeLabel }}</span
             >
           </span>
@@ -40,11 +43,11 @@
           >
         </div>
         <div class="me-4 d-flex justify-content-end align-items-center">
-          <img v-if="item.accessible" :src="wheelchairIcon" alt="無障礙公車" />
-          <span v-if="item.hasBus" class="plate">{{ item.plate }}</span>
-          <div v-if="item.hasBus && i > 0" class="station-badge active"></div>
+          <img v-if="item.Accessible" :src="wheelchairIcon" alt="無障礙公車" />
+          <span v-if="item.HasBus" class="plate">{{ item.PlateNumb }}</span>
+          <div v-if="item.HasBus && i > 0" class="station-badge active"></div>
           <div
-            v-else-if="item.hasBus && i === 0"
+            v-else-if="item.HasBus && i === 0"
             class="station-badge active noafter"
           ></div>
           <div v-else-if="i > 0" class="station-badge"></div>
@@ -57,9 +60,9 @@
 
 <script setup>
 import { ref, inject, computed, onMounted, onUnmounted } from 'vue'
-import bus from '@/composables/useInterCityBus'
+import { useArrivalsInfo } from '@/composables/bus'
 import Loading from '@/components/loading.vue'
-import { getCity } from '@/composables/useUtilities'
+import { getCity, addCustomDataToStops } from '@/composables/useUtilities'
 import wheelchairIcon from '@/assets/wheelchair.svg'
 
 const props = defineProps({
@@ -72,13 +75,16 @@ const props = defineProps({
     type: String,
     required: true,
     default: ''
+  },
+  city: {
+    type: String,
+    required: false
   }
 })
 
 const { forwardStopName, backwardStopName } = inject('stopsLabel')
-const { state } = bus
-let timer = null
 const timeAfterUpdate = ref(0)
+let timer = null
 
 const setStopName = (stopsList, stopName) => {
   const len = stopsList.length
@@ -87,22 +93,32 @@ const setStopName = (stopsList, stopName) => {
   }
 }
 
-await bus.fetchStopsAndBusArrivalTime(props.routeName)
+const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(
+  props.routeName,
+  props.city
+)
+await fetchNewArrivalsInfo()
+
+addCustomDataToStops(arrivalsInfo.forwards)
+addCustomDataToStops(arrivalsInfo.backwards)
 
 const currentStops = computed(() => {
   return props.direction === 'forward'
-    ? state.forwardStopsList
-    : state.backwardStopsList
+    ? arrivalsInfo.forwards
+    : arrivalsInfo.backwards
 })
 
-setStopName(state.forwardStopsList, forwardStopName)
-setStopName(state.backwardStopsList, backwardStopName)
+// 設定好頭尾站牌名稱
+setStopName(arrivalsInfo.forwards, forwardStopName)
+setStopName(arrivalsInfo.backwards, backwardStopName)
 
 onMounted(() => {
   // 每隔60秒 refresh 一次
   timer = setInterval(async () => {
     if (timeAfterUpdate.value >= 60) {
-      await bus.fetchStopsAndBusArrivalTime(props.routeName)
+      await fetchNewArrivalsInfo()
+      addCustomDataToStops(arrivalsInfo.forwards)
+      addCustomDataToStops(arrivalsInfo.backwards)
       timeAfterUpdate.value = 0
     } else {
       const v = timeAfterUpdate.value

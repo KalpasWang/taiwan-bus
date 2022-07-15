@@ -1,6 +1,6 @@
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import { api } from './api'
-import { filterRouteName } from './useUtilities'
+// import { filterRouteName } from './useUtilities'
 
 /**
  * 使用可以取得公車預估到站資料的函式
@@ -27,23 +27,26 @@ function useArrivalsInfo(routeName, city) {
     // 取得預估時間資料
     const res2 = await api.get(`${url2}/${routeName}`)
     // 過濾路線名稱不一致的資料
-    const realData = filterRouteName(routeName, res.data)
-    const realData2 = filterRouteName(routeName, res2.data)
-    if (!realData && !realData[0] && !realData2 && !realData2[0]) {
+    const stopsData = filterRouteName(routeName, res.data)
+    const timeData = filterRouteName(routeName, res2.data)
+    if (!stopsData && !stopsData[0] && !timeData && !timeData[0]) {
       return
     }
     // cache 所需的資料
-    const { stopsForward, stopsBackward } = filterStopsByDirection(realData)
-    const { forwards: timeForward, backwards: timeBackward } =
-      filterDirection(realData2)
+    const { stopsForward, stopsBackward } = filterStopsByDirection(stopsData)
+    const { forwards, backwards } = filterDirection(timeData)
     // 對每一個站牌做處理
     arrivalsInfo.forwards = stopsForward.map((stop) => {
-      const newStop = timeForward.find((item) => item.StopUID === stop.StopUID)
-      stop.EstimateTime = newStop.EstimateTime
+      const timeInfo = forwards.find((item) => item.StopUID === stop.StopUID)
+      stop.EstimateTime = timeInfo.EstimateTime
+      stop.StopStatus = timeInfo.StopStatus
+      return stop
     })
     arrivalsInfo.backwards = stopsBackward.map((stop) => {
-      const newStop = timeBackward.find((item) => item.StopUID === stop.StopUID)
-      stop.EstimateTime = newStop.EstimateTime
+      const timeInfo = backwards.find((item) => item.StopUID === stop.StopUID)
+      stop.EstimateTime = timeInfo.EstimateTime
+      stop.StopStatus = timeInfo.StopStatus
+      return stop
     })
   }
 
@@ -57,26 +60,27 @@ function useArrivalsInfo(routeName, city) {
     // 取得路線上的所有行駛中公車
     const res = await api.get(`${url}/${routeName}`)
     // 過濾路線名稱不一致的資料
-    const realData = filterRouteName(routeName, res.data)
-    if (!realData && !realData[0]) {
+    const busData = filterRouteName(routeName, res.data)
+    if (!busData && !busData[0]) {
       return
     }
-    const { forwards, backwards } = filterDirection(realData)
-    arrivalsInfo.forwards.forEach((stop) => {
-      addBusInfoToStop(stop, forwards)
+    const { forwards, backwards } = filterDirection(busData)
+    // console.log(busData)
+    forwards.forEach((bus) => {
+      addBusInfoToStop(bus, arrivalsInfo.forwards)
     })
-    arrivalsInfo.backwards.forEach((stop) => {
-      addBusInfoToStop(stop, backwards)
+    backwards.forEach((bus) => {
+      addBusInfoToStop(bus, arrivalsInfo.backwards)
     })
   }
 
-  const addBusInfoToStop = async (stop, busList) => {
-    const bus = busList.find((item) => item.StopUID === stop.StopUID)
-    if (bus) {
-      const accessible = await fetchBusType(bus.PlateNumb, city)
-      stop.hasBus = true
-      stop.plate = bus.PlateNumb
-      stop.accessible = accessible
+  const addBusInfoToStop = async (bus, stopsList) => {
+    // console.log(bus, stopsList)
+    const stop = stopsList.find((item) => item.StopUID === bus.StopUID)
+    if (stop) {
+      stop.HasBus = true
+      stop.PlateNumb = bus.PlateNumb
+      stop.Accessible = await fetchBusType(bus.PlateNumb, city)
     }
   }
 
@@ -106,34 +110,6 @@ function useArrivalsInfo(routeName, city) {
   return { arrivalsInfo, fetchNewArrivalsInfo }
 }
 
-// 每個站牌物件加入方便渲染用的屬性
-function addCustomDataToStop(arrivalData, stop) {
-  const time = arrivalData.find((item) => item.StopUID === stop.StopUID)
-  let newStop
-  if (time) {
-    const badge = getTimeBadgeAndColor(time)
-    newStop = Object.assign(stop, {
-      EstimateTime: time.EstimateTime,
-      TimeLabel: badge.text,
-      Color: badge.color,
-      BgColor: badge.bgColor,
-      StopStatus: time.StopStatus,
-      Border: badge.border,
-      LinkColor: badge.linkColor
-    })
-  } else {
-    newStop = Object.assign(stop, {
-      TimeLabel: '--',
-      Color: 'text-warning',
-      BgColor: 'bg-dark',
-      StopStatus: 1,
-      Border: false,
-      LinkColor: 'link-light'
-    })
-  }
-  return newStop
-}
-
 // 過濾掉不一致的 routeName
 function filterRouteName(routeName, list) {
   if (!Array.isArray(list)) {
@@ -155,8 +131,8 @@ const filterStopsByDirection = (arr) => {
 
 // 取得同方向的資料
 const filterDirection = (arr) => {
-  const forwards = arr.find((item) => item.Direction === 0)
-  const backwards = arr.find((item) => item.Direction === 1)
+  const forwards = arr.filter((item) => item.Direction === 0)
+  const backwards = arr.filter((item) => item.Direction === 1)
   return { forwards, backwards }
 }
 

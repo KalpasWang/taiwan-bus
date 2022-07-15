@@ -49,6 +49,75 @@ export const getTimeBadgeAndColor = (timeObj) => {
   return badge
 }
 
+function setLabelAndColor(stop) {
+  let settings = {
+    TimeLabel: '--',
+    Color: 'text-primary',
+    BgColor: 'bg-dark',
+    Border: true,
+    LinkColor: 'link-light'
+  }
+  if (typeof stop.EstimateTime !== 'number') {
+    switch (stop.StopStatus) {
+      case 1:
+        settings.TimeLabel = '未發車'
+        break
+      case 2:
+        settings.TimeLabel = '交管中'
+        break
+      case 3:
+        settings.TimeLabel = '末班過'
+        break
+      case 4:
+        settings.TimeLabel = '未營運'
+        break
+      default:
+        break
+    }
+    settings.BgColor = 'bg-dark'
+    settings.Color = 'text-warning'
+    settings.Border = false
+  } else if (stop.EstimateTime < 60) {
+    settings.TimeLabel = '進站中'
+    settings.BgColor = 'bg-primary'
+    settings.Color = 'text-dark'
+    settings.LinkColor = 'link-primary'
+  } else {
+    const time = Math.floor(stop.EstimateTime / 60)
+    settings.TimeLabel = `${time} 分`
+  }
+  stop = Object.assign(stop, settings)
+}
+
+// 每個站牌物件加入方便渲染用的屬性
+export function addCustomDataToStops(stopsList) {
+  stopsList.forEach((stop) => {
+    setLabelAndColor(stop)
+  })
+  // if (time) {
+  //   const badge = getTimeBadgeAndColor(time)
+  //   newStop = Object.assign(stop, {
+  //     EstimateTime: time.EstimateTime,
+  //     TimeLabel: badge.text,
+  //     Color: badge.color,
+  //     BgColor: badge.bgColor,
+  //     StopStatus: time.StopStatus,
+  //     Border: badge.border,
+  //     LinkColor: badge.linkColor
+  //   })
+  // } else {
+  //   newStop = Object.assign(stop, {
+  //     TimeLabel: '--',
+  //     Color: 'text-warning',
+  //     BgColor: 'bg-dark',
+  //     StopStatus: 1,
+  //     Border: false,
+  //     LinkColor: 'link-light'
+  //   })
+  // }
+  // return newStop
+}
+
 export const getCity = (code) => {
   const city = citys.find((item) => item.CityCode === code)
   return city ? city.City : 'intercity'
@@ -84,6 +153,18 @@ export const parseShape = (shapeStr) => {
   return latlngList.map((el, i) => {
     const [lng, lat] = el.split(' ')
     return [parseFloat(lat), parseFloat(lng)]
+  })
+}
+
+// 過濾掉不一致的 routeName
+export function filterRouteName(routeName, list) {
+  if (!Array.isArray(list)) {
+    console.error('list 不是陣列')
+    console.log(list)
+    return
+  }
+  return list.filter((item) => {
+    return item.RouteName.Zh_tw === routeName
   })
 }
 

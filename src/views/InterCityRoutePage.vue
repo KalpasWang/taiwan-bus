@@ -37,16 +37,10 @@
     <!-- 預估到站時間 -->
     <!-- <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div> -->
     <div class="flex-grow-1 container overflow-auto">
-      <!-- <h3 v-if="state.pending" class="mt-5 text-center">
-        <Loading />
-      </h3>
-      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-        {{ state.error }}
-      </h3> -->
       <h3 v-if="error" class="mt-5 text-center text-light">
         {{ error }}
       </h3>
-      <div v-else>
+      <div v-else class="h-100">
         <keep-alive>
           <Suspense>
             <component
