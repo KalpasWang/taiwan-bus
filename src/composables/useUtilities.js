@@ -168,6 +168,20 @@ export function filterRouteName(routeName, list) {
   })
 }
 
+// 取得同方向的站牌資料
+export const filterStopsByDirection = (arr) => {
+  const stopsForward = arr.find((item) => item.Direction === 0).Stops
+  const stopsBackward = arr.find((item) => item.Direction === 1).Stops
+  return { stopsForward, stopsBackward }
+}
+
+// 取得同方向的資料
+export const filterDirection = (arr) => {
+  const forwards = arr.filter((item) => item.Direction === 0)
+  const backwards = arr.filter((item) => item.Direction === 1)
+  return { forwards, backwards }
+}
+
 export const delay = () => {
   return new Promise((resolve) => {
     setTimeout(() => {

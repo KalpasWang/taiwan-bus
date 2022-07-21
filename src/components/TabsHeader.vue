@@ -1,18 +1,18 @@
 <template>
   <!-- Header -->
   <div class="header-shadow bg-dark">
-    <div class="d-flex px-3 py-4">
+    <div class="d-flex px-3 py-4 container">
       <div class="flex-grow-1 w-100 d-flex align-items-center">
         <img
-          @click="router.go(-1)"
+          @click="handleBack"
           :src="backIcon"
           alt="回上一頁"
           title="回上一頁"
           role="button"
-          width="6"
+          width="23"
         />
       </div>
-      <logo />
+      <Logo />
       <div
         class="flex-grow-1 w-100 d-flex justify-content-end align-items-center"
       >
@@ -46,24 +46,32 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import logo from '@/components/Logo.vue'
+import Logo from '@/components/Logo.vue'
 import backIcon from '@/assets/back.svg'
 
 const props = defineProps({
   routeName: {
     type: String,
+    required: true,
     default: ''
   },
   forwardLabel: {
     type: String,
+    required: true,
     default: '去程'
   },
   backwardLabel: {
     type: String,
+    required: true,
     default: '回程'
+  },
+  isSubview: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 })
-const emit = defineEmits(['setDirection'])
+const emit = defineEmits(['setDirection', 'back'])
 
 const router = useRouter()
 const activeTab = ref('forward')
@@ -71,6 +79,14 @@ const activeTab = ref('forward')
 const setTab = (direction) => {
   activeTab.value = direction
   emit('setDirection', direction)
+}
+
+const handleBack = () => {
+  if (props.isSubview) {
+    emit('back')
+  } else {
+    router.go(-1)
+  }
 }
 </script>
 
