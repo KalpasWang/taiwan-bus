@@ -2,7 +2,7 @@ import { ref, watch } from 'vue'
 import L from 'leaflet'
 import { busIcon } from './constant'
 
-const useRouteMap = (element, state) => {
+const useRouteMap = (element) => {
   const map = ref(null)
   const isMapReady = ref(false)
   const markers = []
@@ -25,18 +25,12 @@ const useRouteMap = (element, state) => {
       ).addTo(map.value)
       // 圖資讀取完成則 resolve
       layers.on('load', () => {
-        isMapReady.value = true
-        updateRouteMap(state.value)
-        watch(state, (value) => {
-          console.log(value)
-          updateRouteMap(value)
-        })
         resolve()
       })
     })
   }
 
-  const updateRouteMap = (state) => {
+  const renderRouteMap = (state) => {
     let latlngList
     const { stops, busList, shape } = state
     if (!shape) {
@@ -48,11 +42,15 @@ const useRouteMap = (element, state) => {
     } else {
       latlngList = shape
     }
+    // console.log('update')
     clearMarkersAndRoute()
     stops.forEach((el, i) => addStopMarker(el, i))
     busList.forEach((el) => addBusMarker(el))
     routeLine = L.polyline(latlngList, { color: '#fcd42c' }).addTo(map.value)
-    map.value.flyToBounds(routeLine.getBounds())
+    if (!isMapReady.value) {
+      isMapReady.value = true
+      map.value.flyToBounds(routeLine.getBounds())
+    }
   }
 
   const clearMarkersAndRoute = () => {
@@ -96,7 +94,7 @@ const useRouteMap = (element, state) => {
     markers.push(marker)
   }
 
-  return { initMap, isMapReady }
+  return { initMap, isMapReady, renderRouteMap }
 }
 
 export default useRouteMap

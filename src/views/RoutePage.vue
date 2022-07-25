@@ -19,7 +19,8 @@
         width="23"
       />
     </TabsHeader>
-    <!-- 預估到站時間 -->
+    <!-- Main View -->
+    <UpdateTimer class="my-3 me-6" />
     <div class="flex-grow-1 overflow-auto">
       <h3 v-if="error" class="mt-5 text-center">
         {{ error }}
@@ -47,6 +48,7 @@
 <script setup>
 import { ref, provide, onErrorCaptured, computed } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
+import UpdateTimer from '@/components/UpdateTimer.vue'
 import RouteMap from '@/components/RouteMap.vue'
 import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
 import Loading from '@/components/Loading.vue'

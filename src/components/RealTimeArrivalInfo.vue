@@ -1,16 +1,5 @@
 <template>
   <div class="h-100">
-    <!-- 每60秒更新一次 -->
-    <p
-      v-if="timeAfterUpdate < 60"
-      class="me-4 pt-4 mb-0 text-end text-primary ls-1"
-    >
-      *於 {{ timeAfterUpdate }} 秒前更新
-    </p>
-    <p v-else class="me-4 pt-4 mb-0 text-end text-primary ls-1">
-      *更新中...
-      <Loading :width="25" class="d-inline-block" />
-    </p>
     <!-- 所有站牌與公車預計抵達時間 -->
     <ul class="list-unstyled">
       <li v-for="(item, i) in currentStops" :key="i" class="py-2 flex-between">
@@ -59,9 +48,9 @@
 </template>
 
 <script setup>
-import { ref, inject, computed, onMounted, onUnmounted } from 'vue'
+import { inject, computed, onUnmounted } from 'vue'
+import useEventBus from '@/composables/useEventBus'
 import { useArrivalsInfo } from '@/composables/bus'
-import Loading from '@/components/loading.vue'
 import { getCity, addCustomDataToStops } from '@/composables/useUtilities'
 import wheelchairIcon from '@/assets/wheelchair.svg'
 
@@ -83,24 +72,11 @@ const props = defineProps({
 })
 
 const { forwardStopName, backwardStopName } = inject('stopsLabel')
-const timeAfterUpdate = ref(0)
-let timer = null
-
-const setStopName = (stopsList, stopName) => {
-  const len = stopsList.length
-  if (len !== 0) {
-    stopName.value = stopsList[len - 1].StopName.Zh_tw
-  }
-}
-
+const bus = useEventBus('timer')
 const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(
   props.routeName,
   props.city
 )
-await fetchNewArrivalsInfo()
-
-addCustomDataToStops(arrivalsInfo.forwards)
-addCustomDataToStops(arrivalsInfo.backwards)
 
 const currentStops = computed(() => {
   return props.direction === 'forward'
@@ -109,25 +85,27 @@ const currentStops = computed(() => {
 })
 
 // 設定好頭尾站牌名稱
+function setStopName(stopsList, stopName) {
+  const len = stopsList.length
+  if (len !== 0) {
+    stopName.value = stopsList[len - 1].StopName.Zh_tw
+  }
+}
+
+async function updateInfo() {
+  await fetchNewArrivalsInfo()
+  addCustomDataToStops(arrivalsInfo.forwards)
+  addCustomDataToStops(arrivalsInfo.backwards)
+}
+
+bus.on(updateInfo)
+await updateInfo()
 setStopName(arrivalsInfo.forwards, forwardStopName)
 setStopName(arrivalsInfo.backwards, backwardStopName)
 
-onMounted(() => {
-  // 每隔60秒 refresh 一次
-  timer = setInterval(async () => {
-    if (timeAfterUpdate.value >= 60) {
-      await fetchNewArrivalsInfo()
-      addCustomDataToStops(arrivalsInfo.forwards)
-      addCustomDataToStops(arrivalsInfo.backwards)
-      timeAfterUpdate.value = 0
-    } else {
-      const v = timeAfterUpdate.value
-      timeAfterUpdate.value = v + 1
-    }
-  }, 1000)
+onUnmounted(() => {
+  bus.off(updateInfo)
 })
-
-onUnmounted(() => clearInterval(timer))
 </script>
 
 <style lang="scss">
