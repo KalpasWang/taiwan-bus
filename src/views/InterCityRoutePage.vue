@@ -82,7 +82,7 @@ const children = {
 }
 const childrenProps = computed(() => {
   return {
-    ...(cIndex.value === 'arrival' && { direction: direction.value }),
+    direction: direction.value,
     routeName: props.routeName
   }
 })
