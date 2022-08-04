@@ -5,6 +5,8 @@ import { filterRouteName, filterDirection } from './useUtilities'
 
 function useSchedule(routeName, city) {
   const schedule = ref({})
+  const forwardTime = ref([])
+  const backwardTime = ref([])
 
   // 取得指定[路線名稱]的公路客運路線班表資料
   const fetchBusSchedule = async () => {
@@ -17,10 +19,11 @@ function useSchedule(routeName, city) {
     schedule.value = filterRouteName(routeName, res.data)
   }
 
-  function getDepartureTimeByDate(date) {
+  const getDepartureTimeByDate = (date) => {
     if (!isValid(date) || isPast(date)) return null
     // 取得此日期為星期幾，如 Monday, Tuesday...
     const dayName = format(date, 'EEEE')
+    // 過濾出去程與返程的班表
     const { forwards, backwards } = filterDirection(schedule.value)
     // 撈出資料中每筆 Depature time
     const result = [forwards, backwards].map((scheduleData) => {
@@ -44,10 +47,18 @@ function useSchedule(routeName, city) {
       })
     })
     // 最終資料會是包含去程與返程發車時間的陣列
-    return result
+    forwardTime.value = result[0]
+    backwardTime.value = result[1]
+    console.log(result)
   }
 
-  return { schedule, fetchBusSchedule, getDepartureTimeByDate }
+  return {
+    schedule,
+    forwardTime,
+    backwardTime,
+    fetchBusSchedule,
+    getDepartureTimeByDate
+  }
 }
 
 export default useSchedule
