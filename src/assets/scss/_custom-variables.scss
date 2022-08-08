@@ -14,10 +14,9 @@ $body-color: $light;
 // font family
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
 
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Noto Sans TC',
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans',
-  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-  'Noto Color Emoji';
+$font-family-sans-serif: Roboto, 'Noto Sans TC', 'Segoe UI', 'Helvetica Neue',
+  Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
 // spacing
 $spacer: 1rem;
@@ -97,6 +96,9 @@ $input-btn-padding-x-lg: 1rem !default;
 
 // Grid
 $grid-columns: 10;
+
+// Container Padding
+$container-padding-x: 1rem;
 
 // Buttons
 $input-btn-padding-y: 0.6rem;

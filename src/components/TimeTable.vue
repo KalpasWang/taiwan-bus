@@ -13,14 +13,18 @@
         type="button"
       />
     </div>
-    <ul v-if="props.direction === 'forward'" class="list-unstyled">
-      <li v-for="(time, i) in forwardTime" :key="i">{{ i + 1 }}: {{ time }}</li>
-    </ul>
-    <ul v-else class="list-unstyled text-end">
-      <li v-for="(time, i) in backwardTime" :key="i">
-        {{ i + 1 }}: {{ time }}
+    <ol v-if="props.direction === 'forward'" class="list-unstyled">
+      <li v-for="(time, i) in forwardTime" :key="i">
+        <span class="index">{{ i + 1 }}</span>
+        {{ time }}
       </li>
-    </ul>
+    </ol>
+    <ol v-else class="list-unstyled text-end">
+      <li v-for="(time, i) in backwardTime" :key="i">
+        <span class="index">{{ i + 1 }}</span>
+        {{ time }}
+      </li>
+    </ol>
   </div>
 </template>
 
@@ -57,4 +61,21 @@ const getNewDepartureTime = (date) => {
 }
 </script>
 
-<style lang=""></style>
+<style lang="scss" scoped>
+@import '../assets/scss/custom-variables';
+
+.index {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: $primary;
+  min-width: 79px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid $primary;
+  border-radius: 13px;
+  box-shadow: 0px 0px 5px $primary;
+  margin-right: 28px;
+  margin-bottom: 14px;
+}
+</style>
