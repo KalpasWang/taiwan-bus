@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, watch } from 'vue'
 import useEventBus from '@/composables/useEventBus'
 import { useRouteMap, useRouteMapInfo } from '@/composables/bus'
 
@@ -35,6 +35,10 @@ const { initMap, renderRouteMap } = useRouteMap('route-map')
 
 const routeDirectionInfo = computed(() => {
   return props.direction === 'forward' ? mapInfo.forward : mapInfo.backward
+})
+
+watch(routeDirectionInfo, (value) => {
+  renderRouteMap(value)
 })
 
 async function updateInfoAndMap() {
