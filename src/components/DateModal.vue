@@ -4,46 +4,38 @@
     content-class="modal-content"
     classes="modal-container"
   >
-    <h5 v-if="msg" class="text-dark">{{ msg }}</h5>
-    <h5 v-else class="text-dark">輸入日期 (格式例：2021 01 01)</h5>
-    <div class="row">
+    <h6 class="mb-4" v-if="msg">{{ msg }}</h6>
+    <h6 class="mb-4" v-else>
+      輸入日期 <span class="text-primary">(格式例：2021 01 01)</span>
+    </h6>
+    <div class="row g-2 mb-4">
       <div class="col">
-        <input v-model="year" :min="year" type="number" class="form-control" />
+        <select v-model.number="year" class="form-select px-6 text-center">
+          <option v-for="y in years" :key="y" :value="y">{{ y }}</option>
+        </select>
       </div>
       <div class="col">
-        <input
-          v-model="month"
-          type="number"
-          min="1"
-          max="12"
-          class="form-control"
-        />
+        <select v-model.number="month" class="form-select px-6 text-center">
+          <option v-for="(m, i) in 12" :key="i" :value="i">{{ m }}</option>
+        </select>
       </div>
       <div class="col">
-        <input
-          v-model="date"
-          type="number"
-          min="1"
-          max="31"
-          class="form-control"
-        />
+        <select v-model.number="date" class="form-select px-6 text-center">
+          <option v-for="d in 31" :key="d">{{ d }}</option>
+        </select>
       </div>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="grid" style="--bs-columns: 2; --bs-gap: 13px">
       <button
         @click="emit('cancel')"
-        type="button"
-        class="btn btn-outline-primary text-warning w-100"
+        class="btn btn-outline-primary text-warning indent-16 ls-16"
+        >取消</button
       >
-        取消
-      </button>
       <button
         @click="validateDate"
-        type="button"
-        class="btn btn-outline-primary w-100"
+        class="btn btn-outline-primary indent-16 ls-16"
+        >設定</button
       >
-        設定
-      </button>
     </div>
   </VueFinalModal>
 </template>
@@ -56,17 +48,23 @@ const emit = defineEmits(['confirm', 'cancel'])
 
 const today = new Date()
 const year = ref(today.getFullYear())
-const month = ref(today.getMonth() + 1)
+const month = ref(today.getMonth())
 const date = ref(today.getDate())
+const years = ref([year.value, year.value + 1])
 const msg = ref('')
 
 const validateDate = () => {
-  const m = month.value - 1
-  const selectedDate = new Date(year.value, m, date.value)
-  if (!isExists(year.value, m, date.value) || isPast(selectedDate)) {
+  const selectedDate = new Date(year.value, month.value, date.value)
+  if (!isExists(year.value, month.value, date.value) || isPast(selectedDate)) {
     msg.value = '請輸入正確且非過去的日期'
     return
   }
   emit('confirm', selectedDate)
 }
 </script>
+
+<style lang="scss">
+.select-center {
+  text-align-last: center;
+}
+</style>

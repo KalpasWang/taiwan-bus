@@ -96,6 +96,7 @@ $input-btn-padding-x-lg: 1rem !default;
 
 // Grid
 $grid-columns: 10;
+$enable-cssgrid: true;
 
 // Container Padding
 $container-padding-x: 1rem;
@@ -104,7 +105,7 @@ $container-padding-x: 1rem;
 $input-btn-padding-y: 0.6rem;
 $btn-box-shadow: 0px 0px 2px 0px rgba(28, 200, 238, 1),
   0px 0px 6px 0px rgba(28, 200, 238, 1);
-$btn-font-size: 0.88rem;
+$btn-font-size: 1rem;
 $btn-border-radius: 9px;
 
 // List group
