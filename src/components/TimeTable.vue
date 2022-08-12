@@ -5,7 +5,7 @@
       @confirm="getNewDepartureTime"
       @cancel="showModal = false"
     />
-    <div class="flex-center mt-5">
+    <div class="flex-center my-5">
       <input
         :value="chooseDate"
         @click="showModal = true"
@@ -13,23 +13,31 @@
         type="button"
       />
     </div>
-    <!-- TODO: transition, fix timetable not showing -->
-    <Transition>
-      <ol v-if="props.direction === 'forward'" class="list-unstyled">
-        <li v-for="(time, i) in forwardTime" :key="i">
-          <span class="index index-left">{{ i + 1 }}</span>
-          {{ time }}
-        </li>
-      </ol>
-    </Transition>
-    <Transition>
-      <ol v-if="props.direction === 'backward'" class="list-unstyled text-end">
-        <li v-for="(time, i) in backwardTime" :key="i">
-          {{ time }}
-          <span class="index index-right">{{ i + 1 }}</span>
-        </li>
-      </ol>
-    </Transition>
+    <div class="row">
+      <div class="col flex-center">
+        <Transition name="slide-right">
+          <ol v-if="props.direction === 'forward'" class="list-unstyled">
+            <li v-for="(time, i) in forwardTime" :key="i">
+              <span class="index">{{ i + 1 }}</span>
+              {{ time }}
+            </li>
+          </ol>
+        </Transition>
+      </div>
+      <div class="col flex-center">
+        <Transition name="slide-left">
+          <ol
+            v-if="props.direction === 'backward'"
+            class="list-unstyled text-end"
+          >
+            <li v-for="(time, i) in backwardTime" :key="i">
+              <span class="index">{{ i + 1 }}</span>
+              {{ time }}
+            </li>
+          </ol>
+        </Transition>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -80,14 +88,35 @@ const getNewDepartureTime = (date) => {
   border: 1px solid $primary;
   border-radius: 13px;
   box-shadow: 0px 0px 5px $primary;
+  margin-right: 28px;
   margin-bottom: 14px;
 }
 
-.index-left {
-  margin-right: 28px;
+.slide-right-enter-active {
+  transition: all 0.25s ease-in;
 }
 
-.index-right {
-  margin-left: 28px;
+.slide-right-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(50%);
+  opacity: 0;
+}
+
+.slide-left-enter-active {
+  transition: all 0.25s ease-in;
+}
+
+.slide-left-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(-50%);
+  opacity: 0;
 }
 </style>

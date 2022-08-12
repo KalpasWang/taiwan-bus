@@ -1,4 +1,4 @@
-import { format, isValid, isExists, isPast } from 'date-fns'
+import { format } from 'date-fns'
 import { ref } from 'vue'
 import { api } from './api'
 import { filterRouteName, filterDirection } from './useUtilities'
@@ -20,7 +20,6 @@ function useSchedule(routeName, city) {
   }
 
   const getDepartureTimeByDate = (date) => {
-    if (!isValid(date) || isPast(date)) return null
     // 取得此日期為星期幾，如 Monday, Tuesday...
     const dayName = format(date, 'EEEE')
     // 過濾出去程與返程的班表
@@ -49,7 +48,6 @@ function useSchedule(routeName, city) {
     // 最終資料會是包含去程與返程發車時間的陣列
     forwardTime.value = result[0]
     backwardTime.value = result[1]
-    console.log(result)
   }
 
   return {
