@@ -5,7 +5,7 @@
       @confirm="getNewDepartureTime"
       @cancel="showModal = false"
     />
-    <div class="d-flex justify-content-center">
+    <div class="flex-center mt-5">
       <input
         :value="chooseDate"
         @click="showModal = true"
@@ -13,18 +13,23 @@
         type="button"
       />
     </div>
-    <ol v-if="props.direction === 'forward'" class="list-unstyled">
-      <li v-for="(time, i) in forwardTime" :key="i">
-        <span class="index">{{ i + 1 }}</span>
-        {{ time }}
-      </li>
-    </ol>
-    <ol v-else class="list-unstyled text-end">
-      <li v-for="(time, i) in backwardTime" :key="i">
-        <span class="index">{{ i + 1 }}</span>
-        {{ time }}
-      </li>
-    </ol>
+    <!-- TODO: transition, fix timetable not showing -->
+    <Transition>
+      <ol v-if="props.direction === 'forward'" class="list-unstyled">
+        <li v-for="(time, i) in forwardTime" :key="i">
+          <span class="index index-left">{{ i + 1 }}</span>
+          {{ time }}
+        </li>
+      </ol>
+    </Transition>
+    <Transition>
+      <ol v-if="props.direction === 'backward'" class="list-unstyled text-end">
+        <li v-for="(time, i) in backwardTime" :key="i">
+          {{ time }}
+          <span class="index index-right">{{ i + 1 }}</span>
+        </li>
+      </ol>
+    </Transition>
   </div>
 </template>
 
@@ -75,7 +80,14 @@ const getNewDepartureTime = (date) => {
   border: 1px solid $primary;
   border-radius: 13px;
   box-shadow: 0px 0px 5px $primary;
-  margin-right: 28px;
   margin-bottom: 14px;
+}
+
+.index-left {
+  margin-right: 28px;
+}
+
+.index-right {
+  margin-left: 28px;
 }
 </style>
