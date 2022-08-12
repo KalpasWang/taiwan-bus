@@ -5,7 +5,7 @@
       @confirm="getNewDepartureTime"
       @cancel="showModal = false"
     />
-    <div class="d-flex justify-content-center">
+    <div class="flex-center my-5">
       <input
         :value="chooseDate"
         @click="showModal = true"
@@ -13,18 +13,31 @@
         type="button"
       />
     </div>
-    <ol v-if="props.direction === 'forward'" class="list-unstyled">
-      <li v-for="(time, i) in forwardTime" :key="i">
-        <span class="index">{{ i + 1 }}</span>
-        {{ time }}
-      </li>
-    </ol>
-    <ol v-else class="list-unstyled text-end">
-      <li v-for="(time, i) in backwardTime" :key="i">
-        <span class="index">{{ i + 1 }}</span>
-        {{ time }}
-      </li>
-    </ol>
+    <div class="row">
+      <div class="col flex-center">
+        <Transition name="slide-right">
+          <ol v-if="props.direction === 'forward'" class="list-unstyled">
+            <li v-for="(time, i) in forwardTime" :key="i">
+              <span class="index">{{ i + 1 }}</span>
+              {{ time }}
+            </li>
+          </ol>
+        </Transition>
+      </div>
+      <div class="col flex-center">
+        <Transition name="slide-left">
+          <ol
+            v-if="props.direction === 'backward'"
+            class="list-unstyled text-end"
+          >
+            <li v-for="(time, i) in backwardTime" :key="i">
+              <span class="index">{{ i + 1 }}</span>
+              {{ time }}
+            </li>
+          </ol>
+        </Transition>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,5 +90,33 @@ const getNewDepartureTime = (date) => {
   box-shadow: 0px 0px 5px $primary;
   margin-right: 28px;
   margin-bottom: 14px;
+}
+
+.slide-right-enter-active {
+  transition: all 0.25s ease-in;
+}
+
+.slide-right-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(50%);
+  opacity: 0;
+}
+
+.slide-left-enter-active {
+  transition: all 0.25s ease-in;
+}
+
+.slide-left-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(-50%);
+  opacity: 0;
 }
 </style>
