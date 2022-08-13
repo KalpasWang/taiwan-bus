@@ -164,7 +164,9 @@ export function filterRouteName(routeName, list) {
     return
   }
   return list.filter((item) => {
-    return item.RouteName.Zh_tw === routeName
+    const name =
+      typeof item.RouteName === 'object' ? item.RouteName.Zh_tw : item.RouteName
+    return name === routeName
   })
 }
 
