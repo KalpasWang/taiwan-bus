@@ -13,10 +13,15 @@ function useRouteFare(routeName, city) {
       url = 'RouteFare/InterCity'
     }
     const res = await api.get(`${url}/${routeName}`)
-    fareMap.value = filterRouteName(routeName, res.data)
+    fareMap.value = filterRouteName(routeName, res.data).filter(
+      (route) => route.RouteName === route.SubRouteName
+    )
   }
 
-  return { fareMap, fetchRouteFare }
+  // 取得指定區間的票價資訊
+  const getStageFare = (stage) => {}
+
+  return { fareMap, fetchRouteFare, getStageFare }
 }
 
 export default useRouteFare
