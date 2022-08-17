@@ -11,16 +11,12 @@ const props = defineProps({
     type: String,
     required: true,
     default: ''
-  },
-  direction: {
-    type: String,
-    required: true,
-    default: 'forward'
   }
 })
 
-const { fareMap, fetchRouteFare } = useRouteFare(props.routeName)
-await fetchRouteFare()
+const { stages, fetchData, getStageFare } = useRouteFare(props.routeName)
+await fetchData()
+// const fares = getStageFare()
 </script>
 
 <style lang="scss" scoped></style>
