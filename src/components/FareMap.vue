@@ -14,7 +14,9 @@ const props = defineProps({
   }
 })
 
-const { stages, fetchData, getStageFare } = useRouteFare(props.routeName)
+const { stages, fareMap, fetchData, getStageFare } = useRouteFare(
+  props.routeName
+)
 await fetchData()
 // const fares = getStageFare()
 </script>

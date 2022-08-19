@@ -4,21 +4,8 @@ import { filterRouteName } from './useUtilities'
 
 function useRouteFare(routeName, city) {
   let fareData = null
-  let operators = []
   const stages = ref([])
   const fareMap = ref([])
-
-  // 取得所有客運營運業者資料
-  const fetchOperators = async () => {
-    const res = await api.get('Operator/InterCity')
-    operators = res.data
-  }
-
-  // 查詢業者名稱
-  const findOperator = (id) => {
-    const operator = operators.find((operator) => operator.OperatorID === id)
-    return operator.OperatorName.Zh_tw
-  }
 
   // 取得指定[路線名稱]的公車/客運路線票價資料
   const fetchRouteFare = async () => {
@@ -31,34 +18,56 @@ function useRouteFare(routeName, city) {
     fareData = filterRouteName(routeName, res.data).filter(
       (route) => route.RouteName === route.SubRouteName
     )
+    console.log(fareData)
   }
 
   // 取得所有計費站
   const mapStagesAndFare = () => {
+    // 取得所有此路線的計費站
     fareData.forEach((fare) => {
-      if (fare.StageFares) {
-        fare.StageFares.forEach((stage) => {
-          const originID = stage.OriginStage.StopID
-          const destinationID = stage.DestinationStage.StopID
-          if (!stages.value.some((s) => s.StopID === originID)) {
-            stages.value.push(stage.OriginStage)
-          }
-          if (!stages.value.some((s) => s.StopID === destinationID)) {
-            stages.value.push(stage.DestinationStage)
-          }
-        })
-      }
+      if (!fare.StageFares) return
+      fare.StageFares.forEach((stage) => {
+        const originID = stage.OriginStage.StopID
+        const destinationID = stage.DestinationStage.StopID
+        if (!stages.value.some((s) => s.StopID === originID)) {
+          stages.value.push(stage.OriginStage)
+        }
+        if (!stages.value.some((s) => s.StopID === destinationID)) {
+          stages.value.push(stage.DestinationStage)
+        }
+      })
     })
     stages.value.sort((a, b) => {
       return a.StopID - b.StopID
+    })
+    // 初始化 fareMap
+    fareMap.value = Array.from(Array(stages.value.length), () =>
+      Array(stages.value.length)
+    )
+    // 將所有區段的票價放入對應的票價表位置
+    fareData.forEach((routeFare) => {
+      if (!routeFare.StageFares) return
+      routeFare.StageFares.forEach((stage) => {
+        stage.Fares.forEach((fare) => {
+          if (fare.Price === -1) return
+          // FareName 範例：全票_不分時段_四排座
+          const [ticket, time, seat] = fare.FareName.split('_')
+          setFareMap(stage.OriginStage, stage.DesinationStage, {
+            [seat]: { [ticket]: fare.Price }
+          })
+        })
+      })
     })
   }
 
   // init
   const fetchData = async () => {
-    await Promise.all([fetchOperators(), fetchRouteFare()])
+    await fetchRouteFare()
     mapStagesAndFare()
   }
+
+  // 設定票價資訊到 fareMap 以便方便查詢
+  const setFareMap = (origin, dest, fareInfo) => {}
 
   // 取得指定區間的票價資訊
   const getStageFare = (origin, destination) => {
