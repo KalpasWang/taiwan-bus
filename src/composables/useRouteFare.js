@@ -23,7 +23,7 @@ function useRouteFare(routeName, city) {
     fareData = filterRouteName(routeName, res.data).filter(
       (route) => route.RouteName === route.SubRouteName
     )
-    console.log(fareData)
+    // console.log(fareData)
   }
 
   // 取得所有此路線的計費站
@@ -71,17 +71,33 @@ function useRouteFare(routeName, city) {
   }
 
   // 儲存票價資訊到 fareMap
-  const saveFare = (stage1, stage2, fare) => {
+  const saveFare = (stage1, stage2, newFare) => {
     // fareName 範例：全票_不分時段_四排座
-    const [ticket, time, seat] = fare.FareName.split('_')
+    const [ticketType, time, seat] = newFare.FareName.split('_')
     const x = getStageIndex(stage1)
     const y = getStageIndex(stage2)
     if (x > y) {
       ;[x, y] = [y, x]
     }
-    if (!fareMap.value[x][y]) fareMap.value[x][y] = {}
-    const f = fareMap.value[x][y]
-    f[seat] = { ...f[seat], [ticket]: fare.Price }
+    if (!fareMap.value[x][y]) fareMap.value[x][y] = []
+    const savedFares = fareMap.value[x][y]
+    const ticketObj = {
+      name: ticketType,
+      price: newFare.Price
+    }
+    // 檢查是否已存在此座位類型與票價
+    const found = savedFares.find((f) => f.seat === seat)
+    const isSameTicket = found?.tickets.some(
+      (t) => t.name === ticketType && t.price === newFare.Price
+    )
+    if (found && !isSameTicket) {
+      found.tickets.push(ticketObj)
+    } else if (!found) {
+      savedFares.push({
+        seat,
+        tickets: [ticketObj]
+      })
+    }
   }
 
   // 取得指定區間的票價資訊
@@ -91,6 +107,7 @@ function useRouteFare(routeName, city) {
     if (x > y) {
       ;[x, y] = [y, x]
     }
+    if (!fareMap.value[x][y]) return
     return JSON.parse(JSON.stringify(fareMap.value[x][y]))
   }
 
