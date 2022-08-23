@@ -23,7 +23,7 @@ function useRouteFare(routeName, city) {
     fareData = filterRouteName(routeName, res.data).filter(
       (route) => route.RouteName === route.SubRouteName
     )
-    // console.log(fareData)
+    console.log(fareData)
   }
 
   // 取得所有此路線的計費站
@@ -61,6 +61,21 @@ function useRouteFare(routeName, city) {
         })
       })
     })
+    sortFares()
+  }
+
+  // 整理票種
+  const sortFares = () => {
+    fareMap.value.forEach((row) => {
+      row.forEach((fares) => {
+        if (!fares) return
+        fares.forEach((seat) => {
+          seat.tickets.sort((a, b) => {
+            return a.name.localeCompare(b.name)
+          })
+        })
+      })
+    })
   }
 
   // init
@@ -74,8 +89,8 @@ function useRouteFare(routeName, city) {
   const saveFare = (stage1, stage2, newFare) => {
     // fareName 範例：全票_不分時段_四排座
     const [ticketType, time, seat] = newFare.FareName.split('_')
-    const x = getStageIndex(stage1)
-    const y = getStageIndex(stage2)
+    let x = getStageIndex(stage1)
+    let y = getStageIndex(stage2)
     if (x > y) {
       ;[x, y] = [y, x]
     }
@@ -102,8 +117,8 @@ function useRouteFare(routeName, city) {
 
   // 取得指定區間的票價資訊
   const getStageFare = (stage1, stage2) => {
-    const x = getStageIndex(stage1)
-    const y = getStageIndex(stage2)
+    let x = getStageIndex(stage1)
+    let y = getStageIndex(stage2)
     if (x > y) {
       ;[x, y] = [y, x]
     }
