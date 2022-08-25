@@ -3,12 +3,14 @@
     <!-- Header -->
     <TabsHeader
       @setDirection="setDirection"
+      @back="switchComponent('RealTimeArrivalInfo')"
       :routeName="props.routeName"
       :forwardLabel="forwardStopName"
       :backwardLabel="backwardStopName"
+      :isSubview="cIndex !== 'RealTimeArrivalInfo'"
     >
       <img
-        @click="switchComponent('fare')"
+        @click="switchComponent('FareMap')"
         :src="fareIcon"
         class="pe-3"
         alt="票價查詢"
@@ -17,7 +19,7 @@
         height="23"
       />
       <img
-        @click="switchComponent('timetable')"
+        @click="switchComponent('TimeTable')"
         :src="timetableIcon"
         class="pe-3"
         alt="時刻表"
@@ -26,8 +28,8 @@
         height="23"
       />
       <img
-        @click="toggleMap()"
         :src="mapIcon"
+        @click="switchComponent('RouteMap')"
         alt="地圖"
         title="地圖"
         role="button"
@@ -35,17 +37,19 @@
       />
     </TabsHeader>
     <!-- 預估到站時間 -->
-    <!-- <div v-show="mapShow" id="stops-map" class="flex-grow-1"></div> -->
-    <div class="flex-grow-1 container overflow-auto">
-      <h3 v-if="error" class="mt-5 text-center text-light">
-        {{ error }}
-      </h3>
-      <div v-else class="h-100">
+    <div class="flex-grow-1 overflow-auto">
+      <div v-if="error" class="container">
+        <h3 class="mt-5 text-center text-light">
+          {{ error }}
+        </h3>
+      </div>
+      <div v-else :class="mapClass">
         <keep-alive>
           <Suspense>
             <component
               :is="children[cIndex]"
-              v-bind="childrenProps"
+              :routeName="props.routeName"
+              :direction="direction"
             ></component>
 
             <template #fallback>
@@ -59,13 +63,13 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, nextTick, provide, onErrorCaptured } from 'vue'
+import { computed, ref, provide, onErrorCaptured } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
 import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
 import TimeTable from '@/components/TimeTable.vue'
+import FareMap from '@/components/FareMap.vue'
+import RouteMap from '@/components/RouteMap.vue'
 import Loading from '@/components/Loading.vue'
-import bus from '@/composables/useInterCityBus'
-import map from '@/composables/useMap'
 import mapIcon from '@/assets/map.svg'
 import timetableIcon from '@/assets/timetable.svg'
 import fareIcon from '@/assets/fare.svg'
@@ -73,58 +77,28 @@ import fareIcon from '@/assets/fare.svg'
 const props = defineProps({
   routeName: String
 })
-const { state } = bus
 const direction = ref('forward')
 const error = ref(null)
 const children = {
-  arrival: RealTimeArrivalInfo,
-  timetable: TimeTable
+  RealTimeArrivalInfo,
+  TimeTable,
+  FareMap,
+  RouteMap
 }
-const childrenProps = computed(() => {
-  return {
-    direction: direction.value,
-    routeName: props.routeName
-  }
-})
-const cIndex = ref('arrival')
-const mapShow = ref(false)
-const mapHasShown = ref(false)
+const cIndex = ref('RealTimeArrivalInfo')
+const mapClass = computed(() => ({
+  container: cIndex.value !== 'RouteMap',
+  'h-100': cIndex.value === 'RouteMap'
+}))
 const forwardStopName = ref('去程')
 const backwardStopName = ref('回程')
 
 provide('stopsLabel', { forwardStopName, backwardStopName })
 
-// map切換與tab切換時決定要繪製的地圖
-watch([mapShow, direction], (newVal) => {
-  const isMap = newVal[0]
-  const tab = newVal[1]
-  const stops =
-    tab === 'forward' ? state.forwardStopsList : state.backwardStopsList
-  const busList =
-    tab === 'forward' ? state.forwardBusList : state.backwardBusList
-  const shape =
-    tab === 'forward' ? state.forwardRouteShape : state.backwardRouteShape
-  if (isMap) {
-    nextTick(() => {
-      if (!mapHasShown.value) {
-        // init map
-        map.mapInit('stops-map')
-        mapHasShown.value = true
-      }
-      map.drawStopsPathAndMarkers(stops, busList, shape)
-    })
-  }
-})
-
 // 動態切換元件，在即時公車路線、時刻表、票價查詢與地圖
 // 等元件中切換
 const switchComponent = (index) => {
   cIndex.value = index
-}
-
-const toggleMap = () => {
-  const v = mapShow.value
-  mapShow.value = !v
 }
 
 const setDirection = (newDirection) => {

@@ -78,10 +78,10 @@ function useRouteMapInfo(routeName, city) {
       const forward = realData.find((el) => el.Direction === 0)
       const backward = realData.find((el) => el.Direction === 1)
       if (forward) {
-        mapInfo.shape.forwards = parseShape(forward.Geometry)
+        mapInfo.forward.shape = parseShape(forward.Geometry)
       }
       if (backward) {
-        mapInfo.shape.backwards = parseShape(backward.Geometry)
+        mapInfo.backward.shape = parseShape(backward.Geometry)
       }
     } else {
       const shape = parseShape(realData[0].Geometry)
