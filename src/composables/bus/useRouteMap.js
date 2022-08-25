@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import L from 'leaflet'
-import { busIcon } from './constant'
+import { busIcon } from '../constants'
 
 const useRouteMap = (element) => {
   const map = ref(null)

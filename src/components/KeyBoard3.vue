@@ -19,7 +19,7 @@
 <script setup>
 import { ref, inject, computed } from 'vue'
 import KeyItem from '@/components/KeyItem.vue'
-import { citys } from '@/composables/constant'
+import { citys } from '@/composables/constants'
 
 // inject states and mutations from parent
 const { currentCity, updateCurrentCity } = inject('currentCity')

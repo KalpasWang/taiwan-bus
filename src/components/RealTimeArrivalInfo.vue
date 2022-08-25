@@ -51,7 +51,7 @@
 import { inject, computed, onUnmounted } from 'vue'
 import useEventBus from '@/composables/useEventBus'
 import { useArrivalsInfo } from '@/composables/bus'
-import { getCity, addCustomDataToStops } from '@/composables/useUtilities'
+import { getCity, addCustomDataToStops } from '@/composables/utilities'
 import wheelchairIcon from '@/assets/wheelchair.svg'
 
 const props = defineProps({
@@ -72,7 +72,7 @@ const props = defineProps({
 })
 
 const { forwardStopName, backwardStopName } = inject('stopsLabel')
-const bus = useEventBus('timer')
+const eventBus = useEventBus('timer')
 const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(
   props.routeName,
   props.city
@@ -98,13 +98,13 @@ async function updateInfo() {
   addCustomDataToStops(arrivalsInfo.backwards)
 }
 
-bus.on(updateInfo)
+eventBus.on(updateInfo)
 await updateInfo()
 setStopName(arrivalsInfo.forwards, forwardStopName)
 setStopName(arrivalsInfo.backwards, backwardStopName)
 
 onUnmounted(() => {
-  bus.off(updateInfo)
+  eventBus.off(updateInfo)
 })
 </script>
 

@@ -1,12 +1,12 @@
 import { reactive, readonly } from 'vue'
 import { api, apiTop30 } from './api'
-import { citys } from './constant'
+import { citys } from './constants'
 import {
   getTimeBadgeAndColor,
   parseShape,
   filterRouteName,
   getNearByCitys
-} from './useUtilities'
+} from './utilities'
 import haversine from 'haversine-distance'
 
 const state = reactive({

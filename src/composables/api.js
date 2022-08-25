@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jsSHA from 'jssha'
-import state from './state'
-import { filterRouteName, filterSubRoutes } from './useUtilities'
+import state from './bus/state'
+import { filterRouteName, filterSubRoutes } from './utilities'
 
 export const apiTop30 = axios.create({
   baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',

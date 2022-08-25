@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { ref } from 'vue'
-import { api } from './api'
-import { filterRouteName, filterDirection } from './useUtilities'
+import { api } from '../api'
+import { filterRouteName, filterDirection } from '../utilities'
 
 function useSchedule(routeName, city) {
   const schedule = ref({})

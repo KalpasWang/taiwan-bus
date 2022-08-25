@@ -1,11 +1,11 @@
 import { reactive } from 'vue'
-import { api } from './api'
+import { api } from '../api'
 import {
   filterRouteName,
   filterStopsByDirection,
   filterDirection,
   parseShape
-} from './useUtilities'
+} from '../utilities'
 
 /**
  * 取得路線地圖所需要的資料，包括 stops, buses, route shape

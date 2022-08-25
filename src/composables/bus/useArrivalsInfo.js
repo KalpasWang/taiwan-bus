@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
-import { api } from './api'
-// import { filterRouteName } from './useUtilities'
+import { api } from '../api'
+// import { filterRouteName } from './utilities'
 
 /**
  * 使用可以取得公車預估到站資料的函式

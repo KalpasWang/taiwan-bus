@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue'
 import { api, apiTop30 } from './api'
-import { citys } from './constant'
-import { getTimeBadgeAndColor } from './useUtilities'
+import { citys } from './constants'
+import { getTimeBadgeAndColor } from './utilities'
 
 const state = reactive({
   citysList: citys,

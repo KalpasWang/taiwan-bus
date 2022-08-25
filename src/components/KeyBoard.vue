@@ -159,7 +159,7 @@ import { ref, computed, inject } from 'vue'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 import deleteIcon from '@/assets/delete-icon.svg'
-import { citys } from '@/composables/constant'
+import { citys } from '@/composables/constants'
 
 // inject states and mutations from parent
 const { query, updateCityQuery, updateRouteNameQuery } = inject('query')

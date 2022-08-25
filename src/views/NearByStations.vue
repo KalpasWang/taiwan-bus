@@ -82,7 +82,7 @@ import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import { getCity, getBearingLabel } from '@/composables/useUtilities'
+import { getCity, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
 const mapShow = ref(false)

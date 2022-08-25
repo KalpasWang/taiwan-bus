@@ -1,7 +1,7 @@
 import { ref } from 'vue'
-import { api, fetchStopsOfRoute } from './api'
+import { api, fetchStopsOfRoute } from '../api'
 import state from './state'
-import { filterRouteName } from './useUtilities'
+import { filterRouteName } from '../utilities'
 
 function useRouteFare(routeName, city) {
   let fareData = null

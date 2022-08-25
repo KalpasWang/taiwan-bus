@@ -1,7 +1,7 @@
 import { ref, watch, watchEffect } from 'vue'
 import L from 'leaflet'
-import { busIcon } from './constant'
-import { getBearingLabel, delay } from '@/composables/useUtilities'
+import { busIcon } from './constants'
+import { getBearingLabel, delay } from '@/composables/utilities'
 
 // let routeLine = null
 // const markers = []

@@ -24,7 +24,7 @@ const props = defineProps({
   }
 })
 
-const bus = useEventBus('timer')
+const eventBus = useEventBus('timer')
 //  地圖資料與 fetch 地圖資料的函式
 const { mapInfo, fetchNewMapInfo } = useRouteMapInfo(
   props.routeName,
@@ -46,7 +46,7 @@ async function updateInfoAndMap() {
   renderRouteMap(routeDirectionInfo.value)
 }
 
-bus.on(updateInfoAndMap)
+eventBus.on(updateInfoAndMap)
 await fetchNewMapInfo()
 
 onMounted(async () => {
@@ -55,6 +55,6 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  bus.off(updateInfoAndMap)
+  eventBus.off(updateInfoAndMap)
 })
 </script>

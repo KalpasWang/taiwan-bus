@@ -1,4 +1,4 @@
-import { citys } from '@/composables/constant'
+import { citys } from '@/composables/constants'
 
 export const getTimeBadgeAndColor = (timeObj) => {
   let badge = {

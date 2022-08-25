@@ -77,7 +77,7 @@ import logo from '@/components/logo.vue'
 import cityBus from '@/composables/useCityBus'
 import intercityBus from '@/composables/useInterCityBus'
 import map from '@/composables/useMap'
-import { getBearingLabel } from '@/composables/useUtilities'
+import { getBearingLabel } from '@/composables/utilities'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
 
