@@ -38,14 +38,18 @@ function useArrivalsInfo(routeName, city) {
     // 對每一個站牌做處理
     arrivalsInfo.forwards = stopsForward.map((stop) => {
       const timeInfo = forwards.find((item) => item.StopUID === stop.StopUID)
-      stop.EstimateTime = timeInfo.EstimateTime
-      stop.StopStatus = timeInfo.StopStatus
+      if (timeInfo) {
+        stop.EstimateTime = timeInfo.EstimateTime
+        stop.StopStatus = timeInfo.StopStatus
+      }
       return stop
     })
     arrivalsInfo.backwards = stopsBackward.map((stop) => {
       const timeInfo = backwards.find((item) => item.StopUID === stop.StopUID)
-      stop.EstimateTime = timeInfo.EstimateTime
-      stop.StopStatus = timeInfo.StopStatus
+      if (timeInfo) {
+        stop.EstimateTime = timeInfo.EstimateTime
+        stop.StopStatus = timeInfo.StopStatus
+      }
       return stop
     })
   }

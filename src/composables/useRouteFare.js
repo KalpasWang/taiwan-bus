@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import { api } from './api'
+import { api, fetchStopsOfRoute } from './api'
+import state from './state'
 import { filterRouteName } from './useUtilities'
 
 function useRouteFare(routeName, city) {
@@ -26,6 +27,12 @@ function useRouteFare(routeName, city) {
     console.log(fareData)
   }
 
+  const getStopsOrder = async () => {
+    if (!state.stopsOfRoute) {
+      await fetchStopsOfRoute(routeName, city)
+    }
+  }
+
   // 取得所有此路線的計費站
   const getAllStages = () => {
     fareData.forEach((fare) => {
@@ -33,6 +40,7 @@ function useRouteFare(routeName, city) {
       fare.StageFares.forEach((stage) => {
         const origin = stage.OriginStage
         const destination = stage.DestinationStage
+        if (stage.Fares.every((f) => f.Price === -1)) return
         if (getStageIndex(origin) < 0) {
           stages.value.push(origin)
         }
@@ -40,9 +48,6 @@ function useRouteFare(routeName, city) {
           stages.value.push(destination)
         }
       })
-    })
-    stages.value.sort((a, b) => {
-      return a.StopID - b.StopID
     })
   }
 
@@ -61,10 +66,22 @@ function useRouteFare(routeName, city) {
         })
       })
     })
-    sortFares()
   }
 
-  // 整理票種
+  // 計費站排序
+  const sortStages = () => {
+    stages.value.sort((a, b) => {
+      const indexA = state.stopsOfRoute[0].Stops.findIndex(
+        (s) => s.StopName.Zh_tw === a.StopName
+      )
+      const indexB = state.stopsOfRoute[0].Stops.findIndex(
+        (s) => s.StopName.Zh_tw === b.StopName
+      )
+      return indexA - indexB
+    })
+  }
+
+  // 票種排序
   const sortFares = () => {
     fareMap.value.forEach((row) => {
       row.forEach((fares) => {
@@ -80,9 +97,12 @@ function useRouteFare(routeName, city) {
 
   // init
   const init = async () => {
-    await fetchRouteFare()
+    // await fetchRouteFare()
+    await Promise.all([fetchRouteFare(), getStopsOrder()])
     getAllStages()
+    sortStages()
     setFareMap()
+    sortFares()
   }
 
   // 儲存票價資訊到 fareMap

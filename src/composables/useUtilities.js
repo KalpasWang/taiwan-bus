@@ -170,6 +170,13 @@ export function filterRouteName(routeName, list) {
   })
 }
 
+// 過濾 subroutes
+export const filterSubRoutes = (routeName, routesList) => {
+  return routesList.filter((route) => {
+    return route.SubRouteName.Zh_tw === routeName
+  })
+}
+
 // 取得同方向的站牌資料
 export const filterStopsByDirection = (arr) => {
   const stopsForward = arr.find((item) => item.Direction === 0).Stops
