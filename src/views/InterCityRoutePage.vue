@@ -9,31 +9,20 @@
       :backwardLabel="backwardStopName"
       :isSubview="cIndex !== 'RealTimeArrivalInfo'"
     >
-      <img
+      <IconButton
         @click="switchComponent('FareMap')"
-        :src="fareIcon"
-        class="pe-3"
-        alt="票價查詢"
+        :imgUrl="fareIcon"
         title="票價查詢"
-        role="button"
-        height="23"
       />
-      <img
+      <IconButton
         @click="switchComponent('TimeTable')"
-        :src="timetableIcon"
-        class="pe-3"
-        alt="時刻表"
+        :imgUrl="timetableIcon"
         title="時刻表"
-        role="button"
-        height="23"
       />
-      <img
-        :src="mapIcon"
+      <IconButton
         @click="switchComponent('RouteMap')"
-        alt="地圖"
+        :imgUrl="mapIcon"
         title="地圖"
-        role="button"
-        height="23"
       />
     </TabsHeader>
     <!-- 預估到站時間 -->
@@ -70,6 +59,7 @@ import TimeTable from '@/components/TimeTable.vue'
 import FareMap from '@/components/FareMap.vue'
 import RouteMap from '@/components/RouteMap.vue'
 import Loading from '@/components/Loading.vue'
+import IconButton from '@/components/IconButton.vue'
 import mapIcon from '@/assets/map.svg'
 import timetableIcon from '@/assets/timetable.svg'
 import fareIcon from '@/assets/fare.svg'

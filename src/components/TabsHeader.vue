@@ -3,18 +3,11 @@
   <div class="header-shadow bg-dark">
     <div class="d-flex px-3 py-4 container">
       <div class="flex-grow-1 w-100 d-flex align-items-center">
-        <img
-          @click="handleBack"
-          :src="backIcon"
-          alt="回上一頁"
-          title="回上一頁"
-          role="button"
-          width="23"
-        />
+        <IconButton @click="handleBack" :imgUrl="backIcon" title="回上一頁" />
       </div>
-      <Logo />
+      <Logo class="d-flex align-items-center" />
       <div
-        class="flex-grow-1 w-100 d-flex justify-content-end align-items-center"
+        class="flex-grow-1 w-100 d-flex flex-wrap justify-content-end align-items-center"
       >
         <slot></slot>
       </div>
@@ -47,6 +40,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Logo from '@/components/Logo.vue'
+import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 
 const props = defineProps({
