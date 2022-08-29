@@ -195,3 +195,16 @@ body {
 .badge-fade-leave-to {
   opacity: 0;
 }
+
+.fade-in-enter-active {
+  transition: all 0.25s ease-in-out;
+}
+
+.fade-in-leave-active {
+  transition: all 0.25s ease-in-out;
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0;
+}

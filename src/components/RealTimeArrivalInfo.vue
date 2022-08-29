@@ -1,88 +1,109 @@
 <template>
   <div class="h-100">
+    <TabsHeader @setDirection="setDirection" @back="emit('back')">
+      <IconButton
+        @click="switchComponent('FareMap')"
+        :imgUrl="fareIcon"
+        title="票價查詢"
+      />
+      <IconButton
+        @click="switchComponent('TimeTable')"
+        :imgUrl="timetableIcon"
+        title="時刻表"
+      />
+      <IconButton
+        @click="switchComponent('RouteMap')"
+        :imgUrl="mapIcon"
+        title="地圖"
+      />
+    </TabsHeader>
     <!-- 所有站牌與公車預計抵達時間 -->
-    <ul class="list-unstyled">
-      <li v-for="(item, i) in currentStops" :key="i" class="py-2 flex-between">
-        <!-- 顯示預估到站時間badge與站牌名稱 -->
-        <div class="d-flex justify-content-start align-items-center">
-          <span
-            class="flex-center time-label"
-            :class="[item.Border ? 'label-border' : '', item.BgColor]"
-          >
+    <div class="container overflow-auto">
+      <ul class="list-unstyled">
+        <li
+          v-for="(item, i) in currentStops"
+          :key="i"
+          class="py-2 flex-between"
+        >
+          <!-- 顯示預估到站時間badge與站牌名稱 -->
+          <div class="d-flex justify-content-start align-items-center">
             <span
-              :class="[
-                item.Color,
-                item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
-              ]"
-              >{{ item.TimeLabel }}</span
+              class="flex-center time-label"
+              :class="[item.Border ? 'label-border' : '', item.BgColor]"
             >
-          </span>
-          <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
-          <router-link
-            :to="{
-              name: 'StationPage',
-              params: {
-                city: getCity(item.LocationCityCode),
-                stationId: item.StationID
-              }
-            }"
-            :class="item.LinkColor"
-            class="text-decoration-none fs-7 ls-1 ms-2"
-            >{{ item.StopName.Zh_tw }}</router-link
-          >
-        </div>
-        <div class="me-4 d-flex justify-content-end align-items-center">
-          <img v-if="item.Accessible" :src="wheelchairIcon" alt="無障礙公車" />
-          <span v-if="item.HasBus" class="plate">{{ item.PlateNumb }}</span>
-          <div v-if="item.HasBus && i > 0" class="station-badge active"></div>
-          <div
-            v-else-if="item.HasBus && i === 0"
-            class="station-badge active noafter"
-          ></div>
-          <div v-else-if="i > 0" class="station-badge"></div>
-          <div v-else class="station-badge noafter"></div>
-        </div>
-      </li>
-    </ul>
+              <span
+                :class="[
+                  item.Color,
+                  item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
+                ]"
+                >{{ item.TimeLabel }}</span
+              >
+            </span>
+            <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
+            <router-link
+              :to="{
+                name: 'StationPage',
+                params: {
+                  city: getCity(item.LocationCityCode),
+                  stationId: item.StationID
+                }
+              }"
+              :class="item.LinkColor"
+              class="text-decoration-none fs-7 ls-1 ms-2"
+              >{{ item.StopName.Zh_tw }}</router-link
+            >
+          </div>
+          <div class="me-4 d-flex justify-content-end align-items-center">
+            <img
+              v-if="item.Accessible"
+              :src="wheelchairIcon"
+              alt="無障礙公車"
+            />
+            <span v-if="item.HasBus" class="plate">{{ item.PlateNumb }}</span>
+            <div v-if="item.HasBus && i > 0" class="station-badge active"></div>
+            <div
+              v-else-if="item.HasBus && i === 0"
+              class="station-badge active noafter"
+            ></div>
+            <div v-else-if="i > 0" class="station-badge"></div>
+            <div v-else class="station-badge noafter"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { inject, computed, onUnmounted } from 'vue'
+import { ref, inject, computed, onUnmounted } from 'vue'
+import TabsHeader from '@/components/TabsHeader.vue'
+import IconButton from '@/components/IconButton.vue'
 import useEventBus from '@/composables/useEventBus'
 import { useArrivalsInfo } from '@/composables/bus'
 import { getCity, addCustomDataToStops } from '@/composables/utilities'
 import wheelchairIcon from '@/assets/wheelchair.svg'
+import mapIcon from '@/assets/map.svg'
+import timetableIcon from '@/assets/timetable.svg'
+import fareIcon from '@/assets/fare.svg'
 
-const props = defineProps({
-  direction: {
-    type: String,
-    required: true,
-    default: 'forward'
-  },
-  routeName: {
-    type: String,
-    required: true,
-    default: ''
-  },
-  city: {
-    type: String,
-    required: false
-  }
-})
+const { routeName, city, forwardLabel, backwardLabel } = inject('busLabel')
+const switchComponent = inject('switchComponent')
 
-const { forwardStopName, backwardStopName } = inject('stopsLabel')
+const direction = ref('forward')
 const eventBus = useEventBus('timer')
-const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(
-  props.routeName,
-  props.city
-)
+const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city)
+
+const emit = defineEmits(['back'])
 
 const currentStops = computed(() => {
-  return props.direction === 'forward'
+  return direction === 'forward'
     ? arrivalsInfo.forwards
     : arrivalsInfo.backwards
 })
+
+const setDirection = (newDirection) => {
+  direction.value = newDirection
+}
 
 // 設定好頭尾站牌名稱
 function setStopName(stopsList, stopName) {
@@ -100,8 +121,8 @@ async function updateInfo() {
 
 eventBus.on(updateInfo)
 await updateInfo()
-setStopName(arrivalsInfo.forwards, forwardStopName)
-setStopName(arrivalsInfo.backwards, backwardStopName)
+setStopName(arrivalsInfo.forwards, forwardLabel)
+setStopName(arrivalsInfo.backwards, backwardLabel)
 
 onUnmounted(() => {
   eventBus.off(updateInfo)

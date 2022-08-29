@@ -1,42 +1,17 @@
 <template>
-  <div class="bg-secondary vh-100 d-flex flex-column">
-    <!-- Header -->
-    <TabsHeader
-      @setDirection="setDirection"
-      @back="switchComponent('RealTimeArrivalInfo')"
-      :routeName="props.routeName"
-      :forwardLabel="forwardStopName"
-      :backwardLabel="backwardStopName"
-      :isSubview="cIndex !== 'RealTimeArrivalInfo'"
-    >
-      <IconButton
-        @click="switchComponent('FareMap')"
-        :imgUrl="fareIcon"
-        title="票價查詢"
-      />
-      <IconButton
-        @click="switchComponent('TimeTable')"
-        :imgUrl="timetableIcon"
-        title="時刻表"
-      />
-      <IconButton
-        @click="switchComponent('RouteMap')"
-        :imgUrl="mapIcon"
-        title="地圖"
-      />
-    </TabsHeader>
-    <!-- 預估到站時間 -->
-    <div class="flex-grow-1 overflow-auto">
-      <div v-if="error" class="container">
-        <h3 class="mt-5 text-center text-light">
-          {{ error }}
-        </h3>
-      </div>
-      <div v-else :class="mapClass">
+  <div class="bg-secondary vh-100">
+    <div v-if="error" class="container h-100">
+      <h3 class="flex-center text-light">
+        {{ error }}
+      </h3>
+    </div>
+    <div v-else class="h-100">
+      <Transition name="fade-in">
         <keep-alive>
           <Suspense>
             <component
               :is="children[cIndex]"
+              @back="back"
               :routeName="props.routeName"
               :direction="direction"
             ></component>
@@ -46,28 +21,24 @@
             </template>
           </Suspense>
         </keep-alive>
-      </div>
+      </Transition>
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed, ref, provide, onErrorCaptured } from 'vue'
-import TabsHeader from '@/components/TabsHeader.vue'
+import { useRouter } from 'vue-router'
 import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
 import TimeTable from '@/components/TimeTable.vue'
 import FareMap from '@/components/FareMap.vue'
 import RouteMap from '@/components/RouteMap.vue'
 import Loading from '@/components/Loading.vue'
-import IconButton from '@/components/IconButton.vue'
-import mapIcon from '@/assets/map.svg'
-import timetableIcon from '@/assets/timetable.svg'
-import fareIcon from '@/assets/fare.svg'
 
 const props = defineProps({
   routeName: String
 })
-const direction = ref('forward')
+const router = useRouter()
 const error = ref(null)
 const children = {
   RealTimeArrivalInfo,
@@ -76,14 +47,12 @@ const children = {
   RouteMap
 }
 const cIndex = ref('RealTimeArrivalInfo')
-const mapClass = computed(() => ({
+const childrenClass = computed(() => ({
   container: cIndex.value !== 'RouteMap',
   'h-100': cIndex.value === 'RouteMap'
 }))
-const forwardStopName = ref('去程')
-const backwardStopName = ref('回程')
-
-provide('stopsLabel', { forwardStopName, backwardStopName })
+const forwardLabel = ref('去程')
+const backwardLabel = ref('回程')
 
 // 動態切換元件，在即時公車路線、時刻表、票價查詢與地圖
 // 等元件中切換
@@ -91,9 +60,22 @@ const switchComponent = (index) => {
   cIndex.value = index
 }
 
-const setDirection = (newDirection) => {
-  direction.value = newDirection
+const back = () => {
+  if (cIndex.value === 'RealTimeArrivalInfo') {
+    router.go(-1)
+  } else {
+    cIndex.value = 'RealTimeArrivalInfo'
+  }
 }
+
+provide('busLabel', {
+  routeName: props.routeName,
+  city: null,
+  forwardLabel,
+  backwardLabel
+})
+
+provide('switchComponent', switchComponent)
 
 onErrorCaptured((e) => {
   console.log(e)
