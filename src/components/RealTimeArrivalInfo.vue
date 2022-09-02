@@ -1,25 +1,28 @@
 <template>
-  <div class="h-100">
+  <div class="h-100 d-flex flex-column">
     <TabsHeader @setDirection="setDirection" @back="emit('back')">
-      <IconButton
-        @click="switchComponent('FareMap')"
-        :imgUrl="fareIcon"
-        title="票價查詢"
-      />
-      <IconButton
-        @click="switchComponent('TimeTable')"
-        :imgUrl="timetableIcon"
-        title="時刻表"
-      />
-      <IconButton
-        @click="switchComponent('RouteMap')"
-        :imgUrl="mapIcon"
-        title="地圖"
-      />
+      <template #extra>
+        <IconButton
+          @click="switchComponent('FareMap')"
+          :imgUrl="fareIcon"
+          title="票價查詢"
+        />
+        <IconButton
+          @click="switchComponent('TimeTable')"
+          :imgUrl="timetableIcon"
+          title="時刻表"
+        />
+        <IconButton
+          @click="switchComponent('RouteMap')"
+          :imgUrl="mapIcon"
+          title="地圖"
+        />
+      </template>
     </TabsHeader>
     <!-- 所有站牌與公車預計抵達時間 -->
-    <div class="container overflow-auto">
-      <ul class="list-unstyled">
+    <div class="flex-grow-1 dd-flex flex-column container overflow-auto">
+      <UpdateTimer class="mt-2 me-4" />
+      <ul class="flex-grow-1 list-unstyled">
         <li
           v-for="(item, i) in currentStops"
           :key="i"
@@ -77,6 +80,7 @@
 <script setup>
 import { ref, inject, computed, onUnmounted } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
+import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
 import useEventBus from '@/composables/useEventBus'
 import { useArrivalsInfo } from '@/composables/bus'

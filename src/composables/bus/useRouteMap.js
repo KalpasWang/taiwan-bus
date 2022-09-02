@@ -94,7 +94,7 @@ const useRouteMap = (element) => {
     markers.push(marker)
   }
 
-  return { initMap, isMapReady, renderRouteMap }
+  return { map, initMap, isMapReady, renderRouteMap }
 }
 
 export default useRouteMap

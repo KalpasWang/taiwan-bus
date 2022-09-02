@@ -5,11 +5,13 @@
       <div class="flex-grow-1 w-100 d-flex align-items-center">
         <IconButton @click="emit('back')" :imgUrl="backIcon" title="回上一頁" />
       </div>
-      <Logo class="d-flex align-items-center" />
+      <slot>
+        <Logo class="d-flex align-items-center" />
+      </slot>
       <div
         class="flex-grow-1 w-100 d-flex flex-wrap justify-content-end align-items-center"
       >
-        <slot></slot>
+        <slot name="extra"></slot>
       </div>
     </div>
     <div class="container">
@@ -42,7 +44,7 @@ import Logo from '@/components/Logo.vue'
 import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 
-const emit = defineEmits(['back'])
+const emit = defineEmits(['back', 'setDirection'])
 const { routeName, forwardLabel, backwardLabel } = inject('busLabel')
 const activeTab = ref('forward')
 

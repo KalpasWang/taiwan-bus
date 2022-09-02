@@ -1,23 +1,24 @@
 <template>
   <div class="bg-secondary vh-100">
     <div v-if="error" class="container h-100">
-      <h3 class="flex-center text-light">
+      <h3 class="h-100 flex-center text-light">
         {{ error }}
       </h3>
     </div>
     <div v-else class="h-100">
-      <Transition name="fade-in">
+      <Transition name="slide-in" mode="out-in" @afterLeave="onLeave">
         <keep-alive>
           <Suspense>
             <component
               :is="children[cIndex]"
               @back="back"
               :routeName="props.routeName"
-              :direction="direction"
             ></component>
 
             <template #fallback>
-              <Loading class="mt-4" />
+              <div class="h-100 flex-center">
+                <Loading />
+              </div>
             </template>
           </Suspense>
         </keep-alive>
@@ -41,18 +42,15 @@ const props = defineProps({
 const router = useRouter()
 const error = ref(null)
 const children = {
-  RealTimeArrivalInfo,
+  Home: RealTimeArrivalInfo,
   TimeTable,
   FareMap,
   RouteMap
 }
-const cIndex = ref('RealTimeArrivalInfo')
-const childrenClass = computed(() => ({
-  container: cIndex.value !== 'RouteMap',
-  'h-100': cIndex.value === 'RouteMap'
-}))
+const cIndex = ref('Home')
 const forwardLabel = ref('去程')
 const backwardLabel = ref('回程')
+const childrenFn = []
 
 // 動態切換元件，在即時公車路線、時刻表、票價查詢與地圖
 // 等元件中切換
@@ -60,11 +58,23 @@ const switchComponent = (index) => {
   cIndex.value = index
 }
 
+// 讓 children components 將需要在 tranistion 呼叫的 function 一一呼叫
+const onLeave = () => {
+  childrenFn.forEach((cb) => {
+    cb()
+  })
+}
+
+// provide 給 children 可以加入要在 transition end 後使用的 function
+const addOnLeave = (cb) => {
+  childrenFn.push(cb)
+}
+
 const back = () => {
-  if (cIndex.value === 'RealTimeArrivalInfo') {
+  if (cIndex.value === 'Home') {
     router.go(-1)
   } else {
-    cIndex.value = 'RealTimeArrivalInfo'
+    cIndex.value = 'Home'
   }
 }
 
@@ -74,8 +84,8 @@ provide('busLabel', {
   forwardLabel,
   backwardLabel
 })
-
 provide('switchComponent', switchComponent)
+provide('addOnLeave', addOnLeave)
 
 onErrorCaptured((e) => {
   console.log(e)
