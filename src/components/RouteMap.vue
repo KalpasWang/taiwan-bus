@@ -21,7 +21,7 @@ const map = ref(null)
 //  地圖資料與 fetch 地圖資料的函式
 const { mapInfo, fetchNewMapInfo } = useRouteMapInfo(routeName, city)
 // 建立 leaflet 地圖函式與更新公車/客運路線地圖函式
-const { initMap, renderRouteMap } = useRouteMap('route-map')
+const { initMap, renderRouteMap, isMapReady } = useRouteMap('route-map')
 
 const routeDirectionInfo = computed(() => {
   return direction.value === 'forward' ? mapInfo.forward : mapInfo.backward
@@ -41,7 +41,7 @@ async function updateInfoAndMap() {
 }
 
 addOnLeave(async () => {
-  if (map.value) {
+  if (map.value && !isMapReady.value) {
     await initMap()
     renderRouteMap(routeDirectionInfo.value)
   }
