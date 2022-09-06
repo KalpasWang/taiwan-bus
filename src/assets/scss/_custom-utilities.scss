@@ -28,6 +28,20 @@ $utilities: (
       16: 16px
     )
   ),
+  'box-shadow': (
+    property: box-shadow,
+    class: shadow,
+    values: (
+      primary: $shadow-primary
+    )
+  ),
+  'border-end-dashed': (
+    property: border-right,
+    class: border-end,
+    values: (
+      dashed: 1.8px dashed $primary
+    )
+  ),
   'font-family': (
     property: font-family,
     class: font,
@@ -159,14 +173,24 @@ body {
   opacity: 0.9;
 }
 
-.vfm .modal-content {
+%modal-content-base {
   width: calc(100% - 66px);
-  max-width: 466px;
   margin-left: auto;
   margin-right: auto;
   background-color: $dark;
   color: $light;
   padding: 24px;
+}
+
+.vfm .modal-content {
+  @extend %modal-content-base;
+  max-width: 466px;
+}
+
+.vfm .modal-content-stage {
+  @extend %modal-content-base;
+  max-width: 365px;
+  color: $primary;
 }
 
 .keyboard-slide-enter-active {

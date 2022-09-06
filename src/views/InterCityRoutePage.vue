@@ -9,11 +9,7 @@
       <Transition name="slide-in" mode="out-in" @afterLeave="onLeave">
         <keep-alive>
           <Suspense>
-            <component
-              :is="children[cIndex]"
-              @back="back"
-              :routeName="props.routeName"
-            ></component>
+            <component :is="children[cIndex]" @back="back"></component>
 
             <template #fallback>
               <div class="h-100 flex-center">
