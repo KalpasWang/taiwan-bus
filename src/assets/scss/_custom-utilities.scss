@@ -42,6 +42,21 @@ $utilities: (
       dashed: 1.8px dashed $primary
     )
   ),
+  'overflow-x': (
+    property: overflow-x,
+    class: overflow-x,
+    values: (
+      hidden: hidden
+    )
+  ),
+  'overflow-y': (
+    property: overflow-y,
+    class: overflow-y,
+    values: (
+      hidden: hidden,
+      auto: auto
+    )
+  ),
   'font-family': (
     property: font-family,
     class: font,

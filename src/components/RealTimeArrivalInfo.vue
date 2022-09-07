@@ -20,65 +20,135 @@
       </template>
     </TabsHeader>
     <!-- 所有站牌與公車預計抵達時間 -->
-    <div class="flex-grow-1 dd-flex flex-column container overflow-auto">
-      <UpdateTimer class="mt-2 me-4" />
-      <ul class="flex-grow-1 list-unstyled">
-        <li
-          v-for="(item, i) in currentStops"
-          :key="i"
-          class="py-2 flex-between"
-        >
-          <!-- 顯示預估到站時間badge與站牌名稱 -->
-          <div class="d-flex justify-content-start align-items-center">
-            <span
-              class="flex-center time-label"
-              :class="[item.Border ? 'label-border' : '', item.BgColor]"
-            >
+    <Transition name="slide-to-left">
+      <div
+        v-if="direction === 'forward'"
+        class="flex-grow-1 d-flex flex-column container overflow-auto"
+      >
+        <UpdateTimer class="mt-2 me-4" />
+        <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
+          <li
+            v-for="(item, i) in arrivalsInfo.forwards"
+            :key="i"
+            class="py-2 flex-between"
+          >
+            <!-- 顯示預估到站時間badge與站牌名稱 -->
+            <div class="d-flex justify-content-start align-items-center">
               <span
-                :class="[
-                  item.Color,
-                  item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
-                ]"
-                >{{ item.TimeLabel }}</span
+                class="flex-center time-label"
+                :class="[item.Border ? 'label-border' : '', item.BgColor]"
               >
-            </span>
-            <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
-            <router-link
-              :to="{
-                name: 'StationPage',
-                params: {
-                  city: getCity(item.LocationCityCode),
-                  stationId: item.StationID
-                }
-              }"
-              :class="item.LinkColor"
-              class="text-decoration-none fs-7 ls-1 ms-2"
-              >{{ item.StopName.Zh_tw }}</router-link
-            >
-          </div>
-          <div class="me-4 d-flex justify-content-end align-items-center">
-            <img
-              v-if="item.Accessible"
-              :src="wheelchairIcon"
-              alt="無障礙公車"
-            />
-            <span v-if="item.HasBus" class="plate">{{ item.PlateNumb }}</span>
-            <div v-if="item.HasBus && i > 0" class="station-badge active"></div>
-            <div
-              v-else-if="item.HasBus && i === 0"
-              class="station-badge active noafter"
-            ></div>
-            <div v-else-if="i > 0" class="station-badge"></div>
-            <div v-else class="station-badge noafter"></div>
-          </div>
-        </li>
-      </ul>
-    </div>
+                <span
+                  :class="[
+                    item.Color,
+                    item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
+                  ]"
+                  >{{ item.TimeLabel }}</span
+                >
+              </span>
+              <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
+              <router-link
+                :to="{
+                  name: 'StationPage',
+                  params: {
+                    city: getCity(item.LocationCityCode),
+                    stationId: item.StationID
+                  }
+                }"
+                :class="item.LinkColor"
+                class="text-decoration-none fs-7 ls-1 ms-2"
+                >{{ item.StopName.Zh_tw }}</router-link
+              >
+            </div>
+            <div class="me-4 d-flex justify-content-end align-items-center">
+              <img
+                v-if="item.Accessible"
+                :src="wheelchairIcon"
+                alt="無障礙公車"
+              />
+              <span v-if="item.HasBus" class="plate">{{ item.PlateNumb }}</span>
+              <div
+                v-if="item.HasBus && i > 0"
+                class="station-badge active"
+              ></div>
+              <div
+                v-else-if="item.HasBus && i === 0"
+                class="station-badge active noafter"
+              ></div>
+              <div v-else-if="i > 0" class="station-badge"></div>
+              <div v-else class="station-badge noafter"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </Transition>
+    <Transition name="slide-to-right">
+      <div
+        v-if="direction === 'backward'"
+        class="flex-grow-1 d-flex flex-column container overflow-auto"
+      >
+        <UpdateTimer class="mt-2 me-4" />
+        <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
+          <li
+            v-for="(item, i) in arrivalsInfo.backwards"
+            :key="i"
+            class="py-2 flex-between"
+          >
+            <!-- 顯示預估到站時間badge與站牌名稱 -->
+            <div class="d-flex justify-content-start align-items-center">
+              <span
+                class="flex-center time-label"
+                :class="[item.Border ? 'label-border' : '', item.BgColor]"
+              >
+                <span
+                  :class="[
+                    item.Color,
+                    item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
+                  ]"
+                  >{{ item.TimeLabel }}</span
+                >
+              </span>
+              <!-- params 的 citys 包含站牌在city與公車路線所屬的city -->
+              <router-link
+                :to="{
+                  name: 'StationPage',
+                  params: {
+                    city: getCity(item.LocationCityCode),
+                    stationId: item.StationID
+                  }
+                }"
+                :class="item.LinkColor"
+                class="text-decoration-none fs-7 ls-1 ms-2"
+                >{{ item.StopName.Zh_tw }}</router-link
+              >
+            </div>
+            <div class="me-4 d-flex justify-content-end align-items-center">
+              <img
+                v-if="item.Accessible"
+                :src="wheelchairIcon"
+                alt="無障礙公車"
+              />
+              <span v-if="item.HasBus" class="plate">{{ item.PlateNumb }}</span>
+              <div
+                v-if="item.HasBus && i > 0"
+                class="station-badge active"
+              ></div>
+              <div
+                v-else-if="item.HasBus && i === 0"
+                class="station-badge active noafter"
+              ></div>
+              <div v-else-if="i > 0" class="station-badge"></div>
+              <div v-else class="station-badge noafter"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref, inject, computed, onUnmounted } from 'vue'
+import { ref, inject, onUnmounted } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
 import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
@@ -98,12 +168,6 @@ const eventBus = useEventBus('timer')
 const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city)
 
 const emit = defineEmits(['back'])
-
-const currentStops = computed(() => {
-  return direction === 'forward'
-    ? arrivalsInfo.forwards
-    : arrivalsInfo.backwards
-})
 
 const setDirection = (newDirection) => {
   direction.value = newDirection
@@ -189,5 +253,33 @@ onUnmounted(() => {
   @media screen and (min-width: 1200px) {
     margin-right: 12px;
   }
+}
+
+.slide-to-left-enter-active {
+  transition: all 0.25s ease-in;
+}
+
+.slide-to-left-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-to-left-enter-from,
+.slide-to-left-leave-to {
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.slide-to-right-enter-active {
+  transition: all 0.25s ease-in;
+}
+
+.slide-to-right-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-to-right-enter-from,
+.slide-to-right-leave-to {
+  transform: translateX(50%);
+  opacity: 0;
 }
 </style>
