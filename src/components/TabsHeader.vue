@@ -68,7 +68,7 @@ const setTab = (direction) => {
     border-radius: 50px;
     background: transparent;
     box-shadow: none;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   &.active::after {

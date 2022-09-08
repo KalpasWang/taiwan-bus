@@ -28,7 +28,8 @@ function useSchedule(routeName, city) {
     const result = [forwards, backwards].map((scheduleData) => {
       const timeArray = scheduleData.reduce((accuArray, bus) => {
         bus.Timetables.forEach((trip) => {
-          if (trip.ServiceDay[dayName] === 1) {
+          const day = trip?.ServiceDay?.[dayName]
+          if (day === 1) {
             trip.StopTimes.forEach((stop) => {
               if (stop.StopSequence === 1) {
                 accuArray.push(stop.DepartureTime)

@@ -256,11 +256,11 @@ onUnmounted(() => {
 }
 
 .slide-to-left-enter-active {
-  transition: all 0.25s ease-in;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .slide-to-left-leave-active {
-  transition: all 0.25s ease-out;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .slide-to-left-enter-from,
@@ -270,11 +270,11 @@ onUnmounted(() => {
 }
 
 .slide-to-right-enter-active {
-  transition: all 0.25s ease-in;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .slide-to-right-leave-active {
-  transition: all 0.25s ease-out;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .slide-to-right-enter-from,
