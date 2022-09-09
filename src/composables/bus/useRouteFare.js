@@ -24,7 +24,7 @@ function useRouteFare(routeName, city) {
     fareData = filterRouteName(routeName, res.data).filter(
       (route) => route.RouteName === route.SubRouteName
     )
-    console.log(fareData)
+    // console.log(fareData)
   }
 
   const getStopsOrder = async () => {

@@ -1,20 +1,31 @@
 <template>
   <div class="h-100 d-flex flex-column">
     <TabsHeader @setDirection="setDirection" @back="emit('back')"></TabsHeader>
-    <div class="flex-grow-1" id="route-map" ref="map"></div>
+    <div class="position-relative flex-grow-1">
+      <div id="route-map" ref="map" class="h-100"></div>
+      <UpdateTimer class="position-absolute top-0 end-0 z-400" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onUnmounted, watch, inject } from 'vue'
+import {
+  ref,
+  computed,
+  onUnmounted,
+  watch,
+  inject,
+  onMounted,
+  nextTick
+} from 'vue'
 import useEventBus from '@/composables/useEventBus'
 import { useRouteMap, useRouteMapInfo } from '@/composables/bus'
 import TabsHeader from './TabsHeader.vue'
+import UpdateTimer from './UpdateTimer.vue'
 
 const eventBus = useEventBus('timer')
 const emit = defineEmits(['back'])
 const { routeName, city } = inject('busLabel')
-const addOnLeave = inject('addOnLeave')
 
 const direction = ref('forward')
 const map = ref(null)
@@ -40,15 +51,17 @@ async function updateInfoAndMap() {
   renderRouteMap(routeDirectionInfo.value)
 }
 
-addOnLeave(async () => {
-  if (map.value && !isMapReady.value) {
-    await initMap()
-    renderRouteMap(routeDirectionInfo.value)
-  }
-})
-
 eventBus.on(updateInfoAndMap)
 await fetchNewMapInfo()
+
+onMounted(() => {
+  nextTick(async () => {
+    if (map.value && !isMapReady.value) {
+      await initMap()
+      renderRouteMap(routeDirectionInfo.value)
+    }
+  })
+})
 
 onUnmounted(() => {
   eventBus.off(updateInfoAndMap)

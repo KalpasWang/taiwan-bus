@@ -27,19 +27,26 @@
         <Logo />
         <div class="flex-grow-1 w-100"></div>
       </div>
-      <div class="row">
-        <div class="col d-flex justify-content-end align-items-center">
-          <WideButton @click="showModal1 = true" title="選擇出發站點">{{
-            stage1.StopName
-          }}</WideButton>
-        </div>
-        <div class="col-auto flex-center">
-          <IconButton @click="swapStages" :imgUrl="swapIcon" title="交換站點" />
-        </div>
-        <div class="col align-items-center">
-          <WideButton @click="showModal2 = true" title="選擇抵達站點">{{
-            stage2.StopName
-          }}</WideButton>
+      <div class="container">
+        <h2 class="h4 text-center mb-1">{{ routeName }}</h2>
+        <div class="row">
+          <div class="col d-flex justify-content-end align-items-center">
+            <WideButton @click="showModal1 = true" title="選擇出發站點">{{
+              stage1.StopName
+            }}</WideButton>
+          </div>
+          <div class="col-auto flex-center">
+            <IconButton
+              @click="swapStages"
+              :imgUrl="swapIcon"
+              title="交換站點"
+            />
+          </div>
+          <div class="col align-items-center">
+            <WideButton @click="showModal2 = true" title="選擇抵達站點">{{
+              stage2.StopName
+            }}</WideButton>
+          </div>
         </div>
       </div>
     </header>

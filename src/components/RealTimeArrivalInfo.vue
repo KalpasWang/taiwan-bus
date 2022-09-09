@@ -1,5 +1,8 @@
 <template>
-  <div class="h-100 d-flex flex-column">
+  <div v-if="pending" class="h-100 flex-center">
+    <Loading />
+  </div>
+  <div v-else class="h-100 d-flex flex-column">
     <TabsHeader @setDirection="setDirection" @back="emit('back')">
       <template #extra>
         <IconButton
@@ -148,7 +151,7 @@
 </template>
 
 <script setup>
-import { ref, inject, onUnmounted } from 'vue'
+import { ref, inject, onUnmounted, onMounted } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
 import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
@@ -159,11 +162,13 @@ import wheelchairIcon from '@/assets/wheelchair.svg'
 import mapIcon from '@/assets/map.svg'
 import timetableIcon from '@/assets/timetable.svg'
 import fareIcon from '@/assets/fare.svg'
+import Loading from './Loading.vue'
 
 const { routeName, city, forwardLabel, backwardLabel } = inject('busLabel')
 const switchComponent = inject('switchComponent')
 
 const direction = ref('forward')
+const pending = ref(true)
 const eventBus = useEventBus('timer')
 const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city)
 
@@ -188,9 +193,13 @@ async function updateInfo() {
 }
 
 eventBus.on(updateInfo)
-await updateInfo()
-setStopName(arrivalsInfo.forwards, forwardLabel)
-setStopName(arrivalsInfo.backwards, backwardLabel)
+
+onMounted(async () => {
+  await updateInfo()
+  setStopName(arrivalsInfo.forwards, forwardLabel)
+  setStopName(arrivalsInfo.backwards, backwardLabel)
+  pending.value = false
+})
 
 onUnmounted(() => {
   eventBus.off(updateInfo)
