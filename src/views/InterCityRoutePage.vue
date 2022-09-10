@@ -6,23 +6,17 @@
       </h3>
     </div>
     <div v-else class="h-100">
-      <RealTimeArrivalInfo @back="back" />
-      <Transition name="slide-in">
+      <Transition name="fade-in">
         <keep-alive>
-          <div
-            v-if="cIndex !== 'Home'"
-            class="position-absolute bg-secondary top-0 left-0 h-100 w-100 z-100"
-          >
-            <Suspense>
-              <component :is="children[cIndex]" @back="back"></component>
+          <Suspense>
+            <component :is="children[cIndex]" @back="back"></component>
 
-              <template #fallback>
-                <div class="h-100 flex-center z-100">
-                  <Loading />
-                </div>
-              </template>
-            </Suspense>
-          </div>
+            <template #fallback>
+              <div class="h-100 flex-center z-100">
+                <Loading />
+              </div>
+            </template>
+          </Suspense>
         </keep-alive>
       </Transition>
     </div>
@@ -44,6 +38,7 @@ const props = defineProps({
 const router = useRouter()
 const error = ref(null)
 const children = {
+  Home: RealTimeArrivalInfo,
   TimeTable,
   FareMap,
   RouteMap
