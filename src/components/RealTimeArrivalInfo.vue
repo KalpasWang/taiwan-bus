@@ -1,8 +1,5 @@
 <template>
-  <div v-if="pending" class="h-100 flex-center">
-    <Loading />
-  </div>
-  <div v-else class="h-100 d-flex flex-column">
+  <div class="h-100 d-flex flex-column">
     <TabsHeader @setDirection="setDirection" @back="emit('back')">
       <template #extra>
         <IconButton
@@ -25,8 +22,9 @@
     <!-- 所有站牌與公車預計抵達時間 -->
     <Transition name="slide-to-left">
       <div
-        v-if="direction === 'forward'"
+        v-show="direction === 'forward'"
         class="flex-grow-1 d-flex flex-column container overflow-auto"
+        :class="direction === 'forward' ? '' : 'd-none'"
       >
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
@@ -37,7 +35,11 @@
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
             <div class="d-flex justify-content-start align-items-center">
+              <span v-if="pending" class="flex-center time-label bg-dark">
+                <Loading v-if="pending" :width="23" class="d-inline-block" />
+              </span>
               <span
+                v-else
                 class="flex-center time-label"
                 :class="[item.Border ? 'label-border' : '', item.BgColor]"
               >
@@ -87,8 +89,9 @@
     </Transition>
     <Transition name="slide-to-right">
       <div
-        v-if="direction === 'backward'"
+        v-show="direction === 'backward'"
         class="flex-grow-1 d-flex flex-column container overflow-auto"
+        :class="direction === 'backward' ? '' : 'd-none'"
       >
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
@@ -99,11 +102,17 @@
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
             <div class="d-flex justify-content-start align-items-center">
+              <span v-if="pending" class="flex-center time-label bg-dark">
+                <Loading v-if="pending" :width="23" class="d-inline-block" />
+              </span>
               <span
+                v-else
                 class="flex-center time-label"
                 :class="[item.Border ? 'label-border' : '', item.BgColor]"
               >
+                <Loading v-if="pending" :width="30" class="d-inline-block" />
                 <span
+                  v-else
                   :class="[
                     item.Color,
                     item.TimeLabel && item.TimeLabel.length > 4 ? 'fs-8' : ''
@@ -151,7 +160,7 @@
 </template>
 
 <script setup>
-import { ref, inject, onUnmounted, onMounted } from 'vue'
+import { ref, inject, onUnmounted } from 'vue'
 import TabsHeader from '@/components/TabsHeader.vue'
 import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
@@ -168,8 +177,8 @@ const { routeName, city, forwardLabel, backwardLabel } = inject('busLabel')
 const switchComponent = inject('switchComponent')
 
 const direction = ref('forward')
-const pending = ref(true)
 const eventBus = useEventBus('timer')
+const { pending } = eventBus
 const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city)
 
 const emit = defineEmits(['back'])
@@ -193,13 +202,9 @@ async function updateInfo() {
 }
 
 eventBus.on(updateInfo)
-
-onMounted(async () => {
-  await updateInfo()
-  setStopName(arrivalsInfo.forwards, forwardLabel)
-  setStopName(arrivalsInfo.backwards, backwardLabel)
-  pending.value = false
-})
+await updateInfo()
+setStopName(arrivalsInfo.forwards, forwardLabel)
+setStopName(arrivalsInfo.backwards, backwardLabel)
 
 onUnmounted(() => {
   eventBus.off(updateInfo)
