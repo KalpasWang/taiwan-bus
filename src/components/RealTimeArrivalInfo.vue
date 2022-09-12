@@ -22,9 +22,8 @@
     <!-- 所有站牌與公車預計抵達時間 -->
     <Transition name="slide-to-left">
       <div
-        v-show="direction === 'forward'"
+        v-if="direction === 'forward'"
         class="flex-grow-1 d-flex flex-column container overflow-auto"
-        :class="direction === 'forward' ? '' : 'd-none'"
       >
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
@@ -60,7 +59,7 @@
                     stationId: item.StationID
                   }
                 }"
-                :class="item.LinkColor"
+                :class="item.LinkColor || 'link-light'"
                 class="text-decoration-none fs-7 ls-1 ms-2"
                 >{{ item.StopName.Zh_tw }}</router-link
               >
@@ -89,9 +88,8 @@
     </Transition>
     <Transition name="slide-to-right">
       <div
-        v-show="direction === 'backward'"
+        v-if="direction === 'backward'"
         class="flex-grow-1 d-flex flex-column container overflow-auto"
-        :class="direction === 'backward' ? '' : 'd-none'"
       >
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
@@ -129,7 +127,7 @@
                     stationId: item.StationID
                   }
                 }"
-                :class="item.LinkColor"
+                :class="item.LinkColor || 'link-light'"
                 class="text-decoration-none fs-7 ls-1 ms-2"
                 >{{ item.StopName.Zh_tw }}</router-link
               >
