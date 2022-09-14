@@ -29,6 +29,7 @@
 
 <script setup>
 import { ref, onMounted, reactive, provide, toRef, onUnmounted } from 'vue'
+import { useRoutes } from '@/composables/bus'
 import bus from '@/composables/useInterCityBus'
 import SearchHeader from '@/components/SearchHeader.vue'
 import KeyBoard2 from '@/components/KeyBoard2.vue'
@@ -36,6 +37,7 @@ import RoutesList from '@/components/RoutesList.vue'
 import loadingIcon from '@/assets/loading.svg'
 import keyboardIcon from '@/assets/keyboard.svg'
 
+const { fetchNewRoutes } = useRoutes()
 const { state } = bus
 const routesList = ref(null)
 const query = reactive({
@@ -61,6 +63,8 @@ const updateRouteNameQuery = (key, allKeys = false) => {
     bus.fetchRoutesByRouteName(query.routeName)
   }
 }
+
+fetchNewRoutes('0')
 
 const updateIsManual = (val) => {
   isManual.value = +val
@@ -144,9 +148,8 @@ onUnmounted(() => {
   border-radius: 50%;
   cursor: pointer;
   @media screen and (min-width: 991px) {
-    top: 108px;
-    bottom: auto;
-    right: 58.34%;
+    right: auto;
+    left: 16px;
   }
 }
 </style>
