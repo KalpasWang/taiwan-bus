@@ -46,13 +46,17 @@ export async function fetchStopsOfRoute(routeName, city) {
  * @param  {string} routeName
  * @param  {string} [city] - 若沒有 city 表示位客運路線
  */
-export async function fetchTop30Routes(routeName, city) {
+export async function fetchTop30Routes(routeName, city, skip) {
   // 設定要 fetch 的網址
   let url = `Route/City/${city}`
   if (!city) {
     url = 'Route/InterCity'
   }
-  const res = await apiTop30.get(`${url}/${routeName}`)
+  const res = await apiTop30.get(`${url}/${routeName}`, {
+    params: {
+      $skip: `${skip || 0}`
+    }
+  })
   // console.log(res.data)
   return res.data
 }

@@ -64,7 +64,8 @@ const updateRouteNameQuery = (key, allKeys = false) => {
   }
 }
 
-fetchNewRoutes('0')
+const routes = fetchNewRoutes('0', 'Taipei')
+console.warn(routes)
 
 const updateIsManual = (val) => {
   isManual.value = +val

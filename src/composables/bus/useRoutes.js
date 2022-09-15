@@ -12,14 +12,28 @@ function useRoutes() {
     state.city = city
     const routes = await fetchTop30Routes(routeName, city)
     skip = routes.length
-    const subroutes = addSubRoutesAndHeadSign(routes)
-    console.warn(routes)
-    console.warn(subroutes)
+    if (!city) {
+      addHeadSign(routes)
+    }
+    const subroutes = addSubRoutes(routes)
     return subroutes
   }
 
-  // TODO: add head sign
-  function addSubRoutesAndHeadSign(routes) {
+  function addHeadSign(routes) {
+    routes.forEach((route) => {
+      if (route.HasSubRoutes) {
+        const found = route.SubRoutes.find(
+          (sub) =>
+            sub.SubRouteName.Zh_tw === route.RouteName.Zh_tw &&
+            sub.Direction === 0
+        )
+        route.Headsign = found?.Headsign
+        route.HeadsignEn = found?.HeadsignEn
+      }
+    })
+  }
+
+  function addSubRoutes(routes) {
     const newRoutes = routes.reduce((accu, route) => {
       accu.push(route)
       if (route.HasSubRoutes) {
@@ -28,6 +42,7 @@ function useRoutes() {
             subroute.SubRouteName.Zh_tw !== route.RouteName.Zh_tw &&
             subroute.Direction === 0
           ) {
+            subroute.RouteName = subroute.SubRouteName
             accu.push(subroute)
           }
         })
@@ -37,7 +52,16 @@ function useRoutes() {
     return newRoutes
   }
 
-  async function fetchRemainingRoutes() {}
+  async function fetchRemainingRoutes() {
+    const routes = await fetchTop30Routes(state.routeName, state.city, skip)
+    if (routes.length === 0) return routes
+    skip += routes.length
+    if (!city) {
+      addHeadSign(routes)
+    }
+    const subroutes = addSubRoutes(routes)
+    return subroutes
+  }
 
   return { fetchNewRoutes, fetchRemainingRoutes }
 }
