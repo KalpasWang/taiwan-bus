@@ -5,6 +5,8 @@ import state from './state'
  * 回傳可以取得公車/客運路線資料的函式
  */
 function useRoutes() {
+  const routes = ref([])
+  const isEnd = ref(false)
   let skip = 0
 
   async function fetchNewRoutes(routeName, city) {
@@ -12,11 +14,12 @@ function useRoutes() {
     state.city = city
     const routes = await fetchTop30Routes(routeName, city)
     skip = routes.length
+    isEnd.value = false
     if (!city) {
       addHeadSign(routes)
     }
     const subroutes = addSubRoutes(routes)
-    return subroutes
+    routes.value = subroutes
   }
 
   function addHeadSign(routes) {
@@ -42,7 +45,8 @@ function useRoutes() {
             subroute.SubRouteName.Zh_tw !== route.RouteName.Zh_tw &&
             subroute.Direction === 0
           ) {
-            subroute.RouteName = subroute.SubRouteName
+            subroute.IsSubRoute = true
+            subroute.RouteName = route.RouteName
             accu.push(subroute)
           }
         })
@@ -53,17 +57,18 @@ function useRoutes() {
   }
 
   async function fetchRemainingRoutes() {
-    const routes = await fetchTop30Routes(state.routeName, state.city, skip)
-    if (routes.length === 0) return routes
-    skip += routes.length
+    const lastRoutes = await fetchTop30Routes(state.routeName, state.city, skip)
+    if (lastRoutes.length < 30) isEnd.value = true
+    if (lastRoutes.length === 0) return
+    skip += lastRoutes.length
     if (!city) {
-      addHeadSign(routes)
+      addHeadSign(lastRoutes)
     }
-    const subroutes = addSubRoutes(routes)
-    return subroutes
+    const subroutes = addSubRoutes(lastRoutes)
+    routes.value.concat(subroutes)
   }
 
-  return { fetchNewRoutes, fetchRemainingRoutes }
+  return { fetchNewRoutes, fetchRemainingRoutes, routes, isEnd }
 }
 
 export default useRoutes
