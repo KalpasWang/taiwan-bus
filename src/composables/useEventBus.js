@@ -2,6 +2,7 @@ import { ref } from 'vue'
 
 const events = new Map()
 const error = ref(null)
+const pending = ref(false)
 
 const useEventBus = (key) => {
   function on(listener) {
@@ -28,15 +29,18 @@ const useEventBus = (key) => {
 
   async function emitAndWait(event, payload) {
     try {
+      pending.value = true
       const listeners = events.get(key) || []
       const promises = listeners.map((v) => v(event, payload))
       await Promise.all(promises)
     } catch (e) {
       error.value = e.message
+    } finally {
+      pending.value = false
     }
   }
 
-  return { on, off, emit, reset, emitAndWait, error }
+  return { on, off, emit, reset, emitAndWait, error, pending }
 }
 
 export default useEventBus

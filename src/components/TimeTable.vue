@@ -1,22 +1,24 @@
 <template>
   <div>
+    <TabsHeader @setDirection="setDirection" @back="emit('back')">
+      <div class="flex-center">
+        <input
+          :value="chooseDate"
+          @click="showModal = true"
+          class="btn btn-dark px-7 btn-lg"
+          type="button"
+        />
+      </div>
+    </TabsHeader>
     <DateModal
       v-model="showModal"
       @confirm="getNewDepartureTime"
       @cancel="showModal = false"
     />
-    <div class="flex-center my-5">
-      <input
-        :value="chooseDate"
-        @click="showModal = true"
-        class="btn btn-dark px-7 btn-lg"
-        type="button"
-      />
-    </div>
-    <div class="row">
+    <div class="row mt-5">
       <div class="col flex-center">
         <Transition name="slide-right">
-          <ol v-if="props.direction === 'forward'" class="list-unstyled">
+          <ol v-if="direction === 'forward'" class="list-unstyled">
             <li v-for="(time, i) in forwardTime" :key="i">
               <span class="index">{{ i + 1 }}</span>
               {{ time }}
@@ -26,10 +28,7 @@
       </div>
       <div class="col flex-center">
         <Transition name="slide-left">
-          <ol
-            v-if="props.direction === 'backward'"
-            class="list-unstyled text-end"
-          >
+          <ol v-if="direction === 'backward'" class="list-unstyled text-end">
             <li v-for="(time, i) in backwardTime" :key="i">
               <span class="index">{{ i + 1 }}</span>
               {{ time }}
@@ -42,27 +41,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { useSchedule } from '@/composables/bus'
 import { format } from 'date-fns'
+import TabsHeader from './TabsHeader.vue'
 import DateModal from './DateModal.vue'
 
-const props = defineProps({
-  routeName: {
-    type: String,
-    required: true,
-    default: ''
-  },
-  direction: {
-    type: String,
-    required: true,
-    default: 'forward'
-  }
-})
+const emit = defineEmits(['back'])
+const { routeName } = inject('busLabel')
+const direction = ref('forward')
 const showModal = ref(false)
 const chooseDate = ref(format(new Date(), 'yyyy/MM/dd'))
 const { forwardTime, backwardTime, fetchBusSchedule, getDepartureTimeByDate } =
-  useSchedule(props.routeName)
+  useSchedule(routeName)
+
+const setDirection = (newDirection) => {
+  direction.value = newDirection
+}
 
 await fetchBusSchedule()
 getDepartureTimeByDate(new Date())

@@ -3,20 +3,15 @@
   <div class="header-shadow bg-dark">
     <div class="d-flex px-3 py-4 container">
       <div class="flex-grow-1 w-100 d-flex align-items-center">
-        <img
-          @click="handleBack"
-          :src="backIcon"
-          alt="回上一頁"
-          title="回上一頁"
-          role="button"
-          width="23"
-        />
+        <IconButton @click="emit('back')" :imgUrl="backIcon" title="回上一頁" />
       </div>
-      <Logo />
+      <slot>
+        <Logo class="d-flex align-items-center" />
+      </slot>
       <div
-        class="flex-grow-1 w-100 d-flex justify-content-end align-items-center"
+        class="flex-grow-1 w-100 d-flex flex-wrap justify-content-end align-items-center"
       >
-        <slot></slot>
+        <slot name="extra"></slot>
       </div>
     </div>
     <div class="container">
@@ -44,49 +39,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, inject } from 'vue'
 import Logo from '@/components/Logo.vue'
+import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 
-const props = defineProps({
-  routeName: {
-    type: String,
-    required: true,
-    default: ''
-  },
-  forwardLabel: {
-    type: String,
-    required: true,
-    default: '去程'
-  },
-  backwardLabel: {
-    type: String,
-    required: true,
-    default: '回程'
-  },
-  isSubview: {
-    type: Boolean,
-    required: true,
-    default: false
-  }
-})
-const emit = defineEmits(['setDirection', 'back'])
-
-const router = useRouter()
+const emit = defineEmits(['back', 'setDirection'])
+const { routeName, forwardLabel, backwardLabel } = inject('busLabel')
 const activeTab = ref('forward')
 
 const setTab = (direction) => {
   activeTab.value = direction
   emit('setDirection', direction)
-}
-
-const handleBack = () => {
-  if (props.isSubview) {
-    emit('back')
-  } else {
-    router.go(-1)
-  }
 }
 </script>
 
@@ -104,7 +68,7 @@ const handleBack = () => {
     border-radius: 50px;
     background: transparent;
     box-shadow: none;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   &.active::after {

@@ -8,6 +8,7 @@ $utilities: (
       100: 100,
       200: 200,
       300: 300,
+      400: 400,
       900: 900,
       1000: 1000
     )
@@ -26,6 +27,35 @@ $utilities: (
     class: indent,
     values: (
       16: 16px
+    )
+  ),
+  'box-shadow': (
+    property: box-shadow,
+    class: shadow,
+    values: (
+      primary: $shadow-primary
+    )
+  ),
+  'border-end-dashed': (
+    property: border-right,
+    class: border-end,
+    values: (
+      dashed: 1.8px dashed $primary
+    )
+  ),
+  'overflow-x': (
+    property: overflow-x,
+    class: overflow-x,
+    values: (
+      hidden: hidden
+    )
+  ),
+  'overflow-y': (
+    property: overflow-y,
+    class: overflow-y,
+    values: (
+      hidden: hidden,
+      auto: auto
     )
   ),
   'font-family': (
@@ -159,14 +189,24 @@ body {
   opacity: 0.9;
 }
 
-.vfm .modal-content {
+%modal-content-base {
   width: calc(100% - 66px);
-  max-width: 466px;
   margin-left: auto;
   margin-right: auto;
   background-color: $dark;
   color: $light;
   padding: 24px;
+}
+
+.vfm .modal-content {
+  @extend %modal-content-base;
+  max-width: 466px;
+}
+
+.vfm .modal-content-stage {
+  @extend %modal-content-base;
+  max-width: 365px;
+  color: $primary;
 }
 
 .keyboard-slide-enter-active {
@@ -193,5 +233,18 @@ body {
 
 .badge-fade-enter-from,
 .badge-fade-leave-to {
+  opacity: 0;
+}
+
+.fade-in-enter-active {
+  transition: all 0.25s ease-out;
+}
+
+.fade-in-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
   opacity: 0;
 }
