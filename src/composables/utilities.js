@@ -118,7 +118,12 @@ export function addCustomDataToStops(stopsList) {
   // return newStop
 }
 
-export const getCity = (code) => {
+export function getCityNameByEnName(city) {
+  const cityName = citys.find((item) => item.City === city)
+  return cityName
+}
+
+export const getCityByCityCode = (code) => {
   const city = citys.find((item) => item.CityCode === code)
   return city ? city.City : 'intercity'
 }

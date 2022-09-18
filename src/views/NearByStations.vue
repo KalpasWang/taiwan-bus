@@ -45,7 +45,7 @@
               :to="{
                 name: 'StationPage',
                 params: {
-                  city: getCity(station.StationUID.slice(0, 3)),
+                  city: getCityByCityCode(station.StationUID.slice(0, 3)),
                   stationId: station.StationID
                 }
               }"
@@ -82,7 +82,7 @@ import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
 import bus from '@/composables/useCityBus'
 import map from '@/composables/useMap'
-import { getCity, getBearingLabel } from '@/composables/utilities'
+import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
 const mapShow = ref(false)

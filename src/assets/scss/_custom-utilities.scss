@@ -58,11 +58,11 @@ $utilities: (
       auto: auto
     )
   ),
-  'font-family': (
-    property: font-family,
-    class: font,
+  'min-height': (
+    property: min-height,
+    class: minh,
     values: (
-      roboto: Roboto
+      100: 100%
     )
   )
 );

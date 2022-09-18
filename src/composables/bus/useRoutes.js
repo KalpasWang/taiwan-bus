@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { fetchTop30Routes } from '../api'
 import state from './state'
 
@@ -5,20 +6,28 @@ import state from './state'
  * 回傳可以取得公車/客運路線資料的函式
  */
 function useRoutes() {
-  const routes = ref([])
+  const routes = ref(null)
   const isEnd = ref(false)
   let skip = 0
+
+  function clearRoutes() {
+    state.routeName = ''
+    state.city = ''
+    routes.value = []
+    isEnd.value = false
+    skip = 0
+  }
 
   async function fetchNewRoutes(routeName, city) {
     state.routeName = routeName
     state.city = city
-    const routes = await fetchTop30Routes(routeName, city)
-    skip = routes.length
+    const routesList = await fetchTop30Routes(routeName, city)
+    skip = routesList.length
     isEnd.value = false
     if (!city) {
-      addHeadSign(routes)
+      addHeadSign(routesList)
     }
-    const subroutes = addSubRoutes(routes)
+    const subroutes = addSubRoutes(routesList)
     routes.value = subroutes
   }
 
@@ -68,7 +77,7 @@ function useRoutes() {
     routes.value.concat(subroutes)
   }
 
-  return { fetchNewRoutes, fetchRemainingRoutes, routes, isEnd }
+  return { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, routes, isEnd }
 }
 
 export default useRoutes
