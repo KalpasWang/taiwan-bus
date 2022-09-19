@@ -64,6 +64,14 @@ $utilities: (
     values: (
       100: 100%
     )
+  ),
+  'height': (
+    property: height,
+    class: h,
+    values: (
+      4rem: 4rem,
+      6rem: 6rem
+    )
   )
 );
 

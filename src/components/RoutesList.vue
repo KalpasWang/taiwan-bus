@@ -33,12 +33,21 @@
               <span class="text-primary mx-1">往</span>
               {{ route.DestinationStopNameZh }}
             </p>
-            <div v-else class="text-light fs-7">
+            <p v-else-if="route.Headsign" class="text-light fs-7">
               {{ route.Headsign }}
-            </div>
+            </p>
+            <p v-else class="text-light fs-7">
+              {{ route.DepartureStopNameZh }}→{{ route.DestinationStopNameZh }}
+            </p>
           </router-link>
         </li>
       </ul>
+      <div v-if="!isEnd" class="h-6rem flex-center">
+        <Loading v-if="isFetching" :width="40" />
+        <button v-else @click="fetchMore" class="btn btn-primary"
+          >載入更多</button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -68,7 +77,8 @@ const props = defineProps({
 
 const loading = ref(false)
 const error = ref(null)
-const { fetchNewRoutes, fetchRemaingRoutes, clearRoutes, routes, isEnd } =
+const isFetching = ref(false)
+const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, routes, isEnd } =
   useRoutes()
 const cityName = computed(() => getCityNameByEnName(props.city))
 
@@ -88,11 +98,24 @@ watchEffect(async () => {
   }
 })
 
+async function fetchMore() {
+  isFetching.value = true
+  await fetchRemainingRoutes()
+  isFetching.value = false
+}
+
 const getParams = (route) => {
-  const params = { routeName: route.RouteName.Zh_tw }
-  if (props.type === 'city') {
-    params.city = route.City
+  const params = {
+    routeName: route.RouteName.Zh_tw,
+    ...(route.IsSubRoute && { subRouteName: route.SubRouteName.Zh_tw }),
+    ...(props.type === 'city' && { city: route.City })
   }
+  // if (route.IsSubRoute) {
+  //   params.subRouteName = route.SubRouteName.Zh_tw
+  // }
+  // if (props.type === 'city') {
+  //   params.city = route.City
+  // }
   return params
 }
 </script>

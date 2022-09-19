@@ -7,14 +7,14 @@ import state from './state'
  */
 function useRoutes() {
   const routes = ref(null)
-  const isEnd = ref(false)
+  const isEnd = ref(true)
   let skip = 0
 
   function clearRoutes() {
     state.routeName = ''
     state.city = ''
     routes.value = []
-    isEnd.value = false
+    isEnd.value = true
     skip = 0
   }
 
@@ -24,6 +24,9 @@ function useRoutes() {
     const routesList = await fetchTop30Routes(routeName, city)
     skip = routesList.length
     isEnd.value = false
+    if (skip < 30) {
+      isEnd.value = true
+    }
     if (!city) {
       addHeadSign(routesList)
     }
@@ -33,7 +36,7 @@ function useRoutes() {
 
   function addHeadSign(routes) {
     routes.forEach((route) => {
-      if (route.HasSubRoutes) {
+      if (route?.SubRoutes?.length) {
         const found = route.SubRoutes.find(
           (sub) =>
             sub.SubRouteName.Zh_tw === route.RouteName.Zh_tw &&
@@ -70,11 +73,11 @@ function useRoutes() {
     if (lastRoutes.length < 30) isEnd.value = true
     if (lastRoutes.length === 0) return
     skip += lastRoutes.length
-    if (!city) {
+    if (!state.city) {
       addHeadSign(lastRoutes)
     }
     const subroutes = addSubRoutes(lastRoutes)
-    routes.value.concat(subroutes)
+    routes.value = [...routes.value, ...subroutes]
   }
 
   return { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, routes, isEnd }

@@ -33,7 +33,16 @@ import RouteMap from '@/components/RouteMap.vue'
 import Loading from '@/components/Loading.vue'
 
 const props = defineProps({
-  routeName: String
+  routeName: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  subRouteName: {
+    type: String,
+    required: false,
+    default: ''
+  }
 })
 const router = useRouter()
 const error = ref(null)
@@ -63,6 +72,7 @@ const back = () => {
 
 provide('busLabel', {
   routeName: props.routeName,
+  subRouteName: props.subRouteName || null,
   city: null,
   forwardLabel,
   backwardLabel
