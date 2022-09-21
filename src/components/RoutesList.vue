@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100">
+  <div ref="container" class="h-100">
     <div v-if="loading" class="h-100 flex-center">
       <Loading />
     </div>
@@ -10,9 +10,9 @@
       <h4 v-if="cityName" class="fs-6 text-light mt-5">
         {{ cityName }}
       </h4>
-      <ul class="list-group">
+      <ul ref="routesListComponent" class="list-group">
         <li
-          v-for="(route, idx) in routes"
+          v-for="(route, idx) in state.routes"
           :key="route.RouteName.Zh_tw"
           class="list-group-item list-group-item-action"
           :class="{ 'bg-secondary': idx % 2 === 0 }"
@@ -42,19 +42,16 @@
           </router-link>
         </li>
       </ul>
-      <div v-if="!isEnd" class="h-6rem flex-center">
+      <div v-if="!isEnd" class="h-4rem flex-center">
         <Loading v-if="isFetching" :width="40" />
-        <button v-else @click="fetchMore" class="btn btn-primary"
-          >載入更多</button
-        >
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
-import { useRoutes } from '@/composables/bus'
+import { computed, ref, watchEffect, onMounted, onUnmounted } from 'vue'
+import { state, useRoutes } from '@/composables/bus'
 import { getCityNameByEnName } from '@/composables/utilities'
 import Loading from './Loading.vue'
 
@@ -77,9 +74,10 @@ const props = defineProps({
 
 const loading = ref(false)
 const error = ref(null)
+const container = ref(null)
+const routesListComponent = ref(null)
 const isFetching = ref(false)
-const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, routes, isEnd } =
-  useRoutes()
+const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd } = useRoutes()
 const cityName = computed(() => getCityNameByEnName(props.city))
 
 watchEffect(async () => {
@@ -98,10 +96,17 @@ watchEffect(async () => {
   }
 })
 
-async function fetchMore() {
-  isFetching.value = true
-  await fetchRemainingRoutes()
-  isFetching.value = false
+async function checkFetchCondition() {
+  const target = routesListComponent.value
+  if (!target) return
+  if (
+    target.getBoundingClientRect().bottom < window.innerHeight &&
+    !isEnd.value
+  ) {
+    isFetching.value = true
+    await fetchRemainingRoutes()
+    isFetching.value = false
+  }
 }
 
 const getParams = (route) => {
@@ -110,12 +115,16 @@ const getParams = (route) => {
     ...(route.IsSubRoute && { subRouteName: route.SubRouteName.Zh_tw }),
     ...(props.type === 'city' && { city: route.City })
   }
-  // if (route.IsSubRoute) {
-  //   params.subRouteName = route.SubRouteName.Zh_tw
-  // }
-  // if (props.type === 'city') {
-  //   params.city = route.City
-  // }
   return params
 }
+
+onMounted(() => {
+  const parent = container.value?.parentElement
+  parent?.addEventListener('scroll', checkFetchCondition)
+})
+
+onUnmounted(() => {
+  const parent = container.value?.parentElement
+  parent?.removeEventListener('scroll', checkFetchCondition)
+})
 </script>

@@ -6,14 +6,13 @@ import state from './state'
  * 回傳可以取得公車/客運路線資料的函式
  */
 function useRoutes() {
-  const routes = ref(null)
   const isEnd = ref(true)
   let skip = 0
 
   function clearRoutes() {
     state.routeName = ''
     state.city = ''
-    routes.value = []
+    state.routes = []
     isEnd.value = true
     skip = 0
   }
@@ -31,7 +30,7 @@ function useRoutes() {
       addHeadSign(routesList)
     }
     const subroutes = addSubRoutes(routesList)
-    routes.value = subroutes
+    state.routes = subroutes
   }
 
   function addHeadSign(routes) {
@@ -77,10 +76,12 @@ function useRoutes() {
       addHeadSign(lastRoutes)
     }
     const subroutes = addSubRoutes(lastRoutes)
-    routes.value = [...routes.value, ...subroutes]
+    subroutes.forEach((sub) => {
+      state.routes.push(sub)
+    })
   }
 
-  return { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, routes, isEnd }
+  return { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd }
 }
 
 export default useRoutes
