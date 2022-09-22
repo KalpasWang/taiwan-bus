@@ -15,7 +15,7 @@
         class="keyboard-badge bg-primary shadow-sm"
         @click="isManual = false"
       >
-        <img :src="keyboardIcon" alt="開啟鍵盤" />
+        <img :src="keyboardIcon" alt="開啟鍵盤" role="button" />
       </div>
     </transition>
   </div>

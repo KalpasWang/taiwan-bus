@@ -4,16 +4,14 @@
     <header class="header header-shadow bg-dark p-3 px-lg-0">
       <div class="row">
         <div class="col-auto d-flex justify-content-center align-items-center">
-          <img
+          <IconButton
             @click="router.go(-1)"
-            :src="backIcon"
-            alt="回上一頁"
-            role="button"
-            width="6"
+            :imgUrl="backIcon"
+            title="回上一頁"
           />
         </div>
         <div class="col">
-          <logo />
+          <Logo />
         </div>
       </div>
       <div class="row">
@@ -30,12 +28,7 @@
           />
         </div>
         <div class="col-auto d-flex justify-content-center align-items-center">
-          <img
-            :src="swapIcon"
-            @click="swapCitys"
-            alt="交換縣市"
-            role="button"
-          />
+          <IconButton @click="swapCitys" :imgUrl="swapIcon" title="交換縣市" />
         </div>
         <div class="col">
           <input
@@ -51,41 +44,28 @@
         </div>
       </div>
     </header>
-    <main ref="routesList" class="main-content overflow-hidden px-3">
-      <h3 v-if="state.pending" class="mt-5 text-center text-light">
-        <img :src="loadingIcon" width="70" alt="loading..." />
-      </h3>
-      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-        {{ state.error }}
-      </h3>
-      <RoutesList type="intercity-from-to" v-else />
+    <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
+      <RoutesList
+        type="intercity-from-to"
+        :from="city1.city.City"
+        :to="city2.city.City"
+      />
     </main>
     <KeyBoard3 />
   </div>
 </template>
 
 <script setup>
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-  reactive,
-  computed,
-  provide,
-  toRef
-} from 'vue'
+import { ref, reactive, computed, provide } from 'vue'
 import { useRouter } from 'vue-router'
-import bus from '@/composables/useInterCityBus'
 import RoutesList from '@/components/RoutesList.vue'
 import KeyBoard3 from '@/components/KeyBoard3.vue'
-import logo from '@/components/logo.vue'
+import Logo from '@/components/Logo.vue'
 import backIcon from '@/assets/back.svg'
-import loadingIcon from '@/assets/loading.svg'
 import swapIcon from '@/assets/swap.svg'
+import IconButton from '../components/IconButton.vue'
 
 const router = useRouter()
-const { state } = bus
-const routesList = ref(null)
 const input1 = ref(null)
 const input2 = ref(null)
 const city1 = reactive({
@@ -116,7 +96,8 @@ const focusInput2 = () => {
 }
 
 const fetchData = () => {
-  bus.fetchRoutesByCitys(city1.city.City, city2.city.City)
+  // bus.fetchRoutesByCitys(city1.city.City, city2.city.City)
+  // fetchRoutesByCitys(city1.city.City, city2.city.City)
 }
 
 const swapCitys = () => {
@@ -135,31 +116,9 @@ const updateCurrentCity = (temp) => {
 }
 
 // provide 響應式 states 給子元件
-provide('routesList', toRef(state, 'routesList'))
 provide('currentCity', {
   currentCity,
   updateCurrentCity
-})
-
-// 在 mount, resize 時調整 perfect scrollbar 區域高度
-const setScrollAreaHeight = () => {
-  const height = routesList.value.offsetHeight + 'px'
-  document.documentElement.style.setProperty('--h', height)
-}
-
-// 監聽 resize event
-function callback() {
-  setScrollAreaHeight()
-}
-
-onMounted(() => {
-  setScrollAreaHeight()
-  focusInput1()
-  window.addEventListener('resize', callback)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', callback)
 })
 </script>
 

@@ -52,7 +52,7 @@
 <script setup>
 import { computed, ref, watchEffect, onMounted, onUnmounted } from 'vue'
 import { state, useRoutes } from '@/composables/bus'
-import { getCityNameByEnName } from '@/composables/utilities'
+import { getCityName } from '@/composables/utilities'
 import Loading from './Loading.vue'
 
 const props = defineProps({
@@ -67,8 +67,15 @@ const props = defineProps({
   },
   routeName: {
     type: String,
-    required: true,
-    default: ''
+    required: false
+  },
+  from: {
+    type: String,
+    required: false
+  },
+  to: {
+    type: String,
+    required: false
   }
 })
 
@@ -77,21 +84,38 @@ const error = ref(null)
 const container = ref(null)
 const routesListComponent = ref(null)
 const isFetching = ref(false)
-const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd } = useRoutes()
-const cityName = computed(() => getCityNameByEnName(props.city))
+const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd } = useRoutes(
+  props.type
+)
+
+const cityName = computed(() => getCityName(props.city))
+const arg1 = computed(() => {
+  if (props.type.includes('from-to')) {
+    return props.from
+  }
+  return props.routeName
+})
+const arg2 = computed(() => {
+  if (props.type.includes('from-to')) {
+    return props.to
+  }
+  return props.city
+})
 
 watchEffect(async () => {
-  if (!props.routeName && !props.city) {
+  if (!arg1.value && !arg2.value) {
     clearRoutes()
     return
   }
   try {
     loading.value = true
-    await fetchNewRoutes(props.routeName, props.city)
+    await fetchNewRoutes(arg1.value, arg2.value)
+    console.log(state.routes)
     error.value = null
     loading.value = false
   } catch (e) {
     error.value = e.message
+    console.error(e)
     loading.value = false
   }
 })

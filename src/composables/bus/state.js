@@ -5,9 +5,6 @@ const state = reactive({
   routeID: '',
   city: null,
   routes: [],
-  query: {
-    routeName: ''
-  },
   stopsOfRoute: null
 })
 

@@ -1,11 +1,12 @@
 import { ref } from 'vue'
-import { fetchTop30Routes } from '../api'
+import { fetchTop30Routes, api } from '../api'
+import { citys } from '../constants'
 import state from './state'
 
 /**
  * 回傳可以取得公車/客運路線資料的函式
  */
-function useRoutes() {
+function useRoutes(type = 'city') {
   const isEnd = ref(true)
   let skip = 0
 
@@ -17,7 +18,64 @@ function useRoutes() {
     skip = 0
   }
 
-  async function fetchNewRoutes(routeName, city) {
+  async function fetchNewRoutes(...args) {
+    switch (type) {
+      case 'city':
+      case 'intercity':
+        fetchRoutesByRouteName(...args)
+        break
+      case 'intercity-from-to':
+        await fetchRoutesByCitys(...args)
+        break
+      default:
+    }
+  }
+
+  // 取得有經過指定[縣市]的公車資料
+  async function fetchRoutesByCitys(city1, city2) {
+    const cityObj1 = citys.find((c) => c.City === city1)
+    const cityObj2 = citys.find((c) => c.City === city2)
+    if (!cityObj1 || !cityObj2) return
+    const url = 'StopOfRoute/InterCity'
+    const res = await api.get(url, {
+      params: {
+        $filter: `Stops/any(d:d/LocationCityCode eq '${cityObj1.CityCode}')`
+      }
+    })
+
+    state.routes = []
+    const tempRoutesList = []
+    // 找出經過city1與city2的路線
+    res.data.forEach((route) => {
+      const hasCity2 = route.Stops.some(
+        (stop) => stop.LocationCityCode === cityObj2.CityCode
+      )
+      if (hasCity2) {
+        tempRoutesList.push(route)
+      }
+    })
+    // 根據子路線整理routes list
+    tempRoutesList.forEach((route) => {
+      const routeName = route.RouteName.Zh_tw
+      const subRouteName = route.SubRouteName.Zh_tw
+      const subSlice = subRouteName.slice(routeName.length)
+      // 如果subslice是0之外的都當成另一個route
+      route.UseSubName = false
+      if (subSlice !== '0') {
+        route.UseSubName = true
+      }
+      // 如果沒有被push過才push到state.routesList
+      const isPushed = state.routes.some(
+        (savedRoute) =>
+          savedRoute.SubRouteName.Zh_tw === route.SubRouteName.Zh_tw
+      )
+      if (!isPushed) {
+        state.routes.push(route)
+      }
+    })
+  }
+
+  async function fetchRoutesByRouteName(routeName, city) {
     state.routeName = routeName
     state.city = city
     const routesList = await fetchTop30Routes(routeName, city)
@@ -81,7 +139,13 @@ function useRoutes() {
     })
   }
 
-  return { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd }
+  return {
+    fetchNewRoutes,
+    fetchRemainingRoutes,
+    fetchRoutesByCitys,
+    clearRoutes,
+    isEnd
+  }
 }
 
 export default useRoutes
