@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { fetchTop30Routes, api } from '../api'
 import { citys } from '../constants'
+import { filterRouteName } from '../utilities'
 import state from './state'
 
 /**
@@ -44,33 +45,62 @@ function useRoutes(type = 'city') {
     })
 
     state.routes = []
-    const tempRoutesList = []
+    const promiseArray = []
     // 找出經過city1與city2的路線
     res.data.forEach((route) => {
-      const hasCity2 = route.Stops.some(
+      const city1Idx = route.Stops.findIndex(
+        (stop) => stop.LocationCityCode === cityObj1.CityCode
+      )
+      const city2Idx = route.Stops.findIndex(
         (stop) => stop.LocationCityCode === cityObj2.CityCode
       )
-      if (hasCity2) {
-        tempRoutesList.push(route)
+      if (city1Idx < 0 || city2Idx < 0) return
+      if (city1Idx < city2Idx) {
+        promiseArray.push(fetchRouteInfo(route))
+      }
+    })
+    let values = await Promise.all(promiseArray)
+    values = values.filter(Boolean) // 清除 undefined
+    values.forEach((routeData) => {
+      const isExist = state.routes.some(
+        (savedRoute) =>
+          savedRoute.SubRouteName.Zh_tw === routeData.SubRouteName.Zh_tw
+      )
+      if (!isExist) {
+        state.routes.push(routeData)
       }
     })
     // 根據子路線整理routes list
-    tempRoutesList.forEach((route) => {
-      const routeName = route.RouteName.Zh_tw
-      const subRouteName = route.SubRouteName.Zh_tw
-      const subSlice = subRouteName.slice(routeName.length)
-      // 如果subslice是0之外的都當成另一個route
-      route.UseSubName = false
-      if (subSlice !== '0') {
-        route.UseSubName = true
-      }
-      // 如果沒有被push過才push到state.routesList
-      const isPushed = state.routes.some(
-        (savedRoute) =>
-          savedRoute.SubRouteName.Zh_tw === route.SubRouteName.Zh_tw
-      )
-      if (!isPushed) {
-        state.routes.push(route)
+    // tempRoutes.forEach((route) => {
+    //   const routeName = route.RouteName.Zh_tw
+    //   const subRouteName = route.SubRouteName.Zh_tw
+    //   const subSlice = subRouteName.slice(routeName.length)
+    //   // 如果subslice是0之外的都當成另一個route
+    //   route.UseSubName = false
+    //   if (subSlice !== '0') {
+    //     route.UseSubName = true
+    //   }
+    //   // 如果沒有被push過才push到state.routesList
+    //   const isPushed = state.routes.some(
+    //     (savedRoute) =>
+    //       savedRoute.SubRouteName.Zh_tw === route.SubRouteName.Zh_tw
+    //   )
+    //   if (!isPushed) {
+    //     state.routes.push(route)
+    //   }
+    // })
+  }
+
+  async function fetchRouteInfo(stopsOfRoute) {
+    const routesData = await fetchTop30Routes(stopsOfRoute.RouteName.Zh_tw)
+    const name = stopsOfRoute.RouteName.Zh_tw
+    const subId = stopsOfRoute.SubRouteID
+    const route = routesData.find((item) => item.RouteName.Zh_tw === name)
+    return route.SubRoutes.find((sub) => {
+      if (sub.SubRouteID === subId) {
+        sub.IsSubRoute = true
+        sub.RouteName = route.RouteName
+        return sub
       }
     })
   }

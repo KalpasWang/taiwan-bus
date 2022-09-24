@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper vh-100 container-lg">
+  <div class="wrapper vh-100 container-lg bg-dark">
     <!-- header -->
     <header class="header header-shadow bg-dark p-3 px-lg-0">
       <div class="row">
@@ -132,12 +132,15 @@ provide('currentCity', {
     'main'
     'keyboard';
   column-gap: 42px;
-  @media screen and (min-width: 991px) {
+  @media screen and (min-width: 992px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       'header main'
       'keyboard main';
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: 5fr 7fr;
   }
 }
 

@@ -110,7 +110,6 @@ watchEffect(async () => {
   try {
     loading.value = true
     await fetchNewRoutes(arg1.value, arg2.value)
-    console.log(state.routes)
     error.value = null
     loading.value = false
   } catch (e) {
