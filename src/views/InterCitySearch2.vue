@@ -14,11 +14,11 @@
           <Logo />
         </div>
       </div>
-      <div class="row">
+      <div class="row gx-0">
         <div class="col">
           <input
             ref="input1"
-            :value="city1.city.CityName"
+            :value="getCityName(city1)"
             @click="focusInput1"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -33,7 +33,7 @@
         <div class="col">
           <input
             ref="input2"
-            :value="city2.city.CityName"
+            :value="getCityName(city2)"
             @click="focusInput2"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -45,19 +45,21 @@
       </div>
     </header>
     <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
-      <RoutesList
-        type="intercity-from-to"
-        :from="city1.city.City"
-        :to="city2.city.City"
-      />
+      <RoutesList type="intercity-from-to" :from="city1" :to="city2" />
     </main>
-    <KeyBoard3 />
+    <Transition name="keyboard-slide">
+      <KeyBoard3 v-if="cityFocused === 'city1'" v-model="city1" />
+    </Transition>
+    <Transition name="keyboard-slide">
+      <KeyBoard3 v-if="cityFocused === 'city2'" v-model="city2" />
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, provide } from 'vue'
+import { ref, onMounted, watchPostEffect } from 'vue'
 import { useRouter } from 'vue-router'
+import { getCityName } from '../composables/utilities'
 import RoutesList from '@/components/RoutesList.vue'
 import KeyBoard3 from '@/components/KeyBoard3.vue'
 import Logo from '@/components/Logo.vue'
@@ -68,57 +70,46 @@ import IconButton from '../components/IconButton.vue'
 const router = useRouter()
 const input1 = ref(null)
 const input2 = ref(null)
-const city1 = reactive({
-  city: {
-    CityName: '',
-    CityCode: '',
-    City: ''
+const city1 = ref('')
+const city2 = ref('')
+const cityFocused = ref('city1')
+
+watchPostEffect(() => {
+  if (city1.value && !city2.value) {
+    focusInput2()
+  } else if (!city1.value && city2.value) {
+    focusInput1()
+  } else if (city1.value && city2.value) {
+    blurInputs()
   }
 })
-const city2 = reactive({
-  city: {
-    CityName: '',
-    CityCode: '',
-    City: ''
-  }
-})
-let iscity1 = ref(true)
-const currentCity = computed(() => (iscity1.value ? city1.city : city2.city))
 
-const focusInput1 = () => {
-  iscity1.value = true
-  input1.value.focus()
+function focusInput1() {
+  input1.value.classList.add('form-control-active')
+  input2.value.classList.remove('form-control-active')
+  cityFocused.value = 'city1'
 }
 
-const focusInput2 = () => {
-  iscity1.value = false
-  input2.value.focus()
+function focusInput2() {
+  input2.value.classList.add('form-control-active')
+  input1.value.classList.remove('form-control-active')
+  cityFocused.value = 'city2'
 }
 
-const fetchData = () => {
-  // bus.fetchRoutesByCitys(city1.city.City, city2.city.City)
-  // fetchRoutesByCitys(city1.city.City, city2.city.City)
+function blurInputs() {
+  input1.value.classList.remove('form-control-active')
+  input2.value.classList.remove('form-control-active')
+  cityFocused.value = ''
 }
 
 const swapCitys = () => {
   const temp = city1.city
   city1.city = city2.city
   city2.city = temp
-  fetchData()
 }
 
-const updateCurrentCity = (temp) => {
-  const city = iscity1.value ? city1 : city2
-  city.city = temp
-  if (city2.city.City && city1.city.City) {
-    fetchData()
-  }
-}
-
-// provide 響應式 states 給子元件
-provide('currentCity', {
-  currentCity,
-  updateCurrentCity
+onMounted(() => {
+  focusInput1()
 })
 </script>
 

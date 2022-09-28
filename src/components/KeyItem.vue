@@ -1,21 +1,22 @@
 <template>
-  <div class="btn btn-outline-primary d-block" :class="textWhite">
+  <button
+    type="button"
+    class="btn btn-outline-primary btn-sm w-100"
+    :class="addon"
+  >
     <slot></slot>
-  </div>
+  </button>
 </template>
 <script setup>
-import { useSlots, computed } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   white: Boolean
 })
-const slots = useSlots()
 
-const textWhite = computed(() => {
+const addon = computed(() => {
   return {
     'text-light': props.white
   }
 })
 </script>
-
-<style lang=""></style>
