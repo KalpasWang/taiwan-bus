@@ -74,12 +74,15 @@ provide('manualInput', {
     'main'
     'keyboard';
   column-gap: 42px;
-  @media screen and (min-width: 991px) {
-    grid-template-columns: 6fr 7fr;
+  @media screen and (min-width: 992px) {
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       'header main'
       'keyboard main';
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: 5fr 7fr;
   }
 }
 

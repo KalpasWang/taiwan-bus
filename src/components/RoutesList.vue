@@ -1,19 +1,23 @@
 <template>
   <div ref="container" class="h-100">
-    <div v-if="loading" class="h-100 flex-center">
-      <Loading />
-    </div>
-    <h4 v-else-if="error" class="h-100 flex-center text-light">
-      {{ error }}
+    <h4
+      v-if="props.type === 'city' && !props.city"
+      class="fs-7 text-light px-3 pt-5"
+    >
+      請先選擇縣市
     </h4>
-    <div v-else>
-      <h4 v-if="cityName" class="fs-6 text-light mt-5">
-        {{ cityName }}
+    <div v-else class="h-100">
+      <h4 v-if="props.city" class="fs-6 text-light px-3 pt-5">
+        {{ getCityName(props.city) }}
       </h4>
-      <ul ref="routesListComponent" class="list-group">
+      <Loading v-if="isLoading" :width="70" />
+      <h4 v-else-if="error" class="text-center text-light">
+        {{ error }}
+      </h4>
+      <ul v-else class="list-group">
         <li
           v-for="(route, idx) in state.routes"
-          :key="route.RouteName.Zh_tw"
+          :key="route.SubRouteID || route.RouteID"
           class="list-group-item list-group-item-action"
           :class="{ 'bg-secondary': idx % 2 === 0 }"
         >
@@ -42,15 +46,15 @@
           </router-link>
         </li>
       </ul>
-      <div v-if="!isEnd" class="h-4rem flex-center">
-        <Loading v-if="isFetching" :width="40" />
+      <div v-if="!isEnd" class="h-7rem flex-center">
+        <Loading v-if="isFetching" :width="70" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, watchEffect, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watchPostEffect, onMounted, onUnmounted } from 'vue'
 import { state, useRoutes } from '@/composables/bus'
 import { getCityName } from '@/composables/utilities'
 import Loading from './Loading.vue'
@@ -78,17 +82,16 @@ const props = defineProps({
     required: false
   }
 })
+const emit = defineEmits(['onScroll'])
 
-const loading = ref(false)
+const isLoading = ref(false)
 const error = ref(null)
 const container = ref(null)
-const routesListComponent = ref(null)
 const isFetching = ref(false)
 const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd } = useRoutes(
   props.type
 )
 
-const cityName = computed(() => getCityName(props.city))
 const arg1 = computed(() => {
   if (props.type.includes('from-to')) {
     return props.from
@@ -102,28 +105,37 @@ const arg2 = computed(() => {
   return props.city
 })
 
-watchEffect(async () => {
-  if (!arg1.value && !arg2.value) {
+watchPostEffect(async () => {
+  if (props.type === 'city' && !arg2.value) {
+    clearRoutes()
+    return
+  }
+  if (props.type.includes('from-to') && !arg1.value && !arg2.value) {
+    clearRoutes()
+    return
+  }
+  if (!arg1.value) {
     clearRoutes()
     return
   }
   try {
-    loading.value = true
+    isLoading.value = true
     await fetchNewRoutes(arg1.value, arg2.value)
     error.value = null
-    loading.value = false
+    isLoading.value = false
   } catch (e) {
     error.value = e.message
     console.error(e)
-    loading.value = false
+    isLoading.value = false
   }
 })
 
 async function checkFetchCondition() {
-  const target = routesListComponent.value
+  const target = container.value?.parentElement
   if (!target) return
+  emit('onScroll')
   if (
-    target.getBoundingClientRect().bottom < window.innerHeight &&
+    target.offsetHeight + target.scrollTop >= target.scrollHeight - 150 &&
     !isEnd.value
   ) {
     isFetching.value = true

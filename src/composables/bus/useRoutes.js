@@ -1,7 +1,6 @@
 import { ref } from 'vue'
-import { fetchTop30Routes, api } from '../api'
+import { fetchTop20Routes, api } from '../api'
 import { citys } from '../constants'
-import { filterRouteName } from '../utilities'
 import state from './state'
 
 /**
@@ -70,29 +69,10 @@ function useRoutes(type = 'city') {
         state.routes.push(routeData)
       }
     })
-    // 根據子路線整理routes list
-    // tempRoutes.forEach((route) => {
-    //   const routeName = route.RouteName.Zh_tw
-    //   const subRouteName = route.SubRouteName.Zh_tw
-    //   const subSlice = subRouteName.slice(routeName.length)
-    //   // 如果subslice是0之外的都當成另一個route
-    //   route.UseSubName = false
-    //   if (subSlice !== '0') {
-    //     route.UseSubName = true
-    //   }
-    //   // 如果沒有被push過才push到state.routesList
-    //   const isPushed = state.routes.some(
-    //     (savedRoute) =>
-    //       savedRoute.SubRouteName.Zh_tw === route.SubRouteName.Zh_tw
-    //   )
-    //   if (!isPushed) {
-    //     state.routes.push(route)
-    //   }
-    // })
   }
 
   async function fetchRouteInfo(stopsOfRoute) {
-    const routesData = await fetchTop30Routes(stopsOfRoute.RouteName.Zh_tw)
+    const routesData = await fetchTop20Routes(stopsOfRoute.RouteName.Zh_tw)
     const name = stopsOfRoute.RouteName.Zh_tw
     const subId = stopsOfRoute.SubRouteID
     const route = routesData.find((item) => item.RouteName.Zh_tw === name)
@@ -108,10 +88,10 @@ function useRoutes(type = 'city') {
   async function fetchRoutesByRouteName(routeName, city) {
     state.routeName = routeName
     state.city = city
-    const routesList = await fetchTop30Routes(routeName, city)
+    const routesList = await fetchTop20Routes(routeName, city)
     skip = routesList.length
     isEnd.value = false
-    if (skip < 30) {
+    if (skip < 20) {
       isEnd.value = true
     }
     if (!city) {
@@ -146,6 +126,13 @@ function useRoutes(type = 'city') {
           ) {
             subroute.IsSubRoute = true
             subroute.RouteName = route.RouteName
+            subroute.City = route.City
+            if (!subroute.DepartureStopNameZh) {
+              subroute.DepartureStopNameZh = route.DepartureStopNameZh
+              subroute.DepartureStopNameEn = route.DepartureStopNameEn
+              subroute.DestinationStopNameZh = route.DestinationStopNameZh
+              subroute.DestinationStopNameEn = route.DestinationStopNameEn
+            }
             accu.push(subroute)
           }
         })
@@ -156,8 +143,8 @@ function useRoutes(type = 'city') {
   }
 
   async function fetchRemainingRoutes() {
-    const lastRoutes = await fetchTop30Routes(state.routeName, state.city, skip)
-    if (lastRoutes.length < 30) isEnd.value = true
+    const lastRoutes = await fetchTop20Routes(state.routeName, state.city, skip)
+    if (lastRoutes.length < 20) isEnd.value = true
     if (lastRoutes.length === 0) return
     skip += lastRoutes.length
     if (!state.city) {

@@ -3,11 +3,11 @@ import jsSHA from 'jssha'
 import state from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 
-export const apiTop30 = axios.create({
+export const apiTop20 = axios.create({
   baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',
   headers: getAuthorizationHeader(),
   params: {
-    $top: 30,
+    $top: 20,
     $format: 'JSON'
   }
 })
@@ -46,13 +46,13 @@ export async function fetchStopsOfRoute(routeName, city) {
  * @param  {string} routeName
  * @param  {string} [city] - 若沒有 city 表示位客運路線
  */
-export async function fetchTop30Routes(routeName, city, skip) {
+export async function fetchTop20Routes(routeName, city, skip) {
   // 設定要 fetch 的網址
   let url = `Route/City/${city}`
   if (!city) {
     url = 'Route/InterCity'
   }
-  const res = await apiTop30.get(`${url}/${routeName}`, {
+  const res = await apiTop20.get(`${url}/${routeName}`, {
     params: {
       $skip: `${skip || 0}`
     }
