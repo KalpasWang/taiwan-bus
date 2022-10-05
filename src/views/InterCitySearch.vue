@@ -2,21 +2,26 @@
   <div class="wrapper vh-100 container-lg position-relative">
     <SearchHeader class="header" />
     <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
-      <RoutesList type="intercity" :routeName="query.routeName" />
+      <RoutesList
+        type="intercity"
+        :routeName="input.routeName"
+        @onScroll="checkMedia"
+      />
     </main>
     <Transition name="keyboard-slide">
-      <div v-if="!isManual" class="keyboard">
+      <div v-if="!isManual && showKeyboard" class="keyboard">
         <KeyBoard2 />
       </div>
     </Transition>
     <transition name="badge-fade">
-      <div
+      <button
         v-if="isManual"
+        @click="updateIsManual(false)"
         class="keyboard-badge bg-primary shadow-sm"
-        @click="isManual = false"
+        role="button"
       >
         <img :src="keyboardIcon" alt="開啟鍵盤" role="button" />
-      </div>
+      </button>
     </transition>
   </div>
 </template>
@@ -28,37 +33,38 @@ import KeyBoard2 from '@/components/KeyBoard2.vue'
 import RoutesList from '@/components/RoutesList.vue'
 import keyboardIcon from '@/assets/keyboard.svg'
 
-const query = reactive({
+const input = reactive({
   routeName: ''
 })
+const showKeyboard = ref(true)
 const isManual = ref(false)
 
 // methods
-const updateRouteNameQuery = (key, allKeys = false) => {
-  if (allKeys) {
-    query.routeName = key
-  } else if (typeof key === 'string') {
-    const oldName = query.routeName
-    query.routeName = oldName + key
-  } else if (key === -1) {
-    const name = query.routeName
-    query.routeName = name.slice(0, -1)
-  } else if (!key) {
-    query.routeName = ''
+const checkMedia = () => {
+  if (!showKeyboard.value) return
+  const mq = window.matchMedia('(min-width: 992px)')
+  if (!mq.matches) {
+    showKeyboard.value = false
   }
+}
+
+const updateRouteName = (newRouteName) => {
+  input.routeName = newRouteName
 }
 
 const updateIsManual = (val) => {
   isManual.value = +val
+  showKeyboard.value = !val
 }
 
 // provide 響應式 states, mutations 給子元件
-provide('query', {
-  query,
-  updateRouteNameQuery
+provide('input', {
+  input,
+  showKeyboard,
+  updateRouteName
 })
 
-provide('manualInput', {
+provide('isManual', {
   isManual,
   updateIsManual
 })
@@ -96,22 +102,5 @@ provide('manualInput', {
 
 .keyboard {
   grid-area: keyboard;
-}
-
-.keyboard-badge {
-  position: absolute;
-  right: 16px;
-  bottom: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  cursor: pointer;
-  @media screen and (min-width: 991px) {
-    right: auto;
-    left: 16px;
-  }
 }
 </style>
