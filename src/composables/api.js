@@ -3,11 +3,11 @@ import jsSHA from 'jssha'
 import state from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 
-export const apiTop30 = axios.create({
+export const apiTop20 = axios.create({
   baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',
   headers: getAuthorizationHeader(),
   params: {
-    $top: 30,
+    $top: 20,
     $format: 'JSON'
   }
 })
@@ -20,8 +20,12 @@ export const api = axios.create({
   }
 })
 
-// 取得指定[縣市],[路線名稱]的市區公車或公路客運路線站序資料
-export const fetchStopsOfRoute = async (routeName, city) => {
+/**
+ * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線站序資料
+ * @param  {string} routeName
+ * @param  {string} [city] - 若沒有 city 表示位客運路線
+ */
+export async function fetchStopsOfRoute(routeName, city) {
   // 設定要 fetch 的網址
   let url = `StopOfRoute/City/${city}`
   if (!city) {
@@ -35,6 +39,26 @@ export const fetchStopsOfRoute = async (routeName, city) => {
   }
   state.routeName = routeName
   state.stopsOfRoute = stopsData
+}
+
+/**
+ * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線資料
+ * @param  {string} routeName
+ * @param  {string} [city] - 若沒有 city 表示位客運路線
+ */
+export async function fetchTop20Routes(routeName, city, skip) {
+  // 設定要 fetch 的網址
+  let url = `Route/City/${city}`
+  if (!city) {
+    url = 'Route/InterCity'
+  }
+  const res = await apiTop20.get(`${url}/${routeName}`, {
+    params: {
+      $skip: `${skip || 0}`
+    }
+  })
+  // console.log(res.data)
+  return res.data
 }
 
 function getAuthorizationHeader() {

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="container">
-      <h2 class="h4 text-center mb-1">{{ routeName }}</h2>
+      <h2 class="h4 text-center mb-1">{{ subRouteName || routeName }}</h2>
       <div class="row">
         <div
           @click="setTab('forward')"
@@ -45,7 +45,8 @@ import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 
 const emit = defineEmits(['back', 'setDirection'])
-const { routeName, forwardLabel, backwardLabel } = inject('busLabel')
+const { routeName, subRouteName, forwardLabel, backwardLabel } =
+  inject('busLabel')
 const activeTab = ref('forward')
 
 const setTab = (direction) => {

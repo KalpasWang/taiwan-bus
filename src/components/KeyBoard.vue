@@ -10,7 +10,7 @@
         <div class="col-6">
           <KeyItem @click="boardState = 2" white>
             <img :src="markerUrl" width="13" height="15.89" class="me-2" />
-            <span v-if="query.city.CityName">{{ query.city.CityName }}</span>
+            <span v-if="input.city">{{ getCityName(input.city) }}</span>
             <span v-else>選擇縣市</span>
           </KeyItem>
         </div>
@@ -96,7 +96,7 @@
         <div v-for="city in citys" :key="city.City" class="col">
           <KeyItem
             :class="{ active: city.City === selectedCity }"
-            @click="setTempCity(city)"
+            @click="setTempCity(city.City)"
             >{{ city.CityName }}</KeyItem
           >
         </div>
@@ -160,16 +160,17 @@ import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 import deleteIcon from '@/assets/delete-icon.svg'
 import { citys } from '@/composables/constants'
+import { getCityName } from '../composables/utilities'
 
 // inject states and mutations from parent
-const { query, updateCityQuery, updateRouteNameQuery } = inject('query')
-const { updateIsManual } = inject('manualInput')
+const { input, updateCity, updateRouteName } = inject('input')
+const { isManual, updateIsManual } = inject('isManual')
 
 // states
 const boardState = ref(1)
 const tempCity = ref(null)
 const selectedCity = computed(() =>
-  tempCity.value ? tempCity.value.City : query.city.City
+  tempCity.value ? tempCity.value : input.city
 )
 
 // methods
@@ -180,10 +181,19 @@ const setTempCity = (city) => {
   tempCity.value = city
 }
 const setCityAndBoardState = () => {
-  updateCityQuery(tempCity.value)
+  updateCity(tempCity.value)
   boardState.value = 1
 }
 const handleKeyPress = (key) => {
-  updateRouteNameQuery(key)
+  if (isManual.value) {
+    return
+  }
+  if (typeof key === 'string') {
+    updateRouteName(input.routeName + key)
+  } else if (key === -1) {
+    updateRouteName(input.routeName.slice(0, -1))
+  } else if (!key) {
+    updateRouteName('')
+  }
 }
 </script>

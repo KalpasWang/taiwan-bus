@@ -55,7 +55,7 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCity(item.LocationCityCode),
+                    city: getCityByCityCode(item.LocationCityCode),
                     stationId: item.StationID
                   }
                 }"
@@ -123,7 +123,7 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCity(item.LocationCityCode),
+                    city: getCityByCityCode(item.LocationCityCode),
                     stationId: item.StationID
                   }
                 }"
@@ -164,7 +164,10 @@ import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
 import useEventBus from '@/composables/useEventBus'
 import { useArrivalsInfo } from '@/composables/bus'
-import { getCity, addCustomDataToStops } from '@/composables/utilities'
+import {
+  getCityByCityCode,
+  addCustomDataToStops
+} from '@/composables/utilities'
 import wheelchairIcon from '@/assets/wheelchair.svg'
 import mapIcon from '@/assets/map.svg'
 import timetableIcon from '@/assets/timetable.svg'

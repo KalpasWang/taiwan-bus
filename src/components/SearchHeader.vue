@@ -1,13 +1,14 @@
 <template>
   <header class="header-shadow bg-dark row p-3 px-lg-0">
     <div class="col-auto">
-      <logo />
+      <Logo />
     </div>
     <div class="col">
       <input
-        ref="input"
-        v-model="routeNameModel"
+        ref="textInput"
+        v-model.trim="routeNameModel"
         :readonly="!isManual"
+        @click="checkKeyboard"
         type="text"
         class="form-control bg-secondary py-md-3 ls-1"
         placeholder="選擇路線或手動輸入關鍵字"
@@ -17,30 +18,32 @@
 </template>
 
 <script setup>
-import { inject, ref, computed, watch, onMounted } from 'vue'
-import logo from '@/components/logo.vue'
+import { inject, ref, computed, watch } from 'vue'
+import Logo from '@/components/logo.vue'
 
 // inject states and mutations from parent
-const { query, updateRouteNameQuery } = inject('query')
-const { isManual } = inject('manualInput')
-const input = ref(null)
+const { input, showKeyboard, updateRouteName } = inject('input')
+const { isManual } = inject('isManual')
+const textInput = ref(null)
 
 const routeNameModel = computed({
   get() {
-    return query.routeName
+    return input.routeName
   },
   set(keys) {
-    updateRouteNameQuery(keys, true)
+    updateRouteName(keys)
   }
 })
 
-onMounted(() => {
-  watch(isManual, (newVal) => {
-    if (newVal) {
-      input.value.focus()
-    }
-  })
+watch(isManual, (newVal) => {
+  if (newVal) {
+    textInput.value.focus()
+  }
 })
-</script>
 
-<style lang="scss"></style>
+const checkKeyboard = (e) => {
+  if (!isManual.value) {
+    showKeyboard.value = true
+  }
+}
+</script>

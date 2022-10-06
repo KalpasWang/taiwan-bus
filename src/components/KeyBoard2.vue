@@ -85,25 +85,33 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue'
+import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 import deleteIcon from '@/assets/delete-icon.svg'
 
 // inject states and mutations from parent
-const { updateRouteNameQuery } = inject('query')
-const { updateIsManual } = inject('manualInput')
+const { input, updateRouteName } = inject('input')
+const { isManual, updateIsManual } = inject('isManual')
 
 // states
 const router = useRouter()
-// const boardState = ref(1)
 
 // methods
 const hideKeyboard = () => {
   updateIsManual(true)
 }
 const handleKeyPress = (key) => {
-  updateRouteNameQuery(key)
+  if (isManual.value) {
+    return
+  }
+  if (typeof key === 'string') {
+    updateRouteName(input.routeName + key)
+  } else if (key === -1) {
+    updateRouteName(input.routeName.slice(0, -1))
+  } else if (!key) {
+    updateRouteName('')
+  }
 }
 </script>

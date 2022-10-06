@@ -2,11 +2,11 @@
   <div class="bg-secondary p-4 px-md-7 py-md-5 p-lg-4">
     <!-- 選擇縣市 -->
     <div class="row row-cols-5 g-1">
-      <div v-for="city in citys" :key="city.City" class="col">
+      <div v-for="city in citys.map((ob) => ob.City)" :key="city" class="col">
         <KeyItem
-          :class="{ active: city.City === selectedCity }"
-          @click="setTempCity(city)"
-          >{{ city.CityName }}</KeyItem
+          :class="{ active: city === selectedCity }"
+          @click="setCity(city)"
+          >{{ getCityName(city) }}</KeyItem
         >
       </div>
       <div class="col flex-grow-1">
@@ -17,30 +17,19 @@
 </template>
 
 <script setup>
-import { ref, inject, computed } from 'vue'
+import { ref } from 'vue'
 import KeyItem from '@/components/KeyItem.vue'
 import { citys } from '@/composables/constants'
+import { getCityName } from '../composables/utilities'
 
-// inject states and mutations from parent
-const { currentCity, updateCurrentCity } = inject('currentCity')
-
-// states
-const initialState = {
-  City: '',
-  CityCode: '',
-  CityName: ''
-}
-const tempCity = ref(initialState)
-const selectedCity = computed(
-  () => tempCity.value.City || currentCity.value.City
-)
-
+const props = defineProps(['modelValue'])
+const emit = defineEmits(['update:modelValue'])
+const selectedCity = ref(props.modelValue)
 // methods
-const setTempCity = (cityObj) => {
-  tempCity.value = cityObj
+const setCity = (city) => {
+  selectedCity.value = city
 }
 const update = () => {
-  updateCurrentCity(tempCity.value)
-  tempCity.value = initialState
+  emit('update:modelValue', selectedCity.value)
 }
 </script>

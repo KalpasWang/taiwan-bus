@@ -1,26 +1,24 @@
 <template>
-  <div class="wrapper vh-100 container-lg">
+  <div class="wrapper vh-100 container-lg bg-dark">
     <!-- header -->
     <header class="header header-shadow bg-dark p-3 px-lg-0">
       <div class="row">
         <div class="col-auto d-flex justify-content-center align-items-center">
-          <img
+          <IconButton
             @click="router.go(-1)"
-            :src="backIcon"
-            alt="回上一頁"
-            role="button"
-            width="6"
+            :imgUrl="backIcon"
+            title="回上一頁"
           />
         </div>
         <div class="col">
-          <logo />
+          <Logo />
         </div>
       </div>
-      <div class="row">
+      <div class="row gx-0">
         <div class="col">
           <input
             ref="input1"
-            :value="city1.city.CityName"
+            :value="getCityName(city1)"
             @click="focusInput1"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -30,17 +28,12 @@
           />
         </div>
         <div class="col-auto d-flex justify-content-center align-items-center">
-          <img
-            :src="swapIcon"
-            @click="swapCitys"
-            alt="交換縣市"
-            role="button"
-          />
+          <IconButton @click="swapCitys" :imgUrl="swapIcon" title="交換縣市" />
         </div>
         <div class="col">
           <input
             ref="input2"
-            :value="city2.city.CityName"
+            :value="getCityName(city2)"
             @click="focusInput2"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -51,115 +44,72 @@
         </div>
       </div>
     </header>
-    <main ref="routesList" class="main-content overflow-hidden px-3">
-      <h3 v-if="state.pending" class="mt-5 text-center text-light">
-        <img :src="loadingIcon" width="70" alt="loading..." />
-      </h3>
-      <h3 v-else-if="state.error" class="mt-5 text-center text-light">
-        {{ state.error }}
-      </h3>
-      <RoutesList type="intercity-from-to" v-else />
+    <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
+      <RoutesList type="intercity-from-to" :from="city1" :to="city2" />
     </main>
-    <KeyBoard3 />
+    <Transition name="keyboard-slide">
+      <KeyBoard3 v-if="cityFocused === 'city1'" v-model="city1" />
+    </Transition>
+    <Transition name="keyboard-slide">
+      <KeyBoard3 v-if="cityFocused === 'city2'" v-model="city2" />
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-  reactive,
-  computed,
-  provide,
-  toRef
-} from 'vue'
+import { ref, onMounted, watchPostEffect } from 'vue'
 import { useRouter } from 'vue-router'
-import bus from '@/composables/useInterCityBus'
+import { getCityName } from '../composables/utilities'
 import RoutesList from '@/components/RoutesList.vue'
 import KeyBoard3 from '@/components/KeyBoard3.vue'
-import logo from '@/components/logo.vue'
+import Logo from '@/components/Logo.vue'
 import backIcon from '@/assets/back.svg'
-import loadingIcon from '@/assets/loading.svg'
 import swapIcon from '@/assets/swap.svg'
+import IconButton from '../components/IconButton.vue'
 
 const router = useRouter()
-const { state } = bus
-const routesList = ref(null)
 const input1 = ref(null)
 const input2 = ref(null)
-const city1 = reactive({
-  city: {
-    CityName: '',
-    CityCode: '',
-    City: ''
+const city1 = ref('')
+const city2 = ref('')
+const cityFocused = ref('city1')
+
+watchPostEffect(() => {
+  if (city1.value && !city2.value) {
+    focusInput2()
+  } else if (!city1.value && city2.value) {
+    focusInput1()
+  } else if (city1.value && city2.value) {
+    blurInputs()
   }
 })
-const city2 = reactive({
-  city: {
-    CityName: '',
-    CityCode: '',
-    City: ''
-  }
-})
-let iscity1 = ref(true)
-const currentCity = computed(() => (iscity1.value ? city1.city : city2.city))
 
-const focusInput1 = () => {
-  iscity1.value = true
-  input1.value.focus()
+function focusInput1() {
+  input1.value.classList.add('form-control-active')
+  input2.value.classList.remove('form-control-active')
+  cityFocused.value = 'city1'
 }
 
-const focusInput2 = () => {
-  iscity1.value = false
-  input2.value.focus()
+function focusInput2() {
+  input2.value.classList.add('form-control-active')
+  input1.value.classList.remove('form-control-active')
+  cityFocused.value = 'city2'
 }
 
-const fetchData = () => {
-  bus.fetchRoutesByCitys(city1.city.City, city2.city.City)
+function blurInputs() {
+  input1.value.classList.remove('form-control-active')
+  input2.value.classList.remove('form-control-active')
+  cityFocused.value = ''
 }
 
 const swapCitys = () => {
   const temp = city1.city
   city1.city = city2.city
   city2.city = temp
-  fetchData()
-}
-
-const updateCurrentCity = (temp) => {
-  const city = iscity1.value ? city1 : city2
-  city.city = temp
-  if (city2.city.City && city1.city.City) {
-    fetchData()
-  }
-}
-
-// provide 響應式 states 給子元件
-provide('routesList', toRef(state, 'routesList'))
-provide('currentCity', {
-  currentCity,
-  updateCurrentCity
-})
-
-// 在 mount, resize 時調整 perfect scrollbar 區域高度
-const setScrollAreaHeight = () => {
-  const height = routesList.value.offsetHeight + 'px'
-  document.documentElement.style.setProperty('--h', height)
-}
-
-// 監聽 resize event
-function callback() {
-  setScrollAreaHeight()
 }
 
 onMounted(() => {
-  setScrollAreaHeight()
   focusInput1()
-  window.addEventListener('resize', callback)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', callback)
 })
 </script>
 
@@ -173,12 +123,15 @@ onUnmounted(() => {
     'main'
     'keyboard';
   column-gap: 42px;
-  @media screen and (min-width: 991px) {
+  @media screen and (min-width: 992px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       'header main'
       'keyboard main';
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: 5fr 7fr;
   }
 }
 
