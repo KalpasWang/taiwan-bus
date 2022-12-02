@@ -3,11 +3,13 @@
     <TabsHeader @setDirection="setDirection" @back="emit('back')">
       <template #extra>
         <IconButton
+          v-if="!city"
           @click="switchComponent('FareMap')"
           :imgUrl="fareIcon"
           title="票價查詢"
         />
         <IconButton
+          v-if="!city"
           @click="switchComponent('TimeTable')"
           :imgUrl="timetableIcon"
           title="時刻表"
@@ -34,11 +36,11 @@
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
             <div class="d-flex justify-content-start align-items-center">
-              <span v-if="pending" class="flex-center time-label bg-dark">
-                <Loading v-if="pending" :width="23" class="d-inline-block" />
+              <span v-show="pending" class="flex-center time-label bg-dark">
+                <Loading :width="23" class="d-inline-block" />
               </span>
               <span
-                v-else
+                v-show="!pending"
                 class="flex-center time-label"
                 :class="[item.Border ? 'label-border' : '', item.BgColor]"
               >
@@ -100,11 +102,11 @@
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
             <div class="d-flex justify-content-start align-items-center">
-              <span v-if="pending" class="flex-center time-label bg-dark">
-                <Loading v-if="pending" :width="23" class="d-inline-block" />
+              <span v-show="pending" class="flex-center time-label bg-dark">
+                <Loading :width="23" class="d-inline-block" />
               </span>
               <span
-                v-else
+                v-show="!pending"
                 class="flex-center time-label"
                 :class="[item.Border ? 'label-border' : '', item.BgColor]"
               >

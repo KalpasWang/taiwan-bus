@@ -1,5 +1,5 @@
 import { reactive, readonly } from 'vue'
-import { api, apiTop20 } from './api'
+import { api, top20 } from './api'
 import { citys } from './constants'
 import {
   getTimeBadgeAndColor,
@@ -40,7 +40,7 @@ const handleRoutesByCityAndRouteName = async (city, routeName) => {
   } else {
     url = `Route/City/${city}/${routeName}`
   }
-  const res = await apiTop20.get(url)
+  const res = await api.get(url, top20)
   // console.log(res.data)
   state.routesList = res.data
   state.pending = false
@@ -217,8 +217,9 @@ const fetchNearByStations = (radius) => {
     state.userPosition.lat = lat
     state.userPosition.lng = lng
     const url = 'Station/NearBy'
-    const res = await apiTop20.get(url, {
+    const res = await api.get(url, {
       params: {
+        $top: 20,
         $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`
       }
     })

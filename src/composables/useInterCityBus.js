@@ -1,5 +1,5 @@
 import { reactive, readonly } from 'vue'
-import { api, apiTop20 } from './api'
+import { api, top20 } from './api'
 import { citys } from './constants'
 import { getTimeBadgeAndColor } from './utilities'
 
@@ -83,7 +83,7 @@ const handleRoutesByCitys = async (city1, city2) => {
 // 取得有指定[路線名稱]的公車資料
 const handleRoutesByRouteName = async (routeName) => {
   const url = `Route/InterCity/${routeName}`
-  const res = await apiTop20.get(url)
+  const res = await api.get(url, top20)
   state.routesList = res.data
 }
 
