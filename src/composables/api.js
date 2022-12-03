@@ -6,25 +6,17 @@ import state from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 
 let token
+const params = qs.stringify({
+  grant_type: 'client_credentials',
+  client_id: 'wf6212-8e3fc5d4-bd75-4367',
+  client_secret: 'dd7d34c9-b960-4126-9db6-3ec1311d354b'
+})
 
 export const api = axios.create({
   baseURL: 'https://tdx.transportdata.tw/api/basic/v2/Bus',
   params: {
     $format: 'JSON'
   }
-})
-
-const authApi = axios.create({
-  baseURL:
-    'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token',
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded'
-  },
-  data: qs.stringify({
-    grant_type: 'client_credentials',
-    client_id: 'wf6212-8e3fc5d4-bd75-4367',
-    client_secret: 'dd7d34c9-b960-4126-9db6-3ec1311d354b'
-  })
 })
 
 // request 攔截器，設定帶入token
@@ -34,8 +26,9 @@ api.interceptors.request.use(
       token = await setToken()
     }
     config.headers = {
-      Authorization: 'Bearer ' + token?.access_token
+      authorization: 'Bearer ' + token?.access_token
     }
+    return config
   },
   (error) => Promise.reject(error)
 )
@@ -44,12 +37,13 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (res) => res,
   async (error) => {
+    console.log(error.config)
     const originalRequest = error.config
     if (error?.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true
       token = await setToken()
       axios.defaults.headers.common['Authorization'] =
-        'Bearer ' + token.access_token
+        'Bearer ' + token?.access_token
       return api(originalRequest)
     }
     return Promise.reject(error)
@@ -58,10 +52,15 @@ api.interceptors.response.use(
 
 async function setToken() {
   try {
-    const res = await authApi.post()
-    console.log(res.data)
-    token = res.data
-    return token
+    const res = await axios({
+      method: 'POST',
+      url: 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: params
+    })
+    return res.data
   } catch (error) {
     throw new Error(error.message)
   }
