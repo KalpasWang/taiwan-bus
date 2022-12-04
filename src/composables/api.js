@@ -1,7 +1,5 @@
 import axios from 'axios'
 import qs from 'qs'
-import Cookies from 'js-cookie'
-import jsSHA from 'jssha'
 import state from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 

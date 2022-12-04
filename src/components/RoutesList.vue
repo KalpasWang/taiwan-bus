@@ -10,7 +10,9 @@
       <h4 v-if="props.city" class="fs-6 text-light px-3 pt-5">
         {{ getCityName(props.city) }}
       </h4>
-      <Loading v-if="isLoading" :width="70" />
+      <div v-if="isLoading">
+        <Loading :width="70" />
+      </div>
       <h4 v-else-if="error" class="text-center text-light">
         {{ error }}
       </h4>
@@ -88,6 +90,7 @@ const isLoading = ref(false)
 const error = ref(null)
 const container = ref(null)
 const isFetching = ref(false)
+let ticking = false
 const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd } = useRoutes(
   props.type
 )
@@ -144,6 +147,16 @@ async function checkFetchCondition() {
   }
 }
 
+function scrollHandler(e) {
+  if (!ticking) {
+    window.requestAnimationFrame(async () => {
+      await checkFetchCondition()
+      ticking = false
+    })
+    ticking = true
+  }
+}
+
 const getParams = (route) => {
   const params = {
     routeName: route.RouteName.Zh_tw,
@@ -155,11 +168,11 @@ const getParams = (route) => {
 
 onMounted(() => {
   const parent = container.value?.parentElement
-  parent?.addEventListener('scroll', checkFetchCondition)
+  parent?.addEventListener('scroll', scrollHandler)
 })
 
 onUnmounted(() => {
   const parent = container.value?.parentElement
-  parent?.removeEventListener('scroll', checkFetchCondition)
+  parent?.removeEventListener('scroll', scrollHandler)
 })
 </script>

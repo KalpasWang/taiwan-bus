@@ -14,6 +14,4 @@ const props = defineProps({
     default: 70
   }
 })
-
-console.log('loader')
 </script>
