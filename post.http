@@ -1,0 +1,7 @@
+POST https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token?grant_type=client_credentials
+
+content-type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id=wf6212-8e3fc5d4-bd75-4367
+&client_secret=dd7d34c9-b960-4126-9db6-3ec1311d354b"

@@ -1,88 +1,83 @@
 <template>
-  <div class="bg-secondary vh-100 d-flex flex-column">
-    <!-- Header -->
-    <TabsHeader
-      @setDirection="setDirection"
-      @back="switchComponent('RealTimeArrivalInfo')"
-      :routeName="props.routeName"
-      :forwardLabel="forwardStopName"
-      :backwardLabel="backwardStopName"
-      :isSubview="cIndex === 'RouteMap'"
-    >
-      <img
-        v-if="cIndex === 'RealTimeArrivalInfo'"
-        @click="switchComponent('RouteMap')"
-        :src="mapIcon"
-        alt="地圖"
-        title="地圖"
-        role="button"
-        width="23"
-      />
-    </TabsHeader>
-    <!-- Main View -->
-    <UpdateTimer class="my-3 me-6" />
-    <div class="flex-grow-1 overflow-auto">
-      <h3 v-if="error" class="mt-5 text-center">
+  <div class="bg-secondary vh-100">
+    <div v-if="error" class="container flex-center h-100">
+      <h3 class="text-center">
         {{ error }}
       </h3>
-      <div v-else :class="['h-100', mapClass]">
-        <keep-alive>
-          <Suspense>
-            <component
-              :is="children[cIndex]"
-              :routeName="props.routeName"
-              :city="props.city"
-              :direction="direction"
-            ></component>
+    </div>
+    <div v-else class="h-100">
+      <keep-alive>
+        <Suspense>
+          <component :is="children[cIndex]" @back="back"></component>
 
-            <template #fallback>
-              <Loading class="mt-4" />
-            </template>
-          </Suspense>
-        </keep-alive>
-      </div>
+          <template #fallback>
+            <div class="h-100 flex-center z-100">
+              <Loading />
+            </div>
+          </template>
+        </Suspense>
+      </keep-alive>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, provide, onErrorCaptured, computed } from 'vue'
-import TabsHeader from '@/components/TabsHeader.vue'
-import UpdateTimer from '@/components/UpdateTimer.vue'
+import { ref, provide, onErrorCaptured } from 'vue'
 import RouteMap from '@/components/RouteMap.vue'
 import RealTimeArrivalInfo from '@/components/RealTimeArrivalInfo.vue'
 import Loading from '@/components/Loading.vue'
-import mapIcon from '@/assets/map.svg'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
-  city: String,
-  routeName: String
+  city: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  routeName: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  subRouteName: {
+    type: String,
+    required: false
+  }
 })
 
-const direction = ref('forward')
+const router = useRouter()
 const error = ref(null)
-const forwardStopName = ref('去程')
-const backwardStopName = ref('回程')
+const forwardLabel = ref('去程')
+const backwardLabel = ref('回程')
 const children = {
-  RealTimeArrivalInfo,
+  Home: RealTimeArrivalInfo,
   RouteMap
 }
-const cIndex = ref('RealTimeArrivalInfo')
-const mapClass = computed(() => ({
-  container: cIndex.value !== 'RouteMap'
-}))
-
-provide('stopsLabel', { forwardStopName, backwardStopName })
+const cIndex = ref('Home')
 
 const switchComponent = (index) => {
   cIndex.value = index
 }
 
-const setDirection = (newDirection) => {
-  direction.value = newDirection
+const back = () => {
+  if (cIndex.value === 'Home') {
+    router.go(-1)
+  } else {
+    cIndex.value = 'Home'
+  }
 }
 
+provide('busLabel', {
+  routeName: props.routeName,
+  subRouteName: props.subRouteName,
+  city: props.city,
+  forwardLabel,
+  backwardLabel
+})
+provide('switchComponent', switchComponent)
+
 onErrorCaptured((e) => {
+  console.error(e)
   error.value = e.message
 })
 </script>

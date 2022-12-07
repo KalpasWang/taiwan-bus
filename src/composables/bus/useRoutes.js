@@ -22,7 +22,7 @@ function useRoutes(type = 'city') {
     switch (type) {
       case 'city':
       case 'intercity':
-        fetchRoutesByRouteName(...args)
+        await fetchRoutesByRouteName(...args)
         break
       case 'intercity-from-to':
         await fetchRoutesByCitys(...args)
