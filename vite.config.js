@@ -17,5 +17,8 @@ export default defineConfig({
         charset: false
       }
     }
+  },
+  test: {
+    globals: true
   }
 })
