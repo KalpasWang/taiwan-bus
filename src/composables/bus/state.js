@@ -5,6 +5,7 @@ const state = reactive({
   routeID: '',
   city: null,
   routes: [],
+  nearByStations: [],
   stopsOfRoute: null
 })
 
