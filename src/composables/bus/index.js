@@ -5,6 +5,7 @@ import useRouteMapInfo from './useRouteMapInfo'
 import useRouteMap from './useRouteMap'
 import useSchedule from './useSchedule'
 import useRouteFare from './useRouteFare'
+import useNearBy from './useNearBy'
 
 export {
   state,
@@ -13,5 +14,6 @@ export {
   useRouteMapInfo,
   useRouteMap,
   useSchedule,
-  useRouteFare
+  useRouteFare,
+  useNearBy
 }
