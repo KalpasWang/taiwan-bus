@@ -1,10 +1,13 @@
 import state from './state'
 import { advancedBaseUrl, api } from '../api'
 
+let id
+
 export default function useNearBy() {
   function watchNearBy(radius = 500) {
     checkGeolocation()
-    watchUserGeolocation()
+    watchUserGeolocation(radius)
+    return clearWatch
   }
 
   function checkGeolocation() {
@@ -14,10 +17,10 @@ export default function useNearBy() {
   }
 
   function watchUserGeolocation(radius) {
-    navigator.geolocation.watchPosition(async (position) => {
+    id = navigator.geolocation.watchPosition(async (position) => {
       const lat = position.coords.latitude
       const lng = position.coords.longitude
-      await callApi(lat, lng, radius)
+      const res = await callApi(lat, lng, radius)
       const newStations = res.data.map((item) => {
         const d = haversine(
           { lat, lng },
@@ -26,7 +29,8 @@ export default function useNearBy() {
             lng: item.StationPosition.PositionLon
           }
         )
-        return { ...item, Distance: Math.round(d) }
+        item.Distance = Math.round(d)
+        return item
       })
       newStations.sort((a, b) => a.Distance - b.Distance)
       state.nearByStations = newStations
@@ -42,6 +46,10 @@ export default function useNearBy() {
       }
     })
     return res
+  }
+
+  function clearWatch() {
+    navigator.geolocation.clearWatch(id)
   }
 
   return watchNearBy
