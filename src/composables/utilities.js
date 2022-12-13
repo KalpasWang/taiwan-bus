@@ -201,10 +201,10 @@ export const filterDirection = (arr) => {
   return { forwards, backwards }
 }
 
-export const delay = () => {
+export const delay = (ms = 500) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve()
-    }, 500)
+    }, ms)
   })
 }

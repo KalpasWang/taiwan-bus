@@ -1,3 +1,4 @@
+import haversine from 'haversine-distance'
 import state from './state'
 import { advancedBaseUrl, api } from '../api'
 
