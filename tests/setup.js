@@ -5,6 +5,5 @@ import { expect, afterEach, vi } from 'vitest'
 expect.extend(matchers)
 
 afterEach(() => {
-  vi.resetAllMocks()
   cleanup()
 })
