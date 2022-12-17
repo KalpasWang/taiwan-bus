@@ -8,26 +8,26 @@
     "test": "vitest --environment jsdom"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "bootstrap": "^5.2.0",
-    "date-fns": "^2.29.1",
+    "axios": "^1.2.1",
+    "bootstrap": "^5.2.3",
+    "date-fns": "^2.29.3",
     "haversine-distance": "^1.2.1",
-    "leaflet": "^1.7.1",
+    "leaflet": "^1.9.3",
     "leaflet-color-number-markers": "^1.0.7",
     "qs": "^6.11.0",
-    "vue": "^3.2.16",
-    "vue-final-modal": "^3.4.4",
-    "vue-router": "^4.0.12",
-    "vue3-perfect-scrollbar": "^1.5.5"
+    "vue": "^3.2.45",
+    "vue-final-modal": "^3.4.11",
+    "vue-router": "^4.1.6",
+    "vue3-perfect-scrollbar": "^1.6.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
-    "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue": "^4.0.0",
     "jsdom": "^20.0.3",
-    "sass": "^1.43.4",
-    "vite": "^2.6.4",
-    "vitest": "^0.25.5"
+    "sass": "^1.57.0",
+    "vite": "^4.0.1",
+    "vitest": "^0.25.8"
   }
 }

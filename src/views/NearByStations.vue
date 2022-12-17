@@ -3,72 +3,65 @@
     <!-- Header -->
     <div class="header-shadow bg-dark">
       <div class="d-flex justify-content-between align-items-center px-3 py-4">
-        <img
-          @click="router.go(-1)"
-          :src="backIcon"
-          alt="回上一頁"
-          role="button"
-          width="6"
+        <IconButton
+          @click="mapShow ? toggleMap() : router.go(-1)"
+          :imgUrl="backIcon"
+          title="回上一頁"
         />
-        <logo />
-        <img
+        <Logo />
+        <IconButton
+          v-if="!mapShow"
           @click="toggleMap()"
-          :src="mapIcon"
-          :class="{ 'map-active': mapShow }"
-          alt="地圖"
-          role="button"
-          width="23"
+          :imgUrl="mapIcon"
+          title="地圖"
         />
       </div>
     </div>
     <!-- 地圖 -->
     <div v-show="mapShow" id="stations-map" class="flex-grow-1"></div>
     <!-- 站位列表 -->
-    <div v-show="!mapShow" ref="stationsList" class="flex-grow-1 container">
-      <h3 v-if="state.pending" class="mt-5">
+    <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
+      <h3 v-if="isLoading" class="mt-5">
         <Loading />
       </h3>
-      <h3 v-else-if="state.error" class="mt-5 text-center">
-        {{ state.error }}
+      <h3 v-else-if="error" class="mt-5 text-center">
+        {{ error }}
       </h3>
-      <!-- 使用套件取代 scrollbar -->
-      <perfect-scrollbar v-else>
-        <ul class="list-group">
-          <li
-            v-for="(station, i) in state.nearByStations"
-            :key="station.StationUID"
-            class="list-group-item list-group-item-action"
-            :class="{ 'bg-secondary': i % 2 === 0 }"
+      <ul v-else class="list-group">
+        <li
+          v-for="(station, i) in state.nearByStations"
+          :key="station.StationID"
+          class="list-group-item list-group-item-action"
+          :class="{ 'bg-secondary': i % 2 === 0 }"
+        >
+          <!-- 每個站牌可以連結到公車路線 -->
+          <router-link
+            :to="{
+              name: 'StationPage',
+              params: {
+                city: getCityByCityCode(station.StationUID.slice(0, 3)),
+                stationId: station.StationID
+              }
+            }"
+            class="d-block link-primary text-decoration-none"
           >
-            <!-- 每個站牌可以連結到公車路線 -->
-            <router-link
-              :to="{
-                name: 'StationPage',
-                params: {
-                  city: getCityByCityCode(station.StationUID.slice(0, 3)),
-                  stationId: station.StationID
-                }
-              }"
-              class="d-block link-primary text-decoration-none"
-            >
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <!-- 顯示站牌名稱與方向 -->
-                  <h4 class="fs-6">
-                    {{ station.StationName.Zh_tw }}({{
-                      getBearingLabel(station.Bearing)
-                    }})
-                  </h4>
-                  <p class="text-light fs-7">
-                    {{ station.Stops.length }} 個站牌
-                  </p>
-                </div>
-                <p>{{ station.Distance }} 公尺</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <!-- 顯示站牌名稱與方向 -->
+                <h4 class="fs-6">
+                  {{ station.StationName.Zh_tw }}({{
+                    getBearingLabel(station.Bearing)
+                  }})
+                </h4>
+                <p class="text-light fs-7">
+                  {{ station.Stops.length }} 個站牌
+                </p>
               </div>
-            </router-link>
-          </li>
-        </ul>
-      </perfect-scrollbar>
+              <p>{{ station.Distance }} 公尺</p>
+            </div>
+          </router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -77,57 +70,61 @@
 import { ref, watch, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
-import logo from '@/components/logo.vue'
+import Logo from '@/components/logo.vue'
+import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
-import bus from '@/composables/useCityBus'
-import map from '@/composables/useMap'
+import { useNearBy, state } from '@/composables/bus'
+// import bus from '@/composables/useCityBus'
+// import map from '@/composables/useMap'
 import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
+const watchNearBy = useNearBy()
+console.log(watchNearBy)
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
-const stationsList = ref(null)
-const { state } = bus
+const isLoading = ref(true)
+const error = ref('')
 
 // 切換 map 的顯示與隱藏
 const toggleMap = () => {
-  const v = mapShow.value
-  mapShow.value = !v
-  if (mapShow.value) {
-    nextTick(() => {
-      map.mapInit('stations-map').then(() => {
-        // unwrappiing
-        const userPosition = state.userPosition
-        const nearByStations = state.nearByStations
-        map.drawNearByMarkers(userPosition, nearByStations)
-        mapIsDrawed.value = true
-      })
-    })
-  } else {
-    mapIsDrawed.value = false
-  }
+  mapShow.value = !mapShow.value
+  // if (mapShow.value) {
+  //   nextTick(() => {
+  //     map.mapInit('stations-map').then(() => {
+  //       // unwrappiing
+  //       const userPosition = state.userPosition
+  //       const nearByStations = state.nearByStations
+  //       map.drawNearByMarkers(userPosition, nearByStations)
+  //       mapIsDrawed.value = true
+  //     })
+  //   })
+  // } else {
+  //   mapIsDrawed.value = false
+  // }
 }
 
-watch(
-  () => state.pending,
-  (val) => {
-    if (val && mapIsDrawed.value) {
-      // unwrapping
-      const userPosition = state.userPosition
-      const newPositions = state.nearByStations
-      map.redrawNearByMarkers(userPosition, newPositions)
-    }
-  }
-)
+// watch(
+//   () => state.pending,
+//   (val) => {
+//     if (val && mapIsDrawed.value) {
+//       // unwrapping
+//       const userPosition = state.userPosition
+//       const newPositions = state.nearByStations
+//       map.redrawNearByMarkers(userPosition, newPositions)
+//     }
+//   }
+// )
 
-onMounted(() => {
-  // set scroll region height
-  const height = stationsList.value.getBoundingClientRect().height + 'px'
-  document.documentElement.style.setProperty('--h', height)
-
-  bus.fetchNearByStations(500)
-})
+try {
+  watchNearBy(500)
+  console.log(
+    '🚀 ~ file: NearByStations.vue:127 ~ state.nearByStations',
+    state.nearByStations
+  )
+  isLoading.value = false
+} catch (e) {
+  error.value = e.message
+}
 </script>
-
-<style lang=""></style>
