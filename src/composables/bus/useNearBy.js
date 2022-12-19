@@ -40,7 +40,7 @@ export default function useNearBy() {
 
   async function callApi(lat, lng, radius) {
     const res = await api.get('Station/NearBy', {
-      baseUrl: advancedBaseUrl,
+      baseURL: advancedBaseUrl,
       params: {
         $top: 20,
         $spatialFilter: `nearby(${lat}, ${lng}, ${radius})`
