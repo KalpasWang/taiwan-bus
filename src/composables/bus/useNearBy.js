@@ -1,10 +1,10 @@
 import haversine from 'haversine-distance'
-import state from './state'
+import { state } from './state'
 import { advancedBaseUrl, api } from '../api'
 
 let id
 
-export default function useNearBy() {
+export function useNearBy() {
   function watchNearBy(radius = 500) {
     checkGeolocation()
     watchUserGeolocation(radius)

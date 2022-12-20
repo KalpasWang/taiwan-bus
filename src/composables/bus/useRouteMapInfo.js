@@ -12,7 +12,7 @@ import {
  * @param  {string} routeName - 路線名稱
  * @param  {string} city - 室內公車須輸入縣市名稱，如果是客運就不用傳入參數
  */
-function useRouteMapInfo(routeName, city) {
+export function useRouteMapInfo(routeName, city) {
   const mapInfo = reactive({
     forward: {
       stops: [],
@@ -98,5 +98,3 @@ function useRouteMapInfo(routeName, city) {
 
   return { mapInfo, fetchNewMapInfo }
 }
-
-export default useRouteMapInfo

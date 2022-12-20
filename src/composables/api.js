@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import state from './bus/state'
+import { state } from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 
 let token

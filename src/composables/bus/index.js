@@ -1,19 +1,8 @@
-import state from './state'
-import useRoutes from './useRoutes'
-import useArrivalsInfo from './useArrivalsInfo'
-import useRouteMapInfo from './useRouteMapInfo'
-import useRouteMap from './useRouteMap'
-import useSchedule from './useSchedule'
-import useRouteFare from './useRouteFare'
-import useNearBy from './useNearBy'
-
-export {
-  state,
-  useRoutes,
-  useArrivalsInfo,
-  useRouteMapInfo,
-  useRouteMap,
-  useSchedule,
-  useRouteFare,
-  useNearBy
-}
+export * from './state'
+export * from './useRoutes'
+export * from './useArrivalsInfo'
+export * from './useRouteMapInfo'
+export * from './useRouteMap'
+export * from './useSchedule'
+export * from './useRouteFare'
+export * from './useNearBy'

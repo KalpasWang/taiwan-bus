@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-const state = reactive({
+export const state = reactive({
   routeName: '',
   routeID: '',
   city: null,
@@ -9,5 +9,3 @@ const state = reactive({
   nearByStations: [],
   stopsOfRoute: null
 })
-
-export default state

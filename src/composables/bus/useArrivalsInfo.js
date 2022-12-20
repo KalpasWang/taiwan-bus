@@ -7,7 +7,7 @@ import { api } from '../api'
  * @param  {string} routeName - 路線名稱
  * @param  {string} city - 室內公車須輸入縣市名稱，如果是客運就不用傳入參數
  */
-function useArrivalsInfo(routeName, city) {
+export function useArrivalsInfo(routeName, city) {
   const arrivalsInfo = reactive({
     forwards: [],
     backwards: []
@@ -139,5 +139,3 @@ const filterDirection = (arr) => {
   const backwards = arr.filter((item) => item.Direction === 1)
   return { forwards, backwards }
 }
-
-export default useArrivalsInfo

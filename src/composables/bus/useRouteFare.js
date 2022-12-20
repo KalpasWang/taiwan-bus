@@ -1,9 +1,9 @@
 import { ref } from 'vue'
 import { api, fetchStopsOfRoute } from '../api'
-import state from './state'
+import { state } from './state'
 import { filterRouteName } from '../utilities'
 
-function useRouteFare(routeName, city) {
+export function useRouteFare(routeName, city) {
   let fareData = null
   const stages = ref([])
   const fareMap = ref([])
@@ -148,5 +148,3 @@ function useRouteFare(routeName, city) {
 
   return { fareMap, stages, init, getStageFare }
 }
-
-export default useRouteFare

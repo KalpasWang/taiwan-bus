@@ -81,7 +81,7 @@ import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
 const watchNearBy = useNearBy()
-console.log(watchNearBy)
+console.log('🚀 ~ file: NearByStations.vue:86 ~ watchNearBy', watchNearBy)
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
 const isLoading = ref(true)
@@ -117,14 +117,12 @@ const toggleMap = () => {
 //   }
 // )
 
-try {
-  watchNearBy(500)
-  console.log(
-    '🚀 ~ file: NearByStations.vue:127 ~ state.nearByStations',
-    state.nearByStations
-  )
-  isLoading.value = false
-} catch (e) {
-  error.value = e.message
-}
+onMounted(() => {
+  try {
+    watchNearBy(500)
+    isLoading.value = false
+  } catch (e) {
+    error.value = e.message
+  }
+})
 </script>

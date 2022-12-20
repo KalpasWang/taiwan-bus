@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { api } from '../api'
 import { filterRouteName, filterDirection } from '../utilities'
 
-function useSchedule(routeName, city) {
+export function useSchedule(routeName, city) {
   const schedule = ref({})
   const forwardTime = ref([])
   const backwardTime = ref([])
@@ -59,5 +59,3 @@ function useSchedule(routeName, city) {
     getDepartureTimeByDate
   }
 }
-
-export default useSchedule

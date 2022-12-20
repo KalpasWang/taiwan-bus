@@ -5,31 +5,27 @@ import NearByStations from '@/views/NearByStations.vue'
 import { state } from '@/composables/bus'
 import { mockNearbyResponse } from '@/composables/constants'
 
+vi.mock('../../../src/composables/bus', async () => {
+  const original = await vi.importActual('../../../src/composables/bus')
+  return {
+    ...original,
+    useNearBy: vi.fn(() => {
+      return vi.fn(() => {
+        state.nearByStations = mockNearbyResponse
+      })
+    })
+  }
+})
+vi.mock('vue-router', () => ({
+  useRouter: vi.fn(() => ({
+    go: vi.fn()
+  }))
+}))
+
 describe('NearByStations 頁面', () => {
   it('讀取資料發生錯誤會顯示訊息', () => {})
 
   describe('Happy Path', () => {
-    beforeAll(() => {
-      vi.mock('../../../src/composables/bus/useNearBy.js', () => {
-        return {
-          default: {
-            useNearBy: vi.fn()
-          }
-        }
-      })
-      vi.mock('vue-router', () => ({
-        useRouter: vi.fn(() => ({
-          go: vi.fn()
-        }))
-      }))
-      // const watchNearBy = useNearBy()
-      // watchNearBy.mockImplementation(() => {
-      //   state.nearByStations = mockNearbyResponse
-      //   console.log(state.nearByStations)
-      // })
-      //
-    })
-
     it('顯示使用者附近公車站位', async () => {
       render(NearByStations, {
         global: {
@@ -38,10 +34,11 @@ describe('NearByStations 頁面', () => {
           }
         }
       })
+      // console.log(state)
       const stations = await screen.findAllByRole('listitem')
-      screen.debug()
+      // screen.debug()
       stations.forEach((station, i) => {
-        const stationName = state.NearByStations[i].StationName.Zh_tw
+        const stationName = state.nearByStations[i].StationName.Zh_tw
         expect(station.textContent).toMatch(stationName)
       })
     })
