@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark vh-100 d-flex flex-column">
+  <div class="bg-dark vh-100 d-flex flex-column" data-testid="station-page">
     <!-- Header -->
     <div class="header-shadow bg-dark">
       <div class="d-flex justify-content-between align-items-center px-3 py-4">

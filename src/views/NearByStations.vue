@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark vh-100 d-flex flex-column" data-testid="NearByStations">
+  <div class="bg-dark vh-100 d-flex flex-column" data-testid="nearby">
     <!-- Header -->
     <div class="header-shadow bg-dark">
       <div class="d-flex justify-content-between align-items-center px-3 py-4">
@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
@@ -75,13 +75,10 @@ import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
 import { useNearBy, state } from '@/composables/bus'
-// import bus from '@/composables/useCityBus'
-// import map from '@/composables/useMap'
 import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
 const watchNearBy = useNearBy()
-console.log('🚀 ~ file: NearByStations.vue:86 ~ watchNearBy', watchNearBy)
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
 const isLoading = ref(true)
