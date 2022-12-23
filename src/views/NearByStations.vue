@@ -18,16 +18,21 @@
       </div>
     </div>
     <!-- 地圖 -->
-    <div v-show="mapShow" id="stations-map" class="flex-grow-1"></div>
+    <div
+      v-if="mapShow"
+      data-testid="nearby-map"
+      id="stations-map"
+      class="flex-grow-1"
+    ></div>
     <!-- 站位列表 -->
-    <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
+    <div v-else class="flex-grow-1 container overflow-auto">
       <h3 v-if="isLoading" class="mt-5">
         <Loading />
       </h3>
       <h3 v-else-if="error" class="mt-5 text-center">
         {{ error }}
       </h3>
-      <ul v-else class="list-group">
+      <ul v-else class="list-group" data-testid="nearby-list">
         <li
           v-for="(station, i) in state.nearByStations"
           :key="station.StationID"
