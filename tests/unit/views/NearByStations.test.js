@@ -2,6 +2,7 @@ import { render, screen, waitFor, within } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
 import { describe, it, beforeAll, vi, expect, beforeEach } from 'vitest'
 import { createRouter, createWebHistory } from 'vue-router'
+import L from 'leaflet'
 import Home from '@/views/Home.vue'
 import NearByStations from '@/views/NearByStations.vue'
 import StationPage from '@/views/StationPage.vue'
@@ -23,6 +24,8 @@ import {
 //     })
 //   }
 // })
+
+vi.mock('leaflet')
 
 const mockGeolocation = {
   watchPosition: vi.fn((success) => success(mockUserPosition))
@@ -104,6 +107,7 @@ describe('NearByStations 頁面', () => {
       await user.click(mapBtn)
       waitFor(() => {
         expect(screen.getByTestId('nearby-map')).toBeInTheDocument()
+        expect(L.map).toBeCalled()
       })
     })
   })
