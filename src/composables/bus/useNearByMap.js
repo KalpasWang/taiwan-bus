@@ -1,6 +1,6 @@
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import L from 'leaflet'
-import { busIcon } from '../constants'
+import { state } from './state'
 
 export const useNearByMap = (element) => {
   const map = ref(null)
@@ -29,15 +29,16 @@ export const useNearByMap = (element) => {
     })
   }
 
-  const renderNearByMap = (state) => {
-    const { stations, user } = state
-    // console.log('update')
-    clearMarkersAndRoute()
-    addStationsMarker(stations)
-    addUserMarker(user)
+  const renderNearByMap = () => {
+    watchEffect(() => {
+      // console.log('update')
+      clearMarkersAndRoute()
+      addStationsMarker(state.nearByStations)
+      addUserMarker(state.userPosition)
+    })
     if (!isMapReady.value) {
       isMapReady.value = true
-      map.value.flyTo(user, 4)
+      map.value.flyTo(state.userPosition, 4)
     }
   }
 

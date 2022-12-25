@@ -49,6 +49,7 @@
               }
             }"
             class="d-block link-primary text-decoration-none"
+            :data-testid="`station-link${i + 1}`"
           >
             <div class="d-flex justify-content-between align-items-center">
               <div>

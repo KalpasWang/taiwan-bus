@@ -21,6 +21,7 @@ export function useNearBy() {
     id = navigator.geolocation.watchPosition(async (position) => {
       const lat = position.coords.latitude
       const lng = position.coords.longitude
+      state.userPosition = { lat, lng }
       const res = await callApi(lat, lng, radius)
       const newStations = res.data.map((item) => {
         const d = haversine(

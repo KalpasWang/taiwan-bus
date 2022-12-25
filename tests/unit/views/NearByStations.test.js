@@ -1,5 +1,6 @@
-import { render, screen, waitFor, within } from '@testing-library/vue'
+import { fireEvent, render, screen, waitFor } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
+import { flushPromises } from '@vue/test-utils'
 import { describe, it, beforeAll, vi, expect, beforeEach } from 'vitest'
 import { createRouter, createWebHistory } from 'vue-router'
 import L from 'leaflet'
@@ -25,7 +26,7 @@ import {
 //   }
 // })
 
-vi.mock('leaflet')
+// vi.mock('leaflet')
 
 const mockGeolocation = {
   watchPosition: vi.fn((success) => success(mockUserPosition))
@@ -79,6 +80,9 @@ describe('NearByStations 頁面', () => {
     })
 
     it('選擇其中一個公車站位會連結到公車站位頁面', async () => {
+      router.push('/nearby')
+      await router.isReady()
+
       render(NearByStations, {
         global: {
           plugins: [router]
@@ -86,11 +90,10 @@ describe('NearByStations 頁面', () => {
       })
 
       expect(screen.getByTestId('nearby')).toBeInTheDocument()
-
-      const listitems = await screen.findAllByRole('listitem')
-      const firstLink = within(listitems[0]).getByRole('link')
-      await user.click(firstLink)
-      waitFor(() => {
+      // await user.click(stationLinks[0])
+      await fireEvent.click(await screen.findByTestId('station-link1'))
+      await flushPromises()
+      await waitFor(() => {
         const newPage = screen.getByTestId('station-page')
         expect(newPage).toBeInTheDocument()
       })
@@ -103,11 +106,14 @@ describe('NearByStations 頁面', () => {
         }
       })
       expect(screen.getByTestId('nearby')).toBeInTheDocument()
+      expect(await screen.findByTestId('nearby-list')).toBeInTheDocument()
+      const lmap = vi.spyOn(L, 'map')
+      expect(lmap).not.toHaveBeenCalled()
       const mapBtn = await screen.findByTitle('地圖')
       await user.click(mapBtn)
-      waitFor(() => {
-        expect(screen.getByTestId('nearby-map')).toBeInTheDocument()
-        expect(L.map).toBeCalled()
+      await waitFor(() => {
+        // expect(screen.getByTestId('nearby-map')).toBeInTheDocument()
+        // expect(lmap).toHaveBeenCalledOnce()
       })
     })
   })
