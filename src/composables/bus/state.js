@@ -10,5 +10,8 @@ export const state = reactive({
     lng: null
   },
   nearByStations: [],
-  stopsOfRoute: null
+  stopsOfRoute: null,
+  isLoading: false,
+  hasError: false,
+  errorMsg: ''
 })

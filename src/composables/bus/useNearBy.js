@@ -6,6 +6,7 @@ let id
 
 export function useNearBy() {
   function watchNearBy(radius = 500) {
+    state.isLoading = true
     checkGeolocation()
     watchUserGeolocation(radius)
     return clearWatch
@@ -19,23 +20,31 @@ export function useNearBy() {
 
   function watchUserGeolocation(radius) {
     id = navigator.geolocation.watchPosition(async (position) => {
-      const lat = position.coords.latitude
-      const lng = position.coords.longitude
-      state.userPosition = { lat, lng }
-      const res = await callApi(lat, lng, radius)
-      const newStations = res.data.map((item) => {
-        const d = haversine(
-          { lat, lng },
-          {
-            lat: item.StationPosition.PositionLat,
-            lng: item.StationPosition.PositionLon
-          }
-        )
-        item.Distance = Math.round(d)
-        return item
-      })
-      newStations.sort((a, b) => a.Distance - b.Distance)
-      state.nearByStations = newStations
+      try {
+        state.hasError = false
+        const lat = position.coords.latitude
+        const lng = position.coords.longitude
+        state.userPosition = { lat, lng }
+        const res = await callApi(lat, lng, radius)
+        const newStations = res.data.map((item) => {
+          const d = haversine(
+            { lat, lng },
+            {
+              lat: item.StationPosition.PositionLat,
+              lng: item.StationPosition.PositionLon
+            }
+          )
+          item.Distance = Math.round(d)
+          return item
+        })
+        newStations.sort((a, b) => a.Distance - b.Distance)
+        state.nearByStations = newStations
+      } catch (error) {
+        state.hasError = true
+        state.errorMsg = error.message
+      } finally {
+        state.isLoading = false
+      }
     })
   }
 

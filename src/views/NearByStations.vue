@@ -26,12 +26,12 @@
     ></div>
     <!-- 站位列表 -->
     <div v-else class="flex-grow-1 container overflow-auto">
-      <h3 v-if="isLoading" class="mt-5">
+      <h3 v-if="state.isLoading" class="mt-5">
         <Loading />
       </h3>
-      <h3 v-else-if="error" class="mt-5 text-center">
-        {{ error }}
-      </h3>
+      <h3 v-else-if="state.hasError" class="mt-5 text-center"
+        >對不起，發生錯誤...</h3
+      >
       <ul v-else class="list-group" data-testid="nearby-list">
         <li
           v-for="(station, i) in state.nearByStations"
@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
@@ -87,8 +87,6 @@ const router = useRouter()
 const watchNearBy = useNearBy()
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
-const isLoading = ref(true)
-const error = ref('')
 
 // 切換 map 的顯示與隱藏
 const toggleMap = () => {
@@ -120,12 +118,5 @@ const toggleMap = () => {
 //   }
 // )
 
-onMounted(() => {
-  try {
-    watchNearBy(500)
-    isLoading.value = false
-  } catch (e) {
-    error.value = e.message
-  }
-})
+watchNearBy(500)
 </script>

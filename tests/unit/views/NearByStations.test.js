@@ -1,6 +1,14 @@
-import { render, screen, waitFor } from '@testing-library/vue'
+import { getByText, render, screen, waitFor } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
-import { describe, it, beforeAll, vi, expect } from 'vitest'
+import {
+  describe,
+  it,
+  beforeAll,
+  vi,
+  expect,
+  beforeEach,
+  afterEach
+} from 'vitest'
 import { router } from '@/router'
 import NearByStations from '@/views/NearByStations.vue'
 import { state } from '@/composables/bus'
@@ -16,7 +24,6 @@ const mockGeolocation = {
 }
 vi.stubGlobal('navigator', { geolocation: mockGeolocation })
 vi.mock('../../../src/composables/api.js')
-api.get.mockResolvedValue({ data: mockNearbyResponse })
 
 let user
 
@@ -25,7 +32,27 @@ describe('NearByStations 頁面', () => {
     user = userEvent.setup()
   })
 
-  it('讀取資料發生錯誤會顯示訊息', () => {})
+  beforeEach(() => {
+    api.get.mockResolvedValue({ data: mockNearbyResponse })
+  })
+
+  afterEach(() => {
+    api.get.mockReset()
+  })
+
+  it('讀取資料發生錯誤會顯示訊息', async () => {
+    api.get.mockReset()
+    api.get.mockRejectedValue(new Error('Data error'))
+    render(NearByStations, {
+      global: {
+        plugins: [router]
+      }
+    })
+    await waitFor(() => {
+      // screen.debug()
+      expect(screen.getByText(/錯誤/)).toBeInTheDocument()
+    })
+  })
 
   describe('Happy Path', () => {
     it('顯示使用者附近公車站位與距離', async () => {
@@ -69,13 +96,14 @@ describe('NearByStations 頁面', () => {
       })
 
       expect(screen.getByTestId('nearby')).toBeInTheDocument()
-      const link = await screen.findByTestId('station-link1')
-      const stationId = state.nearByStations[0].StationID
-      const city = getCityByCityCode(
-        state.nearByStations[0].StationUID.slice(0, 3)
-      )
-      expect(link).toBeInTheDocument()
-      expect(link.getAttribute('href')).toBe(`/stations/${city}/${stationId}`)
+      expect(await screen.findByTestId('nearby-list')).toBeInTheDocument()
+      state.nearByStations.forEach((station, i) => {
+        const link = screen.getByTestId('station-link' + (i + 1))
+        const stationId = station.StationID
+        const city = getCityByCityCode(station.StationUID.slice(0, 3))
+        expect(link).toBeInTheDocument()
+        expect(link.getAttribute('href')).toBe(`/stations/${city}/${stationId}`)
+      })
     })
   })
 })
