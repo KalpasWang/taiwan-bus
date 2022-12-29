@@ -5,41 +5,48 @@ import { state } from './state'
 export const useNearByMap = (element) => {
   const map = ref(null)
   const isMapReady = ref(false)
-  const markers = []
+  // const markers = []
 
   const initMap = () => {
-    return new Promise((resolve) => {
-      map.value = L.map(element, {
-        center: [23.7, 121],
-        zoom: 7
-      })
-      // 把地圖圖資加到 map
-      const layers = L.tileLayer(
-        'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-        {
-          maxZoom: 20,
-          attribution:
-            '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        }
-      ).addTo(map.value)
-      // 圖資讀取完成則 resolve
-      layers.on('load', () => {
-        resolve()
-      })
+    isMapReady.value = false
+    map.value = null
+    return new Promise((resolve, reject) => {
+      try {
+        map.value = L.map(element, {
+          center: [23.7, 121],
+          zoom: 7
+        })
+        // 把地圖圖資加到 map
+        const layers = L.tileLayer(
+          'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+          {
+            maxZoom: 20,
+            attribution:
+              '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          }
+        ).addTo(map.value)
+        // 圖資讀取完成則 resolve
+        layers.on('load', () => {
+          isMapReady.value = true
+          console.log(isMapReady.value)
+          resolve()
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 
   const renderNearByMap = () => {
     watchEffect(() => {
       // console.log('update')
-      clearMarkersAndRoute()
-      addStationsMarker(state.nearByStations)
-      addUserMarker(state.userPosition)
+      if (isMapReady.value) {
+        map.value.flyTo(state.userPosition, 4)
+        clearMarkersAndRoute()
+        addStationsMarker(state.nearByStations)
+        addUserMarker(state.userPosition)
+      }
     })
-    if (!isMapReady.value) {
-      isMapReady.value = true
-      map.value.flyTo(state.userPosition, 4)
-    }
   }
 
   const clearMarkersAndRoute = () => {
@@ -54,7 +61,7 @@ export const useNearByMap = (element) => {
   const addUserMarker = (user) => {
     const lng = user.lng
     const lat = user.lat
-    const marker = L.marker([lat, lng], {
+    L.marker([lat, lng], {
       icon: L.divIcon({
         className: 'user-marker'
       })
@@ -66,7 +73,7 @@ export const useNearByMap = (element) => {
       const item = list[i]
       const lng = item.StationPosition.PositionLon
       const lat = item.StationPosition.PositionLat
-      const marker = L.marker([lat, lng], {
+      L.marker([lat, lng], {
         icon: L.divIcon({
           className: 'map-marker',
           html: '<span class="marker-label">S</span>'
@@ -78,12 +85,12 @@ export const useNearByMap = (element) => {
             item.Bearing
           )})</h6>`
         )
-      marker.markerId = item.StationID
-      marker.lng = lng
-      marker.lat = lat
-      markers.push(marker)
+      // marker.markerId = item.StationID
+      // marker.lng = lng
+      // marker.lat = lat
+      // markers.push(marker)
     }
   }
 
-  return { map, isMapReady, initMap, isMapReady, renderNearByMap }
+  return { map, isMapReady, initMap, renderNearByMap }
 }
