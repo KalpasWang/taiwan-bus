@@ -27,7 +27,7 @@
     <!-- 站位列表 -->
     <div v-else class="flex-grow-1 container overflow-auto">
       <h3 v-if="state.isLoading" class="mt-5">
-        <Loading />
+        <Loading data-testid="loader" />
       </h3>
       <h3 v-else-if="state.hasError" class="mt-5 text-center"
         >對不起，發生錯誤...</h3

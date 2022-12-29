@@ -36,10 +36,6 @@ describe('NearByStations 頁面', () => {
     api.get.mockResolvedValue({ data: mockNearbyResponse })
   })
 
-  afterEach(() => {
-    api.get.mockReset()
-  })
-
   it('讀取資料發生錯誤會顯示訊息', async () => {
     api.get.mockReset()
     api.get.mockRejectedValue(new Error('Data error'))
@@ -49,12 +45,20 @@ describe('NearByStations 頁面', () => {
       }
     })
     await waitFor(() => {
-      // screen.debug()
       expect(screen.getByText(/錯誤/)).toBeInTheDocument()
     })
   })
 
   describe('Happy Path', () => {
+    it('讀取資料會顯示 loading icon', async () => {
+      render(NearByStations, {
+        global: {
+          plugins: [router]
+        }
+      })
+      expect(screen.getByTestId('loader')).toBeInTheDocument()
+    })
+
     it('顯示使用者附近公車站位與距離', async () => {
       render(NearByStations, {
         global: {
