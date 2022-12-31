@@ -9,23 +9,25 @@
           title="回上一頁"
         />
         <Logo />
-        <IconButton
-          v-if="!mapShow"
-          @click="toggleMap()"
-          :imgUrl="mapIcon"
-          title="地圖"
-        />
+        <div>
+          <IconButton
+            v-if="!mapShow"
+            @click="toggleMap()"
+            :imgUrl="mapIcon"
+            title="地圖"
+          />
+        </div>
       </div>
     </div>
     <!-- 地圖 -->
     <div
-      v-if="mapShow"
+      v-show="mapShow"
       data-testid="nearby-map"
-      id="stations-map"
+      id="nearby-map"
       class="flex-grow-1"
     ></div>
     <!-- 站位列表 -->
-    <div v-else class="flex-grow-1 container overflow-auto">
+    <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
       <h3 v-if="state.isLoading" class="mt-5">
         <Loading data-testid="loader" />
       </h3>
@@ -73,50 +75,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
 import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
-import { useNearBy, state } from '@/composables/bus'
+import { useNearBy, useNearByMap, state } from '@/composables/bus'
 import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
 const watchNearBy = useNearBy()
+const { map, isMapReady, initMap, renderNearByMap } = useNearByMap('nearby-map')
+
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
 
 // 切換 map 的顯示與隱藏
-const toggleMap = () => {
+const toggleMap = async () => {
   mapShow.value = !mapShow.value
-  // if (mapShow.value) {
-  //   nextTick(() => {
-  //     map.mapInit('stations-map').then(() => {
-  //       // unwrappiing
-  //       const userPosition = state.userPosition
-  //       const nearByStations = state.nearByStations
-  //       map.drawNearByMarkers(userPosition, nearByStations)
-  //       mapIsDrawed.value = true
-  //     })
-  //   })
-  // } else {
-  //   mapIsDrawed.value = false
-  // }
+  if (mapShow.value && !mapIsDrawed.value) {
+    await nextTick()
+    await initMap()
+    mapIsDrawed.value = true
+    renderNearByMap()
+  }
 }
-
-// watch(
-//   () => state.pending,
-//   (val) => {
-//     if (val && mapIsDrawed.value) {
-//       // unwrapping
-//       const userPosition = state.userPosition
-//       const newPositions = state.nearByStations
-//       map.redrawNearByMarkers(userPosition, newPositions)
-//     }
-//   }
-// )
 
 watchNearBy(500)
 </script>

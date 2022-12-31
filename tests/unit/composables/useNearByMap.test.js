@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/vue'
 import L from 'leaflet'
+import NearByStations from '@/views/NearByStations.vue'
+import { router } from '@/router'
 import { state, useNearByMap } from '../../../src/composables/bus'
 import {
   mockUserPosition,
@@ -8,34 +10,32 @@ import {
   mockUserPosition2,
   mockNearbyResponse2
 } from '../../../src/composables/constants'
-
-let mapTest, isMapReadyTest
+import { onMounted, ref } from 'vue'
 
 const testComponent = {
-  template: '<div id="map" data-testid="map">test</div>',
+  template: '<div id="map" ref="mapRef" data-testid="map"></div>',
   setup() {
-    const { map, isMapReady, initMap, renderNearByMap } = useNearByMap('map')
-    mapTest = map
-    isMapReadyTest = isMapReady
-    initMap()
-    renderNearByMap()
+    const mapRef = ref(null)
+    onMounted(async () => {
+      console.log('mapRef', mapRef.value)
+      const { map, isMapReady, initMap, renderNearByMap } = useNearByMap(
+        mapRef.value
+      )
+      await initMap()
+      renderNearByMap()
+    })
+    return {
+      mapRef
+    }
   }
 }
 
-// vi.mock('leaflet')
-
 describe('useNearByMap function', () => {
   it('init map', async () => {
-    document.body.innerHTML = '<div id="map" data-testid="map"></div>'
-    const { map, isMapReady, initMap, renderNearByMap } = useNearByMap('map')
-    await initMap()
-    renderNearByMap()
     state.userPosition = mockUserPosition
     state.nearByStations = mockNearbyResponse
-    expect(isMapReady.value).toBeFalsy()
+    render(testComponent)
     await waitFor(() => {
-      // console.log(isMapReady.value)
-      expect(isMapReady.value).toBeTruthy()
       expect(screen.getByTestId('map')).not.toBeEmptyDOMElement()
     })
   })
