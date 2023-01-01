@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import L from 'leaflet'
 import { busIcon } from '../constants'
 
-const useRouteMap = (element) => {
+export const useRouteMap = (element) => {
   const map = ref(null)
   const isMapReady = ref(false)
   const markers = []
@@ -96,5 +96,3 @@ const useRouteMap = (element) => {
 
   return { map, isMapReady, initMap, isMapReady, renderRouteMap }
 }
-
-export default useRouteMap

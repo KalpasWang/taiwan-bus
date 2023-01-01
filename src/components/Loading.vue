@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center" data-testid="loader">
     <img :src="loadingIcon" :width="props.width" alt="loading..." />
   </div>
 </template>

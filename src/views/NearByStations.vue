@@ -1,133 +1,114 @@
 <template>
-  <div class="bg-dark vh-100 d-flex flex-column">
+  <div class="bg-dark vh-100 d-flex flex-column" data-testid="nearby">
     <!-- Header -->
     <div class="header-shadow bg-dark">
       <div class="d-flex justify-content-between align-items-center px-3 py-4">
-        <img
-          @click="router.go(-1)"
-          :src="backIcon"
-          alt="回上一頁"
-          role="button"
-          width="6"
+        <IconButton
+          @click="mapShow ? toggleMap() : router.go(-1)"
+          :imgUrl="backIcon"
+          title="回上一頁"
         />
-        <logo />
-        <img
-          @click="toggleMap()"
-          :src="mapIcon"
-          :class="{ 'map-active': mapShow }"
-          alt="地圖"
-          role="button"
-          width="23"
-        />
+        <Logo />
+        <div>
+          <IconButton
+            v-if="!mapShow"
+            @click="toggleMap()"
+            :imgUrl="mapIcon"
+            title="地圖"
+          />
+        </div>
       </div>
     </div>
     <!-- 地圖 -->
-    <div v-show="mapShow" id="stations-map" class="flex-grow-1"></div>
+    <div
+      v-show="mapShow"
+      data-testid="nearby-map"
+      id="nearby-map"
+      class="flex-grow-1"
+    ></div>
     <!-- 站位列表 -->
-    <div v-show="!mapShow" ref="stationsList" class="flex-grow-1 container">
-      <h3 v-if="state.pending" class="mt-5">
-        <Loading />
+    <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
+      <h3 v-if="state.isLoading" class="mt-5">
+        <Loading data-testid="loader" />
       </h3>
-      <h3 v-else-if="state.error" class="mt-5 text-center">
-        {{ state.error }}
-      </h3>
-      <!-- 使用套件取代 scrollbar -->
-      <perfect-scrollbar v-else>
-        <ul class="list-group">
-          <li
-            v-for="(station, i) in state.nearByStations"
-            :key="station.StationUID"
-            class="list-group-item list-group-item-action"
-            :class="{ 'bg-secondary': i % 2 === 0 }"
+      <h3 v-else-if="state.hasError" class="mt-5 text-center"
+        >對不起，發生錯誤...</h3
+      >
+      <ul v-else class="list-group" data-testid="nearby-list">
+        <li
+          v-for="(station, i) in state.nearByStations"
+          :key="station.StationID"
+          class="list-group-item list-group-item-action"
+          :class="{ 'bg-secondary': i % 2 === 0 }"
+        >
+          <!-- 每個站牌可以連結到公車路線 -->
+          <router-link
+            :to="{
+              name: 'StationPage',
+              params: {
+                city: getCityByCityCode(station.StationUID.slice(0, 3)),
+                stationId: station.StationID
+              }
+            }"
+            class="d-block link-primary text-decoration-none"
+            :data-testid="`station-link${i + 1}`"
           >
-            <!-- 每個站牌可以連結到公車路線 -->
-            <router-link
-              :to="{
-                name: 'StationPage',
-                params: {
-                  city: getCityByCityCode(station.StationUID.slice(0, 3)),
-                  stationId: station.StationID
-                }
-              }"
-              class="d-block link-primary text-decoration-none"
-            >
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <!-- 顯示站牌名稱與方向 -->
-                  <h4 class="fs-6">
-                    {{ station.StationName.Zh_tw }}({{
-                      getBearingLabel(station.Bearing)
-                    }})
-                  </h4>
-                  <p class="text-light fs-7">
-                    {{ station.Stops.length }} 個站牌
-                  </p>
-                </div>
-                <p>{{ station.Distance }} 公尺</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <!-- 顯示站牌名稱與方向 -->
+                <h4 class="fs-6">
+                  {{ station.StationName.Zh_tw }}({{
+                    getBearingLabel(station.Bearing)
+                  }})
+                </h4>
+                <p class="text-light fs-7">
+                  {{ station.Stops.length }} 個站牌
+                </p>
               </div>
-            </router-link>
-          </li>
-        </ul>
-      </perfect-scrollbar>
+              <p>{{ station.Distance }} 公尺</p>
+            </div>
+          </router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
-import logo from '@/components/logo.vue'
+import Logo from '@/components/logo.vue'
+import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
-import bus from '@/composables/useCityBus'
-import map from '@/composables/useMap'
+import { useNearBy, useNearByMap, state } from '@/composables/bus'
 import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
+const watchNearBy = useNearBy()
+const { map, isMapReady, initMap, renderNearByMap } = useNearByMap()
+
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
-const stationsList = ref(null)
-const { state } = bus
 
 // 切換 map 的顯示與隱藏
-const toggleMap = () => {
-  const v = mapShow.value
-  mapShow.value = !v
-  if (mapShow.value) {
-    nextTick(() => {
-      map.mapInit('stations-map').then(() => {
-        // unwrappiing
-        const userPosition = state.userPosition
-        const nearByStations = state.nearByStations
-        map.drawNearByMarkers(userPosition, nearByStations)
-        mapIsDrawed.value = true
-      })
-    })
-  } else {
-    mapIsDrawed.value = false
+const toggleMap = async () => {
+  mapShow.value = !mapShow.value
+  if (mapShow.value && !mapIsDrawed.value) {
+    await nextTick()
+    await initMap('nearby-map')
+    mapIsDrawed.value = true
+    renderNearByMap()
   }
 }
 
 watch(
-  () => state.pending,
-  (val) => {
-    if (val && mapIsDrawed.value) {
-      // unwrapping
-      const userPosition = state.userPosition
-      const newPositions = state.nearByStations
-      map.redrawNearByMarkers(userPosition, newPositions)
-    }
+  () => state.userPosition,
+  () => {
+    renderNearByMap()
   }
 )
 
-onMounted(() => {
-  // set scroll region height
-  const height = stationsList.value.getBoundingClientRect().height + 'px'
-  document.documentElement.style.setProperty('--h', height)
-
-  bus.fetchNearByStations(500)
-})
+watchNearBy(500)
 </script>
-
-<style lang=""></style>

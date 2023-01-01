@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import state from './bus/state'
+import { state } from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 
 let token
@@ -16,6 +16,10 @@ export const api = axios.create({
     $format: 'JSON'
   }
 })
+
+export const top20 = { params: { $top: 20 } }
+export const advancedBaseUrl =
+  'https://tdx.transportdata.tw/api/advanced/v2/Bus'
 
 // request 攔截器，設定帶入token
 api.interceptors.request.use(
@@ -63,8 +67,6 @@ async function setToken() {
     throw new Error(error.message)
   }
 }
-
-export const top20 = { params: { $top: 20 } }
 
 /**
  * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線站序資料
