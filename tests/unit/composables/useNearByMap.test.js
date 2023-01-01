@@ -10,20 +10,27 @@ import {
   mockUserPosition2,
   mockNearbyResponse2
 } from '../../../src/composables/constants'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { delay } from '../../../src/composables/utilities'
+
+let rerender = 0
 
 const testComponent = {
   template: '<div id="map" ref="mapRef" data-testid="map"></div>',
   setup() {
     const mapRef = ref(null)
+    const { map, isMapReady, initMap, renderNearByMap } = useNearByMap()
     onMounted(async () => {
-      console.log('mapRef', mapRef.value)
-      const { map, isMapReady, initMap, renderNearByMap } = useNearByMap(
-        mapRef.value
-      )
-      await initMap()
+      await initMap(mapRef.value)
       renderNearByMap()
     })
+    watch(
+      () => state.userPosition,
+      () => {
+        rerender++
+        renderNearByMap()
+      }
+    )
     return {
       mapRef
     }
@@ -39,5 +46,17 @@ describe('useNearByMap function', () => {
       expect(screen.getByTestId('map')).not.toBeEmptyDOMElement()
     })
   })
-  it('當 user 位置改變會 rerender', () => {})
+
+  it('當 user 位置改變 map 會 rerender', async () => {
+    state.userPosition = mockUserPosition
+    state.nearByStations = mockNearbyResponse
+    render(testComponent)
+    expect(rerender).toBe(0)
+    await delay(500)
+    state.userPosition = mockUserPosition2
+    state.nearByStations = mockNearbyResponse2
+    await waitFor(() => {
+      expect(rerender).toBe(1)
+    })
+  })
 })

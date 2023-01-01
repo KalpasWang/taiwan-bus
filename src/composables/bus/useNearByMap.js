@@ -1,13 +1,13 @@
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import L from 'leaflet'
 import { state } from './state'
 import { getBearingLabel } from '../utilities'
 
-export const useNearByMap = (element) => {
+export const useNearByMap = () => {
   const map = ref(null)
   const isMapReady = ref(false)
 
-  const initMap = () => {
+  const initMap = (element) => {
     isMapReady.value = false
     map.value = null
     return new Promise((resolve) => {
@@ -27,21 +27,18 @@ export const useNearByMap = (element) => {
       // 圖資讀取完成則 resolve
       layers.on('load', () => {
         isMapReady.value = true
-        console.log('map is ready')
         resolve()
       })
     })
   }
 
   const renderNearByMap = () => {
-    watchEffect(() => {
-      if (isMapReady.value && state.userPosition.lat) {
-        map.value.flyTo(state.userPosition, 15)
-        clearMarkersAndRoute()
-        addStationsMarker(state.nearByStations)
-        addUserMarker(state.userPosition)
-      }
-    })
+    if (isMapReady.value && state.userPosition.lat) {
+      map.value.flyTo(state.userPosition, 15)
+      clearMarkersAndRoute()
+      addStationsMarker(state.nearByStations)
+      addUserMarker(state.userPosition)
+    }
   }
 
   const clearMarkersAndRoute = () => {

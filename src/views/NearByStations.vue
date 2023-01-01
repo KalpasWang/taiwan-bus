@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
@@ -87,7 +87,7 @@ import { getCityByCityCode, getBearingLabel } from '@/composables/utilities'
 
 const router = useRouter()
 const watchNearBy = useNearBy()
-const { map, isMapReady, initMap, renderNearByMap } = useNearByMap('nearby-map')
+const { map, isMapReady, initMap, renderNearByMap } = useNearByMap()
 
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
@@ -97,11 +97,18 @@ const toggleMap = async () => {
   mapShow.value = !mapShow.value
   if (mapShow.value && !mapIsDrawed.value) {
     await nextTick()
-    await initMap()
+    await initMap('nearby-map')
     mapIsDrawed.value = true
     renderNearByMap()
   }
 }
+
+watch(
+  () => state.userPosition,
+  () => {
+    renderNearByMap()
+  }
+)
 
 watchNearBy(500)
 </script>
