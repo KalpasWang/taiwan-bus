@@ -25,7 +25,11 @@
       data-testid="nearby-map"
       id="nearby-map"
       class="flex-grow-1"
-    ></div>
+    >
+      <h3 v-if="state.hasError || mapHasError" class="mt-5 text-center"
+        >對不起，發生錯誤...</h3
+      >
+    </div>
     <!-- 站位列表 -->
     <div v-show="!mapShow" class="flex-grow-1 container overflow-auto">
       <h3 v-if="state.isLoading" class="mt-5">
@@ -91,15 +95,22 @@ const { map, isMapReady, initMap, renderNearByMap } = useNearByMap()
 
 const mapShow = ref(false)
 const mapIsDrawed = ref(false)
+const mapHasError = ref(false)
+const mapErrorMsg = ref('')
 
 // 切換 map 的顯示與隱藏
 const toggleMap = async () => {
-  mapShow.value = !mapShow.value
-  if (mapShow.value && !mapIsDrawed.value) {
-    await nextTick()
-    await initMap('nearby-map')
-    mapIsDrawed.value = true
-    renderNearByMap()
+  try {
+    mapShow.value = !mapShow.value
+    if (mapShow.value && !mapIsDrawed.value) {
+      await nextTick()
+      await initMap('nearby-map')
+      mapIsDrawed.value = true
+      renderNearByMap()
+    }
+  } catch (error) {
+    mapHasError.value = true
+    mapErrorMsg.value = error.message
   }
 }
 

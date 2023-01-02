@@ -14,6 +14,7 @@ import { onMounted, ref, watch } from 'vue'
 import { delay } from '../../../src/composables/utilities'
 
 let rerender = 0
+let hasErrors = false
 
 const testComponent = {
   template: '<div id="map" ref="mapRef" data-testid="map"></div>',
@@ -21,8 +22,12 @@ const testComponent = {
     const mapRef = ref(null)
     const { map, isMapReady, initMap, renderNearByMap } = useNearByMap()
     onMounted(async () => {
-      await initMap(mapRef.value)
-      renderNearByMap()
+      try {
+        await initMap(mapRef.value)
+        renderNearByMap()
+      } catch (error) {
+        hasErrors = true
+      }
     })
     watch(
       () => state.userPosition,
@@ -57,6 +62,14 @@ describe('useNearByMap function', () => {
     state.nearByStations = mockNearbyResponse2
     await waitFor(() => {
       expect(rerender).toBe(1)
+    })
+  })
+
+  it('當 initMap 發生錯誤會 reject', async () => {
+    L.map = vi.fn()
+    render(testComponent)
+    await waitFor(() => {
+      expect(hasErrors).toBeTruthy()
     })
   })
 })
