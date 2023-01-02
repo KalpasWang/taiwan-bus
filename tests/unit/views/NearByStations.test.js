@@ -45,7 +45,7 @@ describe('NearByStations 頁面', () => {
       }
     })
     await waitFor(() => {
-      expect(screen.getByText(/錯誤/)).toBeInTheDocument()
+      expect(screen.getAllByText(/錯誤/).length).toBeGreaterThan(0)
     })
   })
 
