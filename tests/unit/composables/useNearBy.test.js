@@ -33,7 +33,7 @@ describe('useNearBy 函式', () => {
       api.get.mockResolvedValue({ data: mockNearbyResponse })
     })
 
-    it('radius 150，傳回包含二個公車站位、距離的陣列', async () => {
+    it('radius 150，傳回包含九個公車站位、距離的陣列', async () => {
       watchNearBy(150)
       await delay(10)
       // console.log(state.nearByStations)

@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch } from 'vue'
+import { ref, nextTick, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
@@ -97,6 +97,8 @@ const mapShow = ref(false)
 const mapIsDrawed = ref(false)
 const mapHasError = ref(false)
 const mapErrorMsg = ref('')
+
+const clearWatch = watchNearBy(500)
 
 // 切換 map 的顯示與隱藏
 const toggleMap = async () => {
@@ -121,5 +123,7 @@ watch(
   }
 )
 
-watchNearBy(500)
+onUnmounted(() => {
+  clearWatch()
+})
 </script>
