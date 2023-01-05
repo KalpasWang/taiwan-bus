@@ -1,4 +1,4 @@
-import { getByText, render, screen, waitFor } from '@testing-library/vue'
+import { render, screen, waitFor } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
 import {
   describe,
@@ -20,7 +20,8 @@ import {
 } from '../../../src/composables/constants'
 
 const mockGeolocation = {
-  watchPosition: vi.fn((success) => success(mockUserPosition))
+  watchPosition: vi.fn((success) => success(mockUserPosition)),
+  clearWatch: vi.fn()
 }
 vi.stubGlobal('navigator', { geolocation: mockGeolocation })
 vi.mock('../../../src/composables/api.js')
@@ -83,12 +84,10 @@ describe('NearByStations 頁面', () => {
       })
       expect(screen.getByTestId('nearby')).toBeInTheDocument()
       expect(await screen.findByTestId('nearby-list')).toBeInTheDocument()
-      // expect(lmap).not.toHaveBeenCalled()
       const mapBtn = await screen.findByTitle('地圖')
       await user.click(mapBtn)
       await waitFor(() => {
         expect(screen.getByTestId('nearby-map')).toBeInTheDocument()
-        // expect(lmap).toHaveBeenCalledOnce()
       })
     })
 
@@ -108,6 +107,17 @@ describe('NearByStations 頁面', () => {
         expect(link).toBeInTheDocument()
         expect(link.getAttribute('href')).toBe(`/stations/${city}/${stationId}`)
       })
+    })
+
+    it('頁面 unmounted 會呼叫 clearWatch', () => {
+      navigator.geolocation.clearWatch.mockClear()
+      const { unmount } = render(NearByStations, {
+        global: {
+          plugins: [router]
+        }
+      })
+      unmount()
+      expect(navigator.geolocation.clearWatch).toHaveBeenCalledOnce()
     })
   })
 })
