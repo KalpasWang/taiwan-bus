@@ -71,7 +71,7 @@ async function setToken() {
 /**
  * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線站序資料
  * @param  {string} routeName
- * @param  {string} [city] - 若沒有 city 表示位客運路線
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
  */
 export async function fetchStopsOfRoute(routeName, city) {
   // 設定要 fetch 的網址
@@ -92,7 +92,7 @@ export async function fetchStopsOfRoute(routeName, city) {
 /**
  * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線資料
  * @param  {string} routeName
- * @param  {string} [city] - 若沒有 city 表示位客運路線
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
  */
 export async function fetchTop20Routes(routeName, city, skip) {
   // 設定要 fetch 的網址
@@ -108,4 +108,23 @@ export async function fetchTop20Routes(routeName, city, skip) {
   })
   // console.log(res.data)
   return res.data
+}
+
+/**
+ * 取得指定[縣市]的市區公車或公路客運站位資料
+ * @param  {string} id - station id
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
+ */
+export async function fetchStation(id, city) {
+  // 設定要 fetch 的網址
+  let url = `Station/City/${city}`
+  if (!city) {
+    url = 'Station/InterCity'
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `StationID eq '${id}'`
+    }
+  })
+  state.station = res.data[0]
 }
