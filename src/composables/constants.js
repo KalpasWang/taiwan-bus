@@ -2243,3 +2243,53 @@ export const mockNearbyResponse2 = [
     VersionID: 2120
   }
 ]
+
+export const mockCityStationData = [
+  {
+    StationUID: 'HUA129575',
+    StationID: '129575',
+    StationName: {
+      Zh_tw: '大同市場'
+    },
+    StationPosition: {
+      PositionLon: 121.60629,
+      PositionLat: 23.98122,
+      GeoHash: 'wsq2rjwux'
+    },
+    StationGroupID: '970－049',
+    Stops: [
+      {
+        StopUID: 'HUA304864',
+        StopID: '304864',
+        StopName: {
+          Zh_tw: '大同市場',
+          En: 'Datong Market'
+        },
+        RouteUID: 'HUA0307',
+        RouteID: '0307',
+        RouteName: {
+          Zh_tw: '307',
+          En: '307'
+        }
+      },
+      {
+        StopUID: 'HUA304764',
+        StopID: '304764',
+        StopName: {
+          Zh_tw: '大同市場',
+          En: 'Datong Market'
+        },
+        RouteUID: 'HUA0308',
+        RouteID: '0308',
+        RouteName: {
+          Zh_tw: '308',
+          En: '308'
+        }
+      }
+    ],
+    LocationCityCode: 'HUA',
+    Bearing: 'N',
+    UpdateTime: '2023-01-08T07:00:51+08:00',
+    VersionID: 1504
+  }
+]
