@@ -2293,3 +2293,1714 @@ export const mockCityStationData = [
     VersionID: 1504
   }
 ]
+
+export const mockCityPassThroughRoutes = [
+  {
+    RouteUID: 'HUA0307',
+    RouteID: '0307',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '39',
+        OperatorName: {
+          Zh_tw: '首都客運',
+          En: 'Capital Bus Co., Ltd.'
+        },
+        OperatorCode: 'CapitalBus',
+        OperatorNo: '0913'
+      },
+      {
+        OperatorID: '42',
+        OperatorName: {
+          Zh_tw: '臺北客運',
+          En: 'Taipei Bus Co., Ltd.'
+        },
+        OperatorCode: 'TaipeiBus',
+        OperatorNo: '1407'
+      }
+    ],
+    AuthorityID: '022',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'HUA030701',
+        SubRouteID: '030701',
+        OperatorIDs: ['39', '42'],
+        SubRouteName: {
+          Zh_tw: '307',
+          En: '307'
+        },
+        Headsign: '花蓮轉運站→慈濟科技大學→東大門夜市→花蓮轉運站',
+        HeadsignEn:
+          'Hualien Bus Station→Tzu—chi University of Science and Technology→Dongdamen Night Market→Hualien Bus Station',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'HUA030702',
+        SubRouteID: '030702',
+        OperatorIDs: ['39', '42'],
+        SubRouteName: {
+          Zh_tw: '307',
+          En: '307'
+        },
+        Headsign: '花蓮轉運站→東大門夜市→慈濟科技大學→花蓮轉運站',
+        HeadsignEn:
+          'Hualien Bus Station→Dongdamen Night Market→Tzu—chi University of Science and Technology→Hualien Bus Station',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 11,
+    RouteName: {
+      Zh_tw: '307',
+      En: '307'
+    },
+    DepartureStopNameZh: '花蓮轉運站',
+    DepartureStopNameEn: 'Hualien Bus Station',
+    DestinationStopNameZh: '花蓮轉運站',
+    DestinationStopNameEn: 'Hualien Bus Station',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/0307.jpg',
+    City: 'HualienCounty',
+    CityCode: 'HUA',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'HUA0308',
+    RouteID: '0308',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '34',
+        OperatorName: {
+          Zh_tw: '統聯客運',
+          En: 'United Highway Bus Co., Ltd.'
+        },
+        OperatorCode: 'UnitedHighwayBus',
+        OperatorNo: '1201'
+      }
+    ],
+    AuthorityID: '022',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'HUA030801',
+        SubRouteID: '030801',
+        OperatorIDs: ['34'],
+        SubRouteName: {
+          Zh_tw: '308',
+          En: '308'
+        },
+        Headsign: '飯店接駁線(花蓮轉運站→七星潭)',
+        HeadsignEn: 'Hotel connection line(Hualien Bus Station→Qixingtan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'HUA030802',
+        SubRouteID: '030802',
+        OperatorIDs: ['34'],
+        SubRouteName: {
+          Zh_tw: '308',
+          En: '308'
+        },
+        Headsign: '飯店接駁線(七星潭→花蓮轉運站)',
+        HeadsignEn: 'Hotel connection line(Qixingtan→Hualien Bus Station)',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'HUA0308A1',
+        SubRouteID: '0308A1',
+        OperatorIDs: ['34'],
+        SubRouteName: {
+          Zh_tw: '308A',
+          En: '308A'
+        },
+        Headsign: '飯店接駁線(花蓮轉運站→民意社區)',
+        HeadsignEn:
+          'Hotel connection line(Hualien Bus Station→Minyi Community)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'HUA0308A2',
+        SubRouteID: '0308A2',
+        OperatorIDs: ['34'],
+        SubRouteName: {
+          Zh_tw: '308A',
+          En: '308A'
+        },
+        Headsign: '飯店接駁線(民意社區→花蓮轉運站)',
+        HeadsignEn:
+          'Hotel connection line(Minyi Community→Hualien Bus Station)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 11,
+    RouteName: {
+      Zh_tw: '308',
+      En: '308'
+    },
+    DepartureStopNameZh: '花蓮轉運站',
+    DepartureStopNameEn: 'Hualien Bus Station',
+    DestinationStopNameZh: '七星潭',
+    DestinationStopNameEn: 'Qixingtan',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/0308.jpg',
+    City: 'HualienCounty',
+    CityCode: 'HUA',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  }
+]
+
+export const mockIntercityStation = [
+  {
+    StationUID: 'THB102582',
+    StationID: '102582',
+    StationName: {
+      Zh_tw: '署東醫院'
+    },
+    StationPosition: {
+      PositionLon: 121.149651,
+      PositionLat: 22.757344,
+      GeoHash: 'wsn1kyf7p'
+    },
+    StationGroupID: '950－039',
+    Stops: [
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8101',
+        RouteID: '8101',
+        RouteName: {
+          Zh_tw: '8101',
+          En: '8101'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8103',
+        RouteID: '8103',
+        RouteName: {
+          Zh_tw: '8103',
+          En: '8103'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8109',
+        RouteID: '8109',
+        RouteName: {
+          Zh_tw: '8109',
+          En: '8109'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8113',
+        RouteID: '8113',
+        RouteName: {
+          Zh_tw: '8113',
+          En: '8113'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8117',
+        RouteID: '8117',
+        RouteName: {
+          Zh_tw: '8117',
+          En: '8117'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8122',
+        RouteID: '8122',
+        RouteName: {
+          Zh_tw: '8122',
+          En: '8122'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8128',
+        RouteID: '8128',
+        RouteName: {
+          Zh_tw: '8128',
+          En: '8128'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8132',
+        RouteID: '8132',
+        RouteName: {
+          Zh_tw: '8132',
+          En: '8132'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8135',
+        RouteID: '8135',
+        RouteName: {
+          Zh_tw: '8135',
+          En: '8135'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8137',
+        RouteID: '8137',
+        RouteName: {
+          Zh_tw: '8137',
+          En: '8137'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8138',
+        RouteID: '8138',
+        RouteName: {
+          Zh_tw: '8138',
+          En: '8138'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8150',
+        RouteID: '8150',
+        RouteName: {
+          Zh_tw: '8150',
+          En: '8150'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8161',
+        RouteID: '8161',
+        RouteName: {
+          Zh_tw: '8161',
+          En: '8161'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8163',
+        RouteID: '8163',
+        RouteName: {
+          Zh_tw: '8163',
+          En: '8163'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8165',
+        RouteID: '8165',
+        RouteName: {
+          Zh_tw: '8165',
+          En: '8165'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8166',
+        RouteID: '8166',
+        RouteName: {
+          Zh_tw: '8166',
+          En: '8166'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8167',
+        RouteID: '8167',
+        RouteName: {
+          Zh_tw: '8167',
+          En: '8167'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8168',
+        RouteID: '8168',
+        RouteName: {
+          Zh_tw: '8168',
+          En: '8168'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8171',
+        RouteID: '8171',
+        RouteName: {
+          Zh_tw: '8171',
+          En: '8171'
+        }
+      },
+      {
+        StopUID: 'THB135427',
+        StopID: '135427',
+        StopName: {
+          Zh_tw: '署東醫院',
+          En: 'Taitung Hospital'
+        },
+        RouteUID: 'THB8172',
+        RouteID: '8172',
+        RouteName: {
+          Zh_tw: '8172',
+          En: '8172'
+        }
+      }
+    ],
+    LocationCityCode: 'TTT',
+    Bearing: 'E',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  }
+]
+
+export const mockIntercityPassThroughRoutes = [
+  {
+    RouteUID: 'THB8101',
+    RouteID: '8101',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB810101',
+        SubRouteID: '810101',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8101',
+          En: '8101'
+        },
+        Headsign: '台東→靜埔',
+        HeadsignEn: 'Taitung→Jingpu',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB810102',
+        SubRouteID: '810102',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8101',
+          En: '8101'
+        },
+        Headsign: '靜埔→台東',
+        HeadsignEn: 'Jingpu→Taitung',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8101A1',
+        SubRouteID: '8101A1',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8101A',
+          En: '8101A'
+        },
+        Headsign: '台東轉運站→三仙台遊憩區[台灣好行東部海岸線(一日行程)]',
+        HeadsignEn: 'Taitung→ Sanxiantai(East Coast Line Day Trip)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB8101B1',
+        SubRouteID: '8101B1',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8101B',
+          En: '8101B'
+        },
+        Headsign: '台東轉運站→阿美民俗中心[台灣好行東部海岸線(上午半日)]',
+        HeadsignEn:
+          'Taitung→ Amis Folk Center(East Coast Line Day Tour (Morning Half Day Tour))',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB8101C1',
+        SubRouteID: '8101C1',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8101C',
+          En: '8101C'
+        },
+        Headsign: '台東轉運站→阿美民俗中心[台灣好行東部海岸線(下午半日)]',
+        HeadsignEn:
+          'Taitung→Amis Folk Center(East Coast Line Day Tour (Afternoon ~ Evening Half Day Tour))',
+        Direction: 0
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8101',
+      En: '8101'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '德蕾莎',
+    DestinationStopNameEn: 'Deleisha',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8101.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8103',
+    RouteID: '8103',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB810301',
+        SubRouteID: '810301',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8103',
+          En: '8103'
+        },
+        Headsign: '台東→成功',
+        HeadsignEn: 'Taitung→Chenggong',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB810302',
+        SubRouteID: '810302',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8103',
+          En: '8103'
+        },
+        Headsign: '成功→台東',
+        HeadsignEn: 'Chenggong→Taitung',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8103',
+      En: '8103'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '成功',
+    DestinationStopNameEn: 'Chenggong',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8103.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8109',
+    RouteID: '8109',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB810901',
+        SubRouteID: '810901',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8109',
+          En: '8109'
+        },
+        Headsign: '台東→泰源',
+        HeadsignEn: 'Taitung→Taiyuan',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB810902',
+        SubRouteID: '810902',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8109',
+          En: '8109'
+        },
+        Headsign: '泰源→台東',
+        HeadsignEn: 'Taiyuan→Taitung',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8109',
+      En: '8109'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '泰源',
+    DestinationStopNameEn: 'Taiyuan',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8109.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8113',
+    RouteID: '8113',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB811301',
+        SubRouteID: '811301',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8113',
+          En: '8113'
+        },
+        Headsign: '台東轉運站→達魯瑪克',
+        HeadsignEn: 'Taitung Bus Station→Taromak',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB811302',
+        SubRouteID: '811302',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8113',
+          En: '8113'
+        },
+        Headsign: '達魯瑪克→台東轉運站',
+        HeadsignEn: 'Taromak→Taitung Bus Station',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8113',
+      En: '8113'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '達魯瑪克',
+    DestinationStopNameEn: 'Taromak',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8113.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8117',
+    RouteID: '8117',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB811701',
+        SubRouteID: '811701',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8117',
+          En: '8117'
+        },
+        Headsign: '台東→鹿野',
+        HeadsignEn: 'Taitung→Zhongye',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB811702',
+        SubRouteID: '811702',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8117',
+          En: '8117'
+        },
+        Headsign: '鹿野→台東',
+        HeadsignEn: 'Zhongye→Taitung',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8117',
+      En: '8117'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '鹿野',
+    DestinationStopNameEn: 'Luye',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8117.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8122',
+    RouteID: '8122',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB812201',
+        SubRouteID: '812201',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8122',
+          En: '8122'
+        },
+        Headsign: '臺東→隆昌',
+        HeadsignEn: 'Taitung→Longchang',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB812202',
+        SubRouteID: '812202',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8122',
+          En: '8122'
+        },
+        Headsign: '隆昌→臺東',
+        HeadsignEn: 'Longchang→Taitung',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8122',
+      En: '8122'
+    },
+    DepartureStopNameZh: '台東保養廠',
+    DepartureStopNameEn: 'Dingdong Transport Maintain Factory(Coast Line)',
+    DestinationStopNameZh: '隆昌',
+    DestinationStopNameEn: 'Longchang',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8122.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8128',
+    RouteID: '8128',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '114',
+        OperatorName: {
+          Zh_tw: '興東客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '1602'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB812801',
+        SubRouteID: '812801',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8128',
+          En: '8128'
+        },
+        Headsign: '臺東→臺東航空站',
+        HeadsignEn: 'Taitung→Taitung Airport',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB812802',
+        SubRouteID: '812802',
+        OperatorIDs: ['114'],
+        SubRouteName: {
+          Zh_tw: '8128',
+          En: '8128'
+        },
+        Headsign: '臺東航空站→臺東',
+        HeadsignEn: 'Taitung Airport→Taitung',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8128',
+      En: '8128'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '台東航空站',
+    DestinationStopNameEn: 'Taitung Airport Station',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8128.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8132',
+    RouteID: '8132',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB813201',
+        SubRouteID: '813201',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8132',
+          En: '8132'
+        },
+        Headsign: '台東→安朔國小(經大南)',
+        HeadsignEn: 'Taitung→Anshuo Elementary School(Via Danan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB813202',
+        SubRouteID: '813202',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8132',
+          En: '8132'
+        },
+        Headsign: '安朔國小→台東(經大南)',
+        HeadsignEn: 'Anshuo Elementary School→Taitung(Via Danan)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8132',
+      En: '8132'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '安朔國小',
+    DestinationStopNameEn: 'Anshuo Elementary School',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8132.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8135',
+    RouteID: '8135',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB813501',
+        SubRouteID: '813501',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8135',
+          En: '8135'
+        },
+        Headsign: '台東→安朔(經大南)',
+        HeadsignEn: 'Taitung→Anshuo(Via Danan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB813502',
+        SubRouteID: '813502',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8135',
+          En: '8135'
+        },
+        Headsign: '安朔→台東(經大南)',
+        HeadsignEn: 'Anshuo→Taitung(Via Danan)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8135',
+      En: '8135'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '安朔',
+    DestinationStopNameEn: 'Anshuo',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8135.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8137',
+    RouteID: '8137',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB813701',
+        SubRouteID: '813701',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8137',
+          En: '8137'
+        },
+        Headsign: '台東→尚武(經大南)',
+        HeadsignEn: 'Taitung→Shangwu(Via Danan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB813702',
+        SubRouteID: '813702',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8137',
+          En: '8137'
+        },
+        Headsign: '尚武→台東(經大南)',
+        HeadsignEn: 'Shangwu→Taitung(Via Danan)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8137',
+      En: '8137'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '尚武',
+    DestinationStopNameEn: 'Shangwu',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8137.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8138',
+    RouteID: '8138',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB813801',
+        SubRouteID: '813801',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8138',
+          En: '8138'
+        },
+        Headsign: '台東→壢坵(經大南)',
+        HeadsignEn: 'Taitung→Liqiu(Via Danan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB813802',
+        SubRouteID: '813802',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8138',
+          En: '8138'
+        },
+        Headsign: '壢坵→台東(經大南)',
+        HeadsignEn: 'Liqiu→Taitung(Via Danan)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8138',
+      En: '8138'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '壢坵',
+    DestinationStopNameEn: 'Liqiu',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8138.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8150',
+    RouteID: '8150',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB815001',
+        SubRouteID: '815001',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8150',
+          En: '8150'
+        },
+        Headsign: '台東→金峰(經大南)',
+        HeadsignEn: 'Taitung→Jinfeng(Via Danan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB815002',
+        SubRouteID: '815002',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8150',
+          En: '8150'
+        },
+        Headsign: '金峰→台東(經大南)',
+        HeadsignEn: 'Jinfeng→Taitung(Via Danan)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8150',
+      En: '8150'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '金峰',
+    DestinationStopNameEn: 'Jinfeng',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8150.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8161',
+    RouteID: '8161',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB816101',
+        SubRouteID: '816101',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8161',
+          En: '8161'
+        },
+        Headsign: '台東→富里(經武陵、海端)',
+        HeadsignEn: 'Taitung→Fuli(Via Wuling、Haiduan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB816102',
+        SubRouteID: '816102',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8161',
+          En: '8161'
+        },
+        Headsign: '富里→台東(經海端、武陵)',
+        HeadsignEn: 'Fuli→Taitung(Via Wuling、Haiduan)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8161',
+      En: '8161'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '富里農會',
+    DestinationStopNameEn: 'Fuli Farmer Assc.',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8161.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8163',
+    RouteID: '8163',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB816301',
+        SubRouteID: '816301',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8163',
+          En: '8163'
+        },
+        Headsign: '台東→池上(經武陵、海端)',
+        HeadsignEn: 'Taitung→Chishang(Via Wuling、Haiduan)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB816302',
+        SubRouteID: '816302',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8163',
+          En: '8163'
+        },
+        Headsign: '池上→台東(經海端、武陵)',
+        HeadsignEn: 'Chishang→Taitung(Via Haiduan、Wuling)',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8163A2',
+        SubRouteID: '8163A2',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8163A',
+          En: '8163A'
+        },
+        Headsign: '池上→台東(經武陵、海端、加樂)',
+        HeadsignEn: 'Chishang→Taitung(Via Haiduan、Wuling、 Jiayue)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8163',
+      En: '8163'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '池上',
+    DestinationStopNameEn: 'Chishang',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8163.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8165',
+    RouteID: '8165',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB816501',
+        SubRouteID: '816501',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8165',
+          En: '8165'
+        },
+        Headsign: '台東→池上(經瑞源、池上大橋)',
+        HeadsignEn: 'Taitung→Chishang(Via Ruiyuan、Chishang Bridge)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB816502',
+        SubRouteID: '816502',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8165',
+          En: '8165'
+        },
+        Headsign: '池上→台東(經池上大橋、瑞源)',
+        HeadsignEn: 'Chishang→Taitung(Via Chishang Bridge、Ruiyuan)',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8165A1',
+        SubRouteID: '8165A1',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8165A',
+          En: '8165A'
+        },
+        Headsign: '台東→池上(經瑞源、池上大橋、加樂)',
+        HeadsignEn: 'Taitung→Chishang(Via Ruiyuan、Chishang Bridge、Jiuyue)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB8165A2',
+        SubRouteID: '8165A2',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8165A',
+          En: '8165A'
+        },
+        Headsign: '池上→台東(經池上大橋、瑞源)[繞駛加拿村]',
+        HeadsignEn:
+          'Chishang→Taitung(Via Chishang Bridge、Ruiyuan)[Jiana Village]',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8165',
+      En: '8165'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '池上',
+    DestinationStopNameEn: 'Chishang',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8165.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8166',
+    RouteID: '8166',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB816601',
+        SubRouteID: '816601',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8166',
+          En: '8166'
+        },
+        Headsign: '臺東→瑞源、海端→池上',
+        HeadsignEn: 'Taitung→Ruiyuan、Haiduan→Chishang',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB816602',
+        SubRouteID: '816602',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8166',
+          En: '8166'
+        },
+        Headsign: '池上→瑞源、海端→臺東',
+        HeadsignEn: 'Chishang→Ruiyuan、Haiduan→Taitung',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8166A2',
+        SubRouteID: '8166A2',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8166A',
+          En: '8166A'
+        },
+        Headsign: '池上→台東(經瑞源、海端、加樂)',
+        HeadsignEn: 'Chishang→Taitung(Via Ruiyuan、Haiduan、Jiayue)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8166',
+      En: '8166'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '池上',
+    DestinationStopNameEn: 'Chishang',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8166.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8167',
+    RouteID: '8167',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB816701',
+        SubRouteID: '816701',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8167',
+          En: '8167'
+        },
+        Headsign: '台東→關山',
+        HeadsignEn: 'Taitung→Guanshan',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB816702',
+        SubRouteID: '816702',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8167',
+          En: '8167'
+        },
+        Headsign: '關山→台東',
+        HeadsignEn: 'Guanshan→Taitung',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8167A1',
+        SubRouteID: '8167A1',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8167A',
+          En: '8167A'
+        },
+        Headsign: '台東→關山(經加樂)',
+        HeadsignEn: 'Taitung→Guanshan(Via Jiayue)',
+        Direction: 0
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8167',
+      En: '8167'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '關山',
+    DestinationStopNameEn: 'Guanshan',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8167.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8168',
+    RouteID: '8168',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB816801',
+        SubRouteID: '816801',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8168',
+          En: '8168'
+        },
+        Headsign: '臺東(延平、龍田)→永康',
+        HeadsignEn: 'Taitung(Yanping、Longtian)→Yongkang',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB816802',
+        SubRouteID: '816802',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8168',
+          En: '8168'
+        },
+        Headsign: '永康→臺東(延平、龍田)',
+        HeadsignEn: 'Yongkang→Taitung(Yanping、Longtian)',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8168A1',
+        SubRouteID: '8168A1',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8168A',
+          En: '8168A'
+        },
+        Headsign: '臺東(延平、龍田)→永康[台灣好行縱谷鹿野線]',
+        HeadsignEn:
+          'Taitung[Yanping、Longtian]→Yongkang(Taiwan Tourist Shuttle—East Rift valley Line)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB8168A2',
+        SubRouteID: '8168A2',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8168A',
+          En: '8168A'
+        },
+        Headsign: '永康→臺東(延平、龍田)[台灣好行縱谷鹿野線]',
+        HeadsignEn:
+          'Yongkang→Taitung[Yanping、Longtian](Taiwan Tourist Shuttle—East Rift valley Line)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8168',
+      En: '8168'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '鹿野高台',
+    DestinationStopNameEn: 'Luye Gaotai',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8168.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8171',
+    RouteID: '8171',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB817101',
+        SubRouteID: '817101',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8171',
+          En: '8171'
+        },
+        Headsign: '台東→初鹿',
+        HeadsignEn: 'Taitung→Chulu',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB817102',
+        SubRouteID: '817102',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8171',
+          En: '8171'
+        },
+        Headsign: '初鹿→台東(未經台東總站)',
+        HeadsignEn: 'Chulu→Taitung(Not Via Taitung Bus Terminal)',
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8171A2',
+        SubRouteID: '8171A2',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8171A',
+          En: '8171A'
+        },
+        Headsign: '初鹿→台東[至台東女中]',
+        HeadsignEn:
+          "Chulu→Taitung(To National Taitung Girl's Senior High School)",
+        Direction: 1
+      },
+      {
+        SubRouteUID: 'THB8171B1',
+        SubRouteID: '8171B1',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8171B',
+          En: '8171B'
+        },
+        Headsign: '台東→初鹿[經鼎東保養場]',
+        HeadsignEn: 'Taitung→Chulu(Via DiingDong Transport Maintain Factory)',
+        Direction: 0
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8171',
+      En: '8171'
+    },
+    DepartureStopNameZh: '鼎東山線保養場',
+    DepartureStopNameEn: 'Dingdong Transport Maintain Factory(Mountain Line)',
+    DestinationStopNameZh: '初鹿',
+    DestinationStopNameEn: 'Chulu',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8171.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  },
+  {
+    RouteUID: 'THB8172',
+    RouteID: '8172',
+    HasSubRoutes: true,
+    Operators: [
+      {
+        OperatorID: '113',
+        OperatorName: {
+          Zh_tw: '東台灣客運'
+        },
+        OperatorCode: '',
+        OperatorNo: '0816'
+      }
+    ],
+    AuthorityID: '010',
+    ProviderID: '010',
+    SubRoutes: [
+      {
+        SubRouteUID: 'THB817201',
+        SubRouteID: '817201',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8172',
+          En: '8172'
+        },
+        Headsign: '台東→台東火車站(經四維路)',
+        HeadsignEn: 'Taitung→TRA Taitung Station(Via Siwei Road)',
+        Direction: 0
+      },
+      {
+        SubRouteUID: 'THB817202',
+        SubRouteID: '817202',
+        OperatorIDs: ['113'],
+        SubRouteName: {
+          Zh_tw: '8172',
+          En: '8172'
+        },
+        Headsign: '台東火車站→台東(經四維路)',
+        HeadsignEn: 'TRA Taitung Station→Taitung(Via Siwei Road)',
+        Direction: 1
+      }
+    ],
+    BusRouteType: 12,
+    RouteName: {
+      Zh_tw: '8172',
+      En: '8172'
+    },
+    DepartureStopNameZh: '台東轉運站',
+    DepartureStopNameEn: 'Taitung Bus Station',
+    DestinationStopNameZh: '台東火車站',
+    DestinationStopNameEn: 'TRA Taitung Station',
+    RouteMapImageUrl: 'http://web.taiwanbus.tw/TMSData/Schematic/file/8172.jpg',
+    UpdateTime: '2023-01-09T04:20:50+08:00',
+    VersionID: 1505
+  }
+]

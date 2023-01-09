@@ -126,5 +126,20 @@ export async function fetchStation(id, city) {
       $filter: `StationID eq '${id}'`
     }
   })
-  state.station = res.data[0]
+  return res.data[0]
+}
+
+/**
+ * 取得指定[縣市],[站位]的市區公車或公路客運路線資料
+ * @param  {string} stationId - station id
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
+ */
+export async function fetchRoutesPassGivenStation(stationId, city) {
+  // 設定要 fetch 的網址
+  let url = `Route/City/${city}/PassThrough/Station/${stationId}`
+  if (!city) {
+    url = `Route/InterCity/PassThrough/Station/${stationId}`
+  }
+  const res = await api.get(url)
+  return res.data
 }
