@@ -3,10 +3,21 @@ import { fetchRoutesPassGivenStation, fetchStation } from '../api'
 
 export function useStation() {
   async function getStationAndRoutes(id, cityName) {
-    const station = await fetchStation(id, cityName)
-    state.station = station
-    const routes = await fetchRoutesPassGivenStation(id, cityName)
-    state.station.routes = routes
+    try {
+      state.isLoading = true
+      state.hasError = false
+      const [station, routes] = await Promise.all([
+        fetchStation(id, cityName),
+        fetchRoutesPassGivenStation(id, cityName)
+      ])
+      state.station = station
+      state.station.routes = routes
+    } catch (error) {
+      state.hasError = true
+      state.errorMsg = error.message
+    } finally {
+      state.isLoading = false
+    }
   }
 
   return getStationAndRoutes
