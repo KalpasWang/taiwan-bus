@@ -75,6 +75,7 @@
 import { ref, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { state, useStation } from '@/composables/bus'
+import IconButton from '@/components/IconButton.vue'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
 import { getBearingLabel } from '@/composables/utilities'
