@@ -60,5 +60,15 @@ describe('Station Page', () => {
       })
     })
   })
-  it('先檢查是否已有此站位資料，若是無才會 call api', () => {})
+  it('先檢查是否已有此站位資料，若是無才會 call api', async () => {
+    const { unmount } = render(StationPage, options)
+    await waitFor(() => {
+      expect(api.get).toHaveBeenCalled()
+    })
+    unmount()
+    render(StationPage, options)
+    await waitFor(() => {
+      expect(api.get).not.toHaveBeenCalled()
+    })
+  })
 })
