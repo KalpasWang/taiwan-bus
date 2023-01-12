@@ -1,14 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/vue'
-import userEvent from '@testing-library/user-event'
-import {
-  describe,
-  it,
-  beforeAll,
-  vi,
-  expect,
-  beforeEach,
-  afterEach
-} from 'vitest'
+import { describe, it, vi, expect, beforeEach } from 'vitest'
 import { router } from '@/router'
 import StationPage from '@/views/StationPage.vue'
 import { state } from '@/composables/bus'
@@ -41,25 +32,26 @@ describe('Station Page', () => {
     expect(screen.getByTestId('loader')).toBeInTheDocument()
   })
 
-  it('顯示站位名稱', () => {
+  it('顯示站位名稱', async () => {
     render(StationPage, options)
-    waitFor(() => {
+    await waitFor(() => {
       expect(
-        screen.getByText(state.station.StationName.Zh_tw)
+        screen.getByText(state.station.StationName.Zh_tw, { exact: false })
       ).toBeInTheDocument()
     })
   })
 
-  it('路線列表包含前往的終點站與 route page 的連結', () => {
+  it('路線列表包含前往的終點站與 route page 的連結', async () => {
     render(StationPage, options)
-    waitFor(() => {
+    await waitFor(() => {
       const routesList = screen.getAllByRole('listitem')
       expect(routesList.length).toBe(state.station.routes.length)
-      routesList.forEach((route, i) => {
+      routesList.forEach((li, i) => {
+        // console.log(li)
         const routeData = state.station.routes[i]
-        expect(route.textContent).toMatch(routeData.RouteName.Zh_tw)
-        expect(route.textContent).toMatch(routeData.DestinationStopNameZh)
-        const link = route.find('a')
+        expect(li.textContent).toMatch(routeData.RouteName.Zh_tw)
+        expect(li.textContent).toMatch(routeData.DestinationStopNameZh)
+        const link = li.querySelector('a')
         const routeName = routeData.RouteName.Zh_tw
         const routeCity = routeData.City
         expect(link.getAttribute('href')).toBe(

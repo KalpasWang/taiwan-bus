@@ -140,6 +140,8 @@ export async function fetchRoutesPassGivenStation(stationId, city) {
   if (!city) {
     url = `Route/InterCity/PassThrough/Station/${stationId}`
   }
-  const res = await api.get(url)
+  const res = await api.get(url, {
+    baseURL: advancedBaseUrl
+  })
   return res.data
 }

@@ -36,7 +36,7 @@
       </h3>
       <div class="overflow-auto" v-else>
         <!-- 顯示站牌名稱與方向 -->
-        <h4 class="fs-6 text-light mt-5">
+        <h4 class="h5 text-center text-light mt-5">
           {{ state.station?.StationName?.Zh_tw }}({{
             getBearingLabel(state.station.Bearing)
           }})
@@ -50,18 +50,13 @@
           >
             <!-- 每個站牌可以連結到公車路線 -->
             <router-link
-              :to="{
-                name: 'InterCityRoutePage',
-                params: {
-                  routeName: route.RouteName.Zh_tw
-                }
-              }"
+              :to="getlinkConfig(route)"
               class="d-block link-primary text-decoration-none"
             >
               {{ route.RouteName.Zh_tw }}
               <p class="text-light fs-7">
                 <span class="text-primary mx-1">往</span>
-                {{ route.finalStop.StopName.Zh_tw }}
+                {{ route.DestinationStopNameZh }}
               </p>
             </router-link>
           </li>
@@ -81,6 +76,7 @@ import Logo from '@/components/logo.vue'
 import { getBearingLabel } from '@/composables/utilities'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
+import { getLabelPrinter } from 'jest-matcher-utils'
 
 const props = defineProps({
   city: String,
@@ -96,6 +92,19 @@ const mapShow = ref(false)
 const toggleMap = () => {
   const v = mapShow.value
   mapShow.value = !v
+}
+
+function getlinkConfig(route) {
+  const name = route.City ? 'RoutePage' : 'InterCityRoutePage'
+  const city = route.City || 'intercity'
+  const routeName = route.RouteName.Zh_tw
+  return {
+    name,
+    params: {
+      routeName,
+      ...(city && { city })
+    }
+  }
 }
 
 onBeforeMount(async () => {
