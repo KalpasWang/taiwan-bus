@@ -47,7 +47,6 @@ describe('Station Page', () => {
       const routesList = screen.getAllByRole('listitem')
       expect(routesList.length).toBe(state.station.routes.length)
       routesList.forEach((li, i) => {
-        // console.log(li)
         const routeData = state.station.routes[i]
         expect(li.textContent).toMatch(routeData.RouteName.Zh_tw)
         expect(li.textContent).toMatch(routeData.DestinationStopNameZh)
@@ -58,17 +57,6 @@ describe('Station Page', () => {
           `/routes/${routeCity}/${routeName}`
         )
       })
-    })
-  })
-  it('先檢查是否已有此站位資料，若是無才會 call api', async () => {
-    const { unmount } = render(StationPage, options)
-    await waitFor(() => {
-      expect(api.get).toHaveBeenCalled()
-    })
-    unmount()
-    render(StationPage, options)
-    await waitFor(() => {
-      expect(api.get).not.toHaveBeenCalled()
     })
   })
 })

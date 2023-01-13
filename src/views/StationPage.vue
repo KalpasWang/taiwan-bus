@@ -76,7 +76,6 @@ import Logo from '@/components/logo.vue'
 import { getBearingLabel } from '@/composables/utilities'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'
-import { getLabelPrinter } from 'jest-matcher-utils'
 
 const props = defineProps({
   city: String,

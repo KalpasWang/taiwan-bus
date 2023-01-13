@@ -1,8 +1,16 @@
 import { state } from './state'
 import { fetchRoutesPassGivenStation, fetchStation } from '../api'
+import { getCityCode } from '../utilities'
 
 export function useStation() {
   async function getStationAndRoutes(id, cityName) {
+    if (
+      state?.station?.StationID === id &&
+      getCityCode(cityName) === state?.station?.LocationCityCode
+    ) {
+      return
+    }
+
     try {
       state.isLoading = true
       state.hasError = false

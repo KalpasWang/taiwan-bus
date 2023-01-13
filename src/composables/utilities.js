@@ -125,7 +125,7 @@ export function getCityName(city) {
 
 export function getCityCode(city) {
   const found = citys.find((item) => item.City === city)
-  return found?.CityCode
+  return found?.CityCode || 'TTT'
 }
 
 export const getCityByCityCode = (code) => {
