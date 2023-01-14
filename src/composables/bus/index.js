@@ -8,6 +8,7 @@ import { useRouteFare } from './useRouteFare'
 import { useNearBy } from './useNearBy'
 import { useNearByMap } from './useNearByMap'
 import { useStation } from './useStation'
+import { useStationMap } from './useStationMap'
 
 export default {
   state,
@@ -19,7 +20,8 @@ export default {
   useRouteFare,
   useNearBy,
   useNearByMap,
-  useStation
+  useStation,
+  useStationMap
 }
 
 export { state }
@@ -32,3 +34,4 @@ export { useRouteFare }
 export { useNearBy }
 export { useNearByMap }
 export { useStation }
+export { useStationMap }

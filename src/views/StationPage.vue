@@ -25,13 +25,22 @@
       data-testid="station-map"
       id="station-map"
       class="flex-grow-1"
-    ></div>
+    >
+      <h3
+        v-if="state.hasError || mapHasError"
+        class="mt-5 text-center position-relative z-300"
+        >對不起，發生錯誤...</h3
+      >
+    </div>
     <!-- 站牌列表 -->
     <div v-show="!mapShow" class="flex-grow-1 container">
       <h3 v-if="state.isLoading" class="mt-5">
         <Loading data-testid="loader" />
       </h3>
-      <h3 v-else-if="state.hasError" class="mt-5 text-center text-light">
+      <h3
+        v-else-if="state.hasError"
+        class="mt-5 text-center text-light position-relative z-300"
+      >
         對不起，發生錯誤...
       </h3>
       <div class="overflow-auto" v-else>
@@ -67,9 +76,9 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import { state, useStation } from '@/composables/bus'
+import bus from '@/composables/bus'
 import IconButton from '@/components/IconButton.vue'
 import Loading from '@/components/loading.vue'
 import Logo from '@/components/logo.vue'
@@ -84,13 +93,28 @@ const props = defineProps({
 
 const { city, stationId } = props
 const router = useRouter()
-const getStationAndRoutes = useStation()
+const { state } = bus
+const getStationAndRoutes = bus.useStation()
+const { map, isMapReady, initMap, renderStationMap } = bus.useStationMap()
 const mapShow = ref(false)
+const mapIsDrawed = ref(false)
+const mapHasError = ref(false)
+const mapErrorMsg = ref('')
 
 // 切換 map 的顯示與隱藏
-const toggleMap = () => {
-  const v = mapShow.value
-  mapShow.value = !v
+const toggleMap = async () => {
+  try {
+    mapShow.value = !mapShow.value
+    if (mapShow.value && !mapIsDrawed.value) {
+      await nextTick()
+      await initMap('station-map')
+      mapIsDrawed.value = true
+      renderStationMap()
+    }
+  } catch (error) {
+    mapHasError.value = true
+    mapErrorMsg.value = error.message
+  }
 }
 
 function getlinkConfig(route) {
@@ -106,7 +130,5 @@ function getlinkConfig(route) {
   }
 }
 
-onBeforeMount(async () => {
-  await getStationAndRoutes(stationId, city)
-})
+getStationAndRoutes(stationId, city)
 </script>
