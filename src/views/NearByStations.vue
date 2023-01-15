@@ -50,7 +50,9 @@
             :to="{
               name: 'StationPage',
               params: {
-                city: getCityByCityCode(station.StationUID.slice(0, 3)),
+                city:
+                  getCityByCityCode(station.StationUID.slice(0, 3)) ||
+                  'intercity',
                 stationId: station.StationID
               }
             }"

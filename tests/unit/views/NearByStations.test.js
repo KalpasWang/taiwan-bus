@@ -103,7 +103,8 @@ describe('NearByStations 頁面', () => {
       state.nearByStations.forEach((station, i) => {
         const link = screen.getByTestId('station-link' + (i + 1))
         const stationId = station.StationID
-        const city = getCityByCityCode(station.StationUID.slice(0, 3))
+        const city =
+          getCityByCityCode(station.StationUID.slice(0, 3)) || 'intercity'
         expect(link).toBeInTheDocument()
         expect(link.getAttribute('href')).toBe(`/stations/${city}/${stationId}`)
       })

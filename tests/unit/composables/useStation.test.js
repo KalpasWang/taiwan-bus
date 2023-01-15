@@ -23,7 +23,7 @@ describe('useStations function', () => {
       .mockResolvedValueOnce({ data: mockCityPassThroughRoutes })
     await getStationAndRoutes(cityStationId, city)
 
-    expect(state.station.LocationCityCode).toBe(getCityCode(city))
+    expect(state.station.StationUID.slice(0, 3)).toBe(getCityCode(city))
     expect(state.station.StationID).toBe(cityStationId)
     expect(Array.isArray(state.station.routes)).toBe(true)
     expect(state.station.routes.length).toBe(2)

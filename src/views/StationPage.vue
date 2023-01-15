@@ -119,7 +119,7 @@ const toggleMap = async () => {
 
 function getlinkConfig(route) {
   const name = route.City ? 'RoutePage' : 'InterCityRoutePage'
-  const city = route.City || 'intercity'
+  const city = route.City
   const routeName = route.RouteName.Zh_tw
   return {
     name,
