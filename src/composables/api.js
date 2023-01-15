@@ -118,7 +118,7 @@ export async function fetchTop20Routes(routeName, city, skip) {
 export async function fetchStation(id, city) {
   // 設定要 fetch 的網址
   let url = `Station/City/${city}`
-  if (!city) {
+  if (!city || city === 'intercity') {
     url = 'Station/InterCity'
   }
   const res = await api.get(url, {
@@ -137,7 +137,7 @@ export async function fetchStation(id, city) {
 export async function fetchRoutesPassGivenStation(stationId, city) {
   // 設定要 fetch 的網址
   let url = `Route/City/${city}/PassThrough/Station/${stationId}`
-  if (!city) {
+  if (!city || city === 'intercity') {
     url = `Route/InterCity/PassThrough/Station/${stationId}`
   }
   const res = await api.get(url, {

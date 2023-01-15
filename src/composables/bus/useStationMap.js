@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import L from 'leaflet'
+import { getBearingLabel } from '@/composables/utilities'
 import { state } from './state'
 
 export const useStationMap = () => {
@@ -62,9 +63,10 @@ export const useStationMap = () => {
     })
       .addTo(map.value)
       .bindPopup(
-        `<h6 class="popup-name">${station.StationName.Zh_tw}(${getBearingLabel(
-          station.Bearing
-        )})</h6>`
+        `<h6 class="popup-name">
+          ${station.StationName.Zh_tw}
+          (${getBearingLabel(station.Bearing)})
+        </h6>`
       )
   }
 

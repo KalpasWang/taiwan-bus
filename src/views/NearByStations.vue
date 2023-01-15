@@ -2,7 +2,9 @@
   <div class="bg-dark vh-100 d-flex flex-column" data-testid="nearby">
     <!-- Header -->
     <div class="header-shadow bg-dark">
-      <div class="d-flex justify-content-between align-items-center px-3 py-4">
+      <div
+        class="container d-flex justify-content-between align-items-center px-3 py-4"
+      >
         <IconButton
           @click="mapShow ? toggleMap() : router.go(-1)"
           :imgUrl="backIcon"
@@ -26,7 +28,9 @@
       id="nearby-map"
       class="flex-grow-1"
     >
-      <h3 v-if="state.hasError || mapHasError" class="mt-5 text-center"
+      <h3
+        v-if="state.hasError || mapHasError"
+        class="mt-5 text-center text-light position-relative z-900"
         >對不起，發生錯誤...</h3
       >
     </div>
@@ -35,7 +39,9 @@
       <h3 v-if="state.isLoading" class="mt-5">
         <Loading data-testid="loader" />
       </h3>
-      <h3 v-else-if="state.hasError" class="mt-5 text-center"
+      <h3
+        v-else-if="state.hasError"
+        class="mt-5 text-center position-relative z-900"
         >對不起，發生錯誤...</h3
       >
       <ul v-else class="list-group" data-testid="nearby-list">
