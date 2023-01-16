@@ -1,8 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/vue'
 import L from 'leaflet'
-import NearByStations from '@/views/NearByStations.vue'
-import { router } from '@/router'
 import { state, useNearByMap } from '../../../src/composables/bus'
 import {
   mockUserPosition,

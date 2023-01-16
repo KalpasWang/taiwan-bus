@@ -1,9 +1,37 @@
-export * from './state'
-export * from './useRoutes'
-export * from './useArrivalsInfo'
-export * from './useRouteMapInfo'
-export * from './useRouteMap'
-export * from './useSchedule'
-export * from './useRouteFare'
-export * from './useNearBy'
-export * from './useNearByMap'
+import { state } from './state'
+import { useRoutes } from './useRoutes'
+import { useArrivalsInfo } from './useArrivalsInfo'
+import { useRouteMapInfo } from './useRouteMapInfo'
+import { useRouteMap } from './useRouteMap'
+import { useSchedule } from './useSchedule'
+import { useRouteFare } from './useRouteFare'
+import { useNearBy } from './useNearBy'
+import { useNearByMap } from './useNearByMap'
+import { useStation } from './useStation'
+import { useStationMap } from './useStationMap'
+
+export default {
+  state,
+  useRoutes,
+  useArrivalsInfo,
+  useRouteMapInfo,
+  useRouteMap,
+  useSchedule,
+  useRouteFare,
+  useNearBy,
+  useNearByMap,
+  useStation,
+  useStationMap
+}
+
+export { state }
+export { useRoutes }
+export { useArrivalsInfo }
+export { useRouteMapInfo }
+export { useRouteMap }
+export { useSchedule }
+export { useRouteFare }
+export { useNearBy }
+export { useNearByMap }
+export { useStation }
+export { useStationMap }
