@@ -33,6 +33,8 @@ export function useArrivalsInfo(routeName, city) {
       return
     }
     // cache 所需的資料
+    console.log(stopsData)
+    console.log(timeData)
     const { stopsForward, stopsBackward } = filterStopsByDirection(stopsData)
     const { forwards, backwards } = filterDirection(timeData)
     // 對每一個站牌做處理
@@ -128,8 +130,8 @@ function filterRouteName(routeName, list) {
 
 // 取得同方向的站牌資料
 const filterStopsByDirection = (arr) => {
-  const stopsForward = arr.find((item) => item.Direction === 0).Stops
-  const stopsBackward = arr.find((item) => item.Direction === 1).Stops
+  const stopsForward = arr.find((item) => item.Direction === 0)?.Stops
+  const stopsBackward = arr.find((item) => item.Direction === 1)?.Stops
   return { stopsForward, stopsBackward }
 }
 
