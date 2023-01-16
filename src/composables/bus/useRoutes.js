@@ -1,12 +1,12 @@
 import { ref } from 'vue'
 import { fetchTop20Routes, api } from '../api'
 import { citys } from '../constants'
-import state from './state'
+import { state } from './state'
 
 /**
  * 回傳可以取得公車/客運路線資料的函式
  */
-function useRoutes(type = 'city') {
+export function useRoutes(type = 'city') {
   const isEnd = ref(true)
   let skip = 0
 
@@ -164,5 +164,3 @@ function useRoutes(type = 'city') {
     isEnd
   }
 }
-
-export default useRoutes

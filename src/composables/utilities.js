@@ -125,12 +125,12 @@ export function getCityName(city) {
 
 export function getCityCode(city) {
   const found = citys.find((item) => item.City === city)
-  return found?.CityCode
+  return found?.CityCode || 'THB'
 }
 
 export const getCityByCityCode = (code) => {
   const city = citys.find((item) => item.CityCode === code)
-  return city ? city.City : 'intercity'
+  return city?.City
 }
 
 export const getNearByCitys = (city) => {
@@ -201,10 +201,10 @@ export const filterDirection = (arr) => {
   return { forwards, backwards }
 }
 
-export const delay = () => {
+export const delay = (ms = 500) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve()
-    }, 500)
+    }, ms)
   })
 }

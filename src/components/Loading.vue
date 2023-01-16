@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center">
-    <img :src="loadingIcon" :width="props.width" alt="loading..." />
+  <div class="text-center" data-testid="loader">
+    <img :src="loadingIcon" :width="props.width" alt="讀取中..." />
   </div>
 </template>
 

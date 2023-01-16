@@ -1,11 +1,18 @@
 import { reactive } from 'vue'
 
-const state = reactive({
+export const state = reactive({
   routeName: '',
   routeID: '',
   city: null,
   routes: [],
-  stopsOfRoute: null
+  userPosition: {
+    lat: null,
+    lng: null
+  },
+  nearByStations: [],
+  station: null,
+  stopsOfRoute: null,
+  isLoading: false,
+  hasError: false,
+  errorMsg: ''
 })
-
-export default state

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import state from './bus/state'
+import { state } from './bus/state'
 import { filterRouteName, filterSubRoutes } from './utilities'
 
 let token
@@ -16,6 +16,10 @@ export const api = axios.create({
     $format: 'JSON'
   }
 })
+
+export const top20 = { params: { $top: 20 } }
+export const advancedBaseUrl =
+  'https://tdx.transportdata.tw/api/advanced/v2/Bus'
 
 // request 攔截器，設定帶入token
 api.interceptors.request.use(
@@ -64,12 +68,10 @@ async function setToken() {
   }
 }
 
-export const top20 = { params: { $top: 20 } }
-
 /**
  * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線站序資料
  * @param  {string} routeName
- * @param  {string} [city] - 若沒有 city 表示位客運路線
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
  */
 export async function fetchStopsOfRoute(routeName, city) {
   // 設定要 fetch 的網址
@@ -90,7 +92,7 @@ export async function fetchStopsOfRoute(routeName, city) {
 /**
  * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線資料
  * @param  {string} routeName
- * @param  {string} [city] - 若沒有 city 表示位客運路線
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
  */
 export async function fetchTop20Routes(routeName, city, skip) {
   // 設定要 fetch 的網址
@@ -105,5 +107,41 @@ export async function fetchTop20Routes(routeName, city, skip) {
     }
   })
   // console.log(res.data)
+  return res.data
+}
+
+/**
+ * 取得指定[縣市]的市區公車或公路客運站位資料
+ * @param  {string} id - station id
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
+ */
+export async function fetchStation(id, city) {
+  // 設定要 fetch 的網址
+  let url = `Station/City/${city}`
+  if (!city || city === 'intercity') {
+    url = 'Station/InterCity'
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `StationID eq '${id}'`
+    }
+  })
+  return res.data[0]
+}
+
+/**
+ * 取得指定[縣市],[站位]的市區公車或公路客運路線資料
+ * @param  {string} stationId - station id
+ * @param  {string} [city] - 若沒有 city 表示為客運路線
+ */
+export async function fetchRoutesPassGivenStation(stationId, city) {
+  // 設定要 fetch 的網址
+  let url = `Route/City/${city}/PassThrough/Station/${stationId}`
+  if (!city || city === 'intercity') {
+    url = `Route/InterCity/PassThrough/Station/${stationId}`
+  }
+  const res = await api.get(url, {
+    baseURL: advancedBaseUrl
+  })
   return res.data
 }
