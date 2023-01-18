@@ -18,5 +18,6 @@ export const state = reactive({
   stopsOfRoute: null,
   isLoading: false,
   hasError: false,
-  errorMsg: ''
+  errorMsg: '',
+  displayMsg: ''
 })

@@ -4004,3 +4004,1963 @@ export const mockIntercityPassThroughRoutes = [
     VersionID: 1505
   }
 ]
+
+export const mockCityArrivals = [
+  {
+    StopUID: 'TPE124233',
+    StopID: '124233',
+    StopName: {
+      Zh_tw: '政大一',
+      En: 'National Chengchi U. 1'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2902,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE17003',
+    StopID: '17003',
+    StopName: {
+      Zh_tw: '康樂新村',
+      En: 'Kangle New Village'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8309,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE17005',
+    StopID: '17005',
+    StopName: {
+      Zh_tw: '大茅埔',
+      En: 'Damaopu'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8342,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE17001',
+    StopID: '17001',
+    StopName: {
+      Zh_tw: '仁康醫院',
+      En: 'Jen-Kang Hospital'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8270,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE17007',
+    StopID: '17007',
+    StopName: {
+      Zh_tw: '安祥路口',
+      En: 'Anxiang Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8409,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE56984',
+    StopID: '56984',
+    StopName: {
+      Zh_tw: '寶強路口',
+      En: 'BaoQiang Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1895,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE56985',
+    StopID: '56985',
+    StopName: {
+      Zh_tw: '寶橋中興路口一',
+      En: 'Baoqiao and Zhongxing Intersection 1'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2137,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE56987',
+    StopID: '56987',
+    StopName: {
+      Zh_tw: '安祥路口',
+      En: 'Anxiang Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 159,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE56983',
+    StopID: '56983',
+    StopName: {
+      Zh_tw: '萬興圖書館',
+      En: 'Wanxing Library'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2935,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE56988',
+    StopID: '56988',
+    StopName: {
+      Zh_tw: '捷運動物園站',
+      En: 'MRT Taipei Zoo Sta.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 243,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57416',
+    StopID: '57416',
+    StopName: {
+      Zh_tw: '風動石',
+      En: 'Fengdongshi'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 444,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57410',
+    StopID: '57410',
+    StopName: {
+      Zh_tw: '寶橋路口',
+      En: 'Baoqiao Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2105,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57411',
+    StopID: '57411',
+    StopName: {
+      Zh_tw: '忠順廟',
+      En: 'Zhongshun Temple'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2567,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57412',
+    StopID: '57412',
+    StopName: {
+      Zh_tw: '指南路口',
+      En: 'Zhinan Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2716,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57417',
+    StopID: '57417',
+    StopName: {
+      Zh_tw: '風動石',
+      En: 'Fengdongshi'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 1086,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57419',
+    StopID: '57419',
+    StopName: {
+      Zh_tw: '萬興國小',
+      En: 'Wanxing Elementary School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 228,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57420',
+    StopID: '57420',
+    StopName: {
+      Zh_tw: '國泰新村(木新)',
+      En: 'Guotai New Village(Muxin)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 668,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57421',
+    StopID: '57421',
+    StopName: {
+      Zh_tw: '寶強路口',
+      En: 'BaoQiang Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 60,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE57422',
+    StopID: '57422',
+    StopName: {
+      Zh_tw: '指南路口',
+      En: 'Zhinan Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 482,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE148692',
+    StopID: '148692',
+    StopName: {
+      Zh_tw: '萬壽橋頭(新光)',
+      En: 'Wanshou Qiaotou(Xinguang)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 100,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE148693',
+    StopID: '148693',
+    StopName: {
+      Zh_tw: '萬壽橋頭(秀明)',
+      En: 'Wanshou Qiaotou(Xiuming)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 163,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE193234',
+    StopID: '193234',
+    StopName: {
+      Zh_tw: '政大一',
+      En: 'National Chengchi U. 1'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 268,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE58029',
+    StopID: '58029',
+    StopName: {
+      Zh_tw: '貓纜動物園站',
+      En: 'Maokong Gondola Taipei Zoo Station'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 75,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16917',
+    StopID: '16917',
+    StopName: {
+      Zh_tw: '興雅國中',
+      En: 'Xingya Junior High School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 481,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16915',
+    StopID: '16915',
+    StopName: {
+      Zh_tw: '消防局(松仁)',
+      En: 'City Fire Department(Songren)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 397,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16919',
+    StopID: '16919',
+    StopName: {
+      Zh_tw: '信義行政中心(松仁)',
+      En: 'Xinyi Dist. Admin. Center(Songren)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 644,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16913',
+    StopID: '16913',
+    StopName: {
+      Zh_tw: '捷運市政府站',
+      En: 'MRT Taipei City Hall Sta.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 246,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16911',
+    StopID: '16911',
+    StopName: {
+      Zh_tw: '市政府(市府)',
+      En: 'Taipei City Hall(City Hall Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1119,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16929',
+    StopID: '16929',
+    StopName: {
+      Zh_tw: '萬壽橋頭(新光)',
+      En: 'Wanshou Qiaotou(Xinguang)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 140,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16921',
+    StopID: '16921',
+    StopName: {
+      Zh_tw: '石壁坑',
+      En: 'Shibikeng'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 1130,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16923',
+    StopID: '16923',
+    StopName: {
+      Zh_tw: '捷運動物園站',
+      En: 'MRT Taipei Zoo Sta.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 0,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE191082',
+    StopID: '191082',
+    StopName: {
+      Zh_tw: '新店站',
+      En: 'Xindian Station'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8482,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE191081',
+    StopID: '191081',
+    StopName: {
+      Zh_tw: '新店站',
+      En: 'Xindian Station'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 141,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16907',
+    StopID: '16907',
+    StopName: {
+      Zh_tw: '信義行政中心(信義)',
+      En: 'Xinyi Dist. Admin. Center(Xinyi)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 845,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16905',
+    StopID: '16905',
+    StopName: {
+      Zh_tw: '石壁坑',
+      En: 'Shibikeng'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 368,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16909',
+    StopID: '16909',
+    StopName: {
+      Zh_tw: '捷運台北101/世貿站(市府)',
+      En: 'MRT Taipei 101/World Trade Center Sta.(City Hall Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 945,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16901',
+    StopID: '16901',
+    StopName: {
+      Zh_tw: '貓纜動物園站',
+      En: 'Maokong Gondola Taipei Zoo Station'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 177,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16873',
+    StopID: '16873',
+    StopName: {
+      Zh_tw: '寶高產業園區',
+      En: 'Baogao Science and Intellectual Park'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2254,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16871',
+    StopID: '16871',
+    StopName: {
+      Zh_tw: '加油站',
+      En: 'Gas Sta.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2213,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16877',
+    StopID: '16877',
+    StopName: {
+      Zh_tw: '木新市場',
+      En: 'Muxin Market'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2393,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16875',
+    StopID: '16875',
+    StopName: {
+      Zh_tw: '景美女中',
+      En: 'Jingmei Girls High School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2341,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16879',
+    StopID: '16879',
+    StopName: {
+      Zh_tw: '力行國小',
+      En: 'Lixing Elementary School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2447,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16883',
+    StopID: '16883',
+    StopName: {
+      Zh_tw: '國泰新村(木新)',
+      En: 'GuoTai New Village(Muxin)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2487,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16887',
+    StopID: '16887',
+    StopName: {
+      Zh_tw: '景文中學',
+      En: 'Jingwen High School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2643,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16885',
+    StopID: '16885',
+    StopName: {
+      Zh_tw: '司法新村',
+      En: 'Sifa New Village'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2594,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16889',
+    StopID: '16889',
+    StopName: {
+      Zh_tw: '木南公園',
+      En: 'Munan Park'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2694,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16851',
+    StopID: '16851',
+    StopName: {
+      Zh_tw: '溪頭',
+      En: 'Xitou'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 847,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16855',
+    StopID: '16855',
+    StopName: {
+      Zh_tw: '碧潭橋頭',
+      En: 'Bitan Bridge'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1429,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16853',
+    StopID: '16853',
+    StopName: {
+      Zh_tw: '捷運新店站(新店路)',
+      En: 'MRT Xindian Sta.(Xindian Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1020,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16859',
+    StopID: '16859',
+    StopName: {
+      Zh_tw: '捷運新店區公所站(北新)',
+      En: 'MRT Xindian City Hall Sta.(Beixin)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1535,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16857',
+    StopID: '16857',
+    StopName: {
+      Zh_tw: '檳榔路',
+      En: 'Binlang Rd.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1462,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16861',
+    StopID: '16861',
+    StopName: {
+      Zh_tw: '七張(北新路)',
+      En: 'Qizhang(Beixin Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1652,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16865',
+    StopID: '16865',
+    StopName: {
+      Zh_tw: '新店郵局',
+      En: 'Xindian Post Office'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1868,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16863',
+    StopID: '16863',
+    StopName: {
+      Zh_tw: '捷運七張站',
+      En: 'MRT Qizhang Sta.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 1783,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16839',
+    StopID: '16839',
+    StopName: {
+      Zh_tw: '安康派出所',
+      En: 'Ankang Police Substation'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 568,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16833',
+    StopID: '16833',
+    StopName: {
+      Zh_tw: '台北菸廠',
+      En: 'Taipei Tobacco Factory'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 417,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16831',
+    StopID: '16831',
+    StopName: {
+      Zh_tw: '安康車子路口',
+      En: 'Ankang Chezi Rd. Intersection'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 383,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16837',
+    StopID: '16837',
+    StopName: {
+      Zh_tw: '公崙新村(豐榮醫院)',
+      En: 'Gonglun New Village(Feng Rong Hospital)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 493,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16835',
+    StopID: '16835',
+    StopName: {
+      Zh_tw: '浪漫貴族',
+      En: 'Langmanguizu'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 449,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16849',
+    StopID: '16849',
+    StopName: {
+      Zh_tw: '大坪頂',
+      En: 'Dapingding'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 796,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16843',
+    StopID: '16843',
+    StopName: {
+      Zh_tw: '下城社區',
+      En: 'Xiacheng Community'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 706,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16841',
+    StopID: '16841',
+    StopName: {
+      Zh_tw: '光華新村(安康路)',
+      En: 'Guanghua New Village(Ankang Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 627,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16847',
+    StopID: '16847',
+    StopName: {
+      Zh_tw: '頂城',
+      En: 'Dingcheng'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 763,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16845',
+    StopID: '16845',
+    StopName: {
+      Zh_tw: '胡璉故居紀念館',
+      En: 'The HU-LIAN House Memorial Hall'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 731,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16829',
+    StopID: '16829',
+    StopName: {
+      Zh_tw: '薏仁坑',
+      En: 'Yirenkeng'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 301,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16827',
+    StopID: '16827',
+    StopName: {
+      Zh_tw: '仁康醫院',
+      En: 'Jen-Kang Hospital'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 268,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16825',
+    StopID: '16825',
+    StopName: {
+      Zh_tw: '康樂新村',
+      En: 'Kangle New Village'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 244,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16823',
+    StopID: '16823',
+    StopName: {
+      Zh_tw: '大茅埔',
+      En: 'Damaopu'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 180,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16891',
+    StopID: '16891',
+    StopName: {
+      Zh_tw: '政大',
+      En: 'National Chengchi U.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2842,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16895',
+    StopID: '16895',
+    StopName: {
+      Zh_tw: '大誠高中',
+      En: 'Tacheng High School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 2973,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16897',
+    StopID: '16897',
+    StopName: {
+      Zh_tw: '萬壽橋頭(秀明)',
+      En: 'Wanshou Qiaotou(Xiuming)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 54,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16993',
+    StopID: '16993',
+    StopName: {
+      Zh_tw: '浪漫貴族',
+      En: 'Langmanguizu'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8080,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16991',
+    StopID: '16991',
+    StopName: {
+      Zh_tw: '公崙新村(豐榮醫院)',
+      En: 'Gonglun New Village(Feng Rong Hospital)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8037,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16997',
+    StopID: '16997',
+    StopName: {
+      Zh_tw: '安康車子路口',
+      En: 'Ankang Chezi Rd. Intersection'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8160,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16995',
+    StopID: '16995',
+    StopName: {
+      Zh_tw: '台北菸廠',
+      En: 'Taipei Tobacco Factory'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8131,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16999',
+    StopID: '16999',
+    StopName: {
+      Zh_tw: '薏仁坑',
+      En: 'Yirenkeng'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 8228,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16971',
+    StopID: '16971',
+    StopName: {
+      Zh_tw: '檳榔路',
+      En: 'Binlang Rd.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 597,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16975',
+    StopID: '16975',
+    StopName: {
+      Zh_tw: '捷運新店站(新店路)',
+      En: 'MRT Xindian Sta.(Xindian Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 773,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16973',
+    StopID: '16973',
+    StopName: {
+      Zh_tw: '碧潭橋頭',
+      En: 'Bitan Bridge'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 646,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16979',
+    StopID: '16979',
+    StopName: {
+      Zh_tw: '大坪頂',
+      En: 'Dapingding'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7757,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16977',
+    StopID: '16977',
+    StopName: {
+      Zh_tw: '溪頭',
+      En: 'Xitou'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7716,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16983',
+    StopID: '16983',
+    StopName: {
+      Zh_tw: '胡璉故居紀念館',
+      En: 'The HU-LIAN House Memorial Hall'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7798,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16981',
+    StopID: '16981',
+    StopName: {
+      Zh_tw: '頂城',
+      En: 'Dingcheng'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7782,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16987',
+    StopID: '16987',
+    StopName: {
+      Zh_tw: '光華新村(安康路)',
+      En: 'Guanghua New Village(Ankang Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7940,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16985',
+    StopID: '16985',
+    StopName: {
+      Zh_tw: '下城社區',
+      En: 'Xiacheng Community'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7824,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16989',
+    StopID: '16989',
+    StopName: {
+      Zh_tw: '安康派出所',
+      En: 'Ankang Police Substation'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7983,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16959',
+    StopID: '16959',
+    StopName: {
+      Zh_tw: '臺灣銀行',
+      En: 'Bank of Taiwan'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 1089,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16953',
+    StopID: '16953',
+    StopName: {
+      Zh_tw: '景美女中',
+      En: 'Jingmei Girls High School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 816,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16951',
+    StopID: '16951',
+    StopName: {
+      Zh_tw: '木新市場',
+      En: 'Muxin Market'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 761,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16957',
+    StopID: '16957',
+    StopName: {
+      Zh_tw: '寶中路',
+      En: 'Baozhong Rd.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 1043,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16955',
+    StopID: '16955',
+    StopName: {
+      Zh_tw: '寶高產業園區(寶中路)',
+      En: 'Baogao Science and Intellectual Park(Baozhong Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 986,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16965',
+    StopID: '16965',
+    StopName: {
+      Zh_tw: '捷運七張站',
+      En: 'MRT Qizhang Sta.'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 253,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16963',
+    StopID: '16963',
+    StopName: {
+      Zh_tw: '新店郵局',
+      En: 'Xindian Post Office'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 208,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16969',
+    StopID: '16969',
+    StopName: {
+      Zh_tw: '捷運新店區公所站(北新)',
+      En: 'MRT Hsintien City Hall Station'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 483,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16967',
+    StopID: '16967',
+    StopName: {
+      Zh_tw: '七張(北新路)',
+      En: 'Qizhang(Beixin Rd.)'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 358,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16939',
+    StopID: '16939',
+    StopName: {
+      Zh_tw: '木南公園',
+      En: 'Munan Park'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 520,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16937',
+    StopID: '16937',
+    StopName: {
+      Zh_tw: '新光路口',
+      En: 'Xinguang Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 409,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16949',
+    StopID: '16949',
+    StopName: {
+      Zh_tw: '力行國小',
+      En: 'Lixing Elementary School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 716,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16943',
+    StopID: '16943',
+    StopName: {
+      Zh_tw: '司法新村',
+      En: 'Sifa New Village'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 566,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16941',
+    StopID: '16941',
+    StopName: {
+      Zh_tw: '景文中學',
+      En: 'Jingwen High School'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 540,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE16945',
+    StopID: '16945',
+    StopName: {
+      Zh_tw: '忠順廟',
+      En: 'Zhongshun Temple'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 615,
+    StopStatus: 0,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE156418',
+    StopID: '156418',
+    StopName: {
+      Zh_tw: '安華路口',
+      En: 'Anwar Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 0,
+    EstimateTime: 687,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  },
+  {
+    StopUID: 'TPE156419',
+    StopID: '156419',
+    StopName: {
+      Zh_tw: '安華路口',
+      En: 'Anwar Rd. Entrance'
+    },
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Direction: 1,
+    EstimateTime: 7889,
+    StopStatus: 1,
+    SrcUpdateTime: '2023-01-18T13:18:10+08:00',
+    UpdateTime: '2023-01-18T13:18:15+08:00'
+  }
+]
