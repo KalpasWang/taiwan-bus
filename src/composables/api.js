@@ -1,7 +1,11 @@
 import axios from 'axios'
 import qs from 'qs'
 import { state } from './bus/state'
-import { filterRouteName, filterSubRoutes } from './utilities'
+import {
+  filterDirection,
+  filterSubRoutes,
+  filterStopsByDirection
+} from './utilities'
 
 let token
 const params = qs.stringify({
@@ -73,20 +77,37 @@ async function setToken() {
  * @param  {string} routeName
  * @param  {string} [city] - 若沒有 city 表示為客運路線
  */
-export async function fetchStopsOfRoute(routeName, city) {
+export async function fetchStopsOfRoute(routeName, city, subRouteName) {
   // 設定要 fetch 的網址
   let url = `StopOfRoute/City/${city}`
   if (!city) {
     url = 'StopOfRoute/InterCity'
   }
   // 取得站序資料
-  const res = await api.get(`${url}/${routeName}`)
-  let stopsData = filterRouteName(routeName, res.data)
+  const res = await api.get(url, {
+    params: {
+      $filter: `RouteName/Zh_tw eq '${routeName}'`
+    }
+  })
+  let stopsData
   if (!city) {
-    stopsData = filterSubRoutes(routeName, stopsData)
+    const filterName = subRouteName || routeName
+    stopsData = filterSubRoutes(subRouteName, res.data)
+    const [forward, backward] = filterDirection(stopsData)
+    stopsData = {
+      forward,
+      backward
+    }
+  } else {
+    const { stopsForward, stopsBackward } = filterStopsByDirection(res.data)
+    stopsData = {
+      forawrd: stopsForward,
+      backward: stopsBackward
+    }
   }
   state.routeName = routeName
   state.stopsOfRoute = stopsData
+  return stopsData
 }
 
 /**
@@ -126,7 +147,15 @@ export async function fetchEstimatedTimeOfArrival(routeName, city) {
       $filter: `RouteName/Zh_tw eq '${routeName}'`
     }
   })
-  return res.data
+  // 資料過濾與排序
+  const [forward, backward] = filterDirection(res.data)
+  if (forward.length === 0 && backward.length === 0) {
+    throw new Error('找不到此公車路線')
+  }
+  state.routeName = routeName
+  state.arrivalsInfo.forawrd = forward
+  state.arrivalsInfo.backward = backward
+  return [forward, backward]
 }
 
 /**

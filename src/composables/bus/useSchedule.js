@@ -23,7 +23,7 @@ export function useSchedule(routeName, city) {
     // 取得此日期為星期幾，如 Monday, Tuesday...
     const dayName = format(date, 'EEEE')
     // 過濾出去程與返程的班表
-    const { forwards, backwards } = filterDirection(schedule.value)
+    const [forwards, backwards] = filterDirection(schedule.value)
     // 撈出資料中每筆 Depature time
     const result = [forwards, backwards].map((scheduleData) => {
       const timeArray = scheduleData.reduce((accuArray, bus) => {

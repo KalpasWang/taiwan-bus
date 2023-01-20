@@ -10,9 +10,7 @@ const intercityRouteName = '0968'
 const oneDirectionRouteName = '1123'
 
 vi.mock('../../../src/composables/api', async () => {
-  const api = await vi.importActual('../../../src/composables/api')
   return {
-    api,
     fetchEstimatedTimeOfArrival: vi.fn()
   }
 })
@@ -20,7 +18,7 @@ vi.mock('../../../src/composables/api', async () => {
 describe('useArrivalsInfo function', () => {
   it('可以取得市區公車的預估到站時間資料', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(cityRouteName, city)
-    console.log(fetchEstimatedTimeOfArrival)
+    // console.log(fetchEstimatedTimeOfArrival)
     fetchEstimatedTimeOfArrival.mockResolvedValueOnce({
       data: mockCityArrivals
     })
