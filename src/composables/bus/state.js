@@ -6,7 +6,7 @@ export const state = reactive({
   city: null,
   routes: [],
   arrivalsInfo: {
-    forawrd: [],
+    forward: [],
     backward: []
   },
   userPosition: {

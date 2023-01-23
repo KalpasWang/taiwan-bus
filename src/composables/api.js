@@ -89,21 +89,34 @@ export async function fetchStopsOfRoute(routeName, city, subRouteName) {
       $filter: `RouteName/Zh_tw eq '${routeName}'`
     }
   })
-  let stopsData
-  if (!city) {
-    const filterName = subRouteName || routeName
-    stopsData = filterSubRoutes(subRouteName, res.data)
-    const [forward, backward] = filterDirection(stopsData)
-    stopsData = {
-      forward,
-      backward
-    }
-  } else {
-    const { stopsForward, stopsBackward } = filterStopsByDirection(res.data)
-    stopsData = {
-      forawrd: stopsForward,
-      backward: stopsBackward
-    }
+  const filterName = subRouteName || routeName
+  let stopsData = filterSubRoutes(filterName, res.data)
+  // 如果沒有過濾出此路線，找出最多站牌的路線
+  if (stopsData.length === 0) {
+    let maxStopsLength = 0
+    let maxStopsRoute
+    let anotherDirection = null
+    res.data.forEach((item) => {
+      if (item.Stops.length > maxStopsLength) {
+        maxStopsLength = item.Stops.length
+        maxStopsRoute = item
+      }
+    })
+    // 尋找另一方向的路線
+    anotherDirection = res.data.find((item) => {
+      if (
+        maxStopsRoute.RouteID === item.RouteID &&
+        maxStopsRoute.Direction !== item.Direction
+      ) {
+        return true
+      }
+    })
+    stopsData = [maxStopsRoute, anotherDirection]
+  }
+  const [forward, backward] = filterDirection(stopsData)
+  stopsData = {
+    forward: forward[0],
+    backward: backward[0]
   }
   state.routeName = routeName
   state.stopsOfRoute = stopsData
@@ -136,7 +149,11 @@ export async function fetchTop20Routes(routeName, city, skip) {
  * @param  {string} routeName - 公車路線的中文名稱
  * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
  */
-export async function fetchEstimatedTimeOfArrival(routeName, city) {
+export async function fetchEstimatedTimeOfArrival(
+  routeName,
+  city,
+  subRouteName
+) {
   // 設定要 fetch 的網址
   let url = `EstimatedTimeOfArrival/City/${city}`
   if (!city || city === 'intercity') {
@@ -148,12 +165,17 @@ export async function fetchEstimatedTimeOfArrival(routeName, city) {
     }
   })
   // 資料過濾與排序
-  const [forward, backward] = filterDirection(res.data)
+  let stopsData = res.data
+  if (res.data[0].SubRouteID) {
+    const filterName = subRouteName || routeName
+    stopsData = filterSubRoutes(filterName, res.data)
+  }
+  const [forward, backward] = filterDirection(stopsData)
   if (forward.length === 0 && backward.length === 0) {
     throw new Error('找不到此公車路線')
   }
   state.routeName = routeName
-  state.arrivalsInfo.forawrd = forward
+  state.arrivalsInfo.forward = forward
   state.arrivalsInfo.backward = backward
   return [forward, backward]
 }

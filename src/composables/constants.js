@@ -4005,7 +4005,7 @@ export const mockIntercityPassThroughRoutes = [
   }
 ]
 
-export const mockCityArrivals = [
+export const mockG1Arrivals = [
   {
     StopUID: 'TPE124233',
     StopID: '124233',
@@ -5962,5 +5962,3026 @@ export const mockCityArrivals = [
     StopStatus: 1,
     SrcUpdateTime: '2023-01-18T13:18:10+08:00',
     UpdateTime: '2023-01-18T13:18:15+08:00'
+  }
+]
+
+export const mockG1StopsOfRoute = [
+  {
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Operators: [
+      {
+        OperatorID: '100',
+        OperatorName: {
+          Zh_tw: '臺北客運',
+          En: 'Taipei Bus Co., Ltd.'
+        },
+        OperatorCode: 'TaipeiBus',
+        OperatorNo: '1407'
+      }
+    ],
+    SubRouteUID: 'TPE10142',
+    SubRouteID: '10142',
+    SubRouteName: {
+      Zh_tw: '綠1調度站發車',
+      En: 'G1'
+    },
+    Direction: 0,
+    City: 'Taipei',
+    CityCode: 'TPE',
+    Stops: [
+      {
+        StopUID: 'TPE191081',
+        StopID: '191081',
+        StopName: {
+          Zh_tw: '新店站',
+          En: 'Xindian Station'
+        },
+        StopBoarding: 0,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.483357,
+          PositionLat: 24.960538,
+          GeoHash: 'wsqmurvmx'
+        },
+        StationID: '72232',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE56987',
+        StopID: '56987',
+        StopName: {
+          Zh_tw: '安祥路口',
+          En: 'Anxiang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.491777,
+          PositionLat: 24.9554,
+          GeoHash: 'wsqmuwgxe'
+        },
+        StationID: '2902',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16823',
+        StopID: '16823',
+        StopName: {
+          Zh_tw: '大茅埔',
+          En: 'Damaopu'
+        },
+        StopBoarding: 0,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.4946626,
+          PositionLat: 24.95431753,
+          GeoHash: 'wsqmuwv9q'
+        },
+        StationID: '1000380',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16825',
+        StopID: '16825',
+        StopName: {
+          Zh_tw: '康樂新村',
+          En: 'Kangle New Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.496712,
+          PositionLat: 24.955193,
+          GeoHash: 'wsqmuwznw'
+        },
+        StationID: '1000381',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16827',
+        StopID: '16827',
+        StopName: {
+          Zh_tw: '仁康醫院',
+          En: 'Jen-Kang Hospital'
+        },
+        StopBoarding: 0,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.499054,
+          PositionLat: 24.956348,
+          GeoHash: 'wsqmuz0vm'
+        },
+        StationID: '3983',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16829',
+        StopID: '16829',
+        StopName: {
+          Zh_tw: '薏仁坑',
+          En: 'Yirenkeng'
+        },
+        StopBoarding: 0,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.502106,
+          PositionLat: 24.95733611,
+          GeoHash: 'wsqmuz75h'
+        },
+        StationID: '3982',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16831',
+        StopID: '16831',
+        StopName: {
+          Zh_tw: '安康車子路口',
+          En: 'Ankang Chezi Rd. Intersection'
+        },
+        StopBoarding: 0,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.505929,
+          PositionLat: 24.958027,
+          GeoHash: 'wsqmuzmzj'
+        },
+        StationID: '3984',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16833',
+        StopID: '16833',
+        StopName: {
+          Zh_tw: '台北菸廠',
+          En: 'Taipei Tobacco Factory'
+        },
+        StopBoarding: 0,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.509284,
+          PositionLat: 24.959017,
+          GeoHash: 'wsqmvp8kg'
+        },
+        StationID: '2887',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16835',
+        StopID: '16835',
+        StopName: {
+          Zh_tw: '浪漫貴族',
+          En: 'Langmanguizu'
+        },
+        StopBoarding: 0,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.511483,
+          PositionLat: 24.960016,
+          GeoHash: 'wsqmvpcfw'
+        },
+        StationID: '1000401',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16837',
+        StopID: '16837',
+        StopName: {
+          Zh_tw: '公崙新村(豐榮醫院)',
+          En: 'Gonglun New Village(Feng Rong Hospital)'
+        },
+        StopBoarding: 0,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.512648,
+          PositionLat: 24.962041,
+          GeoHash: 'wsqqj04y3'
+        },
+        StationID: '1000402',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16839',
+        StopID: '16839',
+        StopName: {
+          Zh_tw: '安康派出所',
+          En: 'Ankang Police Substation'
+        },
+        StopBoarding: -1,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.515311,
+          PositionLat: 24.963642,
+          GeoHash: 'wsqqj0kxz'
+        },
+        StationID: '1000403',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16841',
+        StopID: '16841',
+        StopName: {
+          Zh_tw: '光華新村(安康路)',
+          En: 'Guanghua New Village(Ankang Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 12,
+        StopPosition: {
+          PositionLon: 121.517942,
+          PositionLat: 24.963936,
+          GeoHash: 'wsqqj0w9m'
+        },
+        StationID: '2896',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE156418',
+        StopID: '156418',
+        StopName: {
+          Zh_tw: '安華路口',
+          En: 'Anwar Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 13,
+        StopPosition: {
+          PositionLon: 121.521365324681,
+          PositionLat: 24.9637050292789,
+          GeoHash: 'wsqqj290j'
+        },
+        StationID: '20310',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16843',
+        StopID: '16843',
+        StopName: {
+          Zh_tw: '下城社區',
+          En: 'Xiacheng Community'
+        },
+        StopBoarding: 0,
+        StopSequence: 14,
+        StopPosition: {
+          PositionLon: 121.5235251,
+          PositionLat: 24.96347353,
+          GeoHash: 'wsqqj26wz'
+        },
+        StationID: '2858',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16845',
+        StopID: '16845',
+        StopName: {
+          Zh_tw: '胡璉故居紀念館',
+          En: 'The HU-LIAN House Memorial Hall'
+        },
+        StopBoarding: 0,
+        StopSequence: 15,
+        StopPosition: {
+          PositionLon: 121.52598,
+          PositionLat: 24.962917,
+          GeoHash: 'wsqqj2ke8'
+        },
+        StationID: '2857',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16847',
+        StopID: '16847',
+        StopName: {
+          Zh_tw: '頂城',
+          En: 'Dingcheng'
+        },
+        StopBoarding: 0,
+        StopSequence: 16,
+        StopPosition: {
+          PositionLon: 121.528339,
+          PositionLat: 24.961725,
+          GeoHash: 'wsqqj2nhx'
+        },
+        StationID: '2934',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16849',
+        StopID: '16849',
+        StopName: {
+          Zh_tw: '大坪頂',
+          En: 'Dapingding'
+        },
+        StopBoarding: 0,
+        StopSequence: 17,
+        StopPosition: {
+          PositionLon: 121.530152,
+          PositionLat: 24.961041,
+          GeoHash: 'wsqqj2p89'
+        },
+        StationID: '2855',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16851',
+        StopID: '16851',
+        StopName: {
+          Zh_tw: '溪頭',
+          En: 'Xitou'
+        },
+        StopBoarding: 0,
+        StopSequence: 18,
+        StopPosition: {
+          PositionLon: 121.532361,
+          PositionLat: 24.960256,
+          GeoHash: 'wsqmvxchj'
+        },
+        StationID: '2679',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16853',
+        StopID: '16853',
+        StopName: {
+          Zh_tw: '捷運新店站(新店路)',
+          En: 'MRT Xindian Sta.(Xindian Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 19,
+        StopPosition: {
+          PositionLon: 121.53755,
+          PositionLat: 24.958392,
+          GeoHash: 'wsqmvxscn'
+        },
+        StationID: '72044',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16855',
+        StopID: '16855',
+        StopName: {
+          Zh_tw: '碧潭橋頭',
+          En: 'Bitan Bridge'
+        },
+        StopBoarding: 0,
+        StopSequence: 20,
+        StopPosition: {
+          PositionLon: 121.53982,
+          PositionLat: 24.963158,
+          GeoHash: 'wsqqj8qsg'
+        },
+        StationID: '60071',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16857',
+        StopID: '16857',
+        StopName: {
+          Zh_tw: '檳榔路',
+          En: 'Binlang Rd.'
+        },
+        StopBoarding: -1,
+        StopSequence: 21,
+        StopPosition: {
+          PositionLon: 121.5405875,
+          PositionLat: 24.96500149,
+          GeoHash: 'wsqqj8xps'
+        },
+        StationID: '2981',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16859',
+        StopID: '16859',
+        StopName: {
+          Zh_tw: '捷運新店區公所站(北新)',
+          En: 'MRT Xindian City Hall Sta.(Beixin)'
+        },
+        StopBoarding: -1,
+        StopSequence: 22,
+        StopPosition: {
+          PositionLon: 121.54161613426882,
+          PositionLat: 24.96763873691205,
+          GeoHash: 'wsqqj9pzh'
+        },
+        StationID: '30100',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16861',
+        StopID: '16861',
+        StopName: {
+          Zh_tw: '七張(北新路)',
+          En: 'Qizhang(Beixin Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 23,
+        StopPosition: {
+          PositionLon: 121.542921,
+          PositionLat: 24.971513,
+          GeoHash: 'wsqqjcbve'
+        },
+        StationID: '30101',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16863',
+        StopID: '16863',
+        StopName: {
+          Zh_tw: '捷運七張站',
+          En: 'MRT Qizhang Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 24,
+        StopPosition: {
+          PositionLon: 121.5430453,
+          PositionLat: 24.9753,
+          GeoHash: 'wsqqjf8gw'
+        },
+        StationID: '30102',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16865',
+        StopID: '16865',
+        StopName: {
+          Zh_tw: '新店郵局',
+          En: 'Xindian Post Office'
+        },
+        StopBoarding: 0,
+        StopSequence: 25,
+        StopPosition: {
+          PositionLon: 121.542795,
+          PositionLat: 24.978161,
+          GeoHash: 'wsqqjg0u2'
+        },
+        StationID: '30103',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE56984',
+        StopID: '56984',
+        StopName: {
+          Zh_tw: '寶強路口',
+          En: 'BaoQiang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 26,
+        StopPosition: {
+          PositionLon: 121.54378,
+          PositionLat: 24.97916,
+          GeoHash: 'wsqqjg36p'
+        },
+        StationID: '60063',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE57410',
+        StopID: '57410',
+        StopName: {
+          Zh_tw: '寶橋路口',
+          En: 'Baoqiao Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 27,
+        StopPosition: {
+          PositionLon: 121.546288,
+          PositionLat: 24.976868,
+          GeoHash: 'wsqqjfgkc'
+        },
+        StationID: '2987',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE56985',
+        StopID: '56985',
+        StopName: {
+          Zh_tw: '寶橋中興路口一',
+          En: 'Baoqiao and Zhongxing Intersection 1'
+        },
+        StopBoarding: -1,
+        StopSequence: 28,
+        StopPosition: {
+          PositionLon: 121.547757,
+          PositionLat: 24.97650499,
+          GeoHash: 'wsqqjfu6s'
+        },
+        StationID: '4160',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16871',
+        StopID: '16871',
+        StopName: {
+          Zh_tw: '加油站',
+          En: 'Gas Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 29,
+        StopPosition: {
+          PositionLon: 121.548731,
+          PositionLat: 24.977046,
+          GeoHash: 'wsqqjfvjf'
+        },
+        StationID: '1000551',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16873',
+        StopID: '16873',
+        StopName: {
+          Zh_tw: '寶高產業園區',
+          En: 'Baogao Science and Intellectual Park'
+        },
+        StopBoarding: 0,
+        StopSequence: 30,
+        StopPosition: {
+          PositionLon: 121.551231544066,
+          PositionLat: 24.9786235157248,
+          GeoHash: 'wsqqjgnzh'
+        },
+        StationID: '1000552',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16875',
+        StopID: '16875',
+        StopName: {
+          Zh_tw: '景美女中',
+          En: 'Jingmei Girls High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 31,
+        StopPosition: {
+          PositionLon: 121.55568,
+          PositionLat: 24.980335,
+          GeoHash: 'wsqqn5d0u'
+        },
+        StationID: '2461',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16877',
+        StopID: '16877',
+        StopName: {
+          Zh_tw: '木新市場',
+          En: 'Muxin Market'
+        },
+        StopBoarding: 0,
+        StopSequence: 32,
+        StopPosition: {
+          PositionLon: 121.5583622,
+          PositionLat: 24.98100977,
+          GeoHash: 'wsqqn5shg'
+        },
+        StationID: '1000553',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16879',
+        StopID: '16879',
+        StopName: {
+          Zh_tw: '力行國小',
+          En: 'Lixing Elementary School'
+        },
+        StopBoarding: 0,
+        StopSequence: 33,
+        StopPosition: {
+          PositionLon: 121.559783932422,
+          PositionLat: 24.9813802657801,
+          GeoHash: 'wsqqn5tph'
+        },
+        StationID: '1000554',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16883',
+        StopID: '16883',
+        StopName: {
+          Zh_tw: '國泰新村(木新)',
+          En: 'GuoTai New Village(Muxin)'
+        },
+        StopBoarding: 0,
+        StopSequence: 34,
+        StopPosition: {
+          PositionLon: 121.561802,
+          PositionLat: 24.981856,
+          GeoHash: 'wsqqn5y9g'
+        },
+        StationID: '3993',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57411',
+        StopID: '57411',
+        StopName: {
+          Zh_tw: '忠順廟',
+          En: 'Zhongshun Temple'
+        },
+        StopBoarding: 0,
+        StopSequence: 35,
+        StopPosition: {
+          PositionLon: 121.56469,
+          PositionLat: 24.982483,
+          GeoHash: 'wsqqn7btw'
+        },
+        StationID: '1000453',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16885',
+        StopID: '16885',
+        StopName: {
+          Zh_tw: '司法新村',
+          En: 'Sifa New Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 36,
+        StopPosition: {
+          PositionLon: 121.56636,
+          PositionLat: 24.98305,
+          GeoHash: 'wsqqnk1bv'
+        },
+        StationID: '4028',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16887',
+        StopID: '16887',
+        StopName: {
+          Zh_tw: '景文中學',
+          En: 'Jingwen High School'
+        },
+        StopBoarding: -1,
+        StopSequence: 37,
+        StopPosition: {
+          PositionLon: 121.568528509552,
+          PositionLat: 24.9837877068618,
+          GeoHash: 'wsqqnk5t0'
+        },
+        StationID: '1000540',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16889',
+        StopID: '16889',
+        StopName: {
+          Zh_tw: '木南公園',
+          En: 'Munan Park'
+        },
+        StopBoarding: 0,
+        StopSequence: 38,
+        StopPosition: {
+          PositionLon: 121.570615,
+          PositionLat: 24.985348,
+          GeoHash: 'wsqqnkmn0'
+        },
+        StationID: '50681',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57412',
+        StopID: '57412',
+        StopName: {
+          Zh_tw: '指南路口',
+          En: 'Zhinan Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 39,
+        StopPosition: {
+          PositionLon: 121.570722800802,
+          PositionLat: 24.9871941238226,
+          GeoHash: 'wsqqnkv0g'
+        },
+        StationID: '2426',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16891',
+        StopID: '16891',
+        StopName: {
+          Zh_tw: '政大',
+          En: 'National Chengchi U.'
+        },
+        StopBoarding: 0,
+        StopSequence: 40,
+        StopPosition: {
+          PositionLon: 121.574633255625,
+          PositionLat: 24.9878362086283,
+          GeoHash: 'wsqqnkzuw'
+        },
+        StationID: '2415',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE124233',
+        StopID: '124233',
+        StopName: {
+          Zh_tw: '政大一',
+          En: 'National Chengchi U. 1'
+        },
+        StopBoarding: 0,
+        StopSequence: 41,
+        StopPosition: {
+          PositionLon: 121.576427,
+          PositionLat: 24.988319,
+          GeoHash: 'wsqqnscr8'
+        },
+        StationID: '1001400',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE56983',
+        StopID: '56983',
+        StopName: {
+          Zh_tw: '萬興圖書館',
+          En: 'Wanxing Library'
+        },
+        StopBoarding: -1,
+        StopSequence: 42,
+        StopPosition: {
+          PositionLon: 121.57697,
+          PositionLat: 24.98897,
+          GeoHash: 'wsqqnt1ek'
+        },
+        StationID: '2520',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16895',
+        StopID: '16895',
+        StopName: {
+          Zh_tw: '大誠高中',
+          En: 'Tacheng High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 43,
+        StopPosition: {
+          PositionLon: 121.576905,
+          PositionLat: 24.990413,
+          GeoHash: 'wsqqnt3ee'
+        },
+        StationID: '2368',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16897',
+        StopID: '16897',
+        StopName: {
+          Zh_tw: '萬壽橋頭(秀明)',
+          En: 'Wanshou Qiaotou(Xiuming)'
+        },
+        StopBoarding: -1,
+        StopSequence: 44,
+        StopPosition: {
+          PositionLon: 121.574627,
+          PositionLat: 24.991863,
+          GeoHash: 'wsqqnmxun'
+        },
+        StationID: '50671',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE148692',
+        StopID: '148692',
+        StopName: {
+          Zh_tw: '萬壽橋頭(新光)',
+          En: 'Wanshou Qiaotou(Xinguang)'
+        },
+        StopBoarding: 0,
+        StopSequence: 45,
+        StopPosition: {
+          PositionLon: 121.573803212774,
+          PositionLat: 24.9928588203687,
+          GeoHash: 'wsqqnmz3f'
+        },
+        StationID: '50669',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16901',
+        StopID: '16901',
+        StopName: {
+          Zh_tw: '貓纜動物園站',
+          En: 'Maokong Gondola Taipei Zoo Station'
+        },
+        StopBoarding: 0,
+        StopSequence: 46,
+        StopPosition: {
+          PositionLon: 121.576314002724,
+          PositionLat: 24.9963006246947,
+          GeoHash: 'wsqqnw3nj'
+        },
+        StationID: '2443',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE56988',
+        StopID: '56988',
+        StopName: {
+          Zh_tw: '捷運動物園站',
+          En: 'MRT Taipei Zoo Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 47,
+        StopPosition: {
+          PositionLon: 121.579926,
+          PositionLat: 24.998553,
+          GeoHash: 'wsqqnwgg1'
+        },
+        StationID: '50672',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16905',
+        StopID: '16905',
+        StopName: {
+          Zh_tw: '石壁坑',
+          En: 'Shibikeng'
+        },
+        StopBoarding: 0,
+        StopSequence: 48,
+        StopPosition: {
+          PositionLon: 121.583287778248,
+          PositionLat: 25.0028393386766,
+          GeoHash: 'wsqqnxwhp'
+        },
+        StationID: '56111',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57416',
+        StopID: '57416',
+        StopName: {
+          Zh_tw: '風動石',
+          En: 'Fengdongshi'
+        },
+        StopBoarding: 0,
+        StopSequence: 49,
+        StopPosition: {
+          PositionLon: 121.579255519338,
+          PositionLat: 25.0011783104188,
+          GeoHash: 'wsqqnx763'
+        },
+        StationID: '2429',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16907',
+        StopID: '16907',
+        StopName: {
+          Zh_tw: '信義松仁路口(信義)',
+          En: 'Xinyi and Songren Rd. Entrance(Xinyi)'
+        },
+        StopBoarding: 0,
+        StopSequence: 50,
+        StopPosition: {
+          PositionLon: 121.566687674056,
+          PositionLat: 25.0329497897498,
+          GeoHash: 'wsqqqm45t'
+        },
+        StationID: '6929',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16909',
+        StopID: '16909',
+        StopName: {
+          Zh_tw: '捷運台北101/世貿站(市府)',
+          En: 'MRT Taipei 101/World Trade Center Sta.(City Hall Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 51,
+        StopPosition: {
+          PositionLon: 121.56364,
+          PositionLat: 25.03376,
+          GeoHash: 'wsqqqjrbn'
+        },
+        StationID: '2029',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16911',
+        StopID: '16911',
+        StopName: {
+          Zh_tw: '市政府(市府)',
+          En: 'Taipei City Hall(City Hall Rd.)'
+        },
+        StopBoarding: 0,
+        StopSequence: 52,
+        StopPosition: {
+          PositionLon: 121.563625169371,
+          PositionLat: 25.0383666649821,
+          GeoHash: 'wsqqqnpgj'
+        },
+        StationID: '2063',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16913',
+        StopID: '16913',
+        StopName: {
+          Zh_tw: '捷運市政府站',
+          En: 'MRT Taipei City Hall Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 53,
+        StopPosition: {
+          PositionLon: 121.5668354,
+          PositionLat: 25.04100991,
+          GeoHash: 'wsqqqqd62'
+        },
+        StationID: '3916',
+        LocationCityCode: 'TPE'
+      }
+    ],
+    UpdateTime: '2023-01-22T05:00:43+08:00',
+    VersionID: 2205
+  },
+  {
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Operators: [
+      {
+        OperatorID: '100',
+        OperatorName: {
+          Zh_tw: '臺北客運',
+          En: 'Taipei Bus Co., Ltd.'
+        },
+        OperatorCode: 'TaipeiBus',
+        OperatorNo: '1407'
+      }
+    ],
+    SubRouteUID: 'TPE10142',
+    SubRouteID: '10142',
+    SubRouteName: {
+      Zh_tw: '綠1調度站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    City: 'Taipei',
+    CityCode: 'TPE',
+    Stops: [
+      {
+        StopUID: 'TPE16915',
+        StopID: '16915',
+        StopName: {
+          Zh_tw: '消防局(松仁)',
+          En: 'City Fire Department(Songren)'
+        },
+        StopBoarding: 0,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.568284,
+          PositionLat: 25.038604,
+          GeoHash: 'wsqqqq5k6'
+        },
+        StationID: '1165604593',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16917',
+        StopID: '16917',
+        StopName: {
+          Zh_tw: '興雅國中',
+          En: 'Xingya Junior High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.568268559011,
+          PositionLat: 25.0372323905063,
+          GeoHash: 'wsqqqmgk3'
+        },
+        StationID: '2179',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16919',
+        StopID: '16919',
+        StopName: {
+          Zh_tw: '信義松仁路口(松仁)',
+          En: 'Xinyi and Songren Rd. Entrance(Songren)'
+        },
+        StopBoarding: 0,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.568236043782,
+          PositionLat: 25.0345352489599,
+          GeoHash: 'wsqqqm7k9'
+        },
+        StationID: '2121',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57417',
+        StopID: '57417',
+        StopName: {
+          Zh_tw: '風動石',
+          En: 'Fengdongshi'
+        },
+        StopBoarding: 0,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.579341481903,
+          PositionLat: 25.0010545644892,
+          GeoHash: 'wsqqnx73e'
+        },
+        StationID: '309',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16921',
+        StopID: '16921',
+        StopName: {
+          Zh_tw: '石壁坑',
+          En: 'Shibikeng'
+        },
+        StopBoarding: 0,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.58301,
+          PositionLat: 25.00261,
+          GeoHash: 'wsqqnxw4c'
+        },
+        StationID: '2400',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16923',
+        StopID: '16923',
+        StopName: {
+          Zh_tw: '捷運動物園站',
+          En: 'MRT Taipei Zoo Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.580221,
+          PositionLat: 24.99882,
+          GeoHash: 'wsqqnwuh8'
+        },
+        StationID: '2442',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE58029',
+        StopID: '58029',
+        StopName: {
+          Zh_tw: '貓纜動物園站',
+          En: 'Maokong Gondola Taipei Zoo Station'
+        },
+        StopBoarding: 0,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.576778,
+          PositionLat: 24.9968,
+          GeoHash: 'wsqqnw98b'
+        },
+        StationID: '1000436',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16929',
+        StopID: '16929',
+        StopName: {
+          Zh_tw: '萬壽橋頭(新光)',
+          En: 'Wanshou Qiaotou(Xinguang)'
+        },
+        StopBoarding: -1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.573725603131,
+          PositionLat: 24.9935042275141,
+          GeoHash: 'wsqqnmzm9'
+        },
+        StationID: '2512',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE148693',
+        StopID: '148693',
+        StopName: {
+          Zh_tw: '萬壽橋頭(秀明)',
+          En: 'Wanshou Qiaotou(Xiuming)'
+        },
+        StopBoarding: 0,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.574153,
+          PositionLat: 24.99161,
+          GeoHash: 'wsqqnmxde'
+        },
+        StationID: '2510',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57419',
+        StopID: '57419',
+        StopName: {
+          Zh_tw: '萬興國小',
+          En: 'Wanxing Elementary School'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.576757,
+          PositionLat: 24.989679,
+          GeoHash: 'wsqqnt1rr'
+        },
+        StationID: '2519',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE193234',
+        StopID: '193234',
+        StopName: {
+          Zh_tw: '政大一',
+          En: 'National Chengchi U. 1'
+        },
+        StopBoarding: 0,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.576051,
+          PositionLat: 24.987811,
+          GeoHash: 'wsqqnsbux'
+        },
+        StationID: '1001409',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16937',
+        StopID: '16937',
+        StopName: {
+          Zh_tw: '新光路口',
+          En: 'Xinguang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 12,
+        StopPosition: {
+          PositionLon: 121.573881732316,
+          PositionLat: 24.9880845060964,
+          GeoHash: 'wsqqnkzqh'
+        },
+        StationID: '1000854',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57422',
+        StopID: '57422',
+        StopName: {
+          Zh_tw: '指南路口',
+          En: 'Zhinan Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 13,
+        StopPosition: {
+          PositionLon: 121.570658,
+          PositionLat: 24.986197,
+          GeoHash: 'wsqqnkt51'
+        },
+        StationID: '1000544',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16939',
+        StopID: '16939',
+        StopName: {
+          Zh_tw: '木南公園',
+          En: 'Munan Park'
+        },
+        StopBoarding: 0,
+        StopSequence: 14,
+        StopPosition: {
+          PositionLon: 121.57011,
+          PositionLat: 24.984828,
+          GeoHash: 'wsqqnkkeh'
+        },
+        StationID: '2521',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16941',
+        StopID: '16941',
+        StopName: {
+          Zh_tw: '景文中學',
+          En: 'Jingwen High School'
+        },
+        StopBoarding: -1,
+        StopSequence: 15,
+        StopPosition: {
+          PositionLon: 121.568940442089,
+          PositionLat: 24.9841119210195,
+          GeoHash: 'wsqqnk5z1'
+        },
+        StationID: '1000522',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16943',
+        StopID: '16943',
+        StopName: {
+          Zh_tw: '司法新村',
+          En: 'Sifa New Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 16,
+        StopPosition: {
+          PositionLon: 121.56699,
+          PositionLat: 24.98335,
+          GeoHash: 'wsqqnk46s'
+        },
+        StationID: '4029',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16945',
+        StopID: '16945',
+        StopName: {
+          Zh_tw: '忠順廟',
+          En: 'Zhongshun Temple'
+        },
+        StopBoarding: 0,
+        StopSequence: 17,
+        StopPosition: {
+          PositionLon: 121.56452654233,
+          PositionLat: 24.982650387537,
+          GeoHash: 'wsqqn7bw6'
+        },
+        StationID: '2411',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57420',
+        StopID: '57420',
+        StopName: {
+          Zh_tw: '國泰新村(木新)',
+          En: 'Guotai New Village(Muxin)'
+        },
+        StopBoarding: 0,
+        StopSequence: 18,
+        StopPosition: {
+          PositionLon: 121.561849824052,
+          PositionLat: 24.9820534481377,
+          GeoHash: 'wsqqn5yeh'
+        },
+        StationID: '3994',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16949',
+        StopID: '16949',
+        StopName: {
+          Zh_tw: '力行國小',
+          En: 'Lixing Elementary School'
+        },
+        StopBoarding: 0,
+        StopSequence: 19,
+        StopPosition: {
+          PositionLon: 121.560289058141,
+          PositionLat: 24.9816609828931,
+          GeoHash: 'wsqqn5v88'
+        },
+        StationID: '2362',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16951',
+        StopID: '16951',
+        StopName: {
+          Zh_tw: '木新市場',
+          En: 'Muxin Market'
+        },
+        StopBoarding: 0,
+        StopSequence: 20,
+        StopPosition: {
+          PositionLon: 121.558272457788,
+          PositionLat: 24.9811534735698,
+          GeoHash: 'wsqqn5sjc'
+        },
+        StationID: '2391',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16953',
+        StopID: '16953',
+        StopName: {
+          Zh_tw: '景美女中',
+          En: 'Jingmei Girls High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 21,
+        StopPosition: {
+          PositionLon: 121.5555005,
+          PositionLat: 24.9804367,
+          GeoHash: 'wsqqn5d18'
+        },
+        StationID: '2462',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16955',
+        StopID: '16955',
+        StopName: {
+          Zh_tw: '寶高產業園區(寶中路)',
+          En: 'Baogao Science and Intellectual Park(Baozhong Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 22,
+        StopPosition: {
+          PositionLon: 121.55006,
+          PositionLat: 24.97896,
+          GeoHash: 'wsqqjgq0c'
+        },
+        StationID: '20306',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16957',
+        StopID: '16957',
+        StopName: {
+          Zh_tw: '寶中路',
+          En: 'Baozhong Rd.'
+        },
+        StopBoarding: 0,
+        StopSequence: 23,
+        StopPosition: {
+          PositionLon: 121.548333,
+          PositionLat: 24.980666,
+          GeoHash: 'wsqqjgsfc'
+        },
+        StationID: '2984',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16959',
+        StopID: '16959',
+        StopName: {
+          Zh_tw: '臺灣銀行',
+          En: 'Bank of Taiwan'
+        },
+        StopBoarding: 0,
+        StopSequence: 24,
+        StopPosition: {
+          PositionLon: 121.54538,
+          PositionLat: 24.9794,
+          GeoHash: 'wsqqjg6es'
+        },
+        StationID: '2962',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE57421',
+        StopID: '57421',
+        StopName: {
+          Zh_tw: '寶強路口',
+          En: 'BaoQiang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 25,
+        StopPosition: {
+          PositionLon: 121.5435326,
+          PositionLat: 24.97919835,
+          GeoHash: 'wsqqjg363'
+        },
+        StationID: '2986',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16963',
+        StopID: '16963',
+        StopName: {
+          Zh_tw: '新店郵局',
+          En: 'Xindian Post Office'
+        },
+        StopBoarding: 0,
+        StopSequence: 26,
+        StopPosition: {
+          PositionLon: 121.542478,
+          PositionLat: 24.978011,
+          GeoHash: 'wsqqjg0e3'
+        },
+        StationID: '2947',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16965',
+        StopID: '16965',
+        StopName: {
+          Zh_tw: '捷運七張站',
+          En: 'MRT Qizhang Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 27,
+        StopPosition: {
+          PositionLon: 121.54279,
+          PositionLat: 24.974123,
+          GeoHash: 'wsqqjf2ub'
+        },
+        StationID: '1165605546',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16967',
+        StopID: '16967',
+        StopName: {
+          Zh_tw: '七張(北新路)',
+          En: 'Qizhang(Beixin Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 28,
+        StopPosition: {
+          PositionLon: 121.5426501,
+          PositionLat: 24.97141,
+          GeoHash: 'wsqqjcbtj'
+        },
+        StationID: '2853',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16969',
+        StopID: '16969',
+        StopName: {
+          Zh_tw: '捷運新店區公所站(北新)',
+          En: 'MRT Hsintien City Hall Station'
+        },
+        StopBoarding: -1,
+        StopSequence: 29,
+        StopPosition: {
+          PositionLon: 121.541385,
+          PositionLat: 24.967768,
+          GeoHash: 'wsqqj9pxz'
+        },
+        StationID: '2928',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16971',
+        StopID: '16971',
+        StopName: {
+          Zh_tw: '檳榔路',
+          En: 'Binlang Rd.'
+        },
+        StopBoarding: -1,
+        StopSequence: 30,
+        StopPosition: {
+          PositionLon: 121.5404224,
+          PositionLat: 24.96516884,
+          GeoHash: 'wsqqj8z09'
+        },
+        StationID: '2982',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16973',
+        StopID: '16973',
+        StopName: {
+          Zh_tw: '碧潭橋頭',
+          En: 'Bitan Bridge'
+        },
+        StopBoarding: 0,
+        StopSequence: 31,
+        StopPosition: {
+          PositionLon: 121.539199,
+          PositionLat: 24.962441,
+          GeoHash: 'wsqqj8q0u'
+        },
+        StationID: '2956',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16975',
+        StopID: '16975',
+        StopName: {
+          Zh_tw: '捷運新店站(新店路)',
+          En: 'MRT Xindian Sta.(Xindian Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 32,
+        StopPosition: {
+          PositionLon: 121.53755,
+          PositionLat: 24.958392,
+          GeoHash: 'wsqmvxscn'
+        },
+        StationID: '72044',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16977',
+        StopID: '16977',
+        StopName: {
+          Zh_tw: '溪頭',
+          En: 'Xitou'
+        },
+        StopBoarding: 0,
+        StopSequence: 33,
+        StopPosition: {
+          PositionLon: 121.5319036,
+          PositionLat: 24.96083175,
+          GeoHash: 'wsqmvxbz6'
+        },
+        StationID: '2950',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16979',
+        StopID: '16979',
+        StopName: {
+          Zh_tw: '大坪頂',
+          En: 'Dapingding'
+        },
+        StopBoarding: 0,
+        StopSequence: 34,
+        StopPosition: {
+          PositionLon: 121.5298939,
+          PositionLat: 24.96132951,
+          GeoHash: 'wsqqj2p67'
+        },
+        StationID: '1001047',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16981',
+        StopID: '16981',
+        StopName: {
+          Zh_tw: '頂城',
+          En: 'Dingcheng'
+        },
+        StopBoarding: 0,
+        StopSequence: 35,
+        StopPosition: {
+          PositionLon: 121.528356,
+          PositionLat: 24.961886,
+          GeoHash: 'wsqqj2njx'
+        },
+        StationID: '1001048',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16983',
+        StopID: '16983',
+        StopName: {
+          Zh_tw: '胡璉故居紀念館',
+          En: 'The HU-LIAN House Memorial Hall'
+        },
+        StopBoarding: 0,
+        StopSequence: 36,
+        StopPosition: {
+          PositionLon: 121.526281,
+          PositionLat: 24.963037,
+          GeoHash: 'wsqqj2ksp'
+        },
+        StationID: '1001049',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16985',
+        StopID: '16985',
+        StopName: {
+          Zh_tw: '下城社區',
+          En: 'Xiacheng Community'
+        },
+        StopBoarding: 0,
+        StopSequence: 37,
+        StopPosition: {
+          PositionLon: 121.5239545,
+          PositionLat: 24.96359615,
+          GeoHash: 'wsqqj27p3'
+        },
+        StationID: '1001050',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE156419',
+        StopID: '156419',
+        StopName: {
+          Zh_tw: '安華路口',
+          En: 'Anwar Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 38,
+        StopPosition: {
+          PositionLon: 121.52120824524,
+          PositionLat: 24.9639074679223,
+          GeoHash: 'wsqqj2913'
+        },
+        StationID: '20309',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16987',
+        StopID: '16987',
+        StopName: {
+          Zh_tw: '光華新村(安康路)',
+          En: 'Guanghua New Village(Ankang Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 39,
+        StopPosition: {
+          PositionLon: 121.5182441,
+          PositionLat: 24.96414395,
+          GeoHash: 'wsqqj0wfs'
+        },
+        StationID: '1000706',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16989',
+        StopID: '16989',
+        StopName: {
+          Zh_tw: '安康派出所',
+          En: 'Ankang Police Substation'
+        },
+        StopBoarding: 0,
+        StopSequence: 40,
+        StopPosition: {
+          PositionLon: 121.514015,
+          PositionLat: 24.963346,
+          GeoHash: 'wsqqj07y1'
+        },
+        StationID: '2900',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16991',
+        StopID: '16991',
+        StopName: {
+          Zh_tw: '公崙新村(豐榮醫院)',
+          En: 'Gonglun New Village(Feng Rong Hospital)'
+        },
+        StopBoarding: 0,
+        StopSequence: 41,
+        StopPosition: {
+          PositionLon: 121.512518,
+          PositionLat: 24.961978,
+          GeoHash: 'wsqqj04wn'
+        },
+        StationID: '2876',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16993',
+        StopID: '16993',
+        StopName: {
+          Zh_tw: '浪漫貴族',
+          En: 'Langmanguizu'
+        },
+        StopBoarding: 0,
+        StopSequence: 42,
+        StopPosition: {
+          PositionLon: 121.51084,
+          PositionLat: 24.95991,
+          GeoHash: 'wsqmvpc6p'
+        },
+        StationID: '2917',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16995',
+        StopID: '16995',
+        StopName: {
+          Zh_tw: '台北菸廠',
+          En: 'Taipei Tobacco Factory'
+        },
+        StopBoarding: 0,
+        StopSequence: 43,
+        StopPosition: {
+          PositionLon: 121.5084746,
+          PositionLat: 24.95887022,
+          GeoHash: 'wsqmuzxgb'
+        },
+        StationID: '2886',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16997',
+        StopID: '16997',
+        StopName: {
+          Zh_tw: '安康車子路口',
+          En: 'Ankang Chezi Rd. Intersection'
+        },
+        StopBoarding: 0,
+        StopSequence: 44,
+        StopPosition: {
+          PositionLon: 121.5048646,
+          PositionLat: 24.95808137,
+          GeoHash: 'wsqmuzmpk'
+        },
+        StationID: '2905',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16999',
+        StopID: '16999',
+        StopName: {
+          Zh_tw: '薏仁坑',
+          En: 'Yirenkeng'
+        },
+        StopBoarding: 0,
+        StopSequence: 45,
+        StopPosition: {
+          PositionLon: 121.5014748,
+          PositionLat: 24.95728682,
+          GeoHash: 'wsqmuz6dt'
+        },
+        StationID: '2979',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE17001',
+        StopID: '17001',
+        StopName: {
+          Zh_tw: '仁康醫院',
+          En: 'Jen-Kang Hospital'
+        },
+        StopBoarding: 0,
+        StopSequence: 46,
+        StopPosition: {
+          PositionLon: 121.499692,
+          PositionLat: 24.956813,
+          GeoHash: 'wsqmuz1ru'
+        },
+        StationID: '2901',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE17003',
+        StopID: '17003',
+        StopName: {
+          Zh_tw: '康樂新村',
+          En: 'Kangle New Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 47,
+        StopPosition: {
+          PositionLon: 121.4972383,
+          PositionLat: 24.95549,
+          GeoHash: 'wsqmuxp86'
+        },
+        StationID: '2922',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE17005',
+        StopID: '17005',
+        StopName: {
+          Zh_tw: '大茅埔',
+          En: 'Damaopu'
+        },
+        StopBoarding: 0,
+        StopSequence: 48,
+        StopPosition: {
+          PositionLon: 121.494847,
+          PositionLat: 24.954594,
+          GeoHash: 'wsqmuwvg5'
+        },
+        StationID: '2859',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE17007',
+        StopID: '17007',
+        StopName: {
+          Zh_tw: '安祥路口',
+          En: 'Anxiang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 49,
+        StopPosition: {
+          PositionLon: 121.491647,
+          PositionLat: 24.955756,
+          GeoHash: 'wsqmux59b'
+        },
+        StationID: '1001414',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE191082',
+        StopID: '191082',
+        StopName: {
+          Zh_tw: '新店站',
+          En: 'Xindian Station'
+        },
+        StopBoarding: 0,
+        StopSequence: 50,
+        StopPosition: {
+          PositionLon: 121.483357,
+          PositionLat: 24.960538,
+          GeoHash: 'wsqmurvmx'
+        },
+        StationID: '72232',
+        LocationCityCode: 'NWT'
+      }
+    ],
+    UpdateTime: '2023-01-22T05:00:43+08:00',
+    VersionID: 2205
+  },
+  {
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Operators: [
+      {
+        OperatorID: '100',
+        OperatorName: {
+          Zh_tw: '臺北客運',
+          En: 'Taipei Bus Co., Ltd.'
+        },
+        OperatorCode: 'TaipeiBus',
+        OperatorNo: '1407'
+      }
+    ],
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 0,
+    City: 'Taipei',
+    CityCode: 'TPE',
+    Stops: [
+      {
+        StopUID: 'TPE16853',
+        StopID: '16853',
+        StopName: {
+          Zh_tw: '捷運新店站(新店路)',
+          En: 'MRT Xindian Sta.(Xindian Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.53755,
+          PositionLat: 24.958392,
+          GeoHash: 'wsqmvxscn'
+        },
+        StationID: '72044',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16855',
+        StopID: '16855',
+        StopName: {
+          Zh_tw: '碧潭橋頭',
+          En: 'Bitan Bridge'
+        },
+        StopBoarding: 0,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.53982,
+          PositionLat: 24.963158,
+          GeoHash: 'wsqqj8qsg'
+        },
+        StationID: '60071',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16857',
+        StopID: '16857',
+        StopName: {
+          Zh_tw: '檳榔路',
+          En: 'Binlang Rd.'
+        },
+        StopBoarding: -1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.5405875,
+          PositionLat: 24.96500149,
+          GeoHash: 'wsqqj8xps'
+        },
+        StationID: '2981',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16859',
+        StopID: '16859',
+        StopName: {
+          Zh_tw: '捷運新店區公所站(北新)',
+          En: 'MRT Xindian City Hall Sta.(Beixin)'
+        },
+        StopBoarding: -1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.54161613426882,
+          PositionLat: 24.96763873691205,
+          GeoHash: 'wsqqj9pzh'
+        },
+        StationID: '30100',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16861',
+        StopID: '16861',
+        StopName: {
+          Zh_tw: '七張(北新路)',
+          En: 'Qizhang(Beixin Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.542921,
+          PositionLat: 24.971513,
+          GeoHash: 'wsqqjcbve'
+        },
+        StationID: '30101',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16863',
+        StopID: '16863',
+        StopName: {
+          Zh_tw: '捷運七張站',
+          En: 'MRT Qizhang Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.5430453,
+          PositionLat: 24.9753,
+          GeoHash: 'wsqqjf8gw'
+        },
+        StationID: '30102',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16865',
+        StopID: '16865',
+        StopName: {
+          Zh_tw: '新店郵局',
+          En: 'Xindian Post Office'
+        },
+        StopBoarding: 0,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.542795,
+          PositionLat: 24.978161,
+          GeoHash: 'wsqqjg0u2'
+        },
+        StationID: '30103',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE56984',
+        StopID: '56984',
+        StopName: {
+          Zh_tw: '寶強路口',
+          En: 'BaoQiang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.54378,
+          PositionLat: 24.97916,
+          GeoHash: 'wsqqjg36p'
+        },
+        StationID: '60063',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE57410',
+        StopID: '57410',
+        StopName: {
+          Zh_tw: '寶橋路口',
+          En: 'Baoqiao Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.546288,
+          PositionLat: 24.976868,
+          GeoHash: 'wsqqjfgkc'
+        },
+        StationID: '2987',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE56985',
+        StopID: '56985',
+        StopName: {
+          Zh_tw: '寶橋中興路口一',
+          En: 'Baoqiao and Zhongxing Intersection 1'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.547757,
+          PositionLat: 24.97650499,
+          GeoHash: 'wsqqjfu6s'
+        },
+        StationID: '4160',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16871',
+        StopID: '16871',
+        StopName: {
+          Zh_tw: '加油站',
+          En: 'Gas Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.548731,
+          PositionLat: 24.977046,
+          GeoHash: 'wsqqjfvjf'
+        },
+        StationID: '1000551',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16873',
+        StopID: '16873',
+        StopName: {
+          Zh_tw: '寶高產業園區',
+          En: 'Baogao Science and Intellectual Park'
+        },
+        StopBoarding: 0,
+        StopSequence: 12,
+        StopPosition: {
+          PositionLon: 121.551231544066,
+          PositionLat: 24.9786235157248,
+          GeoHash: 'wsqqjgnzh'
+        },
+        StationID: '1000552',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16875',
+        StopID: '16875',
+        StopName: {
+          Zh_tw: '景美女中',
+          En: 'Jingmei Girls High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 13,
+        StopPosition: {
+          PositionLon: 121.55568,
+          PositionLat: 24.980335,
+          GeoHash: 'wsqqn5d0u'
+        },
+        StationID: '2461',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16877',
+        StopID: '16877',
+        StopName: {
+          Zh_tw: '木新市場',
+          En: 'Muxin Market'
+        },
+        StopBoarding: 0,
+        StopSequence: 14,
+        StopPosition: {
+          PositionLon: 121.5583622,
+          PositionLat: 24.98100977,
+          GeoHash: 'wsqqn5shg'
+        },
+        StationID: '1000553',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16879',
+        StopID: '16879',
+        StopName: {
+          Zh_tw: '力行國小',
+          En: 'Lixing Elementary School'
+        },
+        StopBoarding: 0,
+        StopSequence: 15,
+        StopPosition: {
+          PositionLon: 121.559783932422,
+          PositionLat: 24.9813802657801,
+          GeoHash: 'wsqqn5tph'
+        },
+        StationID: '1000554',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16883',
+        StopID: '16883',
+        StopName: {
+          Zh_tw: '國泰新村(木新)',
+          En: 'GuoTai New Village(Muxin)'
+        },
+        StopBoarding: 0,
+        StopSequence: 16,
+        StopPosition: {
+          PositionLon: 121.561802,
+          PositionLat: 24.981856,
+          GeoHash: 'wsqqn5y9g'
+        },
+        StationID: '3993',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57411',
+        StopID: '57411',
+        StopName: {
+          Zh_tw: '忠順廟',
+          En: 'Zhongshun Temple'
+        },
+        StopBoarding: 0,
+        StopSequence: 17,
+        StopPosition: {
+          PositionLon: 121.56469,
+          PositionLat: 24.982483,
+          GeoHash: 'wsqqn7btw'
+        },
+        StationID: '1000453',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16885',
+        StopID: '16885',
+        StopName: {
+          Zh_tw: '司法新村',
+          En: 'Sifa New Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 18,
+        StopPosition: {
+          PositionLon: 121.56636,
+          PositionLat: 24.98305,
+          GeoHash: 'wsqqnk1bv'
+        },
+        StationID: '4028',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16887',
+        StopID: '16887',
+        StopName: {
+          Zh_tw: '景文中學',
+          En: 'Jingwen High School'
+        },
+        StopBoarding: -1,
+        StopSequence: 19,
+        StopPosition: {
+          PositionLon: 121.568528509552,
+          PositionLat: 24.9837877068618,
+          GeoHash: 'wsqqnk5t0'
+        },
+        StationID: '1000540',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16889',
+        StopID: '16889',
+        StopName: {
+          Zh_tw: '木南公園',
+          En: 'Munan Park'
+        },
+        StopBoarding: 0,
+        StopSequence: 20,
+        StopPosition: {
+          PositionLon: 121.570615,
+          PositionLat: 24.985348,
+          GeoHash: 'wsqqnkmn0'
+        },
+        StationID: '50681',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57412',
+        StopID: '57412',
+        StopName: {
+          Zh_tw: '指南路口',
+          En: 'Zhinan Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 21,
+        StopPosition: {
+          PositionLon: 121.570722800802,
+          PositionLat: 24.9871941238226,
+          GeoHash: 'wsqqnkv0g'
+        },
+        StationID: '2426',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16891',
+        StopID: '16891',
+        StopName: {
+          Zh_tw: '政大',
+          En: 'National Chengchi U.'
+        },
+        StopBoarding: 0,
+        StopSequence: 22,
+        StopPosition: {
+          PositionLon: 121.574633255625,
+          PositionLat: 24.9878362086283,
+          GeoHash: 'wsqqnkzuw'
+        },
+        StationID: '2415',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE124233',
+        StopID: '124233',
+        StopName: {
+          Zh_tw: '政大一',
+          En: 'National Chengchi U. 1'
+        },
+        StopBoarding: 0,
+        StopSequence: 23,
+        StopPosition: {
+          PositionLon: 121.576427,
+          PositionLat: 24.988319,
+          GeoHash: 'wsqqnscr8'
+        },
+        StationID: '1001400',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE56983',
+        StopID: '56983',
+        StopName: {
+          Zh_tw: '萬興圖書館',
+          En: 'Wanxing Library'
+        },
+        StopBoarding: -1,
+        StopSequence: 24,
+        StopPosition: {
+          PositionLon: 121.57697,
+          PositionLat: 24.98897,
+          GeoHash: 'wsqqnt1ek'
+        },
+        StationID: '2520',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16895',
+        StopID: '16895',
+        StopName: {
+          Zh_tw: '大誠高中',
+          En: 'Tacheng High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 25,
+        StopPosition: {
+          PositionLon: 121.576905,
+          PositionLat: 24.990413,
+          GeoHash: 'wsqqnt3ee'
+        },
+        StationID: '2368',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16897',
+        StopID: '16897',
+        StopName: {
+          Zh_tw: '萬壽橋頭(秀明)',
+          En: 'Wanshou Qiaotou(Xiuming)'
+        },
+        StopBoarding: -1,
+        StopSequence: 26,
+        StopPosition: {
+          PositionLon: 121.574627,
+          PositionLat: 24.991863,
+          GeoHash: 'wsqqnmxun'
+        },
+        StationID: '50671',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE148692',
+        StopID: '148692',
+        StopName: {
+          Zh_tw: '萬壽橋頭(新光)',
+          En: 'Wanshou Qiaotou(Xinguang)'
+        },
+        StopBoarding: 0,
+        StopSequence: 27,
+        StopPosition: {
+          PositionLon: 121.573803212774,
+          PositionLat: 24.9928588203687,
+          GeoHash: 'wsqqnmz3f'
+        },
+        StationID: '50669',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16901',
+        StopID: '16901',
+        StopName: {
+          Zh_tw: '貓纜動物園站',
+          En: 'Maokong Gondola Taipei Zoo Station'
+        },
+        StopBoarding: 0,
+        StopSequence: 28,
+        StopPosition: {
+          PositionLon: 121.576314002724,
+          PositionLat: 24.9963006246947,
+          GeoHash: 'wsqqnw3nj'
+        },
+        StationID: '2443',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE56988',
+        StopID: '56988',
+        StopName: {
+          Zh_tw: '捷運動物園站',
+          En: 'MRT Taipei Zoo Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 29,
+        StopPosition: {
+          PositionLon: 121.579926,
+          PositionLat: 24.998553,
+          GeoHash: 'wsqqnwgg1'
+        },
+        StationID: '50672',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16905',
+        StopID: '16905',
+        StopName: {
+          Zh_tw: '石壁坑',
+          En: 'Shibikeng'
+        },
+        StopBoarding: 0,
+        StopSequence: 30,
+        StopPosition: {
+          PositionLon: 121.583287778248,
+          PositionLat: 25.0028393386766,
+          GeoHash: 'wsqqnxwhp'
+        },
+        StationID: '56111',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57416',
+        StopID: '57416',
+        StopName: {
+          Zh_tw: '風動石',
+          En: 'Fengdongshi'
+        },
+        StopBoarding: 0,
+        StopSequence: 31,
+        StopPosition: {
+          PositionLon: 121.579255519338,
+          PositionLat: 25.0011783104188,
+          GeoHash: 'wsqqnx763'
+        },
+        StationID: '2429',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16907',
+        StopID: '16907',
+        StopName: {
+          Zh_tw: '信義松仁路口(信義)',
+          En: 'Xinyi and Songren Rd. Entrance(Xinyi)'
+        },
+        StopBoarding: 0,
+        StopSequence: 32,
+        StopPosition: {
+          PositionLon: 121.566687674056,
+          PositionLat: 25.0329497897498,
+          GeoHash: 'wsqqqm45t'
+        },
+        StationID: '6929',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16909',
+        StopID: '16909',
+        StopName: {
+          Zh_tw: '捷運台北101/世貿站(市府)',
+          En: 'MRT Taipei 101/World Trade Center Sta.(City Hall Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 33,
+        StopPosition: {
+          PositionLon: 121.56364,
+          PositionLat: 25.03376,
+          GeoHash: 'wsqqqjrbn'
+        },
+        StationID: '2029',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16911',
+        StopID: '16911',
+        StopName: {
+          Zh_tw: '市政府(市府)',
+          En: 'Taipei City Hall(City Hall Rd.)'
+        },
+        StopBoarding: 0,
+        StopSequence: 34,
+        StopPosition: {
+          PositionLon: 121.563625169371,
+          PositionLat: 25.0383666649821,
+          GeoHash: 'wsqqqnpgj'
+        },
+        StationID: '2063',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16913',
+        StopID: '16913',
+        StopName: {
+          Zh_tw: '捷運市政府站',
+          En: 'MRT Taipei City Hall Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 35,
+        StopPosition: {
+          PositionLon: 121.5668354,
+          PositionLat: 25.04100991,
+          GeoHash: 'wsqqqqd62'
+        },
+        StationID: '3916',
+        LocationCityCode: 'TPE'
+      }
+    ],
+    UpdateTime: '2023-01-22T05:00:43+08:00',
+    VersionID: 2205
+  },
+  {
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    Operators: [
+      {
+        OperatorID: '100',
+        OperatorName: {
+          Zh_tw: '臺北客運',
+          En: 'Taipei Bus Co., Ltd.'
+        },
+        OperatorCode: 'TaipeiBus',
+        OperatorNo: '1407'
+      }
+    ],
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    City: 'Taipei',
+    CityCode: 'TPE',
+    Stops: [
+      {
+        StopUID: 'TPE16915',
+        StopID: '16915',
+        StopName: {
+          Zh_tw: '消防局(松仁)',
+          En: 'City Fire Department(Songren)'
+        },
+        StopBoarding: 0,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.568284,
+          PositionLat: 25.038604,
+          GeoHash: 'wsqqqq5k6'
+        },
+        StationID: '1165604593',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16917',
+        StopID: '16917',
+        StopName: {
+          Zh_tw: '興雅國中',
+          En: 'Xingya Junior High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.568268559011,
+          PositionLat: 25.0372323905063,
+          GeoHash: 'wsqqqmgk3'
+        },
+        StationID: '2179',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16919',
+        StopID: '16919',
+        StopName: {
+          Zh_tw: '信義松仁路口(松仁)',
+          En: 'Xinyi and Songren Rd. Entrance(Songren)'
+        },
+        StopBoarding: 0,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.568236043782,
+          PositionLat: 25.0345352489599,
+          GeoHash: 'wsqqqm7k9'
+        },
+        StationID: '2121',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57417',
+        StopID: '57417',
+        StopName: {
+          Zh_tw: '風動石',
+          En: 'Fengdongshi'
+        },
+        StopBoarding: 0,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.579341481903,
+          PositionLat: 25.0010545644892,
+          GeoHash: 'wsqqnx73e'
+        },
+        StationID: '309',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16921',
+        StopID: '16921',
+        StopName: {
+          Zh_tw: '石壁坑',
+          En: 'Shibikeng'
+        },
+        StopBoarding: 0,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.58301,
+          PositionLat: 25.00261,
+          GeoHash: 'wsqqnxw4c'
+        },
+        StationID: '2400',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16923',
+        StopID: '16923',
+        StopName: {
+          Zh_tw: '捷運動物園站',
+          En: 'MRT Taipei Zoo Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.580221,
+          PositionLat: 24.99882,
+          GeoHash: 'wsqqnwuh8'
+        },
+        StationID: '2442',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE58029',
+        StopID: '58029',
+        StopName: {
+          Zh_tw: '貓纜動物園站',
+          En: 'Maokong Gondola Taipei Zoo Station'
+        },
+        StopBoarding: 0,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.576778,
+          PositionLat: 24.9968,
+          GeoHash: 'wsqqnw98b'
+        },
+        StationID: '1000436',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16929',
+        StopID: '16929',
+        StopName: {
+          Zh_tw: '萬壽橋頭(新光)',
+          En: 'Wanshou Qiaotou(Xinguang)'
+        },
+        StopBoarding: -1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.573725603131,
+          PositionLat: 24.9935042275141,
+          GeoHash: 'wsqqnmzm9'
+        },
+        StationID: '2512',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE148693',
+        StopID: '148693',
+        StopName: {
+          Zh_tw: '萬壽橋頭(秀明)',
+          En: 'Wanshou Qiaotou(Xiuming)'
+        },
+        StopBoarding: 0,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.574153,
+          PositionLat: 24.99161,
+          GeoHash: 'wsqqnmxde'
+        },
+        StationID: '2510',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57419',
+        StopID: '57419',
+        StopName: {
+          Zh_tw: '萬興國小',
+          En: 'Wanxing Elementary School'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.576757,
+          PositionLat: 24.989679,
+          GeoHash: 'wsqqnt1rr'
+        },
+        StationID: '2519',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE193234',
+        StopID: '193234',
+        StopName: {
+          Zh_tw: '政大一',
+          En: 'National Chengchi U. 1'
+        },
+        StopBoarding: 0,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.576051,
+          PositionLat: 24.987811,
+          GeoHash: 'wsqqnsbux'
+        },
+        StationID: '1001409',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16937',
+        StopID: '16937',
+        StopName: {
+          Zh_tw: '新光路口',
+          En: 'Xinguang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 12,
+        StopPosition: {
+          PositionLon: 121.573881732316,
+          PositionLat: 24.9880845060964,
+          GeoHash: 'wsqqnkzqh'
+        },
+        StationID: '1000854',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57422',
+        StopID: '57422',
+        StopName: {
+          Zh_tw: '指南路口',
+          En: 'Zhinan Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 13,
+        StopPosition: {
+          PositionLon: 121.570658,
+          PositionLat: 24.986197,
+          GeoHash: 'wsqqnkt51'
+        },
+        StationID: '1000544',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16939',
+        StopID: '16939',
+        StopName: {
+          Zh_tw: '木南公園',
+          En: 'Munan Park'
+        },
+        StopBoarding: 0,
+        StopSequence: 14,
+        StopPosition: {
+          PositionLon: 121.57011,
+          PositionLat: 24.984828,
+          GeoHash: 'wsqqnkkeh'
+        },
+        StationID: '2521',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16941',
+        StopID: '16941',
+        StopName: {
+          Zh_tw: '景文中學',
+          En: 'Jingwen High School'
+        },
+        StopBoarding: -1,
+        StopSequence: 15,
+        StopPosition: {
+          PositionLon: 121.568940442089,
+          PositionLat: 24.9841119210195,
+          GeoHash: 'wsqqnk5z1'
+        },
+        StationID: '1000522',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16943',
+        StopID: '16943',
+        StopName: {
+          Zh_tw: '司法新村',
+          En: 'Sifa New Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 16,
+        StopPosition: {
+          PositionLon: 121.56699,
+          PositionLat: 24.98335,
+          GeoHash: 'wsqqnk46s'
+        },
+        StationID: '4029',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16945',
+        StopID: '16945',
+        StopName: {
+          Zh_tw: '忠順廟',
+          En: 'Zhongshun Temple'
+        },
+        StopBoarding: 0,
+        StopSequence: 17,
+        StopPosition: {
+          PositionLon: 121.56452654233,
+          PositionLat: 24.982650387537,
+          GeoHash: 'wsqqn7bw6'
+        },
+        StationID: '2411',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE57420',
+        StopID: '57420',
+        StopName: {
+          Zh_tw: '國泰新村(木新)',
+          En: 'Guotai New Village(Muxin)'
+        },
+        StopBoarding: 0,
+        StopSequence: 18,
+        StopPosition: {
+          PositionLon: 121.561849824052,
+          PositionLat: 24.9820534481377,
+          GeoHash: 'wsqqn5yeh'
+        },
+        StationID: '3994',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16949',
+        StopID: '16949',
+        StopName: {
+          Zh_tw: '力行國小',
+          En: 'Lixing Elementary School'
+        },
+        StopBoarding: 0,
+        StopSequence: 19,
+        StopPosition: {
+          PositionLon: 121.560289058141,
+          PositionLat: 24.9816609828931,
+          GeoHash: 'wsqqn5v88'
+        },
+        StationID: '2362',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16951',
+        StopID: '16951',
+        StopName: {
+          Zh_tw: '木新市場',
+          En: 'Muxin Market'
+        },
+        StopBoarding: 0,
+        StopSequence: 20,
+        StopPosition: {
+          PositionLon: 121.558272457788,
+          PositionLat: 24.9811534735698,
+          GeoHash: 'wsqqn5sjc'
+        },
+        StationID: '2391',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16953',
+        StopID: '16953',
+        StopName: {
+          Zh_tw: '景美女中',
+          En: 'Jingmei Girls High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 21,
+        StopPosition: {
+          PositionLon: 121.5555005,
+          PositionLat: 24.9804367,
+          GeoHash: 'wsqqn5d18'
+        },
+        StationID: '2462',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'TPE16955',
+        StopID: '16955',
+        StopName: {
+          Zh_tw: '寶高產業園區(寶中路)',
+          En: 'Baogao Science and Intellectual Park(Baozhong Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 22,
+        StopPosition: {
+          PositionLon: 121.55006,
+          PositionLat: 24.97896,
+          GeoHash: 'wsqqjgq0c'
+        },
+        StationID: '20306',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16957',
+        StopID: '16957',
+        StopName: {
+          Zh_tw: '寶中路',
+          En: 'Baozhong Rd.'
+        },
+        StopBoarding: 0,
+        StopSequence: 23,
+        StopPosition: {
+          PositionLon: 121.548333,
+          PositionLat: 24.980666,
+          GeoHash: 'wsqqjgsfc'
+        },
+        StationID: '2984',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16959',
+        StopID: '16959',
+        StopName: {
+          Zh_tw: '臺灣銀行',
+          En: 'Bank of Taiwan'
+        },
+        StopBoarding: 0,
+        StopSequence: 24,
+        StopPosition: {
+          PositionLon: 121.54538,
+          PositionLat: 24.9794,
+          GeoHash: 'wsqqjg6es'
+        },
+        StationID: '2962',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE57421',
+        StopID: '57421',
+        StopName: {
+          Zh_tw: '寶強路口',
+          En: 'BaoQiang Rd. Entrance'
+        },
+        StopBoarding: 0,
+        StopSequence: 25,
+        StopPosition: {
+          PositionLon: 121.5435326,
+          PositionLat: 24.97919835,
+          GeoHash: 'wsqqjg363'
+        },
+        StationID: '2986',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16963',
+        StopID: '16963',
+        StopName: {
+          Zh_tw: '新店郵局',
+          En: 'Xindian Post Office'
+        },
+        StopBoarding: 0,
+        StopSequence: 26,
+        StopPosition: {
+          PositionLon: 121.542478,
+          PositionLat: 24.978011,
+          GeoHash: 'wsqqjg0e3'
+        },
+        StationID: '2947',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16965',
+        StopID: '16965',
+        StopName: {
+          Zh_tw: '捷運七張站',
+          En: 'MRT Qizhang Sta.'
+        },
+        StopBoarding: 0,
+        StopSequence: 27,
+        StopPosition: {
+          PositionLon: 121.54279,
+          PositionLat: 24.974123,
+          GeoHash: 'wsqqjf2ub'
+        },
+        StationID: '1165605546',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16967',
+        StopID: '16967',
+        StopName: {
+          Zh_tw: '七張(北新路)',
+          En: 'Qizhang(Beixin Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 28,
+        StopPosition: {
+          PositionLon: 121.5426501,
+          PositionLat: 24.97141,
+          GeoHash: 'wsqqjcbtj'
+        },
+        StationID: '2853',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16969',
+        StopID: '16969',
+        StopName: {
+          Zh_tw: '捷運新店區公所站(北新)',
+          En: 'MRT Hsintien City Hall Station'
+        },
+        StopBoarding: -1,
+        StopSequence: 29,
+        StopPosition: {
+          PositionLon: 121.541385,
+          PositionLat: 24.967768,
+          GeoHash: 'wsqqj9pxz'
+        },
+        StationID: '2928',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16971',
+        StopID: '16971',
+        StopName: {
+          Zh_tw: '檳榔路',
+          En: 'Binlang Rd.'
+        },
+        StopBoarding: -1,
+        StopSequence: 30,
+        StopPosition: {
+          PositionLon: 121.5404224,
+          PositionLat: 24.96516884,
+          GeoHash: 'wsqqj8z09'
+        },
+        StationID: '2982',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16973',
+        StopID: '16973',
+        StopName: {
+          Zh_tw: '碧潭橋頭',
+          En: 'Bitan Bridge'
+        },
+        StopBoarding: 0,
+        StopSequence: 31,
+        StopPosition: {
+          PositionLon: 121.539199,
+          PositionLat: 24.962441,
+          GeoHash: 'wsqqj8q0u'
+        },
+        StationID: '2956',
+        LocationCityCode: 'NWT'
+      },
+      {
+        StopUID: 'TPE16975',
+        StopID: '16975',
+        StopName: {
+          Zh_tw: '捷運新店站(新店路)',
+          En: 'MRT Xindian Sta.(Xindian Rd.)'
+        },
+        StopBoarding: -1,
+        StopSequence: 32,
+        StopPosition: {
+          PositionLon: 121.53755,
+          PositionLat: 24.958392,
+          GeoHash: 'wsqmvxscn'
+        },
+        StationID: '72044',
+        LocationCityCode: 'NWT'
+      }
+    ],
+    UpdateTime: '2023-01-22T05:00:43+08:00',
+    VersionID: 2205
   }
 ]

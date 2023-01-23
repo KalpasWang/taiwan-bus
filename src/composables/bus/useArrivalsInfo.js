@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import { api, fetchEstimatedTimeOfArrival, fetchStopsOfRoute } from '../api'
+import { state } from './state'
 // import { filterRouteName } from './utilities'
 
 /**
@@ -20,45 +21,43 @@ export function useArrivalsInfo(routeName, city) {
       routeName,
       city
     )
-    // 如果沒有站序資料則要 fetch stops of route
-    let stopsOfRoute
-    if (!timeForward?.[0]?.StopSequence || !timeBackward?.[0].StopSequence) {
-      stopsOfRoute = await fetchStopsOfRoute(routeName, city)
-    }
-    timeForward.sort((stopA, stopB) => {
-      if (stopA.StopSequence) {
-        return stopA.StopSequence - stopB.StopSequence
-      }
+    // 取得站序資料
+    const stopsOfRoute = await fetchStopsOfRoute(routeName, city)
+    // console.log(timeForward.length)
+    // console.log(timeBackward.length)
+    // console.log(stopsOfRoute.forward.Stops.length)
+    // console.log(stopsOfRoute.backward.Stops.length)
+    // 對每一個站牌做排序
+    timeForward.sort(generateSortingFn(stopsOfRoute, 'forward'))
+    timeBackward.sort(generateSortingFn(stopsOfRoute, 'backward'))
+    // set state
+    state.arrivalsInfo.forward = timeForward
+    state.arrivalsInfo.backward = timeBackward
+  }
 
-      if (stopsOfRoute.forward) {
-        const stopAFound = stopsOfRoute.forward.find(
-          (item) => item.StopName.Zh_tw === stopA.StopName.Zh_tw
-        )
-        const stopBFound = stopsOfRoute.forward.find(
-          (item) => item.StopName.Zh_tw === stopB.StopName.Zh_tw
-        )
-        stopA.StopSequence = stopAFound?.StopSequence
-        stopB.StopSequence = stopBFound?.StopSequence
+  // sorting callback for time array
+  function generateSortingFn(stopsOfRoute, direction) {
+    return (stopA, stopB) => {
+      if (stopA.StopSequence && stopB.StopSequence) {
         return stopA.StopSequence - stopB.StopSequence
       }
-    })
-    // 對每一個站牌做處理
-    arrivalsInfo.forwards = stopsForward.map((stop) => {
-      const timeInfo = forwards.find((item) => item.StopUID === stop.StopUID)
-      if (timeInfo) {
-        stop.EstimateTime = timeInfo.EstimateTime
-        stop.StopStatus = timeInfo.StopStatus
+      if (stopsOfRoute[direction]) {
+        if (!stopA.StopSequence) {
+          const stopAFound = stopsOfRoute[direction]?.Stops?.find(
+            (item) => item.StopID === stopA.StopID
+          )
+          stopA.StopSequence = stopAFound?.StopSequence
+        }
+        if (!stopB.StopSequence) {
+          const stopBFound = stopsOfRoute[direction]?.Stops?.find(
+            (item) => item.StopID === stopB.StopID
+          )
+          stopB.StopSequence = stopBFound?.StopSequence
+        }
+        return stopA.StopSequence - stopB.StopSequence || 0
       }
-      return stop
-    })
-    arrivalsInfo.backwards = stopsBackward.map((stop) => {
-      const timeInfo = backwards.find((item) => item.StopUID === stop.StopUID)
-      if (timeInfo) {
-        stop.EstimateTime = timeInfo.EstimateTime
-        stop.StopStatus = timeInfo.StopStatus
-      }
-      return stop
-    })
+      return 0
+    }
   }
 
   // 取得指定[路線名稱]的公車動態最接近站牌資料
@@ -85,7 +84,7 @@ export function useArrivalsInfo(routeName, city) {
     })
   }
 
-  const addBusInfoToStop = async (bus, stopsList) => {
+  async function addBusInfoToStop(bus, stopsList) {
     // console.log(bus, stopsList)
     const stop = stopsList.find((item) => item.StopUID === bus.StopUID)
     if (stop) {
@@ -115,7 +114,7 @@ export function useArrivalsInfo(routeName, city) {
 
   const fetchNewArrivalsInfo = async () => {
     await fetchBusArrivalTime(routeName, city)
-    await fetchBusNearStop(routeName, city)
+    // await fetchBusNearStop(routeName, city)
   }
 
   return { arrivalsInfo, fetchNewArrivalsInfo }

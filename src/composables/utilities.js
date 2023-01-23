@@ -170,7 +170,7 @@ export const parseShape = (shapeStr) => {
 export function filterRouteName(routeName, list) {
   if (!Array.isArray(list)) {
     console.error('list 不是陣列')
-    console.log(list)
+    // console.log(list)
     return
   }
   return list.filter((item) => {
