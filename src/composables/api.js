@@ -105,7 +105,7 @@ export async function fetchStopsOfRoute(routeName, city, subRouteName) {
     // 尋找另一方向的路線
     anotherDirection = res.data.find((item) => {
       if (
-        maxStopsRoute.RouteID === item.RouteID &&
+        maxStopsRoute.SubRouteName.Zh_tw === item.SubRouteName.Zh_tw &&
         maxStopsRoute.Direction !== item.Direction
       ) {
         return true
