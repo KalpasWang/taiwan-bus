@@ -8985,3 +8985,4613 @@ export const mockG1StopsOfRoute = [
     VersionID: 2205
   }
 ]
+
+export const mock0968StopsOfRoute = [
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '35',
+        OperatorName: {
+          Zh_tw: '葛瑪蘭客運',
+          En: 'Kamalan Bus Co., Ltd.'
+        },
+        OperatorCode: 'KamalanBus',
+        OperatorNo: '1308'
+      }
+    ],
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    Stops: [
+      {
+        StopUID: 'THB300177',
+        StopID: '300177',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.261064,
+          PositionLat: 25.018736,
+          GeoHash: 'wsqnr6e8e'
+        },
+        StationID: '136293',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300181',
+        StopID: '300181',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.265196,
+          PositionLat: 25.020322,
+          GeoHash: 'wsqnr6y9g'
+        },
+        StationID: '136297',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300183',
+        StopID: '300183',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.2631,
+          PositionLat: 25.02158,
+          GeoHash: 'wsqnr7j17'
+        },
+        StationID: '136299',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300186',
+        StopID: '300186',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.25934,
+          PositionLat: 25.02413,
+          GeoHash: 'wsqnr7d25'
+        },
+        StationID: '136301',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300188',
+        StopID: '300188',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.270736,
+          PositionLat: 25.031488,
+          GeoHash: 'wsqnrsfdu'
+        },
+        StationID: '136303',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300190',
+        StopID: '300190',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.279911,
+          PositionLat: 25.036606,
+          GeoHash: 'wsqnrvc2f'
+        },
+        StationID: '136305',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300192',
+        StopID: '300192',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.287433,
+          PositionLat: 25.042302,
+          GeoHash: 'wsqnryycf'
+        },
+        StationID: '136307',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300194',
+        StopID: '300194',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: 1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.29021,
+          PositionLat: 25.04142,
+          GeoHash: 'wsqq2n8uf'
+        },
+        StationID: '136309',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300196',
+        StopID: '300196',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: 1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.294189,
+          PositionLat: 25.043506,
+          GeoHash: 'wsqq2p58z'
+        },
+        StationID: '136311',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '16',
+        OperatorName: {
+          Zh_tw: '亞通客運',
+          En: 'Yatung Bus Co., Ltd.'
+        },
+        OperatorCode: 'YatungBus',
+        OperatorNo: '0702'
+      }
+    ],
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    Stops: [
+      {
+        StopUID: 'THB300177',
+        StopID: '300177',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.261064,
+          PositionLat: 25.018736,
+          GeoHash: 'wsqnr6e8e'
+        },
+        StationID: '136293',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300181',
+        StopID: '300181',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.265196,
+          PositionLat: 25.020322,
+          GeoHash: 'wsqnr6y9g'
+        },
+        StationID: '136297',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300183',
+        StopID: '300183',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.2631,
+          PositionLat: 25.02158,
+          GeoHash: 'wsqnr7j17'
+        },
+        StationID: '136299',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300186',
+        StopID: '300186',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.25934,
+          PositionLat: 25.02413,
+          GeoHash: 'wsqnr7d25'
+        },
+        StationID: '136301',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300188',
+        StopID: '300188',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.270736,
+          PositionLat: 25.031488,
+          GeoHash: 'wsqnrsfdu'
+        },
+        StationID: '136303',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300190',
+        StopID: '300190',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.279911,
+          PositionLat: 25.036606,
+          GeoHash: 'wsqnrvc2f'
+        },
+        StationID: '136305',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300192',
+        StopID: '300192',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.287433,
+          PositionLat: 25.042302,
+          GeoHash: 'wsqnryycf'
+        },
+        StationID: '136307',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300194',
+        StopID: '300194',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: 1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.29021,
+          PositionLat: 25.04142,
+          GeoHash: 'wsqq2n8uf'
+        },
+        StationID: '136309',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300196',
+        StopID: '300196',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: 1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.294189,
+          PositionLat: 25.043506,
+          GeoHash: 'wsqq2p58z'
+        },
+        StationID: '136311',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '35',
+        OperatorName: {
+          Zh_tw: '葛瑪蘭客運',
+          En: 'Kamalan Bus Co., Ltd.'
+        },
+        OperatorCode: 'KamalanBus',
+        OperatorNo: '1308'
+      }
+    ],
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    Stops: [
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'THB300197',
+        StopID: '300197',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: -1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.295231,
+          PositionLat: 25.042126,
+          GeoHash: 'wsqq2nu2z'
+        },
+        StationID: '136312',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300195',
+        StopID: '300195',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: -1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.290189,
+          PositionLat: 25.041469,
+          GeoHash: 'wsqq2n8v4'
+        },
+        StationID: '136310',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300193',
+        StopID: '300193',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.287471,
+          PositionLat: 25.042365,
+          GeoHash: 'wsqnryyf6'
+        },
+        StationID: '136308',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300191',
+        StopID: '300191',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.27988,
+          PositionLat: 25.03683,
+          GeoHash: 'wsqnrvc64'
+        },
+        StationID: '136306',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300189',
+        StopID: '300189',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.27074,
+          PositionLat: 25.03163,
+          GeoHash: 'wsqnrsfev'
+        },
+        StationID: '136304',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300187',
+        StopID: '300187',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.25958,
+          PositionLat: 25.02376,
+          GeoHash: 'wsqnr76tc'
+        },
+        StationID: '136302',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300185',
+        StopID: '300185',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.262756,
+          PositionLat: 25.021679,
+          GeoHash: 'wsqnr7hcg'
+        },
+        StationID: '136300',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300182',
+        StopID: '300182',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.26507,
+          PositionLat: 25.02023,
+          GeoHash: 'wsqnr6y92'
+        },
+        StationID: '136298',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300178',
+        StopID: '300178',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.26165,
+          PositionLat: 25.01885,
+          GeoHash: 'wsqnr6s13'
+        },
+        StationID: '136294',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '16',
+        OperatorName: {
+          Zh_tw: '亞通客運',
+          En: 'Yatung Bus Co., Ltd.'
+        },
+        OperatorCode: 'YatungBus',
+        OperatorNo: '0702'
+      }
+    ],
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    Stops: [
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'THB300197',
+        StopID: '300197',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: -1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.295231,
+          PositionLat: 25.042126,
+          GeoHash: 'wsqq2nu2z'
+        },
+        StationID: '136312',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300195',
+        StopID: '300195',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: -1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.290189,
+          PositionLat: 25.041469,
+          GeoHash: 'wsqq2n8v4'
+        },
+        StationID: '136310',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300193',
+        StopID: '300193',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.287471,
+          PositionLat: 25.042365,
+          GeoHash: 'wsqnryyf6'
+        },
+        StationID: '136308',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300191',
+        StopID: '300191',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.27988,
+          PositionLat: 25.03683,
+          GeoHash: 'wsqnrvc64'
+        },
+        StationID: '136306',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300189',
+        StopID: '300189',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.27074,
+          PositionLat: 25.03163,
+          GeoHash: 'wsqnrsfev'
+        },
+        StationID: '136304',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300187',
+        StopID: '300187',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.25958,
+          PositionLat: 25.02376,
+          GeoHash: 'wsqnr76tc'
+        },
+        StationID: '136302',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300185',
+        StopID: '300185',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.262756,
+          PositionLat: 25.021679,
+          GeoHash: 'wsqnr7hcg'
+        },
+        StationID: '136300',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300182',
+        StopID: '300182',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.26507,
+          PositionLat: 25.02023,
+          GeoHash: 'wsqnr6y92'
+        },
+        StationID: '136298',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300178',
+        StopID: '300178',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.26165,
+          PositionLat: 25.01885,
+          GeoHash: 'wsqnr6s13'
+        },
+        StationID: '136294',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '35',
+        OperatorName: {
+          Zh_tw: '葛瑪蘭客運',
+          En: 'Kamalan Bus Co., Ltd.'
+        },
+        OperatorCode: 'KamalanBus',
+        OperatorNo: '1308'
+      }
+    ],
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    Stops: [
+      {
+        StopUID: 'THB300174',
+        StopID: '300174',
+        StopName: {
+          Zh_tw: '開南大學',
+          En: 'Kainan University'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.270384,
+          PositionLat: 25.010787,
+          GeoHash: 'wsqnr946k'
+        },
+        StationID: '136290',
+        StationGroupID: '338－074',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300177',
+        StopID: '300177',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: 1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.261064,
+          PositionLat: 25.018736,
+          GeoHash: 'wsqnr6e8e'
+        },
+        StationID: '136293',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300181',
+        StopID: '300181',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.265196,
+          PositionLat: 25.020322,
+          GeoHash: 'wsqnr6y9g'
+        },
+        StationID: '136297',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300183',
+        StopID: '300183',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.2631,
+          PositionLat: 25.02158,
+          GeoHash: 'wsqnr7j17'
+        },
+        StationID: '136299',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300186',
+        StopID: '300186',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.25934,
+          PositionLat: 25.02413,
+          GeoHash: 'wsqnr7d25'
+        },
+        StationID: '136301',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300188',
+        StopID: '300188',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.270736,
+          PositionLat: 25.031488,
+          GeoHash: 'wsqnrsfdu'
+        },
+        StationID: '136303',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300190',
+        StopID: '300190',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.279911,
+          PositionLat: 25.036606,
+          GeoHash: 'wsqnrvc2f'
+        },
+        StationID: '136305',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300192',
+        StopID: '300192',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.287433,
+          PositionLat: 25.042302,
+          GeoHash: 'wsqnryycf'
+        },
+        StationID: '136307',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300194',
+        StopID: '300194',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: 1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.29021,
+          PositionLat: 25.04142,
+          GeoHash: 'wsqq2n8uf'
+        },
+        StationID: '136309',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300196',
+        StopID: '300196',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: 1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.294189,
+          PositionLat: 25.043506,
+          GeoHash: 'wsqq2p58z'
+        },
+        StationID: '136311',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: -1,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '16',
+        OperatorName: {
+          Zh_tw: '亞通客運',
+          En: 'Yatung Bus Co., Ltd.'
+        },
+        OperatorCode: 'YatungBus',
+        OperatorNo: '0702'
+      }
+    ],
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    Stops: [
+      {
+        StopUID: 'THB300174',
+        StopID: '300174',
+        StopName: {
+          Zh_tw: '開南大學',
+          En: 'Kainan University'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.270384,
+          PositionLat: 25.010787,
+          GeoHash: 'wsqnr946k'
+        },
+        StationID: '136290',
+        StationGroupID: '338－074',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300177',
+        StopID: '300177',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: 1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.261064,
+          PositionLat: 25.018736,
+          GeoHash: 'wsqnr6e8e'
+        },
+        StationID: '136293',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300181',
+        StopID: '300181',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.265196,
+          PositionLat: 25.020322,
+          GeoHash: 'wsqnr6y9g'
+        },
+        StationID: '136297',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300183',
+        StopID: '300183',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.2631,
+          PositionLat: 25.02158,
+          GeoHash: 'wsqnr7j17'
+        },
+        StationID: '136299',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300186',
+        StopID: '300186',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: 1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.25934,
+          PositionLat: 25.02413,
+          GeoHash: 'wsqnr7d25'
+        },
+        StationID: '136301',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300188',
+        StopID: '300188',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.270736,
+          PositionLat: 25.031488,
+          GeoHash: 'wsqnrsfdu'
+        },
+        StationID: '136303',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300190',
+        StopID: '300190',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.279911,
+          PositionLat: 25.036606,
+          GeoHash: 'wsqnrvc2f'
+        },
+        StationID: '136305',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300192',
+        StopID: '300192',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: 1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.287433,
+          PositionLat: 25.042302,
+          GeoHash: 'wsqnryycf'
+        },
+        StationID: '136307',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300194',
+        StopID: '300194',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: 1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.29021,
+          PositionLat: 25.04142,
+          GeoHash: 'wsqq2n8uf'
+        },
+        StationID: '136309',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300196',
+        StopID: '300196',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: 1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.294189,
+          PositionLat: 25.043506,
+          GeoHash: 'wsqq2p58z'
+        },
+        StationID: '136311',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: -1,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '35',
+        OperatorName: {
+          Zh_tw: '葛瑪蘭客運',
+          En: 'Kamalan Bus Co., Ltd.'
+        },
+        OperatorCode: 'KamalanBus',
+        OperatorNo: '1308'
+      }
+    ],
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    Stops: [
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'THB300197',
+        StopID: '300197',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: -1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.295231,
+          PositionLat: 25.042126,
+          GeoHash: 'wsqq2nu2z'
+        },
+        StationID: '136312',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300195',
+        StopID: '300195',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: -1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.290189,
+          PositionLat: 25.041469,
+          GeoHash: 'wsqq2n8v4'
+        },
+        StationID: '136310',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300193',
+        StopID: '300193',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.287471,
+          PositionLat: 25.042365,
+          GeoHash: 'wsqnryyf6'
+        },
+        StationID: '136308',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300191',
+        StopID: '300191',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.27988,
+          PositionLat: 25.03683,
+          GeoHash: 'wsqnrvc64'
+        },
+        StationID: '136306',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300189',
+        StopID: '300189',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.27074,
+          PositionLat: 25.03163,
+          GeoHash: 'wsqnrsfev'
+        },
+        StationID: '136304',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300187',
+        StopID: '300187',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.25958,
+          PositionLat: 25.02376,
+          GeoHash: 'wsqnr76tc'
+        },
+        StationID: '136302',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300185',
+        StopID: '300185',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.262756,
+          PositionLat: 25.021679,
+          GeoHash: 'wsqnr7hcg'
+        },
+        StationID: '136300',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300182',
+        StopID: '300182',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.26507,
+          PositionLat: 25.02023,
+          GeoHash: 'wsqnr6y92'
+        },
+        StationID: '136298',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300178',
+        StopID: '300178',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.26165,
+          PositionLat: 25.01885,
+          GeoHash: 'wsqnr6s13'
+        },
+        StationID: '136294',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300174',
+        StopID: '300174',
+        StopName: {
+          Zh_tw: '開南大學',
+          En: 'Kainan University'
+        },
+        StopBoarding: -1,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.270384,
+          PositionLat: 25.010787,
+          GeoHash: 'wsqnr946k'
+        },
+        StationID: '136290',
+        StationGroupID: '338－074',
+        LocationCityCode: 'TAO'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  },
+  {
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Operators: [
+      {
+        OperatorID: '16',
+        OperatorName: {
+          Zh_tw: '亞通客運',
+          En: 'Yatung Bus Co., Ltd.'
+        },
+        OperatorCode: 'YatungBus',
+        OperatorNo: '0702'
+      }
+    ],
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    Stops: [
+      {
+        StopUID: 'THB300198',
+        StopID: '300198',
+        StopName: {
+          Zh_tw: '庫倫街口',
+          En: 'Kulun St. Entrance'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.518331,
+          PositionLat: 25.070919,
+          GeoHash: 'wsqqthnbw'
+        },
+        StationID: '136313',
+        StationGroupID: '103－008',
+        LocationCityCode: 'TPE'
+      },
+      {
+        StopUID: 'THB300197',
+        StopID: '300197',
+        StopName: {
+          Zh_tw: '長榮',
+          En: 'Changrong'
+        },
+        StopBoarding: -1,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.295231,
+          PositionLat: 25.042126,
+          GeoHash: 'wsqq2nu2z'
+        },
+        StationID: '136312',
+        StationGroupID: '338－151',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300195',
+        StopID: '300195',
+        StopName: {
+          Zh_tw: '光明國小',
+          En: 'Guangming Elementary School'
+        },
+        StopBoarding: -1,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.290189,
+          PositionLat: 25.041469,
+          GeoHash: 'wsqq2n8v4'
+        },
+        StationID: '136310',
+        StationGroupID: '338－149',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300193',
+        StopID: '300193',
+        StopName: {
+          Zh_tw: '南竹南昌路口',
+          En: 'Nanjhu & Nanchang Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.287471,
+          PositionLat: 25.042365,
+          GeoHash: 'wsqnryyf6'
+        },
+        StationID: '136308',
+        StationGroupID: '338－148',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300191',
+        StopID: '300191',
+        StopName: {
+          Zh_tw: '南竹蘆興街口',
+          En: 'Nanjhu & Lusing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.27988,
+          PositionLat: 25.03683,
+          GeoHash: 'wsqnrvc64'
+        },
+        StationID: '136306',
+        StationGroupID: '338－147',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300189',
+        StopID: '300189',
+        StopName: {
+          Zh_tw: '南竹富國路口',
+          En: 'Nanjhu & Fuguo Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.27074,
+          PositionLat: 25.03163,
+          GeoHash: 'wsqnrsfev'
+        },
+        StationID: '136304',
+        StationGroupID: '338－143',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300187',
+        StopID: '300187',
+        StopName: {
+          Zh_tw: '大竹',
+          En: 'Dajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.25958,
+          PositionLat: 25.02376,
+          GeoHash: 'wsqnr76tc'
+        },
+        StationID: '136302',
+        StationGroupID: '338－132',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300185',
+        StopID: '300185',
+        StopName: {
+          Zh_tw: '上大竹',
+          En: 'Shangdajhu'
+        },
+        StopBoarding: -1,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.262756,
+          PositionLat: 25.021679,
+          GeoHash: 'wsqnr7hcg'
+        },
+        StationID: '136300',
+        StationGroupID: '338－121',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300182',
+        StopID: '300182',
+        StopName: {
+          Zh_tw: '大竹上興路口',
+          En: 'Dajhu & Shangsing Intersection'
+        },
+        StopBoarding: -1,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.26507,
+          PositionLat: 25.02023,
+          GeoHash: 'wsqnr6y92'
+        },
+        StationID: '136298',
+        StationGroupID: '338－111',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300178',
+        StopID: '300178',
+        StopName: {
+          Zh_tw: '大竹消防隊',
+          En: 'Dajhu Fire Brigade'
+        },
+        StopBoarding: -1,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.26165,
+          PositionLat: 25.01885,
+          GeoHash: 'wsqnr6s13'
+        },
+        StationID: '136294',
+        StationGroupID: '338－086',
+        LocationCityCode: 'TAO'
+      },
+      {
+        StopUID: 'THB300174',
+        StopID: '300174',
+        StopName: {
+          Zh_tw: '開南大學',
+          En: 'Kainan University'
+        },
+        StopBoarding: -1,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.270384,
+          PositionLat: 25.010787,
+          GeoHash: 'wsqnr946k'
+        },
+        StationID: '136290',
+        StationGroupID: '338－074',
+        LocationCityCode: 'TAO'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  }
+]
+
+export const mock0968Arrivals = [
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300174',
+    StopID: '300174',
+    StopName: {
+      Zh_tw: '開南大學',
+      En: 'Kainan University'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 1,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300174',
+    StopID: '300174',
+    StopName: {
+      Zh_tw: '開南大學',
+      En: 'Kainan University'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 11,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300177',
+    StopID: '300177',
+    StopName: {
+      Zh_tw: '大竹消防隊',
+      En: 'Dajhu Fire Brigade'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 1,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300177',
+    StopID: '300177',
+    StopName: {
+      Zh_tw: '大竹消防隊',
+      En: 'Dajhu Fire Brigade'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 2,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300178',
+    StopID: '300178',
+    StopName: {
+      Zh_tw: '大竹消防隊',
+      En: 'Dajhu Fire Brigade'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 10,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300178',
+    StopID: '300178',
+    StopName: {
+      Zh_tw: '大竹消防隊',
+      En: 'Dajhu Fire Brigade'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 10,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300181',
+    StopID: '300181',
+    StopName: {
+      Zh_tw: '大竹上興路口',
+      En: 'Dajhu & Shangsing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 2,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300181',
+    StopID: '300181',
+    StopName: {
+      Zh_tw: '大竹上興路口',
+      En: 'Dajhu & Shangsing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 3,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300182',
+    StopID: '300182',
+    StopName: {
+      Zh_tw: '大竹上興路口',
+      En: 'Dajhu & Shangsing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 9,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300182',
+    StopID: '300182',
+    StopName: {
+      Zh_tw: '大竹上興路口',
+      En: 'Dajhu & Shangsing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 9,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300183',
+    StopID: '300183',
+    StopName: {
+      Zh_tw: '上大竹',
+      En: 'Shangdajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 3,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300183',
+    StopID: '300183',
+    StopName: {
+      Zh_tw: '上大竹',
+      En: 'Shangdajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 4,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300185',
+    StopID: '300185',
+    StopName: {
+      Zh_tw: '上大竹',
+      En: 'Shangdajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 8,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300185',
+    StopID: '300185',
+    StopName: {
+      Zh_tw: '上大竹',
+      En: 'Shangdajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 8,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300186',
+    StopID: '300186',
+    StopName: {
+      Zh_tw: '大竹',
+      En: 'Dajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 4,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300186',
+    StopID: '300186',
+    StopName: {
+      Zh_tw: '大竹',
+      En: 'Dajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 5,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300187',
+    StopID: '300187',
+    StopName: {
+      Zh_tw: '大竹',
+      En: 'Dajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 7,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300187',
+    StopID: '300187',
+    StopName: {
+      Zh_tw: '大竹',
+      En: 'Dajhu'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 7,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300188',
+    StopID: '300188',
+    StopName: {
+      Zh_tw: '南竹富國路口',
+      En: 'Nanjhu & Fuguo Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 5,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300188',
+    StopID: '300188',
+    StopName: {
+      Zh_tw: '南竹富國路口',
+      En: 'Nanjhu & Fuguo Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 6,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300189',
+    StopID: '300189',
+    StopName: {
+      Zh_tw: '南竹富國路口',
+      En: 'Nanjhu & Fuguo Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 6,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300189',
+    StopID: '300189',
+    StopName: {
+      Zh_tw: '南竹富國路口',
+      En: 'Nanjhu & Fuguo Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 6,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300190',
+    StopID: '300190',
+    StopName: {
+      Zh_tw: '南竹蘆興街口',
+      En: 'Nanjhu & Lusing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 6,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300190',
+    StopID: '300190',
+    StopName: {
+      Zh_tw: '南竹蘆興街口',
+      En: 'Nanjhu & Lusing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 7,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300191',
+    StopID: '300191',
+    StopName: {
+      Zh_tw: '南竹蘆興街口',
+      En: 'Nanjhu & Lusing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 5,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300191',
+    StopID: '300191',
+    StopName: {
+      Zh_tw: '南竹蘆興街口',
+      En: 'Nanjhu & Lusing Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 5,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300192',
+    StopID: '300192',
+    StopName: {
+      Zh_tw: '南竹南昌路口',
+      En: 'Nanjhu & Nanchang Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 7,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300192',
+    StopID: '300192',
+    StopName: {
+      Zh_tw: '南竹南昌路口',
+      En: 'Nanjhu & Nanchang Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 8,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300193',
+    StopID: '300193',
+    StopName: {
+      Zh_tw: '南竹南昌路口',
+      En: 'Nanjhu & Nanchang Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 4,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300193',
+    StopID: '300193',
+    StopName: {
+      Zh_tw: '南竹南昌路口',
+      En: 'Nanjhu & Nanchang Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 4,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300194',
+    StopID: '300194',
+    StopName: {
+      Zh_tw: '光明國小',
+      En: 'Guangming Elementary School'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 8,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: 'KKA-3656',
+    StopUID: 'THB300194',
+    StopID: '300194',
+    StopName: {
+      Zh_tw: '光明國小',
+      En: 'Guangming Elementary School'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    EstimateTime: 42,
+    StopCountDown: 1,
+    CurrentStop: '300192',
+    DestinationStop: '300198',
+    StopSequence: 9,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:39:47+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300195',
+    StopID: '300195',
+    StopName: {
+      Zh_tw: '光明國小',
+      En: 'Guangming Elementary School'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 3,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300195',
+    StopID: '300195',
+    StopName: {
+      Zh_tw: '光明國小',
+      En: 'Guangming Elementary School'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 3,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300196',
+    StopID: '300196',
+    StopName: {
+      Zh_tw: '長榮',
+      En: 'Changrong'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 9,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: 'KKA-3656',
+    StopUID: 'THB300196',
+    StopID: '300196',
+    StopName: {
+      Zh_tw: '長榮',
+      En: 'Changrong'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    EstimateTime: 533,
+    StopCountDown: 2,
+    CurrentStop: '300192',
+    DestinationStop: '300198',
+    StopSequence: 10,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:39:47+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300197',
+    StopID: '300197',
+    StopName: {
+      Zh_tw: '長榮',
+      En: 'Changrong'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 2,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300197',
+    StopID: '300197',
+    StopName: {
+      Zh_tw: '長榮',
+      En: 'Changrong'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 2,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300198',
+    StopID: '300198',
+    StopName: {
+      Zh_tw: '庫倫街口',
+      En: 'Kulun St. Entrance'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300198',
+    StopSequence: 10,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300198',
+    StopID: '300198',
+    StopName: {
+      Zh_tw: '庫倫街口',
+      En: 'Kulun St. Entrance'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300178',
+    StopSequence: 1,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: 'KKA-3656',
+    StopUID: 'THB300198',
+    StopID: '300198',
+    StopName: {
+      Zh_tw: '庫倫街口',
+      En: 'Kulun St. Entrance'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    EstimateTime: 1927,
+    StopCountDown: 3,
+    CurrentStop: '300192',
+    DestinationStop: '300198',
+    StopSequence: 11,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:39:47+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB300198',
+    StopID: '300198',
+    StopName: {
+      Zh_tw: '庫倫街口',
+      En: 'Kulun St. Entrance'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A2',
+    SubRouteID: '0968A2',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 1,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '300174',
+    StopSequence: 1,
+    StopStatus: 3,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:40:29+08:00',
+    SrcTransTime: '2023-01-24T16:40:30+08:00',
+    UpdateTime: '2023-01-24T16:40:35+08:00'
+  },
+  {
+    PlateNumb: 'KKA-3656',
+    StopUID: 'THB300192',
+    StopID: '300192',
+    StopName: {
+      Zh_tw: '南竹南昌路口',
+      En: 'Nanjhu & Nanchang Intersection'
+    },
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB0968A1',
+    SubRouteID: '0968A1',
+    SubRouteName: {
+      Zh_tw: '0968A',
+      En: '0968A'
+    },
+    Direction: 0,
+    EstimateTime: 59,
+    StopCountDown: 1,
+    CurrentStop: '300190',
+    DestinationStop: '300198',
+    StopSequence: 8,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: true,
+    DataTime: '2023-01-24T16:39:23+08:00',
+    SrcTransTime: '2023-01-24T16:39:30+08:00',
+    UpdateTime: '2023-01-24T16:39:35+08:00'
+  }
+]
+
+export const mock1123Arrivals = [
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB182389',
+    StopID: '182389',
+    StopName: {
+      Zh_tw: '花蓮醫院',
+      En: 'Hualien Hospital'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 9,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB182444',
+    StopID: '182444',
+    StopName: {
+      Zh_tw: '海星中學',
+      En: 'Stella Maris Ursuline High School'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 19,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB182874',
+    StopID: '182874',
+    StopName: {
+      Zh_tw: '花蓮商校',
+      En: 'National Hualien Commerical High School'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 3,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB182876',
+    StopID: '182876',
+    StopName: {
+      Zh_tw: '大同市場',
+      En: 'Datong Market'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 5,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB208807',
+    StopID: '208807',
+    StopName: {
+      Zh_tw: '亞士都飯店',
+      En: 'Astar Hotel'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 11,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB208808',
+    StopID: '208808',
+    StopName: {
+      Zh_tw: '翰品酒店',
+      En: 'Chateau de Chine Hotel'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 14,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB222369',
+    StopID: '222369',
+    StopName: {
+      Zh_tw: '東大門夜市',
+      En: 'Dongdaemun Night Market'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 8,
+    StopStatus: 2,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB237391',
+    StopID: '237391',
+    StopName: {
+      Zh_tw: '臺灣企銀',
+      En: 'Taiwan Business Bank'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 6,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB237394',
+    StopID: '237394',
+    StopName: {
+      Zh_tw: '門諾醫院',
+      En: 'Mennonite Christian Hospital'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 12,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB237397',
+    StopID: '237397',
+    StopName: {
+      Zh_tw: '榮民之家',
+      En: 'Veterans Home'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 17,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB241908',
+    StopID: '241908',
+    StopName: {
+      Zh_tw: '郵政總局',
+      En: 'Chunghwa Post Co., Ltd.'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 4,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB247310',
+    StopID: '247310',
+    StopName: {
+      Zh_tw: '慈濟醫院',
+      En: 'Buddhist Tzu Chi General Hospital'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 25,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB247311',
+    StopID: '247311',
+    StopName: {
+      Zh_tw: '花蓮機場',
+      En: 'Hualien Airport'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 22,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB247312',
+    StopID: '247312',
+    StopName: {
+      Zh_tw: '美崙飯店',
+      En: 'Parkview Hotel'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 16,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB247673',
+    StopID: '247673',
+    StopName: {
+      Zh_tw: '石雕博物館',
+      En: 'Hualien Stone Sculpturing Museum'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 13,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB247674',
+    StopID: '247674',
+    StopName: {
+      Zh_tw: '中興中美路口',
+      En: 'Zhongxing Zhongmei Intersection'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 15,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB247675',
+    StopID: '247675',
+    StopName: {
+      Zh_tw: '大陳一村',
+      En: 'Dachen 1st. Village'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 18,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: 'KKB-1721',
+    StopUID: 'THB286975',
+    StopID: '286975',
+    StopName: {
+      Zh_tw: '市立圖書館',
+      En: 'City Library'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    EstimateTime: 285,
+    StopCountDown: 2,
+    CurrentStop: '247310',
+    DestinationStop: '307559',
+    StopSequence: 27,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:17+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB286977',
+    StopID: '286977',
+    StopName: {
+      Zh_tw: '家樂福',
+      En: 'Carrefour'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 20,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB286978',
+    StopID: '286978',
+    StopName: {
+      Zh_tw: '嘉里村',
+      En: 'Jiali Village'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 21,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB286979',
+    StopID: '286979',
+    StopName: {
+      Zh_tw: '市立圖書館',
+      En: 'City Library'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 2,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB286981',
+    StopID: '286981',
+    StopName: {
+      Zh_tw: '家樂福',
+      En: 'Carrefour'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 24,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB286982',
+    StopID: '286982',
+    StopName: {
+      Zh_tw: '嘉里村',
+      En: 'Jiali Village'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 23,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB286983',
+    StopID: '286983',
+    StopName: {
+      Zh_tw: '花蓮旅行社',
+      En: 'Hualien Travel Service'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 7,
+    StopStatus: 2,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB306026',
+    StopID: '306026',
+    StopName: {
+      Zh_tw: '民權 一街',
+      En: 'Minquan  1st Street'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 10,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: 'KKB-1721',
+    StopUID: 'THB307470',
+    StopID: '307470',
+    StopName: {
+      Zh_tw: '明廉國小',
+      En: 'Minglian Elementary School'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    EstimateTime: 91,
+    StopCountDown: 1,
+    CurrentStop: '247310',
+    DestinationStop: '307559',
+    StopSequence: 26,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:17+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: 'KKB-1721',
+    StopUID: 'THB307559',
+    StopID: '307559',
+    StopName: {
+      Zh_tw: '花蓮轉運站',
+      En: 'Hualien Bus Sation'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    EstimateTime: 362,
+    StopCountDown: 3,
+    CurrentStop: '247310',
+    DestinationStop: '307559',
+    StopSequence: 28,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:17+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: '-1',
+    StopUID: 'THB307560',
+    StopID: '307560',
+    StopName: {
+      Zh_tw: '花蓮轉運站',
+      En: 'Hualien Bus Sation'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    StopCountDown: 0,
+    CurrentStop: '-1',
+    DestinationStop: '307559',
+    StopSequence: 1,
+    StopStatus: 1,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:15:50+08:00',
+    SrcTransTime: '2023-01-24T17:15:52+08:00',
+    UpdateTime: '2023-01-24T17:15:55+08:00'
+  },
+  {
+    PlateNumb: 'KKB-1721',
+    StopUID: 'THB247310',
+    StopID: '247310',
+    StopName: {
+      Zh_tw: '慈濟醫院',
+      En: 'Buddhist Tzu Chi General Hospital'
+    },
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    EstimateTime: 59,
+    StopCountDown: 1,
+    CurrentStop: '286981',
+    DestinationStop: '307559',
+    StopSequence: 25,
+    StopStatus: 0,
+    MessageType: 2,
+    IsLastBus: false,
+    DataTime: '2023-01-24T17:14:24+08:00',
+    SrcTransTime: '2023-01-24T17:14:56+08:00',
+    UpdateTime: '2023-01-24T17:15:00+08:00'
+  }
+]
+
+export const mock1123StopsOfRoute = [
+  {
+    RouteUID: 'THB1123',
+    RouteID: '1123',
+    RouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Operators: [
+      {
+        OperatorID: '34',
+        OperatorName: {
+          Zh_tw: '統聯客運',
+          En: 'United Highway Bus Co., Ltd.'
+        },
+        OperatorCode: 'UnitedHighwayBus',
+        OperatorNo: '1201'
+      }
+    ],
+    SubRouteUID: 'THB112301',
+    SubRouteID: '112301',
+    SubRouteName: {
+      Zh_tw: '1123',
+      En: '1123'
+    },
+    Direction: 0,
+    Stops: [
+      {
+        StopUID: 'THB307560',
+        StopID: '307560',
+        StopName: {
+          Zh_tw: '花蓮轉運站',
+          En: 'Hualien Bus Sation'
+        },
+        StopBoarding: 1,
+        StopSequence: 1,
+        StopPosition: {
+          PositionLon: 121.603181,
+          PositionLat: 23.993063,
+          GeoHash: 'wsq2rpu9x'
+        },
+        StationID: '141890',
+        StationGroupID: '970－117',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286979',
+        StopID: '286979',
+        StopName: {
+          Zh_tw: '市立圖書館',
+          En: 'City Library'
+        },
+        StopBoarding: 0,
+        StopSequence: 2,
+        StopPosition: {
+          PositionLon: 121.60153,
+          PositionLat: 23.99003,
+          GeoHash: 'wsq2rp781'
+        },
+        StationID: '128328',
+        StationGroupID: '970－043',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB182874',
+        StopID: '182874',
+        StopName: {
+          Zh_tw: '花蓮商校',
+          En: 'National Hualien Commerical High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 3,
+        StopPosition: {
+          PositionLon: 121.601820604877,
+          PositionLat: 23.9865839026486,
+          GeoHash: 'wsq2rneez'
+        },
+        StationID: '31542',
+        StationGroupID: '970－002',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB241908',
+        StopID: '241908',
+        StopName: {
+          Zh_tw: '郵政總局',
+          En: 'Chunghwa Post Co., Ltd.'
+        },
+        StopBoarding: 0,
+        StopSequence: 4,
+        StopPosition: {
+          PositionLon: 121.603871170832,
+          PositionLat: 23.9839402952397,
+          GeoHash: 'wsq2rnjhx'
+        },
+        StationID: '35855',
+        StationGroupID: '970－006',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB182876',
+        StopID: '182876',
+        StopName: {
+          Zh_tw: '大同市場',
+          En: 'Datong Market'
+        },
+        StopBoarding: 0,
+        StopSequence: 5,
+        StopPosition: {
+          PositionLon: 121.60612266764,
+          PositionLat: 23.9810104419753,
+          GeoHash: 'wsq2rjwgs'
+        },
+        StationID: '31949',
+        StationGroupID: '970－009',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB237391',
+        StopID: '237391',
+        StopName: {
+          Zh_tw: '臺灣企銀',
+          En: 'Taiwan Business Bank'
+        },
+        StopBoarding: 0,
+        StopSequence: 6,
+        StopPosition: {
+          PositionLon: 121.60809,
+          PositionLat: 23.97852,
+          GeoHash: 'wsq2rm0m1'
+        },
+        StationID: '107924',
+        StationGroupID: '970－045',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286983',
+        StopID: '286983',
+        StopName: {
+          Zh_tw: '花蓮旅行社',
+          En: 'Hualien Travel Service'
+        },
+        StopBoarding: 0,
+        StopSequence: 7,
+        StopPosition: {
+          PositionLon: 121.61036,
+          PositionLat: 23.97565,
+          GeoHash: 'wsq2rk9uq'
+        },
+        StationID: '124069',
+        StationGroupID: '970－044',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB222369',
+        StopID: '222369',
+        StopName: {
+          Zh_tw: '東大門夜市',
+          En: 'Dongdaemun Night Market'
+        },
+        StopBoarding: 0,
+        StopSequence: 8,
+        StopPosition: {
+          PositionLon: 121.61111,
+          PositionLat: 23.97453,
+          GeoHash: 'wsq2rk6tb'
+        },
+        StationID: '32848',
+        StationGroupID: '970－012',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB182389',
+        StopID: '182389',
+        StopName: {
+          Zh_tw: '花蓮醫院',
+          En: 'Hualien Hospital'
+        },
+        StopBoarding: 0,
+        StopSequence: 9,
+        StopPosition: {
+          PositionLon: 121.61147,
+          PositionLat: 23.97987,
+          GeoHash: 'wsq2rm6ub'
+        },
+        StationID: '31863',
+        StationGroupID: '970－008',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB306026',
+        StopID: '306026',
+        StopName: {
+          Zh_tw: '民權 一街',
+          En: 'Minquan  1st Street'
+        },
+        StopBoarding: 0,
+        StopSequence: 10,
+        StopPosition: {
+          PositionLon: 121.618598,
+          PositionLat: 23.9813,
+          GeoHash: 'wsq2rmxvn'
+        },
+        StationID: '140434',
+        StationGroupID: '970－113',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB208807',
+        StopID: '208807',
+        StopName: {
+          Zh_tw: '亞士都飯店',
+          En: 'Astar Hotel'
+        },
+        StopBoarding: 0,
+        StopSequence: 11,
+        StopPosition: {
+          PositionLon: 121.62297,
+          PositionLat: 23.9845,
+          GeoHash: 'wsq2rw5pu'
+        },
+        StationID: '32165',
+        StationGroupID: '970－001',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB237394',
+        StopID: '237394',
+        StopName: {
+          Zh_tw: '門諾醫院',
+          En: 'Mennonite Christian Hospital'
+        },
+        StopBoarding: 0,
+        StopSequence: 12,
+        StopPosition: {
+          PositionLon: 121.62621,
+          PositionLat: 23.98819,
+          GeoHash: 'wsq2rwvt2'
+        },
+        StationID: '107015',
+        StationGroupID: '970－026',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB247673',
+        StopID: '247673',
+        StopName: {
+          Zh_tw: '石雕博物館',
+          En: 'Hualien Stone Sculpturing Museum'
+        },
+        StopBoarding: 0,
+        StopSequence: 13,
+        StopPosition: {
+          PositionLon: 121.62807,
+          PositionLat: 23.9901,
+          GeoHash: 'wsq2rxqb7'
+        },
+        StationID: '109586',
+        StationGroupID: '970－030',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB208808',
+        StopID: '208808',
+        StopName: {
+          Zh_tw: '翰品酒店',
+          En: 'Chateau de Chine Hotel'
+        },
+        StopBoarding: 0,
+        StopSequence: 14,
+        StopPosition: {
+          PositionLon: 121.62659,
+          PositionLat: 23.99217,
+          GeoHash: 'wsq2rxtu8'
+        },
+        StationID: '109587',
+        StationGroupID: '970－031',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB247674',
+        StopID: '247674',
+        StopName: {
+          Zh_tw: '中興中美路口',
+          En: 'Zhongxing Zhongmei Intersection'
+        },
+        StopBoarding: 0,
+        StopSequence: 15,
+        StopPosition: {
+          PositionLon: 121.62791,
+          PositionLat: 23.99372,
+          GeoHash: 'wsq2rxytx'
+        },
+        StationID: '109588',
+        StationGroupID: '970－032',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB247312',
+        StopID: '247312',
+        StopName: {
+          Zh_tw: '美崙飯店',
+          En: 'Parkview Hotel'
+        },
+        StopBoarding: 0,
+        StopSequence: 16,
+        StopPosition: {
+          PositionLon: 121.6279,
+          PositionLat: 23.99982,
+          GeoHash: 'wsq2x9n9p'
+        },
+        StationID: '108309',
+        StationGroupID: '970－028',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB237397',
+        StopID: '237397',
+        StopName: {
+          Zh_tw: '榮民之家',
+          En: 'Veterans Home'
+        },
+        StopBoarding: 0,
+        StopSequence: 17,
+        StopPosition: {
+          PositionLon: 121.61951,
+          PositionLat: 24.00296,
+          GeoHash: 'wsq2x98e7'
+        },
+        StationID: '107868',
+        StationGroupID: '970－017',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB247675',
+        StopID: '247675',
+        StopName: {
+          Zh_tw: '大陳一村',
+          En: 'Dachen 1st. Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 18,
+        StopPosition: {
+          PositionLon: 121.61869,
+          PositionLat: 24.00545,
+          GeoHash: 'wsq2xd01b'
+        },
+        StationID: '109589',
+        StationGroupID: '970－033',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB182444',
+        StopID: '182444',
+        StopName: {
+          Zh_tw: '海星中學',
+          En: 'Stella Maris Ursuline High School'
+        },
+        StopBoarding: 0,
+        StopSequence: 19,
+        StopPosition: {
+          PositionLon: 121.61407,
+          PositionLat: 24.00743,
+          GeoHash: 'wsq2x6ktm'
+        },
+        StationID: '31876',
+        StationGroupID: '971－003',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286977',
+        StopID: '286977',
+        StopName: {
+          Zh_tw: '家樂福',
+          En: 'Carrefour'
+        },
+        StopBoarding: 0,
+        StopSequence: 20,
+        StopPosition: {
+          PositionLon: 121.61051,
+          PositionLat: 24.01707,
+          GeoHash: 'wsq2xk4jd'
+        },
+        StationID: '128326',
+        StationGroupID: '971－040',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286978',
+        StopID: '286978',
+        StopName: {
+          Zh_tw: '嘉里村',
+          En: 'Jiali Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 21,
+        StopPosition: {
+          PositionLon: 121.60937,
+          PositionLat: 24.02009,
+          GeoHash: 'wsq2xk9pp'
+        },
+        StationID: '128327',
+        StationGroupID: '971－041',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB247311',
+        StopID: '247311',
+        StopName: {
+          Zh_tw: '花蓮機場',
+          En: 'Hualien Airport'
+        },
+        StopBoarding: 0,
+        StopSequence: 22,
+        StopPosition: {
+          PositionLon: 121.61384,
+          PositionLat: 24.02609,
+          GeoHash: 'wsq2xmu6p'
+        },
+        StationID: '108308',
+        StationGroupID: '971－026',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286982',
+        StopID: '286982',
+        StopName: {
+          Zh_tw: '嘉里村',
+          En: 'Jiali Village'
+        },
+        StopBoarding: 0,
+        StopSequence: 23,
+        StopPosition: {
+          PositionLon: 121.60922,
+          PositionLat: 24.01996,
+          GeoHash: 'wsq2xk9nk'
+        },
+        StationID: '128331',
+        StationGroupID: '971－041',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286981',
+        StopID: '286981',
+        StopName: {
+          Zh_tw: '家樂福',
+          En: 'Carrefour'
+        },
+        StopBoarding: 0,
+        StopSequence: 24,
+        StopPosition: {
+          PositionLon: 121.61029,
+          PositionLat: 24.01705,
+          GeoHash: 'wsq2xk1vm'
+        },
+        StationID: '128330',
+        StationGroupID: '971－040',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB247310',
+        StopID: '247310',
+        StopName: {
+          Zh_tw: '慈濟醫院',
+          En: 'Buddhist Tzu Chi General Hospital'
+        },
+        StopBoarding: 0,
+        StopSequence: 25,
+        StopPosition: {
+          PositionLon: 121.59272,
+          PositionLat: 23.99492,
+          GeoHash: 'wsq2wbjhe'
+        },
+        StationID: '108306',
+        StationGroupID: '970－027',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB307470',
+        StopID: '307470',
+        StopName: {
+          Zh_tw: '明廉國小',
+          En: 'Minglian Elementary School'
+        },
+        StopBoarding: 0,
+        StopSequence: 26,
+        StopPosition: {
+          PositionLon: 121.59514,
+          PositionLat: 23.99516,
+          GeoHash: 'wsq2wbnvu'
+        },
+        StationID: '141817',
+        StationGroupID: '970－070',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB286975',
+        StopID: '286975',
+        StopName: {
+          Zh_tw: '市立圖書館',
+          En: 'City Library'
+        },
+        StopBoarding: 0,
+        StopSequence: 27,
+        StopPosition: {
+          PositionLon: 121.60132,
+          PositionLat: 23.99008,
+          GeoHash: 'wsq2rp72k'
+        },
+        StationID: '128324',
+        StationGroupID: '970－043',
+        LocationCityCode: 'HUA'
+      },
+      {
+        StopUID: 'THB307559',
+        StopID: '307559',
+        StopName: {
+          Zh_tw: '花蓮轉運站',
+          En: 'Hualien Bus Sation'
+        },
+        StopBoarding: -1,
+        StopSequence: 28,
+        StopPosition: {
+          PositionLon: 121.603181,
+          PositionLat: 23.993063,
+          GeoHash: 'wsq2rpu9x'
+        },
+        StationID: '141889',
+        StationGroupID: '970－117',
+        LocationCityCode: 'HUA'
+      }
+    ],
+    UpdateTime: '2023-01-24T05:20:50+08:00',
+    VersionID: 1520
+  }
+]

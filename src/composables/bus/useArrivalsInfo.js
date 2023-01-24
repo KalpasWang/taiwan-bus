@@ -30,6 +30,9 @@ export function useArrivalsInfo(routeName, city) {
     // 對每一個站牌做排序
     timeForward.sort(generateSortingFn(stopsOfRoute, 'forward'))
     timeBackward.sort(generateSortingFn(stopsOfRoute, 'backward'))
+    // timeForward.forEach((item) => console.log(item.StopSequence))
+    // console.log(timeForward[24])
+    // console.log(timeForward[25])
     // set state
     state.arrivalsInfo.forward = timeForward
     state.arrivalsInfo.backward = timeBackward
