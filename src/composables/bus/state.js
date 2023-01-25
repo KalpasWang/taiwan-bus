@@ -3,6 +3,8 @@ import { reactive } from 'vue'
 export const state = reactive({
   routeName: '',
   routeID: '',
+  subRouteName: '',
+  subRouteID: '',
   city: null,
   routes: [],
   arrivalsInfo: {

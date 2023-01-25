@@ -1,14 +1,15 @@
 import { reactive } from 'vue'
 import { api, fetchEstimatedTimeOfArrival, fetchStopsOfRoute } from '../api'
 import { state } from './state'
-// import { filterRouteName } from './utilities'
+import { filterSubRoutes, filterDirection } from '../utilities'
 
 /**
  * 使用可以取得公車預估到站資料的函式
  * @param  {string} routeName - 路線名稱
- * @param  {string} city - 室內公車須輸入縣市名稱，如果是客運就不用傳入參數
+ * @param  {string} [city] - 室內公車須輸入縣市名稱，如果是客運就不傳入參數或是 null
+ * @param  {string} [subRouteName] - 子路線名稱，如果要的是子路線
  */
-export function useArrivalsInfo(routeName, city) {
+export function useArrivalsInfo(routeName, city, subRouteName) {
   const arrivalsInfo = reactive({
     forwards: [],
     backwards: []
@@ -17,25 +18,69 @@ export function useArrivalsInfo(routeName, city) {
   // 取得指定[路線名稱]與[縣市]的室內公車或公路客運預估到站資料
   async function fetchBusArrivalTime(routeName, city) {
     // 取得預估時間資料
-    const [timeForward, timeBackward] = await fetchEstimatedTimeOfArrival(
-      routeName,
-      city
-    )
+    const arrivalsData = await fetchEstimatedTimeOfArrival(routeName, city)
+    const [timeForward, timeBackward] = cleanUpArrivalsData(arrivalsData)
     // 取得站序資料
-    const stopsOfRoute = await fetchStopsOfRoute(routeName, city)
-    // console.log(timeForward.length)
-    // console.log(timeBackward.length)
-    // console.log(stopsOfRoute.forward.Stops.length)
-    // console.log(stopsOfRoute.backward.Stops.length)
+    const stopsData = await fetchStopsOfRoute(routeName, city)
+    const stopsOfRoute = cleanUpStopsOfRoute(stopsData)
     // 對每一個站牌做排序
     timeForward.sort(generateSortingFn(stopsOfRoute, 'forward'))
     timeBackward.sort(generateSortingFn(stopsOfRoute, 'backward'))
-    // timeForward.forEach((item) => console.log(item.StopSequence))
-    // console.log(timeForward[24])
-    // console.log(timeForward[25])
-    // set state
     state.arrivalsInfo.forward = timeForward
     state.arrivalsInfo.backward = timeBackward
+  }
+
+  // 預估到站資料的過濾與排序
+  function cleanUpArrivalsData(arrivalsData) {
+    if (arrivalsData[0].SubRouteID) {
+      const filterName = subRouteName || routeName
+      arrivalsData = filterSubRoutes(filterName, arrivalsData)
+    }
+    const [forward, backward] = filterDirection(arrivalsData)
+    if (forward.length === 0 && backward.length === 0) {
+      throw new Error('找不到此公車路線')
+    }
+    state.routeName = routeName
+    state.arrivalsInfo.forward = forward
+    state.arrivalsInfo.backward = backward
+    if (subRouteName) state.subRouteName = subRouteName
+    return [forward, backward]
+  }
+
+  function cleanUpStopsOfRoute(stopsData) {
+    const filterName = subRouteName || routeName
+    // 過濾要的路線/子路線
+    let filteredStopsData = filterSubRoutes(filterName, stopsData)
+    // 如果沒有過濾出此路線，找出最多站牌的路線
+    if (filteredStopsData.length === 0) {
+      let maxStopsLength = 0
+      let maxStopsRoute
+      let anotherDirection = null
+      stopsData.forEach((item) => {
+        if (item.Stops.length > maxStopsLength) {
+          maxStopsLength = item.Stops.length
+          maxStopsRoute = item
+        }
+      })
+      // 尋找另一方向的路線
+      anotherDirection = stopsData.find((item) => {
+        if (
+          maxStopsRoute.SubRouteName.Zh_tw === item.SubRouteName.Zh_tw &&
+          maxStopsRoute.Direction !== item.Direction
+        ) {
+          return true
+        }
+      })
+      filteredStopsData = [maxStopsRoute, anotherDirection]
+    }
+    const [forward, backward] = filterDirection(filteredStopsData)
+    filteredStopsData = {
+      forward: forward[0],
+      backward: backward[0]
+    }
+    state.routeName = routeName
+    state.stopsOfRoute = filteredStopsData
+    return filteredStopsData
   }
 
   // sorting callback for time array
@@ -73,7 +118,7 @@ export function useArrivalsInfo(routeName, city) {
     // 取得路線上的所有行駛中公車
     const res = await api.get(`${url}/${routeName}`)
     // 過濾路線名稱不一致的資料
-    const busData = filterRouteName(routeName, res.data)
+    const busData = filterRouteName(routeName, stopsData)
     if (!busData && !busData[0]) {
       return
     }
@@ -108,7 +153,7 @@ export function useArrivalsInfo(routeName, city) {
         $filter: `PlateNumb eq '${plate}'`
       }
     })
-    const bus = res.data[0]
+    const bus = stopsData[0]
     if (bus && bus.VehicleType > 0 && bus.VehicleType < 3) {
       return true
     }
