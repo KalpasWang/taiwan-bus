@@ -8,8 +8,19 @@ import {
   mock1123Arrivals,
   mock1123StopsOfRoute
 } from '@/composables/constants'
-import { getCityCode } from '../../../src/composables/utilities'
-import { api } from '../../../src/composables/api'
+import {
+  fetchEstimatedTimeOfArrival,
+  fetchStopsOfRoute
+} from '../../../src/composables/api'
+
+vi.mock('../../../src/composables/api', async () => {
+  const mod = await vi.importActual('../../../src/composables/api')
+  return {
+    ...mod,
+    fetchEstimatedTimeOfArrival: vi.fn(),
+    fetchStopsOfRoute: vi.fn()
+  }
+})
 
 const cityRouteName = '綠1'
 const city = 'Taipei'
@@ -19,14 +30,8 @@ const oneDirectionIntercityRouteName = '1123'
 describe('useArrivalsInfo function', () => {
   it('可以取得市區公車(台北市 綠1 無 StopSequence)的預估到站時間資料', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(cityRouteName, city)
-    api.get = vi
-      .fn()
-      .mockResolvedValueOnce({
-        data: mockG1Arrivals
-      })
-      .mockResolvedValueOnce({
-        data: mockG1StopsOfRoute
-      })
+    fetchEstimatedTimeOfArrival.mockResolvedValueOnce(mockG1Arrivals)
+    fetchStopsOfRoute.mockResolvedValueOnce(mockG1StopsOfRoute)
     await fetchNewArrivalsInfo()
 
     state.arrivalsInfo.forward.forEach((item, i) => {
@@ -43,14 +48,8 @@ describe('useArrivalsInfo function', () => {
 
   it('可以取得公路客運(0968 有 StopSequence)的預估到站時間資料', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(intercityRouteName)
-    api.get = vi
-      .fn()
-      .mockResolvedValueOnce({
-        data: mock0968Arrivals
-      })
-      .mockResolvedValueOnce({
-        data: mock0968StopsOfRoute
-      })
+    fetchEstimatedTimeOfArrival.mockReturnValueOnce(mock0968Arrivals)
+    fetchStopsOfRoute.mockReturnValueOnce(mock0968StopsOfRoute)
     await fetchNewArrivalsInfo()
 
     state.arrivalsInfo.forward.forEach((item, i) => {
@@ -71,14 +70,8 @@ describe('useArrivalsInfo function', () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(
       oneDirectionIntercityRouteName
     )
-    api.get = vi
-      .fn()
-      .mockResolvedValueOnce({
-        data: mock1123Arrivals
-      })
-      .mockResolvedValueOnce({
-        data: mock1123StopsOfRoute
-      })
+    fetchEstimatedTimeOfArrival.mockReturnValueOnce(mock1123Arrivals)
+    fetchStopsOfRoute.mockReturnValueOnce(mock1123StopsOfRoute)
     await fetchNewArrivalsInfo()
 
     expect(state.arrivalsInfo.forward.length).toBe(mock1123Arrivals.length)
@@ -88,4 +81,6 @@ describe('useArrivalsInfo function', () => {
     })
     expect(state.arrivalsInfo.backward.length).toBe(0)
   })
+
+  it('可以取得市區公車路線上的公車資料', async () => {})
 })

@@ -16,7 +16,7 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
   })
 
   // 取得指定[路線名稱]與[縣市]的室內公車或公路客運預估到站資料
-  async function fetchBusArrivalTime(routeName, city) {
+  async function fetchBusArrivalTime() {
     // 取得預估時間資料
     const arrivalsData = await fetchEstimatedTimeOfArrival(routeName, city)
     const [timeForward, timeBackward] = cleanUpArrivalsData(arrivalsData)
@@ -109,7 +109,7 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
   }
 
   // 取得指定[路線名稱]的公車動態最接近站牌資料
-  async function fetchBusNearStop(routeName, city) {
+  async function fetchBusNearStop() {
     // 設定要 fetch 的網址
     let url = `RealTimeNearStop/City/${city}`
     if (!city) {
@@ -153,7 +153,7 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
         $filter: `PlateNumb eq '${plate}'`
       }
     })
-    const bus = stopsData[0]
+    const bus = res.data[0]
     if (bus && bus.VehicleType > 0 && bus.VehicleType < 3) {
       return true
     }
@@ -161,8 +161,8 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
   }
 
   const fetchNewArrivalsInfo = async () => {
-    await fetchBusArrivalTime(routeName, city)
-    // await fetchBusNearStop(routeName, city)
+    await fetchBusArrivalTime()
+    // await fetchBusNearStop()
   }
 
   return { arrivalsInfo, fetchNewArrivalsInfo }
