@@ -3,14 +3,19 @@ import { state, useArrivalsInfo } from '@/composables/bus'
 import {
   mockG1Arrivals,
   mockG1StopsOfRoute,
+  mockG1NearStops,
   mock0968Arrivals,
   mock0968StopsOfRoute,
   mock1123Arrivals,
-  mock1123StopsOfRoute
+  mock1123StopsOfRoute,
+  mockBusTypeNormal,
+  mockBusTypeBarrierFree
 } from '@/composables/constants'
 import {
   fetchEstimatedTimeOfArrival,
-  fetchStopsOfRoute
+  fetchStopsOfRoute,
+  fetchRealTimeNearStops,
+  fetchVehicle
 } from '../../../src/composables/api'
 
 vi.mock('../../../src/composables/api', async () => {
@@ -18,7 +23,9 @@ vi.mock('../../../src/composables/api', async () => {
   return {
     ...mod,
     fetchEstimatedTimeOfArrival: vi.fn(),
-    fetchStopsOfRoute: vi.fn()
+    fetchStopsOfRoute: vi.fn(),
+    fetchRealTimeNearStops: vi.fn(),
+    fetchVehicle: vi.fn()
   }
 })
 
@@ -82,5 +89,21 @@ describe('useArrivalsInfo function', () => {
     expect(state.arrivalsInfo.backward.length).toBe(0)
   })
 
-  it('可以取得市區公車路線上的公車資料', async () => {})
+  it.only('可以取得市區公車路線上的即時公車資料', async () => {
+    const { fetchNewArrivalsInfo } = useArrivalsInfo(cityRouteName, city)
+    fetchEstimatedTimeOfArrival.mockResolvedValueOnce(mockG1Arrivals)
+    fetchStopsOfRoute.mockResolvedValueOnce(mockG1StopsOfRoute)
+    fetchRealTimeNearStops.mockResolvedValueOnce(mockG1NearStops)
+    fetchVehicle
+      .mockResolvedValueOnce(mockBusTypeBarrierFree)
+      .mockResolvedValue(mockBusTypeNormal)
+    await fetchNewArrivalsInfo()
+
+    const stops = state.arrivalsInfo.forward.filter(
+      (stop) => stop.PlateNumb !== '-1'
+    )
+    stops.forEach((stop, i) => {
+      expect(stop.PlateNumb).toBe(mockG1NearStops[i].PlateNumb)
+    })
+  })
 })

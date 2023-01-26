@@ -8986,6 +8986,279 @@ export const mockG1StopsOfRoute = [
   }
 ]
 
+export const mockG1NearStops = [
+  {
+    PlateNumb: '225-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 0,
+    StopUID: 'TPE16891',
+    StopID: '16891',
+    StopName: {
+      Zh_tw: '政大',
+      En: 'National Chengchi U.'
+    },
+    StopSequence: 22,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 1,
+    GPSTime: '2023-01-26T18:45:25+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '228-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE10142',
+    SubRouteID: '10142',
+    SubRouteName: {
+      Zh_tw: '綠1調度站發車',
+      En: 'G1'
+    },
+    Direction: 0,
+    StopUID: 'TPE16873',
+    StopID: '16873',
+    StopName: {
+      Zh_tw: '寶高產業園區',
+      En: 'Baogao Science and Intellectual Park'
+    },
+    StopSequence: 30,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 1,
+    GPSTime: '2023-01-26T18:46:07+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '229-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE10142',
+    SubRouteID: '10142',
+    SubRouteName: {
+      Zh_tw: '綠1調度站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    StopUID: 'TPE16917',
+    StopID: '16917',
+    StopName: {
+      Zh_tw: '興雅國中',
+      En: 'Xingya Junior High School'
+    },
+    StopSequence: 2,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 0,
+    GPSTime: '2023-01-26T18:46:15+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '293-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE10142',
+    SubRouteID: '10142',
+    SubRouteName: {
+      Zh_tw: '綠1調度站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    StopUID: 'TPE16987',
+    StopID: '16987',
+    StopName: {
+      Zh_tw: '光華新村(安康路)',
+      En: 'Guanghua New Village(Ankang Rd.)'
+    },
+    StopSequence: 39,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 1,
+    GPSTime: '2023-01-26T18:46:20+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '295-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    StopUID: 'TPE16951',
+    StopID: '16951',
+    StopName: {
+      Zh_tw: '木新市場',
+      En: 'Muxin Market'
+    },
+    StopSequence: 20,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 1,
+    GPSTime: '2023-01-26T18:46:15+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '296-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 0,
+    StopUID: 'TPE16857',
+    StopID: '16857',
+    StopName: {
+      Zh_tw: '檳榔路',
+      En: 'Binlang Rd.'
+    },
+    StopSequence: 3,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 0,
+    GPSTime: '2023-01-26T18:46:18+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '298-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE10142',
+    SubRouteID: '10142',
+    SubRouteName: {
+      Zh_tw: '綠1調度站發車',
+      En: 'G1'
+    },
+    Direction: 0,
+    StopUID: 'TPE57416',
+    StopID: '57416',
+    StopName: {
+      Zh_tw: '風動石',
+      En: 'Fengdongshi'
+    },
+    StopSequence: 49,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 0,
+    GPSTime: '2023-01-26T18:40:33+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '475-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    StopUID: 'TPE16939',
+    StopID: '16939',
+    StopName: {
+      Zh_tw: '木南公園',
+      En: 'Munan Park'
+    },
+    StopSequence: 14,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 0,
+    GPSTime: '2023-01-26T18:46:28+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  },
+  {
+    PlateNumb: '476-FZ',
+    OperatorID: '100',
+    RouteUID: 'TPE10142',
+    RouteID: '10142',
+    RouteName: {
+      Zh_tw: '綠1',
+      En: 'G1'
+    },
+    SubRouteUID: 'TPE157758',
+    SubRouteID: '157758',
+    SubRouteName: {
+      Zh_tw: '綠1捷運新店站發車',
+      En: 'G1'
+    },
+    Direction: 1,
+    StopUID: 'TPE16969',
+    StopID: '16969',
+    StopName: {
+      Zh_tw: '捷運新店區公所站(北新)',
+      En: 'MRT Hsintien City Hall Station'
+    },
+    StopSequence: 29,
+    DutyStatus: 1,
+    BusStatus: 0,
+    A2EventType: 1,
+    GPSTime: '2023-01-26T18:46:01+08:00',
+    SrcUpdateTime: '2023-01-26T18:46:30+08:00',
+    UpdateTime: '2023-01-26T18:46:35+08:00'
+  }
+]
+
 export const mock0968StopsOfRoute = [
   {
     RouteUID: 'THB0968',
@@ -13593,5 +13866,25 @@ export const mock1123StopsOfRoute = [
     ],
     UpdateTime: '2023-01-24T05:20:50+08:00',
     VersionID: 1520
+  }
+]
+
+export const mockBusTypeNormal = [
+  {
+    PlateNumb: '225-FZ',
+    OperatorCode: '',
+    VehicleType: 0,
+    HasLiftOrRamp: false,
+    UpdateTime: '2019-01-18T16:38:45+08:00'
+  }
+]
+
+export const mockBusTypeBarrierFree = [
+  {
+    PlateNumb: '225-FZ',
+    OperatorCode: '',
+    VehicleType: 1,
+    HasLiftOrRamp: false,
+    UpdateTime: '2019-01-18T16:38:45+08:00'
   }
 ]

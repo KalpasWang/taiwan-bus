@@ -133,6 +133,25 @@ export async function fetchEstimatedTimeOfArrival(routeName, city) {
 }
 
 /**
+ * 取得指定[縣市][路線名稱]的市區公車或公路客運的動態定點資料
+ * @param  {string} routeName - 公車路線的中文名稱
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
+ */
+export async function fetchRealTimeNearStops(routeName, city) {
+  // 設定要 fetch 的網址
+  let url = `RealTimeNearStop/City/${city}`
+  if (!city || city === 'intercity') {
+    url = `RealTimeNearStop/InterCity`
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `RouteName/Zh_tw eq '${routeName}'`
+    }
+  })
+  return res.data
+}
+
+/**
  * 取得指定[縣市]的市區公車或公路客運站位資料
  * @param  {string} id - station id
  * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線

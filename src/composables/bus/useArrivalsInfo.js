@@ -162,7 +162,7 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
 
   const fetchNewArrivalsInfo = async () => {
     await fetchBusArrivalTime()
-    // await fetchBusNearStop()
+    await fetchBusNearStop()
   }
 
   return { arrivalsInfo, fetchNewArrivalsInfo }
