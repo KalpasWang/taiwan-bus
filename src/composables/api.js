@@ -152,6 +152,25 @@ export async function fetchRealTimeNearStops(routeName, city) {
 }
 
 /**
+ * 取得指定[縣市][車牌號碼]的市區公車或公路客運的公車車輛資料
+ * @param  {string} plateNumb - 指定的車牌號碼
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
+ */
+export async function fetchVehicle(plateNumb, city) {
+  // 設定要 fetch 的網址
+  let url = `Vehicle/City/${city}`
+  if (!city || city === 'intercity') {
+    url = `Vehicle/InterCity`
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `PlateNumb eq '${plateNumb}'`
+    }
+  })
+  return res.data
+}
+
+/**
  * 取得指定[縣市]的市區公車或公路客運站位資料
  * @param  {string} id - station id
  * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線

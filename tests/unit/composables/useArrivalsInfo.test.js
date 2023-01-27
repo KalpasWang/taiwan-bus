@@ -71,7 +71,7 @@ describe('useArrivalsInfo function', () => {
     })
   })
 
-  it('若是無此路線會顯示', () => {})
+  it('若是無此路線會拋出錯誤', () => {})
 
   it('若是此路線只有單向資料(1123)也可以運作', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(
@@ -89,7 +89,7 @@ describe('useArrivalsInfo function', () => {
     expect(state.arrivalsInfo.backward.length).toBe(0)
   })
 
-  it.only('可以取得市區公車路線上的即時公車資料', async () => {
+  it('可以取得市區公車路線上的即時公車資料', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(cityRouteName, city)
     fetchEstimatedTimeOfArrival.mockResolvedValueOnce(mockG1Arrivals)
     fetchStopsOfRoute.mockResolvedValueOnce(mockG1StopsOfRoute)
@@ -100,10 +100,15 @@ describe('useArrivalsInfo function', () => {
     await fetchNewArrivalsInfo()
 
     const stops = state.arrivalsInfo.forward.filter(
-      (stop) => stop.PlateNumb !== '-1'
+      (stop) => stop.PlateNumb && stop.PlateNumb !== '-1'
     )
+    let accessibleTimes = 0
     stops.forEach((stop, i) => {
-      expect(stop.PlateNumb).toBe(mockG1NearStops[i].PlateNumb)
+      const found = mockG1NearStops.find((item) => item.StopID === stop.StopID)
+      expect(stop.PlateNumb).toBe(found.PlateNumb)
+      expect(stop.HasBus).toBe(true)
+      accessibleTimes += stop.Accessible
     })
+    expect(accessibleTimes).toBe(1)
   })
 })
