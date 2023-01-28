@@ -71,8 +71,6 @@ describe('useArrivalsInfo function', () => {
     })
   })
 
-  it('若是無此路線會拋出錯誤', () => {})
-
   it('若是此路線只有單向資料(1123)也可以運作', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(
       oneDirectionIntercityRouteName
@@ -111,4 +109,47 @@ describe('useArrivalsInfo function', () => {
     })
     expect(accessibleTimes).toBe(1)
   })
+
+  it('可以取得公路客運的子路線(0968A)的預估到站時間', async () => {
+    const { fetchNewArrivalsInfo } = useArrivalsInfo(
+      intercityRouteName,
+      null,
+      '0968A'
+    )
+    fetchEstimatedTimeOfArrival.mockReturnValueOnce(mock0968Arrivals)
+    fetchStopsOfRoute.mockReturnValueOnce(mock0968StopsOfRoute)
+    await fetchNewArrivalsInfo()
+
+    // 驗證數目
+    let expected = mock0968Arrivals.filter(
+      (item) => item.Direction === 0 && item.SubRouteName.Zh_tw === '0968A'
+    )
+    expect(state.arrivalsInfo.forward.length).toBe(expected.length)
+    expected = mock0968Arrivals.filter(
+      (item) => item.Direction === 1 && item.SubRouteName.Zh_tw === '0968A'
+    )
+    expect(state.arrivalsInfo.backward.length).toBe(expected.length)
+
+    // 驗證路線方向與名稱，以及排列順序
+    let prevNum = 0
+    state.arrivalsInfo.forward.forEach((item) => {
+      expect(item.Direction).toBe(0)
+      expect(item.RouteName.Zh_tw).toBe(intercityRouteName)
+      expect(item.SubRouteName.Zh_tw).toBe('0968A')
+      expect(item.StopSequence).toBeGreaterThanOrEqual(prevNum)
+      prevNum = item.StopSequence
+    })
+    prevNum = 0
+    state.arrivalsInfo.backward.forEach((item) => {
+      expect(item.Direction).toBe(1)
+      expect(item.RouteName.Zh_tw).toBe(intercityRouteName)
+      expect(item.SubRouteName.Zh_tw).toBe('0968A')
+      expect(item.StopSequence).toBeGreaterThanOrEqual(prevNum)
+      prevNum = item.StopSequence
+    })
+  })
+
+  it('可以取得公路客運的子路線(0968A)的即時公車資料')
+
+  it('若是無此路線會拋出錯誤', () => {})
 })
