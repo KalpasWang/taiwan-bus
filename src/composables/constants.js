@@ -12397,6 +12397,73 @@ export const mock0968Arrivals = [
   }
 ]
 
+export const mock0968NearStops = [
+  {
+    PlateNumb: '396-FQ',
+    OperatorID: '35',
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096801',
+    SubRouteID: '096801',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 0,
+    StopUID: 'THB300196',
+    StopID: '300196',
+    StopName: {
+      Zh_tw: '長榮',
+      En: 'Changrong'
+    },
+    StopSequence: 9,
+    MessageType: 2,
+    DutyStatus: 0,
+    BusStatus: 0,
+    A2EventType: 0,
+    GPSTime: '2023-01-29T14:45:42+08:00',
+    SrcRecTime: '2023-01-29T14:45:43+08:00',
+    SrcTransTime: '2023-01-29T14:45:43+08:00',
+    UpdateTime: '2023-01-29T14:45:45+08:00'
+  },
+  {
+    PlateNumb: 'KKA-5638',
+    OperatorID: '16',
+    RouteUID: 'THB0968',
+    RouteID: '0968',
+    RouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    SubRouteUID: 'THB096802',
+    SubRouteID: '096802',
+    SubRouteName: {
+      Zh_tw: '0968',
+      En: '0968'
+    },
+    Direction: 1,
+    StopUID: 'THB300198',
+    StopID: '300198',
+    StopName: {
+      Zh_tw: '庫倫街口',
+      En: 'Kulun St. Entrance'
+    },
+    StopSequence: 1,
+    MessageType: 2,
+    DutyStatus: 0,
+    BusStatus: 0,
+    A2EventType: 0,
+    GPSTime: '2023-01-29T14:41:17+08:00',
+    SrcRecTime: '2023-01-29T14:41:18+08:00',
+    SrcTransTime: '2023-01-29T14:41:18+08:00',
+    UpdateTime: '2023-01-29T14:41:20+08:00'
+  }
+]
+
 export const mock1123Arrivals = [
   {
     PlateNumb: '-1',

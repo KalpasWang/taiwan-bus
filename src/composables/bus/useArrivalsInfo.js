@@ -1,4 +1,3 @@
-import { reactive } from 'vue'
 import {
   api,
   fetchEstimatedTimeOfArrival,
@@ -16,15 +15,13 @@ import { filterSubRoutes, filterDirection } from '../utilities'
  * @param  {string} [subRouteName] - 子路線名稱，如果要的是子路線
  */
 export function useArrivalsInfo(routeName, city, subRouteName) {
-  const arrivalsInfo = reactive({
-    forwards: [],
-    backwards: []
-  })
-
   // 取得指定[路線名稱]與[縣市]的室內公車或公路客運預估到站資料
   async function fetchBusArrivalTime() {
     // 取得預估時間資料
     const arrivalsData = await fetchEstimatedTimeOfArrival(routeName, city)
+    if (arrivalsData.length === 0) {
+      throw new Error(`沒有 ${subRouteName || routeName} 這個路線名稱`)
+    }
     const [timeForward, timeBackward] = cleanUpArrivalsData(arrivalsData)
     // 取得站序資料
     const stopsData = await fetchStopsOfRoute(routeName, city)
@@ -53,31 +50,14 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     return [forward, backward]
   }
 
+  // 路線站牌資料的過濾與處理
   function cleanUpStopsOfRoute(stopsData) {
     const filterName = subRouteName || routeName
     // 過濾要的路線/子路線
     let filteredStopsData = filterSubRoutes(filterName, stopsData)
     // 如果沒有過濾出此路線，找出最多站牌的路線
     if (filteredStopsData.length === 0) {
-      let maxStopsLength = 0
-      let maxStopsRoute
-      let anotherDirection = null
-      stopsData.forEach((item) => {
-        if (item.Stops.length > maxStopsLength) {
-          maxStopsLength = item.Stops.length
-          maxStopsRoute = item
-        }
-      })
-      // 尋找另一方向的路線
-      anotherDirection = stopsData.find((item) => {
-        if (
-          maxStopsRoute.SubRouteName.Zh_tw === item.SubRouteName.Zh_tw &&
-          maxStopsRoute.Direction !== item.Direction
-        ) {
-          return true
-        }
-      })
-      filteredStopsData = [maxStopsRoute, anotherDirection]
+      filteredStopsData = findRouteHasMaxStops(stopsData)
     }
     const [forward, backward] = filterDirection(filteredStopsData)
     filteredStopsData = {
@@ -114,12 +94,48 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     }
   }
 
+  // 找出最多站牌的路線
+  function findRouteHasMaxStops(stopsData) {
+    let maxStopsLength = 0
+    let maxStopsRoute
+    let anotherDirection = null
+    stopsData.forEach((item) => {
+      if (item.Stops.length > maxStopsLength) {
+        maxStopsLength = item.Stops.length
+        maxStopsRoute = item
+      }
+    })
+    // 尋找另一方向的路線
+    anotherDirection = stopsData.find((item) => {
+      if (
+        maxStopsRoute.SubRouteName.Zh_tw === item.SubRouteName.Zh_tw &&
+        maxStopsRoute.Direction !== item.Direction
+      ) {
+        return true
+      }
+    })
+    return [maxStopsRoute, anotherDirection]
+  }
+
   // 取得指定[路線名稱]的公車動態最接近站牌資料
   async function fetchBusNearStop() {
+    clearAllBusInfo()
     // fetch
-    const stopsHasBus = await fetchRealTimeNearStops(routeName, city)
+    let stopsHasBus = await fetchRealTimeNearStops(routeName, city)
     if (!stopsHasBus || !stopsHasBus[0]) {
       return
+    }
+    // 過濾出所要的子路線公車資料
+    const filterName = subRouteName || routeName
+    let filteredStopsHasBus = filterSubRoutes(filterName, stopsHasBus)
+    if (filteredStopsHasBus.length > 0) {
+      stopsHasBus = filteredStopsHasBus
+    } else {
+      // 如果沒有所要的路線的公車資料
+      // 確認是否此路線與所要的路線名稱不一樣
+      const currentName = state.arrivalsInfo.forward.at(0)?.SubRouteName?.Zh_tw
+      const useAll = currentName ? currentName !== filterName : true
+      stopsHasBus = useAll ? stopsHasBus : []
     }
     const [forwards, backwards] = filterDirection(stopsHasBus)
     const promises = []
@@ -130,6 +146,15 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
       promises.push(addBusInfoToStop(stop, 'backward'))
     })
     await Promise.all(promises)
+  }
+
+  function clearAllBusInfo() {
+    function fn(stop) {
+      stop.HasBus = false
+      stop.PlateNumb = '-1'
+    }
+    state.arrivalsInfo.forward.forEach(fn)
+    state.arrivalsInfo.backward.forEach(fn)
   }
 
   async function addBusInfoToStop(stopHasBus, direction) {
@@ -149,5 +174,5 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     await fetchBusNearStop()
   }
 
-  return { arrivalsInfo, fetchNewArrivalsInfo }
+  return { fetchNewArrivalsInfo }
 }

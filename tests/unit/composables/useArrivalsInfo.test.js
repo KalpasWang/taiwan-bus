@@ -6,6 +6,7 @@ import {
   mockG1NearStops,
   mock0968Arrivals,
   mock0968StopsOfRoute,
+  mock0968NearStops,
   mock1123Arrivals,
   mock1123StopsOfRoute,
   mockBusTypeNormal,
@@ -71,23 +72,7 @@ describe('useArrivalsInfo function', () => {
     })
   })
 
-  it('若是此路線只有單向資料(1123)也可以運作', async () => {
-    const { fetchNewArrivalsInfo } = useArrivalsInfo(
-      oneDirectionIntercityRouteName
-    )
-    fetchEstimatedTimeOfArrival.mockReturnValueOnce(mock1123Arrivals)
-    fetchStopsOfRoute.mockReturnValueOnce(mock1123StopsOfRoute)
-    await fetchNewArrivalsInfo()
-
-    expect(state.arrivalsInfo.forward.length).toBe(mock1123Arrivals.length)
-    state.arrivalsInfo.forward.forEach((item, i) => {
-      expect(item.Direction).toBe(0)
-      expect(item.RouteName.Zh_tw).toBe(oneDirectionIntercityRouteName)
-    })
-    expect(state.arrivalsInfo.backward.length).toBe(0)
-  })
-
-  it('可以取得市區公車路線上的即時公車資料', async () => {
+  it('可以取得市區公車路(綠1)線上的即時公車資料', async () => {
     const { fetchNewArrivalsInfo } = useArrivalsInfo(cityRouteName, city)
     fetchEstimatedTimeOfArrival.mockResolvedValueOnce(mockG1Arrivals)
     fetchStopsOfRoute.mockResolvedValueOnce(mockG1StopsOfRoute)
@@ -100,14 +85,34 @@ describe('useArrivalsInfo function', () => {
     const stops = state.arrivalsInfo.forward.filter(
       (stop) => stop.PlateNumb && stop.PlateNumb !== '-1'
     )
-    let accessibleTimes = 0
+    let accessibleCount = 0
     stops.forEach((stop, i) => {
-      const found = mockG1NearStops.find((item) => item.StopID === stop.StopID)
+      const found = mockG1NearStops.find(
+        (item) => item.StopID === stop.StopID && item.Direction === 0
+      )
       expect(stop.PlateNumb).toBe(found.PlateNumb)
       expect(stop.HasBus).toBe(true)
-      accessibleTimes += stop.Accessible
+      accessibleCount += stop.Accessible
     })
-    expect(accessibleTimes).toBe(1)
+    expect(accessibleCount).toBe(1)
+  })
+
+  it('可以取得公路客運(0968)的即時公車資料', async () => {
+    const { fetchNewArrivalsInfo } = useArrivalsInfo(intercityRouteName)
+    fetchEstimatedTimeOfArrival.mockResolvedValueOnce(mock0968Arrivals)
+    fetchStopsOfRoute.mockResolvedValueOnce(mock0968StopsOfRoute)
+    fetchRealTimeNearStops.mockResolvedValueOnce(mock0968NearStops)
+    fetchVehicle.mockResolvedValue(mockBusTypeNormal)
+    await fetchNewArrivalsInfo()
+
+    let stops = state.arrivalsInfo.forward.filter(
+      (stop) => stop.PlateNumb && stop.PlateNumb !== '-1'
+    )
+    expect(stops.length).toBe(1)
+    stops = state.arrivalsInfo.backward.filter(
+      (stop) => stop.PlateNumb && stop.PlateNumb !== '-1'
+    )
+    expect(stops.length).toBe(1)
   })
 
   it('可以取得公路客運的子路線(0968A)的預估到站時間', async () => {
@@ -149,7 +154,47 @@ describe('useArrivalsInfo function', () => {
     })
   })
 
-  it('可以取得公路客運的子路線(0968A)的即時公車資料')
+  it('可以取得公路客運的子路線(0968A)的即時公車資料', async () => {
+    const { fetchNewArrivalsInfo } = useArrivalsInfo(
+      intercityRouteName,
+      null,
+      '0968A'
+    )
+    fetchEstimatedTimeOfArrival.mockResolvedValueOnce(mock0968Arrivals)
+    fetchStopsOfRoute.mockResolvedValueOnce(mock0968StopsOfRoute)
+    fetchRealTimeNearStops.mockResolvedValueOnce(mock0968NearStops)
+    fetchVehicle.mockResolvedValue(mockBusTypeNormal)
+    await fetchNewArrivalsInfo()
 
-  it('若是無此路線會拋出錯誤', () => {})
+    let stops = state.arrivalsInfo.forward.filter(
+      (stop) => stop.PlateNumb && stop.PlateNumb !== '-1'
+    )
+    expect(stops.length).toBe(0)
+    stops = state.arrivalsInfo.backward.filter(
+      (stop) => stop.PlateNumb && stop.PlateNumb !== '-1'
+    )
+    expect(stops.length).toBe(0)
+  })
+
+  it('若是此路線只有單向資料(1123)也可以運作', async () => {
+    const { fetchNewArrivalsInfo } = useArrivalsInfo(
+      oneDirectionIntercityRouteName
+    )
+    fetchEstimatedTimeOfArrival.mockReturnValueOnce(mock1123Arrivals)
+    fetchStopsOfRoute.mockReturnValueOnce(mock1123StopsOfRoute)
+    await fetchNewArrivalsInfo()
+
+    expect(state.arrivalsInfo.forward.length).toBe(mock1123Arrivals.length)
+    state.arrivalsInfo.forward.forEach((item, i) => {
+      expect(item.Direction).toBe(0)
+      expect(item.RouteName.Zh_tw).toBe(oneDirectionIntercityRouteName)
+    })
+    expect(state.arrivalsInfo.backward.length).toBe(0)
+  })
+
+  it('若是無此路線會拋出錯誤', async () => {
+    const { fetchNewArrivalsInfo } = useArrivalsInfo('11111')
+    fetchEstimatedTimeOfArrival.mockResolvedValue([])
+    await expect(fetchNewArrivalsInfo()).rejects.toThrow(/11111/)
+  })
 })
