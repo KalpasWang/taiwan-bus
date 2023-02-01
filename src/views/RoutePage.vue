@@ -41,7 +41,8 @@ const props = defineProps({
   },
   subRouteName: {
     type: String,
-    required: false
+    required: false,
+    default: ''
   }
 })
 

@@ -30,8 +30,8 @@
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
           <li
-            v-for="(item, i) in arrivalsInfo.forwards"
-            :key="i"
+            v-for="(item, i) in state.arrivalsInfo.forward"
+            :key="item.StopID"
             class="py-2 flex-between"
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
@@ -57,8 +57,10 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCityByCityCode(item.LocationCityCode),
-                    stationId: item.StationID
+                    city: getCityByCityCode(
+                      item.LocationCityCode || item.StopUID.slice(0, 3)
+                    ),
+                    stationId: item.StationID || item.StopID
                   }
                 }"
                 :class="item.LinkColor || 'link-light'"
@@ -96,8 +98,8 @@
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
           <li
-            v-for="(item, i) in arrivalsInfo.backwards"
-            :key="i"
+            v-for="(item, i) in state.arrivalsInfo.backward"
+            :key="item.StopID"
             class="py-2 flex-between"
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
@@ -125,8 +127,10 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCityByCityCode(item.LocationCityCode),
-                    stationId: item.StationID
+                    city: getCityByCityCode(
+                      item.LocationCityCode || item.StopUID.slice(0, 3)
+                    ),
+                    stationId: item.StationID || item.StopID
                   }
                 }"
                 :class="item.LinkColor || 'link-light'"
@@ -165,7 +169,7 @@ import TabsHeader from '@/components/TabsHeader.vue'
 import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
 import useEventBus from '@/composables/useEventBus'
-import { useArrivalsInfo } from '@/composables/bus'
+import { state, useArrivalsInfo } from '@/composables/bus'
 import {
   getCityByCityCode,
   addCustomDataToStops
@@ -176,13 +180,14 @@ import timetableIcon from '@/assets/timetable.svg'
 import fareIcon from '@/assets/fare.svg'
 import Loading from './Loading.vue'
 
-const { routeName, city, forwardLabel, backwardLabel } = inject('busLabel')
+const { routeName, city, subRouteName, forwardLabel, backwardLabel } =
+  inject('busLabel')
 const switchComponent = inject('switchComponent')
 
 const direction = ref('forward')
 const eventBus = useEventBus('timer')
 const { pending } = eventBus
-const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city)
+const { fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city, subRouteName)
 
 const emit = defineEmits(['back'])
 
@@ -200,14 +205,14 @@ function setStopName(stopsList, stopName) {
 
 async function updateInfo() {
   await fetchNewArrivalsInfo()
-  addCustomDataToStops(arrivalsInfo.forwards)
-  addCustomDataToStops(arrivalsInfo.backwards)
+  addCustomDataToStops(state.arrivalsInfo.forward)
+  addCustomDataToStops(state.arrivalsInfo.backward)
 }
 
 eventBus.on(updateInfo)
 await updateInfo()
-setStopName(arrivalsInfo.forwards, forwardLabel)
-setStopName(arrivalsInfo.backwards, backwardLabel)
+setStopName(state.arrivalsInfo.forward, forwardLabel)
+setStopName(state.arrivalsInfo.backward, backwardLabel)
 
 onUnmounted(() => {
   eventBus.off(updateInfo)

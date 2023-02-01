@@ -81,12 +81,16 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
             (item) => item.StopID === stopA.StopID
           )
           stopA.StopSequence = stopAFound?.StopSequence
+          stopA.LocationCityCode = stopAFound?.LocationCityCode
+          stopA.StationID = stopAFound?.StationID
         }
         if (!stopB.StopSequence) {
           const stopBFound = stopsOfRoute[direction]?.Stops?.find(
             (item) => item.StopID === stopB.StopID
           )
           stopB.StopSequence = stopBFound?.StopSequence
+          stopB.LocationCityCode = stopBFound?.LocationCityCode
+          stopB.StationID = stopBFound?.StationID
         }
         return stopA.StopSequence - stopB.StopSequence || 0
       }
@@ -152,6 +156,7 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     function fn(stop) {
       stop.HasBus = false
       stop.PlateNumb = '-1'
+      stop.Accessible = false
     }
     state.arrivalsInfo.forward.forEach(fn)
     state.arrivalsInfo.backward.forEach(fn)
@@ -162,10 +167,10 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
       (item) => item.StopUID === stopHasBus.StopUID
     )
     if (stop) {
-      const bus = await fetchVehicle(stopHasBus, city)
+      const bus = await fetchVehicle(stopHasBus.PlateNumb, city)
       stop.HasBus = true
       stop.PlateNumb = stopHasBus.PlateNumb
-      stop.Accessible = bus[0].VehicleType === 1
+      stop.Accessible = bus[0]?.VehicleType === 1
     }
   }
 

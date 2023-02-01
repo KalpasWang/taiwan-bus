@@ -94,28 +94,6 @@ export function addCustomDataToStops(stopsList) {
   stopsList.forEach((stop) => {
     setLabelAndColor(stop)
   })
-  // if (time) {
-  //   const badge = getTimeBadgeAndColor(time)
-  //   newStop = Object.assign(stop, {
-  //     EstimateTime: time.EstimateTime,
-  //     TimeLabel: badge.text,
-  //     Color: badge.color,
-  //     BgColor: badge.bgColor,
-  //     StopStatus: time.StopStatus,
-  //     Border: badge.border,
-  //     LinkColor: badge.linkColor
-  //   })
-  // } else {
-  //   newStop = Object.assign(stop, {
-  //     TimeLabel: '--',
-  //     Color: 'text-warning',
-  //     BgColor: 'bg-dark',
-  //     StopStatus: 1,
-  //     Border: false,
-  //     LinkColor: 'link-light'
-  //   })
-  // }
-  // return newStop
 }
 
 export function getCityName(city) {
