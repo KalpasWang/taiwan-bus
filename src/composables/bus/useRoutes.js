@@ -86,9 +86,9 @@ export function useRoutes(type = 'city') {
   }
 
   async function fetchRoutesByRouteName(routeName, city) {
+    const routesList = await fetchTop20Routes(routeName, city)
     state.routeName = routeName
     state.city = city
-    const routesList = await fetchTop20Routes(routeName, city)
     skip = routesList.length
     isEnd.value = false
     if (skip < 20) {

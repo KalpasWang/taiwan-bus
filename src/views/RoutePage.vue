@@ -78,7 +78,6 @@ provide('busLabel', {
 provide('switchComponent', switchComponent)
 
 onErrorCaptured((e) => {
-  console.error(e)
   error.value = e.message
 })
 </script>

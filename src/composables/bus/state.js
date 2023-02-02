@@ -5,7 +5,11 @@ export const state = reactive({
   routeID: '',
   subRouteName: '',
   subRouteID: '',
-  city: null,
+  city: '',
+  inputRouteName: '',
+  inputCity: '',
+  from: '',
+  to: '',
   routes: [],
   arrivalsInfo: {
     forward: [],

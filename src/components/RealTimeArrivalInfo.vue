@@ -197,8 +197,8 @@ const setDirection = (newDirection) => {
 
 // 設定好頭尾站牌名稱
 function setStopName(stopsList, stopName) {
-  const len = stopsList.length
-  if (len !== 0) {
+  const len = stopsList?.length
+  if ((typeof len === 'number') & (len > 0)) {
     stopName.value = stopsList[len - 1].StopName.Zh_tw
   }
 }

@@ -1,20 +1,20 @@
 <template>
   <div ref="container" class="h-100">
     <h4
-      v-if="props.type === 'city' && !props.city"
+      v-if="props.type === 'city' && !state.inputCity"
       class="fs-7 text-light px-3 pt-5"
     >
       請先選擇縣市
     </h4>
     <div v-else class="h-100">
-      <h4 v-if="props.city" class="fs-6 text-light px-3 pt-5">
-        {{ getCityName(props.city) }}
+      <h4 v-if="state.inputCity" class="fs-6 text-light px-3 pt-5">
+        {{ getCityName(state.inputCity) }}
       </h4>
-      <div v-if="isLoading">
+      <div v-if="state.isLoading">
         <Loading :width="70" />
       </div>
-      <h4 v-else-if="error" class="text-center text-light">
-        {{ error }}
+      <h4 v-else-if="state.hasError" class="text-center text-light">
+        {{ state.errorMsg }}
       </h4>
       <ul v-else class="list-group">
         <li
@@ -48,8 +48,8 @@
           </router-link>
         </li>
       </ul>
-      <div v-if="!isEnd" class="h-7rem flex-center">
-        <Loading v-if="isFetching" :width="70" />
+      <div v-show="!isEnd" class="h-7rem flex-center">
+        <Loading v-show="isFetching" :width="70" />
       </div>
     </div>
   </div>
@@ -66,28 +66,10 @@ const props = defineProps({
     type: String,
     required: true,
     default: 'city'
-  },
-  city: {
-    type: String,
-    required: false
-  },
-  routeName: {
-    type: String,
-    required: false
-  },
-  from: {
-    type: String,
-    required: false
-  },
-  to: {
-    type: String,
-    required: false
   }
 })
 const emit = defineEmits(['onScroll'])
 
-const isLoading = ref(false)
-const error = ref(null)
 const container = ref(null)
 const isFetching = ref(false)
 let ticking = false
@@ -97,15 +79,15 @@ const { fetchNewRoutes, fetchRemainingRoutes, clearRoutes, isEnd } = useRoutes(
 
 const arg1 = computed(() => {
   if (props.type.includes('from-to')) {
-    return props.from
+    return state.from
   }
-  return props.routeName
+  return state.inputRouteName
 })
 const arg2 = computed(() => {
   if (props.type.includes('from-to')) {
-    return props.to
+    return state.to
   }
-  return props.city
+  return state.inputCity
 })
 
 watchPostEffect(async () => {
@@ -122,14 +104,14 @@ watchPostEffect(async () => {
     return
   }
   try {
-    isLoading.value = true
+    state.isLoading = true
+    state.hasError = false
     await fetchNewRoutes(arg1.value, arg2.value)
-    error.value = null
-    isLoading.value = false
   } catch (e) {
-    error.value = e.message
-    console.error(e)
-    isLoading.value = false
+    state.hasError = true
+    state.errorMsg = e.message
+  } finally {
+    state.isLoading = false
   }
 })
 
