@@ -7,6 +7,7 @@ export const state = reactive({
   subRouteID: '',
   city: '',
   inputRouteName: '',
+  inputRouteName2: '',
   inputCity: '',
   from: '',
   to: '',

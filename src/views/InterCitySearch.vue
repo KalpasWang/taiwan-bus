@@ -2,11 +2,7 @@
   <div class="wrapper vh-100 container-lg position-relative">
     <SearchHeader class="header" />
     <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
-      <RoutesList
-        type="intercity"
-        :routeName="input.routeName"
-        @onScroll="checkMedia"
-      />
+      <RoutesList type="intercity" @onScroll="checkMedia" />
     </main>
     <Transition name="keyboard-slide">
       <div v-if="!isManual && showKeyboard" class="keyboard">
@@ -27,15 +23,13 @@
 </template>
 
 <script setup>
-import { ref, reactive, provide } from 'vue'
+import { ref, provide } from 'vue'
+import { state } from '@/composables/bus'
 import SearchHeader from '@/components/SearchHeader.vue'
 import KeyBoard2 from '@/components/KeyBoard2.vue'
 import RoutesList from '@/components/RoutesList.vue'
 import keyboardIcon from '@/assets/keyboard.svg'
 
-const input = reactive({
-  routeName: ''
-})
 const showKeyboard = ref(true)
 const isManual = ref(false)
 
@@ -48,8 +42,12 @@ const checkMedia = () => {
   }
 }
 
+const getRouteName = () => {
+  return state.inputRouteName2
+}
+
 const updateRouteName = (newRouteName) => {
-  input.routeName = newRouteName
+  state.inputRouteName2 = newRouteName
 }
 
 const updateIsManual = (val) => {
@@ -59,8 +57,8 @@ const updateIsManual = (val) => {
 
 // provide 響應式 states, mutations 給子元件
 provide('input', {
-  input,
   showKeyboard,
+  getRouteName,
   updateRouteName
 })
 

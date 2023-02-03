@@ -72,7 +72,7 @@ const back = () => {
 
 provide('busLabel', {
   routeName: props.routeName,
-  subRouteName: props.subRouteName || null,
+  subRouteName: props.subRouteName,
   city: null,
   forwardLabel,
   backwardLabel
@@ -80,7 +80,6 @@ provide('busLabel', {
 provide('switchComponent', switchComponent)
 
 onErrorCaptured((e) => {
-  console.log(e)
   error.value = e.message
 })
 </script>

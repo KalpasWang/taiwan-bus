@@ -92,7 +92,7 @@ import markerUrl from '@/assets/marker.svg'
 import deleteIcon from '@/assets/delete-icon.svg'
 
 // inject states and mutations from parent
-const { input, updateRouteName } = inject('input')
+const { getRouteName, updateRouteName } = inject('input')
 const { isManual, updateIsManual } = inject('isManual')
 
 // states
@@ -107,9 +107,9 @@ const handleKeyPress = (key) => {
     return
   }
   if (typeof key === 'string') {
-    updateRouteName(input.routeName + key)
+    updateRouteName(getRouteName() + key)
   } else if (key === -1) {
-    updateRouteName(input.routeName.slice(0, -1))
+    updateRouteName(getRouteName().slice(0, -1))
   } else if (!key) {
     updateRouteName('')
   }

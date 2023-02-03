@@ -26,9 +26,11 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     // 取得站序資料
     const stopsData = await fetchStopsOfRoute(routeName, city)
     const stopsOfRoute = cleanUpStopsOfRoute(stopsData)
-    // 對每一個站牌做排序
-    timeForward.sort(generateSortingFn(stopsOfRoute, 'forward'))
-    timeBackward.sort(generateSortingFn(stopsOfRoute, 'backward'))
+    // 對每一個站牌做處理排序
+    addStopInfo(timeForward, stopsOfRoute?.forward?.Stops)
+    addStopInfo(timeBackward, stopsOfRoute?.backward?.Stops)
+    timeForward.sort(sortingFn)
+    timeBackward.sort(sortingFn)
     state.arrivalsInfo.forward = timeForward
     state.arrivalsInfo.backward = timeBackward
   }
@@ -69,33 +71,24 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     return filteredStopsData
   }
 
+  // 對每個 time item 加入 stop 資料
+  function addStopInfo(times, stops) {
+    times.forEach((time) => {
+      const stopFound = stops?.find((item) => item.StopID === time.StopID)
+      if (stopFound) {
+        time.StopSequence = time.StopSequence || stopFound?.StopSequence
+        time.LocationCityCode = stopFound?.LocationCityCode
+        time.StationID = stopFound?.StationID
+      }
+    })
+  }
+
   // sorting callback for time array
-  function generateSortingFn(stopsOfRoute, direction) {
-    return (stopA, stopB) => {
-      if (stopA.StopSequence && stopB.StopSequence) {
-        return stopA.StopSequence - stopB.StopSequence
-      }
-      if (stopsOfRoute[direction]) {
-        if (!stopA.StopSequence) {
-          const stopAFound = stopsOfRoute[direction]?.Stops?.find(
-            (item) => item.StopID === stopA.StopID
-          )
-          stopA.StopSequence = stopAFound?.StopSequence
-          stopA.LocationCityCode = stopAFound?.LocationCityCode
-          stopA.StationID = stopAFound?.StationID
-        }
-        if (!stopB.StopSequence) {
-          const stopBFound = stopsOfRoute[direction]?.Stops?.find(
-            (item) => item.StopID === stopB.StopID
-          )
-          stopB.StopSequence = stopBFound?.StopSequence
-          stopB.LocationCityCode = stopBFound?.LocationCityCode
-          stopB.StationID = stopBFound?.StationID
-        }
-        return stopA.StopSequence - stopB.StopSequence || 0
-      }
-      return 0
+  function sortingFn(stopA, stopB) {
+    if (stopA.StopSequence && stopB.StopSequence) {
+      return stopA.StopSequence - stopB.StopSequence
     }
+    return 0
   }
 
   // 找出最多站牌的路線
