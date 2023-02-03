@@ -166,14 +166,14 @@ import { citys } from '@/composables/constants'
 import { getCityName } from '../composables/utilities'
 
 // inject states and mutations from parent
-const { updateCity, updateRouteName } = inject('input')
+const { getCity, updateCity, getRouteName, updateRouteName } = inject('input')
 const { isManual, updateIsManual } = inject('isManual')
 
 // states
 const boardState = ref(1)
 const tempCity = ref(null)
 const selectedCity = computed(() =>
-  tempCity.value ? tempCity.value : state.inputCity
+  tempCity.value ? tempCity.value : getCity()
 )
 
 // methods
@@ -192,9 +192,9 @@ const handleKeyPress = (key) => {
     return
   }
   if (typeof key === 'string') {
-    updateRouteName(state.inputRouteName + key)
+    updateRouteName(getRouteName() + key)
   } else if (key === -1) {
-    updateRouteName(state.inputRouteName.slice(0, -1))
+    updateRouteName(getRouteName().slice(0, -1))
   } else if (!key) {
     updateRouteName('')
   }

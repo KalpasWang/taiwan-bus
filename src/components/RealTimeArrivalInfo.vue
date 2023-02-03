@@ -65,7 +65,7 @@
                 }"
                 :class="item.LinkColor || 'link-light'"
                 class="text-decoration-none fs-7 ls-1 ms-2"
-                >{{ item.StopName.Zh_tw }}</router-link
+                >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
               >
             </div>
             <div class="me-4 d-flex justify-content-end align-items-center">
@@ -135,7 +135,7 @@
                 }"
                 :class="item.LinkColor || 'link-light'"
                 class="text-decoration-none fs-7 ls-1 ms-2"
-                >{{ item.StopName.Zh_tw }}</router-link
+                >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
               >
             </div>
             <div class="me-4 d-flex justify-content-end align-items-center">

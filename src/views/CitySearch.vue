@@ -42,8 +42,16 @@ const checkMedia = () => {
   }
 }
 
+const getRouteName = () => {
+  return state.inputRouteName
+}
+
 const updateRouteName = (newRouteName) => {
   state.inputRouteName = newRouteName
+}
+
+const getCity = () => {
+  return state.inputCity
 }
 
 const updateCity = (newCity) => {
@@ -58,7 +66,9 @@ const updateIsManual = (val) => {
 // provide 響應式 states, mutations 給子元件
 provide('input', {
   showKeyboard,
+  getCity,
   updateCity,
+  getRouteName,
   updateRouteName
 })
 

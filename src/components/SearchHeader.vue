@@ -19,17 +19,16 @@
 
 <script setup>
 import { inject, ref, computed, watch } from 'vue'
-import { state } from '@/composables/bus'
 import Logo from '@/components/logo.vue'
 
 // inject states and mutations from parent
-const { showKeyboard, updateRouteName } = inject('input')
+const { showKeyboard, getRouteName, updateRouteName } = inject('input')
 const { isManual } = inject('isManual')
 const textInput = ref(null)
 
 const routeNameModel = computed({
   get() {
-    return state.inputRouteName
+    return getRouteName()
   },
   set(keys) {
     updateRouteName(keys)

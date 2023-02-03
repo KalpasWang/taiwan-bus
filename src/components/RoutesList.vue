@@ -81,11 +81,17 @@ const arg1 = computed(() => {
   if (props.type.includes('from-to')) {
     return state.from
   }
+  if (props.type.includes('intercity')) {
+    return state.inputRouteName2
+  }
   return state.inputRouteName
 })
 const arg2 = computed(() => {
   if (props.type.includes('from-to')) {
     return state.to
+  }
+  if (props.type.includes('intercity')) {
+    return
   }
   return state.inputCity
 })
