@@ -18,7 +18,7 @@
         <div class="col">
           <input
             ref="input1"
-            :value="getCityName(city1)"
+            :value="getCityName(state.from)"
             @click="focusInput1"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -33,7 +33,7 @@
         <div class="col">
           <input
             ref="input2"
-            :value="getCityName(city2)"
+            :value="getCityName(state.to)"
             @click="focusInput2"
             type="text"
             class="form-control bg-secondary text-center ls-1"
@@ -45,13 +45,13 @@
       </div>
     </header>
     <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
-      <RoutesList type="intercity-from-to" :from="city1" :to="city2" />
+      <RoutesList type="intercity-from-to" />
     </main>
     <Transition name="keyboard-slide">
-      <KeyBoard3 v-if="cityFocused === 'city1'" v-model="city1" />
+      <KeyBoard3 v-if="cityFocused === 'from'" v-model="state.from" />
     </Transition>
     <Transition name="keyboard-slide">
-      <KeyBoard3 v-if="cityFocused === 'city2'" v-model="city2" />
+      <KeyBoard3 v-if="cityFocused === 'to'" v-model="state.to" />
     </Transition>
   </div>
 </template>
@@ -59,6 +59,7 @@
 <script setup>
 import { ref, onMounted, watchPostEffect } from 'vue'
 import { useRouter } from 'vue-router'
+import { state } from '@/composables/bus'
 import { getCityName } from '../composables/utilities'
 import RoutesList from '@/components/RoutesList.vue'
 import KeyBoard3 from '@/components/KeyBoard3.vue'
@@ -70,16 +71,14 @@ import IconButton from '../components/IconButton.vue'
 const router = useRouter()
 const input1 = ref(null)
 const input2 = ref(null)
-const city1 = ref('')
-const city2 = ref('')
-const cityFocused = ref('city1')
+const cityFocused = ref('from')
 
 watchPostEffect(() => {
-  if (city1.value && !city2.value) {
+  if (state.from && !state.to) {
     focusInput2()
-  } else if (!city1.value && city2.value) {
+  } else if (!state.from && state.to) {
     focusInput1()
-  } else if (city1.value && city2.value) {
+  } else if (state.from && state.to) {
     blurInputs()
   }
 })
@@ -87,13 +86,13 @@ watchPostEffect(() => {
 function focusInput1() {
   input1.value.classList.add('form-control-active')
   input2.value.classList.remove('form-control-active')
-  cityFocused.value = 'city1'
+  cityFocused.value = 'from'
 }
 
 function focusInput2() {
   input2.value.classList.add('form-control-active')
   input1.value.classList.remove('form-control-active')
-  cityFocused.value = 'city2'
+  cityFocused.value = 'to'
 }
 
 function blurInputs() {
@@ -103,9 +102,9 @@ function blurInputs() {
 }
 
 const swapCitys = () => {
-  const temp = city1.city
-  city1.city = city2.city
-  city2.city = temp
+  const temp = state.from
+  state.from = state.to
+  state.to = temp
 }
 
 onMounted(() => {

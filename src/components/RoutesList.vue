@@ -7,7 +7,10 @@
       請先選擇縣市
     </h4>
     <div v-else class="h-100">
-      <h4 v-if="state.inputCity" class="fs-6 text-light px-3 pt-5">
+      <h4
+        v-if="state.inputCity && type === 'city'"
+        class="fs-6 text-light px-3 pt-5"
+      >
         {{ getCityName(state.inputCity) }}
       </h4>
       <div v-if="state.isLoading">
