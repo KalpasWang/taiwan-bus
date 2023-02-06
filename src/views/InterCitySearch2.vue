@@ -45,7 +45,7 @@
       </div>
     </header>
     <main class="main-content overflow-auto px-3 px-lg-0 minh-100">
-      <RoutesList type="intercity-from-to" />
+      <RoutesList type="intercity-from-to" @onScroll="checkMedia" />
     </main>
     <Transition name="keyboard-slide">
       <KeyBoard3 v-if="cityFocused === 'from'" v-model="state.from" />
@@ -99,6 +99,14 @@ function blurInputs() {
   input1.value.classList.remove('form-control-active')
   input2.value.classList.remove('form-control-active')
   cityFocused.value = ''
+}
+
+const checkMedia = () => {
+  if (!cityFocused.value) return
+  const mq = window.matchMedia('(min-width: 992px)')
+  if (!mq.matches) {
+    cityFocused.value = ''
+  }
 }
 
 const swapCitys = () => {

@@ -31,7 +31,7 @@
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
           <li
             v-for="(item, i) in state.arrivalsInfo.forward"
-            :key="item.StopID"
+            :key="i"
             class="py-2 flex-between"
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
@@ -57,9 +57,7 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCityByCityCode(
-                      item.LocationCityCode || item.StopUID.slice(0, 3)
-                    ),
+                    city: getCityByCityCode(item.LocationCityCode) || 'Taipei',
                     stationId: item.StationID || item.StopID
                   }
                 }"
@@ -99,7 +97,7 @@
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
           <li
             v-for="(item, i) in state.arrivalsInfo.backward"
-            :key="item.StopID"
+            :key="i"
             class="py-2 flex-between"
           >
             <!-- 顯示預估到站時間badge與站牌名稱 -->
@@ -127,9 +125,7 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCityByCityCode(
-                      item.LocationCityCode || item.StopUID.slice(0, 3)
-                    ),
+                    city: getCityByCityCode(item.LocationCityCode) || 'Taipei',
                     stationId: item.StationID || item.StopID
                   }
                 }"

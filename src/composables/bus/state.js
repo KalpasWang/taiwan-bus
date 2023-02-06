@@ -11,6 +11,8 @@ export const state = reactive({
   inputCity: '',
   from: '',
   to: '',
+  city1: '',
+  city2: '',
   routes: [],
   arrivalsInfo: {
     forward: [],

@@ -34,6 +34,12 @@ export function useRoutes(type = 'city') {
 
   // 取得有經過指定[縣市]的公車資料
   async function fetchRoutesByCitys(city1, city2) {
+    if (
+      state.city1 === city1 &&
+      state.city2 === city2 &&
+      state.routes.length > 0
+    )
+      return
     const cityObj1 = citys.find((c) => c.City === city1)
     const cityObj2 = citys.find((c) => c.City === city2)
     if (!cityObj1 || !cityObj2) return
@@ -65,8 +71,11 @@ export function useRoutes(type = 'city') {
       remainingPromise.push(() => fetchRouteInfo(route))
     })
     let values = await Promise.all(promiseArray)
+    state.routes = []
     const result = processRouteInfo(values)
     state.routes = result
+    state.city1 = city1
+    state.city2 = city2
 
     if (remainingPromise.length > 0) {
       isEnd.value = false
@@ -104,9 +113,13 @@ export function useRoutes(type = 'city') {
   }
 
   async function fetchRoutesByRouteName(routeName, city) {
+    if (
+      state.routeName === routeName &&
+      state.city === city &&
+      state.routes.length > 0
+    )
+      return
     const routesList = await fetchTop20Routes(routeName, city)
-    state.routeName = routeName
-    state.city = city
     skip = routesList.length
     isEnd.value = false
     if (skip < 20) {
@@ -117,6 +130,8 @@ export function useRoutes(type = 'city') {
     }
     const subroutes = addSubRoutes(routesList)
     state.routes = subroutes
+    state.routeName = routeName
+    state.city = city
   }
 
   function addHeadSign(routes) {

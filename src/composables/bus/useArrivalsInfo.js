@@ -15,6 +15,13 @@ import { filterSubRoutes, filterDirection } from '../utilities'
  * @param  {string} [subRouteName] - 子路線名稱，如果要的是子路線
  */
 export function useArrivalsInfo(routeName, city, subRouteName) {
+  const fetchNewArrivalsInfo = async () => {
+    await fetchBusArrivalTime()
+    await fetchBusNearStop()
+    state.arrivalsInfo.forward = removeDuplicates(state.arrivalsInfo.forward)
+    state.arrivalsInfo.backward = removeDuplicates(state.arrivalsInfo.backward)
+  }
+
   // 取得指定[路線名稱]與[縣市]的室內公車或公路客運預估到站資料
   async function fetchBusArrivalTime() {
     // 取得預估時間資料
@@ -22,13 +29,13 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     if (arrivalsData.length === 0) {
       throw new Error(`沒有 ${subRouteName || routeName} 這個路線名稱`)
     }
-    const [timeForward, timeBackward] = cleanUpArrivalsData(arrivalsData)
+    let [timeForward, timeBackward] = cleanUpArrivalsData(arrivalsData)
     // 取得站序資料
     const stopsData = await fetchStopsOfRoute(routeName, city)
     const stopsOfRoute = cleanUpStopsOfRoute(stopsData)
     // 對每一個站牌做處理排序
-    addStopInfo(timeForward, stopsOfRoute?.forward?.Stops)
-    addStopInfo(timeBackward, stopsOfRoute?.backward?.Stops)
+    timeForward = addStopInfo(timeForward, stopsOfRoute?.forward?.Stops)
+    timeBackward = addStopInfo(timeBackward, stopsOfRoute?.backward?.Stops)
     timeForward.sort(sortingFn)
     timeBackward.sort(sortingFn)
     state.arrivalsInfo.forward = timeForward
@@ -73,14 +80,19 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
 
   // 對每個 time item 加入 stop 資料
   function addStopInfo(times, stops) {
-    times.forEach((time) => {
+    const filterArray = new Array(times.length)
+    filterArray.fill(true)
+    times.forEach((time, i) => {
       const stopFound = stops?.find((item) => item.StopID === time.StopID)
       if (stopFound) {
         time.StopSequence = time.StopSequence || stopFound?.StopSequence
         time.LocationCityCode = stopFound?.LocationCityCode
         time.StationID = stopFound?.StationID
+      } else {
+        filterArray[i] = false
       }
     })
+    return times.filter((item, i) => filterArray[i])
   }
 
   // sorting callback for time array
@@ -139,6 +151,8 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     forwards.forEach((stop) => {
       promises.push(addBusInfoToStop(stop, 'forward'))
     })
+    await Promise.all(promises)
+    promises.length = 0
     backwards.forEach((stop) => {
       promises.push(addBusInfoToStop(stop, 'backward'))
     })
@@ -167,9 +181,23 @@ export function useArrivalsInfo(routeName, city, subRouteName) {
     }
   }
 
-  const fetchNewArrivalsInfo = async () => {
-    await fetchBusArrivalTime()
-    await fetchBusNearStop()
+  function removeDuplicates(stops) {
+    const filterArray = new Array(stops.length).fill(true)
+    let prev = null
+    stops.forEach((curr, i) => {
+      if (curr.StopID === prev?.StopID) {
+        prev.PlateNumb =
+          curr.PlateNumb === '-1' ? prev.PlateNumb : curr.PlateNumb
+        if (!prev.EstimateTime) {
+          prev.EstimateTime = curr.EstimateTime
+        } else if (curr.EstimateTime && prev.EstimateTime > curr.EstimateTime) {
+          prev.EstimateTime = curr.EstimateTime
+        }
+        filterArray[i] = false
+      }
+      prev = curr
+    })
+    return stops.filter((_, i) => filterArray[i])
   }
 
   return { fetchNewArrivalsInfo }
