@@ -56,7 +56,7 @@ export function useRouteMapInfo(routeName, city) {
     if (!realData && !realData[0]) {
       return
     }
-    const { forwards, backwards } = filterDirection(realData)
+    const [forwards, backwards] = filterDirection(realData)
     mapInfo.forward.busList = forwards
     mapInfo.backward.busList = backwards
   }

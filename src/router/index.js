@@ -23,13 +23,13 @@ export const routes = [
     name: 'InterCitySearch2'
   },
   {
-    path: '/routes/intercity/:routeName',
+    path: '/routes/intercity/:routeName/:subRouteName?',
     component: InterCityRoutePage,
     name: 'InterCityRoutePage',
     props: true
   },
   {
-    path: '/routes/:city/:routeName',
+    path: '/routes/:city/:routeName/:subRouteName?',
     component: RoutePage,
     name: 'RoutePage',
     props: true

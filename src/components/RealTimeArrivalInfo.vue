@@ -30,7 +30,7 @@
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
           <li
-            v-for="(item, i) in arrivalsInfo.forwards"
+            v-for="(item, i) in state.arrivalsInfo.forward"
             :key="i"
             class="py-2 flex-between"
           >
@@ -57,13 +57,13 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCityByCityCode(item.LocationCityCode),
-                    stationId: item.StationID
+                    city: getCityByCityCode(item.LocationCityCode) || 'Taipei',
+                    stationId: item.StationID || item.StopID
                   }
                 }"
                 :class="item.LinkColor || 'link-light'"
                 class="text-decoration-none fs-7 ls-1 ms-2"
-                >{{ item.StopName.Zh_tw }}</router-link
+                >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
               >
             </div>
             <div class="me-4 d-flex justify-content-end align-items-center">
@@ -96,7 +96,7 @@
         <UpdateTimer class="mt-2 me-4" />
         <ul class="w-100 flex-grow-1 flex-shrink-0 list-unstyled">
           <li
-            v-for="(item, i) in arrivalsInfo.backwards"
+            v-for="(item, i) in state.arrivalsInfo.backward"
             :key="i"
             class="py-2 flex-between"
           >
@@ -125,13 +125,13 @@
                 :to="{
                   name: 'StationPage',
                   params: {
-                    city: getCityByCityCode(item.LocationCityCode),
-                    stationId: item.StationID
+                    city: getCityByCityCode(item.LocationCityCode) || 'Taipei',
+                    stationId: item.StationID || item.StopID
                   }
                 }"
                 :class="item.LinkColor || 'link-light'"
                 class="text-decoration-none fs-7 ls-1 ms-2"
-                >{{ item.StopName.Zh_tw }}</router-link
+                >{{ i + 1 }}. {{ item.StopName.Zh_tw }}</router-link
               >
             </div>
             <div class="me-4 d-flex justify-content-end align-items-center">
@@ -165,7 +165,7 @@ import TabsHeader from '@/components/TabsHeader.vue'
 import UpdateTimer from '@/components/UpdateTimer.vue'
 import IconButton from '@/components/IconButton.vue'
 import useEventBus from '@/composables/useEventBus'
-import { useArrivalsInfo } from '@/composables/bus'
+import { state, useArrivalsInfo } from '@/composables/bus'
 import {
   getCityByCityCode,
   addCustomDataToStops
@@ -176,13 +176,14 @@ import timetableIcon from '@/assets/timetable.svg'
 import fareIcon from '@/assets/fare.svg'
 import Loading from './Loading.vue'
 
-const { routeName, city, forwardLabel, backwardLabel } = inject('busLabel')
+const { routeName, city, subRouteName, forwardLabel, backwardLabel } =
+  inject('busLabel')
 const switchComponent = inject('switchComponent')
 
 const direction = ref('forward')
 const eventBus = useEventBus('timer')
 const { pending } = eventBus
-const { arrivalsInfo, fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city)
+const { fetchNewArrivalsInfo } = useArrivalsInfo(routeName, city, subRouteName)
 
 const emit = defineEmits(['back'])
 
@@ -192,22 +193,22 @@ const setDirection = (newDirection) => {
 
 // 設定好頭尾站牌名稱
 function setStopName(stopsList, stopName) {
-  const len = stopsList.length
-  if (len !== 0) {
+  const len = stopsList?.length
+  if ((typeof len === 'number') & (len > 0)) {
     stopName.value = stopsList[len - 1].StopName.Zh_tw
   }
 }
 
 async function updateInfo() {
   await fetchNewArrivalsInfo()
-  addCustomDataToStops(arrivalsInfo.forwards)
-  addCustomDataToStops(arrivalsInfo.backwards)
+  addCustomDataToStops(state.arrivalsInfo.forward)
+  addCustomDataToStops(state.arrivalsInfo.backward)
 }
 
 eventBus.on(updateInfo)
 await updateInfo()
-setStopName(arrivalsInfo.forwards, forwardLabel)
-setStopName(arrivalsInfo.backwards, backwardLabel)
+setStopName(state.arrivalsInfo.forward, forwardLabel)
+setStopName(state.arrivalsInfo.backward, backwardLabel)
 
 onUnmounted(() => {
   eventBus.off(updateInfo)

@@ -10,7 +10,9 @@
         <div class="col-6">
           <KeyItem @click="boardState = 2" white>
             <img :src="markerUrl" width="13" height="15.89" class="me-2" />
-            <span v-if="input.city">{{ getCityName(input.city) }}</span>
+            <span v-if="state.inputCity">{{
+              getCityName(state.inputCity)
+            }}</span>
             <span v-else>選擇縣市</span>
           </KeyItem>
         </div>
@@ -156,6 +158,7 @@
 
 <script setup>
 import { ref, computed, inject } from 'vue'
+import { state } from '@/composables/bus'
 import KeyItem from '@/components/KeyItem.vue'
 import markerUrl from '@/assets/marker.svg'
 import deleteIcon from '@/assets/delete-icon.svg'
@@ -163,14 +166,14 @@ import { citys } from '@/composables/constants'
 import { getCityName } from '../composables/utilities'
 
 // inject states and mutations from parent
-const { input, updateCity, updateRouteName } = inject('input')
+const { getCity, updateCity, getRouteName, updateRouteName } = inject('input')
 const { isManual, updateIsManual } = inject('isManual')
 
 // states
 const boardState = ref(1)
 const tempCity = ref(null)
 const selectedCity = computed(() =>
-  tempCity.value ? tempCity.value : input.city
+  tempCity.value ? tempCity.value : getCity()
 )
 
 // methods
@@ -189,9 +192,9 @@ const handleKeyPress = (key) => {
     return
   }
   if (typeof key === 'string') {
-    updateRouteName(input.routeName + key)
+    updateRouteName(getRouteName() + key)
   } else if (key === -1) {
-    updateRouteName(input.routeName.slice(0, -1))
+    updateRouteName(getRouteName().slice(0, -1))
   } else if (!key) {
     updateRouteName('')
   }

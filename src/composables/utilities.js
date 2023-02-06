@@ -94,28 +94,6 @@ export function addCustomDataToStops(stopsList) {
   stopsList.forEach((stop) => {
     setLabelAndColor(stop)
   })
-  // if (time) {
-  //   const badge = getTimeBadgeAndColor(time)
-  //   newStop = Object.assign(stop, {
-  //     EstimateTime: time.EstimateTime,
-  //     TimeLabel: badge.text,
-  //     Color: badge.color,
-  //     BgColor: badge.bgColor,
-  //     StopStatus: time.StopStatus,
-  //     Border: badge.border,
-  //     LinkColor: badge.linkColor
-  //   })
-  // } else {
-  //   newStop = Object.assign(stop, {
-  //     TimeLabel: '--',
-  //     Color: 'text-warning',
-  //     BgColor: 'bg-dark',
-  //     StopStatus: 1,
-  //     Border: false,
-  //     LinkColor: 'link-light'
-  //   })
-  // }
-  // return newStop
 }
 
 export function getCityName(city) {
@@ -170,7 +148,7 @@ export const parseShape = (shapeStr) => {
 export function filterRouteName(routeName, list) {
   if (!Array.isArray(list)) {
     console.error('list 不是陣列')
-    console.log(list)
+    // console.log(list)
     return
   }
   return list.filter((item) => {
@@ -183,14 +161,14 @@ export function filterRouteName(routeName, list) {
 // 過濾 subroutes
 export const filterSubRoutes = (routeName, routesList) => {
   return routesList.filter((route) => {
-    return route.SubRouteName.Zh_tw === routeName
+    return route?.SubRouteName.Zh_tw === routeName
   })
 }
 
 // 取得同方向的站牌資料
 export const filterStopsByDirection = (arr) => {
-  const stopsForward = arr.find((item) => item.Direction === 0).Stops
-  const stopsBackward = arr.find((item) => item.Direction === 1).Stops
+  const stopsForward = arr.find((item) => item.Direction === 0)?.Stops
+  const stopsBackward = arr.find((item) => item.Direction === 1)?.Stops
   return { stopsForward, stopsBackward }
 }
 
@@ -198,7 +176,7 @@ export const filterStopsByDirection = (arr) => {
 export const filterDirection = (arr) => {
   const forwards = arr.filter((item) => item.Direction === 0)
   const backwards = arr.filter((item) => item.Direction === 1)
-  return { forwards, backwards }
+  return [forwards, backwards]
 }
 
 export const delay = (ms = 500) => {

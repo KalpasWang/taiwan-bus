@@ -8,6 +8,7 @@ import { state } from './state'
  */
 export function useRoutes(type = 'city') {
   const isEnd = ref(true)
+  let remainingPromise = []
   let skip = 0
 
   function clearRoutes() {
@@ -33,6 +34,12 @@ export function useRoutes(type = 'city') {
 
   // 取得有經過指定[縣市]的公車資料
   async function fetchRoutesByCitys(city1, city2) {
+    if (
+      state.city1 === city1 &&
+      state.city2 === city2 &&
+      state.routes.length > 0
+    )
+      return
     const cityObj1 = citys.find((c) => c.City === city1)
     const cityObj2 = citys.find((c) => c.City === city2)
     if (!cityObj1 || !cityObj2) return
@@ -43,32 +50,52 @@ export function useRoutes(type = 'city') {
       }
     })
 
-    state.routes = []
     const promiseArray = []
+    remainingPromise = []
     // 找出經過city1與city2的路線
     res.data.forEach((route) => {
       const city1Idx = route.Stops.findIndex(
-        (stop) => stop.LocationCityCode === cityObj1.CityCode
+        (stop) => stop.LocationCityCode === cityObj1?.CityCode
       )
+      const stop1 = route.Stops[city1Idx]
       const city2Idx = route.Stops.findIndex(
-        (stop) => stop.LocationCityCode === cityObj2.CityCode
+        (stop) =>
+          stop.LocationCityCode === cityObj2?.CityCode &&
+          stop.StopID !== stop1.StopID
       )
-      if (city1Idx < 0 || city2Idx < 0) return
-      if (city1Idx < city2Idx) {
+      if (city2Idx < 0 || city1Idx >= city2Idx) return
+      if (promiseArray.length < 50) {
         promiseArray.push(fetchRouteInfo(route))
+        return
       }
+      remainingPromise.push(() => fetchRouteInfo(route))
     })
     let values = await Promise.all(promiseArray)
-    values = values.filter(Boolean) // 清除 undefined
-    values.forEach((routeData) => {
+    state.routes = []
+    const result = processRouteInfo(values)
+    state.routes = result
+    state.city1 = city1
+    state.city2 = city2
+
+    if (remainingPromise.length > 0) {
+      isEnd.value = false
+    }
+  }
+
+  // 找出路線並且查看是否已經加入 state.routes
+  function processRouteInfo(routes) {
+    const result = []
+    routes = routes.filter(Boolean) // 清除 undefined
+    routes.forEach((routeData) => {
       const isExist = state.routes.some(
         (savedRoute) =>
           savedRoute.SubRouteName.Zh_tw === routeData.SubRouteName.Zh_tw
       )
       if (!isExist) {
-        state.routes.push(routeData)
+        result.push(routeData)
       }
     })
+    return result
   }
 
   async function fetchRouteInfo(stopsOfRoute) {
@@ -86,8 +113,12 @@ export function useRoutes(type = 'city') {
   }
 
   async function fetchRoutesByRouteName(routeName, city) {
-    state.routeName = routeName
-    state.city = city
+    if (
+      state.routeName === routeName &&
+      state.city === city &&
+      state.routes.length > 0
+    )
+      return
     const routesList = await fetchTop20Routes(routeName, city)
     skip = routesList.length
     isEnd.value = false
@@ -99,6 +130,8 @@ export function useRoutes(type = 'city') {
     }
     const subroutes = addSubRoutes(routesList)
     state.routes = subroutes
+    state.routeName = routeName
+    state.city = city
   }
 
   function addHeadSign(routes) {
@@ -143,6 +176,22 @@ export function useRoutes(type = 'city') {
   }
 
   async function fetchRemainingRoutes() {
+    if (remainingPromise.length > 0) {
+      const promiseArray = []
+      for (let i = 0; i < 50; i++) {
+        const fn = remainingPromise.shift()
+        if (fn) {
+          promiseArray.push(fn())
+        }
+      }
+      const values = await Promise.all(promiseArray)
+      const result = processRouteInfo(values)
+      state.routes = state.routes.concat(result)
+      if (remainingPromise.length === 0) {
+        isEnd.value = true
+      }
+      return
+    }
     const lastRoutes = await fetchTop20Routes(state.routeName, state.city, skip)
     if (lastRoutes.length < 20) isEnd.value = true
     if (lastRoutes.length === 0) return

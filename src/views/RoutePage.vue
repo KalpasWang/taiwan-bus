@@ -41,7 +41,8 @@ const props = defineProps({
   },
   subRouteName: {
     type: String,
-    required: false
+    required: false,
+    default: ''
   }
 })
 
@@ -77,7 +78,6 @@ provide('busLabel', {
 provide('switchComponent', switchComponent)
 
 onErrorCaptured((e) => {
-  console.error(e)
   error.value = e.message
 })
 </script>

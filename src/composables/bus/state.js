@@ -3,8 +3,21 @@ import { reactive } from 'vue'
 export const state = reactive({
   routeName: '',
   routeID: '',
-  city: null,
+  subRouteName: '',
+  subRouteID: '',
+  city: '',
+  inputRouteName: '',
+  inputRouteName2: '',
+  inputCity: '',
+  from: '',
+  to: '',
+  city1: '',
+  city2: '',
   routes: [],
+  arrivalsInfo: {
+    forward: [],
+    backward: []
+  },
   userPosition: {
     lat: null,
     lng: null
@@ -14,5 +27,6 @@ export const state = reactive({
   stopsOfRoute: null,
   isLoading: false,
   hasError: false,
-  errorMsg: ''
+  errorMsg: '',
+  displayMsg: ''
 })

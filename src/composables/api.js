@@ -1,7 +1,11 @@
 import axios from 'axios'
 import qs from 'qs'
 import { state } from './bus/state'
-import { filterRouteName, filterSubRoutes } from './utilities'
+import {
+  filterDirection,
+  filterSubRoutes,
+  filterStopsByDirection
+} from './utilities'
 
 let token
 const params = qs.stringify({
@@ -73,26 +77,25 @@ async function setToken() {
  * @param  {string} routeName
  * @param  {string} [city] - 若沒有 city 表示為客運路線
  */
-export async function fetchStopsOfRoute(routeName, city) {
+export async function fetchStopsOfRoute(routeName, city, subRouteName) {
   // 設定要 fetch 的網址
   let url = `StopOfRoute/City/${city}`
   if (!city) {
     url = 'StopOfRoute/InterCity'
   }
   // 取得站序資料
-  const res = await api.get(`${url}/${routeName}`)
-  let stopsData = filterRouteName(routeName, res.data)
-  if (!city) {
-    stopsData = filterSubRoutes(routeName, stopsData)
-  }
-  state.routeName = routeName
-  state.stopsOfRoute = stopsData
+  const res = await api.get(url, {
+    params: {
+      $filter: `RouteName/Zh_tw eq '${routeName}'`
+    }
+  })
+  return res.data
 }
 
 /**
  * 取得指定[縣市],[路線名稱]的市區公車或公路客運路線資料
- * @param  {string} routeName
- * @param  {string} [city] - 若沒有 city 表示為客運路線
+ * @param  {string} routeName - 公車路線的中文名稱
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
  */
 export async function fetchTop20Routes(routeName, city, skip) {
   // 設定要 fetch 的網址
@@ -111,9 +114,66 @@ export async function fetchTop20Routes(routeName, city, skip) {
 }
 
 /**
+ * 取得指定[縣市][路線名稱]的市區公車或公路客運預估到站資料
+ * @param  {string} routeName - 公車路線的中文名稱
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
+ */
+export async function fetchEstimatedTimeOfArrival(routeName, city) {
+  // 設定要 fetch 的網址
+  let url = `EstimatedTimeOfArrival/City/${city}`
+  if (!city || city === 'intercity') {
+    url = 'EstimatedTimeOfArrival/InterCity'
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `RouteName/Zh_tw eq '${routeName}'`
+    }
+  })
+  return res.data
+}
+
+/**
+ * 取得指定[縣市][路線名稱]的市區公車或公路客運的動態定點資料
+ * @param  {string} routeName - 公車路線的中文名稱
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
+ */
+export async function fetchRealTimeNearStops(routeName, city) {
+  // 設定要 fetch 的網址
+  let url = `RealTimeNearStop/City/${city}`
+  if (!city || city === 'intercity') {
+    url = `RealTimeNearStop/InterCity`
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `RouteName/Zh_tw eq '${routeName}'`
+    }
+  })
+  return res.data
+}
+
+/**
+ * 取得指定[縣市][車牌號碼]的市區公車或公路客運的公車車輛資料
+ * @param  {string} plateNumb - 指定的車牌號碼
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
+ */
+export async function fetchVehicle(plateNumb, city) {
+  // 設定要 fetch 的網址
+  let url = `Vehicle/City/${city}`
+  if (!city || city === 'intercity') {
+    url = `Vehicle/InterCity`
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `PlateNumb eq '${plateNumb}'`
+    }
+  })
+  return res.data
+}
+
+/**
  * 取得指定[縣市]的市區公車或公路客運站位資料
  * @param  {string} id - station id
- * @param  {string} [city] - 若沒有 city 表示為客運路線
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
  */
 export async function fetchStation(id, city) {
   // 設定要 fetch 的網址
@@ -132,7 +192,7 @@ export async function fetchStation(id, city) {
 /**
  * 取得指定[縣市],[站位]的市區公車或公路客運路線資料
  * @param  {string} stationId - station id
- * @param  {string} [city] - 若沒有 city 表示為客運路線
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
  */
 export async function fetchRoutesPassGivenStation(stationId, city) {
   // 設定要 fetch 的網址
