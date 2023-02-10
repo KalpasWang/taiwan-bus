@@ -71,10 +71,10 @@ export function useRouteFare(routeName, city) {
   // 計費站排序
   const sortStages = () => {
     stages.value.sort((a, b) => {
-      const indexA = state.stopsOfRoute[0].Stops.findIndex(
+      const indexA = state.stopsOfRoute.forward.Stops.findIndex(
         (s) => s.StopName.Zh_tw === a.StopName
       )
-      const indexB = state.stopsOfRoute[0].Stops.findIndex(
+      const indexB = state.stopsOfRoute.forward.Stops.findIndex(
         (s) => s.StopName.Zh_tw === b.StopName
       )
       return indexA - indexB
@@ -142,6 +142,7 @@ export function useRouteFare(routeName, city) {
     if (x > y) {
       ;[x, y] = [y, x]
     }
+    console.log(fareMap.value)
     if (!fareMap.value[x][y]) return
     return JSON.parse(JSON.stringify(fareMap.value[x][y]))
   }

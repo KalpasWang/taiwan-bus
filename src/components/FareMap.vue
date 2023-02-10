@@ -62,8 +62,10 @@
             }}</h5>
             <dl class="d-flex flex-wrap h-100 mb-0 align-items-center px-2">
               <div v-for="ticket in fare.tickets" class="px-4">
-                <dt class="fs-7 text-primary lh-1">{{ ticket.name }}</dt>
-                <dd class="fs-5 lh-sm mb-0">${{ ticket.price }}</dd>
+                <dt class="fs-7 text-primary lh-lg">{{ ticket.name }}</dt>
+                <dd class="fs-5 lh-sm mb-0 translate-25-y"
+                  >${{ ticket.price }}</dd
+                >
               </div>
             </dl>
           </div>
