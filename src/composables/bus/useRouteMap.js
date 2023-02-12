@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import L from 'leaflet'
 import { busIcon } from '../constants'
+import { mapUrl } from '../api'
 
 export const useRouteMap = (element) => {
   const map = ref(null)
@@ -15,14 +16,11 @@ export const useRouteMap = (element) => {
         zoom: 7
       })
       // 把地圖圖資加到 map
-      const layers = L.tileLayer(
-        'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-        {
-          maxZoom: 20,
-          attribution:
-            '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        }
-      ).addTo(map.value)
+      const layers = L.tileLayer(mapUrl, {
+        maxZoom: 20,
+        attribution:
+          '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+      }).addTo(map.value)
       // 圖資讀取完成則 resolve
       layers.on('load', () => {
         resolve()

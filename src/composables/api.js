@@ -24,6 +24,8 @@ export const api = axios.create({
 export const top20 = { params: { $top: 20 } }
 export const advancedBaseUrl =
   'https://tdx.transportdata.tw/api/advanced/v2/Bus'
+export const mapUrl =
+  'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
 
 // request 攔截器，設定帶入token
 api.interceptors.request.use(
