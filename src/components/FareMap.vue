@@ -28,8 +28,8 @@
         <div class="flex-grow-1 w-100"></div>
       </div>
       <div class="container">
-        <h2 class="h4 text-center mb-1">{{ routeName }}</h2>
-        <div class="row">
+        <h2 class="h4 text-center mb-1">{{ subRouteName || routeName }}</h2>
+        <div v-if="!state.hasError" class="row">
           <div class="col d-flex justify-content-end align-items-center">
             <WideButton @click="showModal1 = true" title="選擇出發站點">{{
               stage1.StopName
@@ -50,7 +50,10 @@
         </div>
       </div>
     </header>
-    <main class="container pt-7">
+    <h3 v-if="state.hasError" class="h4 text-center mt-5">{{
+      state.errorMsg
+    }}</h3>
+    <main v-else class="container pt-7">
       <h3 v-if="!fares" class="text-center h5">暫無售票</h3>
       <div v-else class="row row-cols-1 row-cols-md-2 g-3">
         <div v-for="fare in fares" class="col">
@@ -76,20 +79,20 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, inject } from 'vue'
+import { ref, watchEffect, inject, onUnmounted } from 'vue'
 import IconButton from './IconButton.vue'
 import WideButton from './WideButton.vue'
 import Logo from '@/components/Logo.vue'
 import backIcon from '@/assets/back.svg'
 import swapIcon from '@/assets/swap.svg'
-import { useRouteFare } from '@/composables/bus'
+import { useRouteFare, state } from '@/composables/bus'
 import StageModal from './StageModal.vue'
 
 const emit = defineEmits(['back'])
-const { routeName } = inject('busLabel')
+const { routeName, subRouteName } = inject('busLabel')
 const showModal1 = ref(false)
 const showModal2 = ref(false)
-const { stages, init, getStageFare } = useRouteFare(routeName)
+const { stages, init, getStageFare } = useRouteFare(subRouteName || routeName)
 await init()
 
 const stage1 = ref(stages.value[0])
@@ -114,5 +117,9 @@ const swapStages = () => {
 
 watchEffect(() => {
   fares.value = getStageFare(stage1.value, stage2.value)
+})
+
+onUnmounted(() => {
+  state.hasError = false
 })
 </script>

@@ -1,40 +1,36 @@
 import { ref } from 'vue'
-import { api, fetchStopsOfRoute } from '../api'
+import { fetchRouteFare, fetchStopsOfRoute } from '../api'
 import { state } from './state'
-import { filterRouteName } from '../utilities'
 
 export function useRouteFare(routeName, city) {
   let fareData = null
   const stages = ref([])
   const fareMap = ref([])
 
-  // 取得計費站在所有計費站中的索引
-  const getStageIndex = (stage) => {
-    return stages.value.findIndex((s) => s.StopID === stage.StopID)
-  }
-
-  // 取得指定[路線名稱]的公車/客運路線票價資料
-  const fetchRouteFare = async () => {
-    // 設定要 fetch 的網址
-    let url = `RouteFare/City/${city}`
-    if (!city) {
-      url = 'RouteFare/InterCity'
+  // init
+  async function init() {
+    try {
+      state.hasError = false
+      fareData = await fetchRouteFare(routeName, city)
+      await getStopsOrder()
+      getAllStages()
+      sortStages()
+      setFareMap()
+      sortFares()
+    } catch (e) {
+      state.hasError = true
+      state.errorMsg = e.message || '對不起，發生錯誤'
     }
-    const res = await api.get(`${url}/${routeName}`)
-    fareData = filterRouteName(routeName, res.data).filter(
-      (route) => route.RouteName === route.SubRouteName
-    )
-    // console.log(fareData)
   }
 
-  const getStopsOrder = async () => {
+  async function getStopsOrder() {
     if (!state.stopsOfRoute) {
       await fetchStopsOfRoute(routeName, city)
     }
   }
 
   // 取得所有此路線的計費站
-  const getAllStages = () => {
+  function getAllStages() {
     fareData.forEach((fare) => {
       if (!fare.StageFares) return
       fare.StageFares.forEach((stage) => {
@@ -51,8 +47,26 @@ export function useRouteFare(routeName, city) {
     })
   }
 
+  // 取得計費站在所有計費站中的索引
+  function getStageIndex(stage) {
+    return stages.value.findIndex((s) => s.StopID === stage.StopID)
+  }
+
+  // 計費站排序
+  function sortStages() {
+    stages.value.sort((a, b) => {
+      const indexA = state.stopsOfRoute.forward.Stops.findIndex(
+        (s) => s.StopName.Zh_tw === a.StopName
+      )
+      const indexB = state.stopsOfRoute.forward.Stops.findIndex(
+        (s) => s.StopName.Zh_tw === b.StopName
+      )
+      return indexA - indexB
+    })
+  }
+
   // 設定好 fareMap 中的所有計費站票價資訊
-  const setFareMap = () => {
+  function setFareMap() {
     // 初始化 fareMap
     const len = stages.value.length
     fareMap.value = Array.from(Array(len), () => Array(len))
@@ -68,21 +82,8 @@ export function useRouteFare(routeName, city) {
     })
   }
 
-  // 計費站排序
-  const sortStages = () => {
-    stages.value.sort((a, b) => {
-      const indexA = state.stopsOfRoute.forward.Stops.findIndex(
-        (s) => s.StopName.Zh_tw === a.StopName
-      )
-      const indexB = state.stopsOfRoute.forward.Stops.findIndex(
-        (s) => s.StopName.Zh_tw === b.StopName
-      )
-      return indexA - indexB
-    })
-  }
-
   // 票種排序
-  const sortFares = () => {
+  function sortFares() {
     fareMap.value.forEach((row) => {
       row.forEach((fares) => {
         if (!fares) return
@@ -95,18 +96,8 @@ export function useRouteFare(routeName, city) {
     })
   }
 
-  // init
-  const init = async () => {
-    // await fetchRouteFare()
-    await Promise.all([fetchRouteFare(), getStopsOrder()])
-    getAllStages()
-    sortStages()
-    setFareMap()
-    sortFares()
-  }
-
   // 儲存票價資訊到 fareMap
-  const saveFare = (stage1, stage2, newFare) => {
+  function saveFare(stage1, stage2, newFare) {
     // fareName 範例：全票_不分時段_四排座
     const [ticketType, time, seat] = newFare.FareName.split('_')
     let x = getStageIndex(stage1)
@@ -136,15 +127,22 @@ export function useRouteFare(routeName, city) {
   }
 
   // 取得指定區間的票價資訊
-  const getStageFare = (stage1, stage2) => {
-    let x = getStageIndex(stage1)
-    let y = getStageIndex(stage2)
-    if (x > y) {
-      ;[x, y] = [y, x]
+  function getStageFare(stage1, stage2) {
+    try {
+      let x = getStageIndex(stage1)
+      let y = getStageIndex(stage2)
+      if (x > y) {
+        ;[x, y] = [y, x]
+      }
+      if (fareMap.value.length === 0) {
+        throw new Error('對不起，沒有此路線的票價資訊')
+      }
+      if (!fareMap.value[x][y]) return
+      return JSON.parse(JSON.stringify(fareMap.value[x][y]))
+    } catch (e) {
+      state.hasError = true
+      state.errorMsg = e.message || '對不起，發生錯誤'
     }
-    console.log(fareMap.value)
-    if (!fareMap.value[x][y]) return
-    return JSON.parse(JSON.stringify(fareMap.value[x][y]))
   }
 
   return { fareMap, stages, init, getStageFare }

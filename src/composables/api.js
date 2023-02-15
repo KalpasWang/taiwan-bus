@@ -1,11 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
 import { state } from './bus/state'
-import {
-  filterDirection,
-  filterSubRoutes,
-  filterStopsByDirection
-} from './utilities'
 
 let token
 const params = qs.stringify({
@@ -204,6 +199,25 @@ export async function fetchRoutesPassGivenStation(stationId, city) {
   }
   const res = await api.get(url, {
     baseURL: advancedBaseUrl
+  })
+  return res.data
+}
+
+/**
+ * 取得指定[路線名稱]的公車/客運路線票價資料
+ * @param  {string} routeName - 路線名稱
+ * @param  {string} [city] - 縣市英文名稱，若沒有 city 表示為客運路線
+ */
+export async function fetchRouteFare(routeName, city) {
+  // 設定要 fetch 的網址
+  let url = `RouteFare/City/${city}`
+  if (!city) {
+    url = 'RouteFare/InterCity'
+  }
+  const res = await api.get(url, {
+    params: {
+      $filter: `SubRouteName eq '${routeName}'`
+    }
   })
   return res.data
 }
