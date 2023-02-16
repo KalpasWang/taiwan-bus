@@ -120,16 +120,28 @@ export const getBearingLabel = (bearing) => {
   let label = ''
   switch (bearing) {
     case 'N':
-      label = '向北'
+      label = '北行'
       break
     case 'S':
-      label = '向南'
+      label = '南行'
       break
     case 'E':
-      label = '向東'
+      label = '東行'
       break
     case 'W':
-      label = '向西'
+      label = '西行'
+      break
+    case 'SE':
+      label = '東南行'
+      break
+    case 'NE':
+      label = '東北行'
+      break
+    case 'SW':
+      label = '西南行'
+      break
+    case 'NW':
+      label = '西北行'
       break
   }
   return label

@@ -76,7 +76,7 @@
                 <p class="text-light fs-7">
                   <span v-for="(stop, i) in station.Stops" :key="stop.StopID"
                     >{{ stop.RouteName.Zh_tw
-                    }}<span v-if="i < station.Stops.length - 1">,</span>
+                    }}<span v-if="i < station.Stops.length - 1">, </span>
                   </span>
                 </p>
               </div>
