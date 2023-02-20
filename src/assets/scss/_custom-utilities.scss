@@ -73,5 +73,12 @@ $utilities: (
       6rem: 6rem,
       7rem: 7rem
     )
+  ),
+  'translate-y': (
+    property: transform,
+    class: translate,
+    values: (
+      25-y: translateY(-25%)
+    )
   )
 );

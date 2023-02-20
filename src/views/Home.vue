@@ -106,10 +106,9 @@ onMounted(() => {
 }
 .circle {
   position: absolute;
-  // @include size(100px);
   border-radius: 50%;
   border: 1px solid $light;
-  animation: loop 2s ease-in-out infinite alternate;
+  animation: loop 4s linear infinite;
 }
 .circle1 {
   @include size(87px);
@@ -153,7 +152,7 @@ onMounted(() => {
 .circle4 {
   @include size(33px);
   @include position($right: 27.5%, $bottom: 7.3%);
-  animation-delay: 0.25s;
+  animation-delay: 1.5s;
   @media screen and (min-width: 768px) {
     @include size(68px);
     @include position($right: 30.7%, $bottom: 8%);
@@ -164,7 +163,7 @@ onMounted(() => {
   }
 }
 .circle5 {
-  animation-delay: 0.75s;
+  animation-delay: 2s;
   @media screen and (min-width: 768px) {
     @include size(75px);
     @include position($left: 21.6%, $bottom: 44.8%);
@@ -175,7 +174,7 @@ onMounted(() => {
   }
 }
 .circle6 {
-  animation-delay: 1.25s;
+  animation-delay: 2.5s;
   @media screen and (min-width: 991px) {
     @include size(56px);
     @include position($right: 32.9%, $bottom: 38.8%);
@@ -186,6 +185,8 @@ onMounted(() => {
   position: absolute;
   border-radius: 50%;
   z-index: 20;
+  transition: all 0.5s linear;
+  transform-origin: center;
   &::before {
     content: '';
     position: absolute;
@@ -194,7 +195,11 @@ onMounted(() => {
     border: 2px solid #f5f5f5;
   }
   &:hover {
-    filter: brightness(95%);
+    filter: brightness(125%);
+    transform: scale(1.05);
+    &::before {
+      animation: loop 5s linear infinite;
+    }
   }
 }
 .blue-ball {
@@ -230,7 +235,6 @@ onMounted(() => {
     mix-blend-mode: normal;
     border: 1px solid #1cc8ee;
     filter: drop-shadow(0px 0px 10px #1cc8ee) drop-shadow(0px 0px 10px #1cc8ee);
-    animation: loop 2s ease-in-out infinite alternate;
   }
 }
 .white-ball {
@@ -264,7 +268,6 @@ onMounted(() => {
     }
     opacity: 0.37;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
-    animation: loop 2s 0.5s ease-in-out infinite alternate;
   }
 }
 .yellow-ball {
@@ -299,7 +302,6 @@ onMounted(() => {
     }
     opacity: 0.37;
     filter: drop-shadow(0px 0px 8px #ffffff) drop-shadow(0px 11px 18px #000000);
-    animation: loop 2s 1s ease-in-out infinite alternate;
   }
 }
 
@@ -316,10 +318,19 @@ onMounted(() => {
 
 @keyframes loop {
   0% {
+    transform: scale(1);
+  }
+  25% {
     transform: scale(0.95);
   }
-  100% {
+  50% {
+    transform: scale(1);
+  }
+  75% {
     transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

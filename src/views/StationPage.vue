@@ -31,7 +31,7 @@
       <h3
         v-if="state.hasError || mapHasError"
         class="mt-5 text-center position-relative z-900"
-        >對不起，發生錯誤...</h3
+        >{{ state.errorMsg || '對不起，發生錯誤...' }}</h3
       >
     </div>
     <!-- 站牌列表 -->
@@ -43,7 +43,7 @@
         v-else-if="state.hasError"
         class="mt-5 text-center text-light position-relative z-900"
       >
-        對不起，發生錯誤...
+        {{ state.errorMsg || '對不起，發生錯誤...' }}
       </h3>
       <div class="overflow-auto" v-else>
         <!-- 顯示站牌名稱與方向 -->

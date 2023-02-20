@@ -25,6 +25,7 @@ export const state = reactive({
   nearByStations: [],
   station: null,
   stopsOfRoute: null,
+  fareMap: null,
   isLoading: false,
   hasError: false,
   errorMsg: '',
