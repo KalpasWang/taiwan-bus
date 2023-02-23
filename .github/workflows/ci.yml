@@ -1,0 +1,27 @@
+name: Build And Commit to Git dist Branch
+
+on:
+  push:
+    branches:
+      -main
+      
+jobs:
+  build_vue:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        
+    - name: Testing
+      run: npm run test
+      
+    - id: Build
+      uses: LizAinslie/VueBuildToBranchAction@1.0.2
+      with:
+        username: 'KalpasWang'
+        reponame: 'taiwan-bus'
+        token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+        branch: 'dist' # defaults to 'gh-pages' but can be changed
