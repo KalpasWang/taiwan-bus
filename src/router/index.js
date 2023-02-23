@@ -7,6 +7,7 @@ import NearByStations from '@/views/NearByStations.vue'
 import RoutePage from '@/views/RoutePage.vue'
 import InterCityRoutePage from '@/views/InterCityRoutePage.vue'
 import StationPage from '@/views/StationPage.vue'
+import NotFoundPage from '@/views/NotFoundPage.vue'
 
 export const routes = [
   { path: '/', component: Home, name: 'Home' },
@@ -39,6 +40,11 @@ export const routes = [
     component: StationPage,
     name: 'StationPage',
     props: true
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFoundPage,
+    name: '404Page'
   }
 ]
 
