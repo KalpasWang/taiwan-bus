@@ -24,4 +24,4 @@ jobs:
         username: 'KalpasWang'
         reponame: 'taiwan-bus'
         token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
-        branch: 'dist' # defaults to 'gh-pages' but can be changed
+        gitbranch: 'dist' # defaults to 'gh-pages' but can be changed
