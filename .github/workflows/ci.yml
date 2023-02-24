@@ -3,7 +3,7 @@ name: Build And Commit to Git dist Branch
 on:
   push:
     branches:
-      -main
+      - main
       
 jobs:
   build_vue:
@@ -18,7 +18,7 @@ jobs:
     - name: Testing
       run: npm run test
       
-    - id: Build
+    - name: Build
       uses: LizAinslie/VueBuildToBranchAction@1.0.2
       with:
         username: 'KalpasWang'
