@@ -92,7 +92,7 @@
 <script setup>
 import { ref, nextTick, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Loading from '@/components/loading.vue'
+import Loading from '@/components/Loading.vue'
 import Logo from '@/components/logo.vue'
 import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'

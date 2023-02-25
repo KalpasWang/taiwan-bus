@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import Loading from '@/components/loading.vue'
+import Loading from '@/components/Loading.vue'
 import useEventBus from '@/composables/useEventBus'
 
 const timeAfterUpdate = ref(0)
