@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import logoUrl from '@/assets/Logo.png'
+import logoUrl from '@/assets/logo.png'
 </script>
 
 <style scoped>
