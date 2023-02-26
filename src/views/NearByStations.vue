@@ -93,7 +93,7 @@
 import { ref, nextTick, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Loading from '@/components/Loading.vue'
-import Logo from '@/components/logo.vue'
+import Logo from '@/components/Logo.vue'
 import IconButton from '@/components/IconButton.vue'
 import backIcon from '@/assets/back.svg'
 import mapIcon from '@/assets/map.svg'

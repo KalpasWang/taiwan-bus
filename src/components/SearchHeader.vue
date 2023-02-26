@@ -19,7 +19,7 @@
 
 <script setup>
 import { inject, ref, computed, watch } from 'vue'
-import Logo from '@/components/logo.vue'
+import Logo from '@/components/Logo.vue'
 
 // inject states and mutations from parent
 const { showKeyboard, getRouteName, updateRouteName } = inject('input')
