@@ -108,7 +108,7 @@ onMounted(() => {
   position: absolute;
   border-radius: 50%;
   border: 1px solid $light;
-  animation: loop 4s linear infinite;
+  animation: loop 3s linear infinite;
 }
 .circle1 {
   @include size(87px);
@@ -198,7 +198,7 @@ onMounted(() => {
     filter: brightness(125%);
     transform: scale(1.05);
     &::before {
-      animation: loop 5s linear infinite;
+      animation: loop 3s linear infinite;
     }
   }
 }
@@ -321,13 +321,13 @@ onMounted(() => {
     transform: scale(1);
   }
   25% {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
   50% {
     transform: scale(1);
   }
   75% {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);

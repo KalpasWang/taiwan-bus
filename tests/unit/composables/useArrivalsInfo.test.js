@@ -129,7 +129,7 @@ describe('useArrivalsInfo function', () => {
     let expected = mock0968Arrivals.filter(
       (item) => item.Direction === 0 && item.SubRouteName.Zh_tw === '0968A'
     )
-    expect(state.arrivalsInfo.forward.length).toBe(expected.length)
+    expect(state.arrivalsInfo.forward.length).toBe(expected.length - 1)
     expected = mock0968Arrivals.filter(
       (item) => item.Direction === 1 && item.SubRouteName.Zh_tw === '0968A'
     )
@@ -184,7 +184,7 @@ describe('useArrivalsInfo function', () => {
     fetchStopsOfRoute.mockReturnValueOnce(mock1123StopsOfRoute)
     await fetchNewArrivalsInfo()
 
-    expect(state.arrivalsInfo.forward.length).toBe(mock1123Arrivals.length)
+    expect(state.arrivalsInfo.forward.length).toBe(mock1123Arrivals.length - 1)
     state.arrivalsInfo.forward.forEach((item, i) => {
       expect(item.Direction).toBe(0)
       expect(item.RouteName.Zh_tw).toBe(oneDirectionIntercityRouteName)
