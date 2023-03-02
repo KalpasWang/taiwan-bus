@@ -4,7 +4,7 @@
 
 這份 project 是我參加 2021 年第三屆的 F2E 第三關的作品，主題為：全台灣公車動態時刻查詢應用服務，使用的 API 為交通部 TDX 平台提供，使用的設計稿是設計師 KT 製作，設計稿可以看[這裡](https://2021.thef2e.com/users/6296432819610583177/)
 
-[線上 Demo](https://taiwan-bus.vercel.app)
+[線上 Demo](https://taiwanbus.vercel.app)
 
 ## Features
 
