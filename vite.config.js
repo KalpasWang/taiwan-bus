@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import path, { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +11,14 @@ export default defineConfig({
     }
   },
   base: './',
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        fallback: resolve(__dirname, '404.html')
+      }
+    }
+  },
   css: {
     preprocessorOptions: {
       scss: {
