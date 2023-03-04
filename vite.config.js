@@ -11,14 +11,14 @@ export default defineConfig({
     }
   },
   base: './',
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        fallback: resolve(__dirname, '404.html')
-      }
-    }
-  },
+  // build: {
+  //   rollupOptions: {
+  //     input: {
+  //       main: resolve(__dirname, 'index.html'),
+  //       fallback: resolve(__dirname, '404.html')
+  //     }
+  //   }
+  // },
   css: {
     preprocessorOptions: {
       scss: {
