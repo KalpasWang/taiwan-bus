@@ -29,15 +29,6 @@
     <link rel="stylesheet" href="./assets/index-273198be.css">
   </head>
   <body>
-    <script>
-      ;(function () {
-        let redirect = sessionStorage.getItem('redirect')
-        delete sessionStorage.redirect
-        if (redirect && redirect !== location.href) {
-          history.pushState({}, 'page 2', redirect)
-        }
-      })()
-    </script>
     <div id="app"></div>
     
   </body>

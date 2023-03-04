@@ -25,10 +25,10 @@
     <meta property="og:image:type" content="png" />
     <meta property="og:image:width" content="256" />
     <meta property="og:image:height" content="256" />
-    <script>
-      sessionStorage.setItem('redirect', location.href)
-    </script>
-    <meta http-equiv="refresh" content="0; url=taiwanbus.vercel.app" />
   </head>
-  <body> </body>
+  <body>
+    <script>
+      location.assign(location.protocol + '//' + location.host)
+    </script>
+  </body>
 </html>
