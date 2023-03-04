@@ -27,15 +27,6 @@
     <meta property="og:image:height" content="256" />
   </head>
   <body>
-    <script>
-      ;(function () {
-        let redirect = sessionStorage.getItem('redirect')
-        delete sessionStorage.redirect
-        if (redirect && redirect !== location.href) {
-          history.pushState({}, 'page 2', redirect)
-        }
-      })()
-    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
